@@ -1,0 +1,222 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/equipment/honeycomb_necklace",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Fishing Speed: §b+1 §9(+1)",
+                        "§7Sea Creature Chance: §3+0.5% §9(+0.5%)",
+                        "§7Sweep: §2+7 §2(+2)",
+                        "§7Foraging Fortune: §6+32.5 §9(+2.5) §2(+5)",
+                        "§7Foraging Wisdom: §3+0.5 §2(+0.5)",
+                        "§7Hunting Wisdom: §3+1 §2(+1)",
+                        "§7Boosters: §2§a⎋§8/§f⸙§8/§a☯§8/§aꕮ",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Marshy Bonus",
+                        "§7Increases §3Forest Whispers §7gain by",
+                        "§7§a+1%§7.",
+                        "",
+                        "§5§lEPIC NECKLACE"
+                    ],
+                    "Name": "§5Marshy Honeycomb Necklace"
+                },
+                "ExtraAttributes": {
+                    "booster_tiers": {
+                        "sweep": 2,
+                        "hunting_wisdom": 2,
+                        "foraging_wisdom": 1,
+                        "foraging_fortune": 2
+                    },
+                    "modifier": "marshy",
+                    "id": "HONEYCOMB_NECKLACE",
+                    "uuid": "1be85eb1-d264-4592-bcab-7ae8adb705f1",
+                    "timestamp": [
+                        415,
+                        -116829647
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:mythic"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "43261513-bf51-3d19-8a0a-0253439e7204",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "CUuZcP0cXPm2S5Rzeh+0r1DBbDSmBjWb+SV09MvO6Y7ENoFO4+icEevQbQre8y7g7S0HPY4TjF17ZjNH3GC1J2e13Xtmsc8q9zW+SDTXuEBQhk5lUUptfgasL5lru/0Z/Uair2sExXD2MsBtKuUYP7QBzUy/KrQBgoLY4j9iEgt9dFZDC5+sA4pIdO/5rFpEi6lwN+mH8xjE+RS1gUot++PcbXDUM/S9IrVmtS8HRjimvBQqFk6afvqWfuf60H6l2x/6iCKTB2haRUwnDSOPI6VW0m5NJwBzFKhTWLxMne60lsjx0AyDCnLXqlxPfhr6zmfGcdgxg+7cG+4hE9Xa+ZI3DTrk2azmSKhde1iq5kx4v0jKQvKxLpxSAY+Ouv8AGFZsnhGxHTRgY3/juAsJUA8ijGW4tnCNk+pf2t5RKcYkjC9I8ajAR8EJCCN+JXcfhn7cZcAq5QKKo7aca/ZcA4MGE76y5RGV3r0vYEK0SCOYgTisZ+rX91ZcHB4rUZahF/gC1Y5dX+sZnti0iZHPUIoScwec9ujEfS7tg5UDYGlXq2rIYssbkRjKbv6T83MbzY/F5937jqJTcm9xPYuIUluEFsO+vFqK4nA95Q44MG+HP5ZqODE3SgdpGc4itV6KW9dY75DSKO6D5FBpV4zf5FgJOtyuPhRJfre9elugOgY=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxOTI2MjI1MzkwNCwKICAicHJvZmlsZUlkIiA6ICI4ZTFjZTM2ZGE2Mzk0ZjgwOTFmZjZjYTZiZTNhZTA5NSIsCiAgInByb2ZpbGVOYW1lIiA6ICJGdWxsY3JlbiIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS85OTIzZjM3YTBlN2M2MTJjZmQ0MDhlYzNkMTNhNzVkMDlhMmRiYjM5NTJjMWJhY2JjMzU4MDc0NDMyOGEyYjgzIgogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+100",
+                        "§7Strength: §c+50",
+                        "§7Fishing Speed: §b+1.8 §9(+1.8)",
+                        "§7Sea Creature Chance: §3+0.9% §9(+0.9%)",
+                        "§7Sweep: §2+102 §2(+2)",
+                        "§7Foraging Fortune: §6+59.5 §9(+4.5) §2(+5)",
+                        "§7Hunting Fortune: §d+30",
+                        "§7Magic Find: §b+2",
+                        "§7Foraging Wisdom: §3+5.5 §2(+0.5)",
+                        "§7Hunting Wisdom: §3+6 §2(+1)",
+                        "§7Boosters: §2§a⎋§8/§f⸙§8/§a☯§8/§aꕮ",
+                        "",
+                        "§7The more you Hunt, the stronger this",
+                        "§7cloak gets!",
+                        "",
+                        "§7Talk to §bDavid §7to view your progress!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Marshy Bonus",
+                        "§7Increases §3Forest Whispers §7gain by",
+                        "§7§a+1%§7.",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§d§lMYTHIC CLOAK"
+                    ],
+                    "Name": "§dMarshy David's Cloak"
+                },
+                "ExtraAttributes": {
+                    "attributeMenuValue": 30,
+                    "booster_tiers": {
+                        "sweep": 2,
+                        "hunting_wisdom": 2,
+                        "foraging_wisdom": 1,
+                        "foraging_fortune": 2
+                    },
+                    "modifier": "marshy",
+                    "id": "DAVIDS_CLOAK",
+                    "uuid": "cdebbb69-efce-4156-bf70-d6642d93ede2",
+                    "timestamp": [
+                        415,
+                        -614525148
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/safari/safari_belt_mythic",
+                "minecraft:tooltip_style": "hypixel_skyblock:mythic"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Sweep: §2+6 §9(+4) §2(+2)",
+                        "§7Foraging Fortune: §6+71 §9(+16) §2(+5)",
+                        "§7Hunting Fortune: §d+34 §9(+4)",
+                        "§7Cold Resistance: §b+10",
+                        "§7Foraging Wisdom: §3+0.5 §2(+0.5)",
+                        "§7Hunting Wisdom: §3+10 §9(+4) §2(+1)",
+                        "§7Boosters: §2§a⎋§8/§f⸙§8/§a☯§8/§aꕮ",
+                        "",
+                        "§7The more §2Safari Milestones§7 you have,",
+                        "§7the stronger this belt gets!",
+                        "",
+                        "§7Talk to §6§aAndrea§7 to view your",
+                        "§7progress!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Majestic Bonus",
+                        "§7Grants §f+50 Speed §7while in the",
+                        "§7§2Critter Safari§7.",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§d§lMYTHIC BELT"
+                    ],
+                    "Name": "§dMajestic Safari Belt"
+                },
+                "ExtraAttributes": {
+                    "booster_tiers": {
+                        "sweep": 2,
+                        "hunting_wisdom": 2,
+                        "foraging_wisdom": 1,
+                        "foraging_fortune": 2
+                    },
+                    "upgraded_rarity": "MYTHIC",
+                    "modifier": "majestic",
+                    "id": "SAFARI_BELT",
+                    "uuid": "bf6f3b8d-e5ed-4dd7-be10-7ea64bdc03dd",
+                    "timestamp": [
+                        415,
+                        -187652358
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/equipment/veilshroom_bracelet",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Fishing Speed: §b+1 §9(+1)",
+                        "§7Sea Creature Chance: §3+0.5% §9(+0.5%)",
+                        "§7Sweep: §2+7 §2(+2)",
+                        "§7Foraging Fortune: §6+32.5 §9(+2.5) §2(+5)",
+                        "§7Foraging Wisdom: §3+0.5 §2(+0.5)",
+                        "§7Hunting Wisdom: §3+1 §2(+1)",
+                        "§7Boosters: §2§a⎋§8/§f⸙§8/§a☯§8/§aꕮ",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Marshy Bonus",
+                        "§7Increases §3Forest Whispers §7gain by",
+                        "§7§a+1%§7.",
+                        "",
+                        "§5§lEPIC BRACELET"
+                    ],
+                    "Name": "§5Marshy Veilshroom Bracelet"
+                },
+                "ExtraAttributes": {
+                    "booster_tiers": {
+                        "sweep": 2,
+                        "hunting_wisdom": 2,
+                        "foraging_wisdom": 1,
+                        "foraging_fortune": 2
+                    },
+                    "modifier": "marshy",
+                    "id": "VEILSHROOM_BRACELET",
+                    "uuid": "d2a82049-3c37-40fa-af6c-49ef13ffe7c1",
+                    "timestamp": [
+                        416,
+                        328118012
+                    ]
+                }
+            },
+            "Damage": 0
+        }
+    ]
+}

@@ -1,0 +1,252 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 301,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 3,
+                        "id": 8
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+83 §9(+8)",
+                        "§7Defense: §a+98 §9(+8)",
+                        "§7True Defense: §f+5",
+                        "§7Strength: §c+8 §9(+8)",
+                        "§7Crit Chance: §9+4% §9(+4%)",
+                        "§7Intelligence: §b+40 §9(+40)",
+                        "§7Mining Speed: §6+10",
+                        "§7Mining Fortune: §6+5",
+                        "§7Speed: §f+12 §9(+2)",
+                        "§7Gemstones: §8[§7§8] §8[§8§8]",
+                        "",
+                        "§9Depth Strider III",
+                        "§7Reduces how much you are slowed in",
+                        "§7the water by §a100%§7.",
+                        "§9Feather Falling V",
+                        "§7Increases how high you can fall",
+                        "§7before taking fall damage by §a5§7 and",
+                        "§7reduces fall damage by §a25%§7.",
+                        "§9Growth V",
+                        "§7Grants §a+75 §c Health§7.",
+                        "§9Protection V",
+                        "§7Grants §a+20 §a Defense§7.",
+                        "§9Thorns III",
+                        "§7Grants a §a50% §7chance to rebound §a9%",
+                        "§a§7of damage dealt back at the attacker.",
+                        "",
+                        "§6Full Set Bonus: Expert Miner §7(0/4)",
+                        "§7Grants §6+2 Mining Speed §7per Mining",
+                        "§7Skill level unlocked.",
+                        "",
+                        "§5§lEPIC BOOTS"
+                    ],
+                    "color": 261368,
+                    "Name": "§5Mythic Glacite Boots"
+                },
+                "ExtraAttributes": {
+                    "modifier": "mythic",
+                    "id": "GLACITE_BOOTS",
+                    "enchantments": {
+                        "depth_strider": 3,
+                        "thorns": 3,
+                        "feather_falling": 5,
+                        "growth": 5,
+                        "protection": 5
+                    },
+                    "uuid": "fbcdcfaf-cb25-4e80-87f9-78d5b9b5924e",
+                    "timestamp": [
+                        416,
+                        1735644430
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 300,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+87 §9(+12)",
+                        "§7Defense: §a+145",
+                        "§7True Defense: §f+10",
+                        "§7Intelligence: §b+100 §9(+100)",
+                        "§7Mining Speed: §6+10",
+                        "§7Mining Fortune: §6+5",
+                        "§7Speed: §f+17 §9(+2)",
+                        "§7Gemstones: §8[§7§8] §8[§8§8]",
+                        "",
+                        "§9Growth V",
+                        "§7Grants §a+75 §c Health§7.",
+                        "§9Protection V",
+                        "§7Grants §a+20 §a Defense§7.",
+                        "§9Thorns III",
+                        "§7Grants a §a50% §7chance to rebound §a9%",
+                        "§a§7of damage dealt back at the attacker.",
+                        "",
+                        "§6Full Set Bonus: Expert Miner §7(0/4)",
+                        "§7Grants §6+2 Mining Speed §7per Mining",
+                        "§7Skill level unlocked.",
+                        "",
+                        "§5§lEPIC LEGGINGS"
+                    ],
+                    "color": 261368,
+                    "Name": "§5Wise Glacite Leggings"
+                },
+                "ExtraAttributes": {
+                    "modifier": "wise",
+                    "id": "GLACITE_LEGGINGS",
+                    "enchantments": {
+                        "thorns": 3,
+                        "protection": 5,
+                        "growth": 5
+                    },
+                    "uuid": "9cf38324-3e1c-4941-a0bf-e3486168d072",
+                    "timestamp": [
+                        416,
+                        1868681756
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 299,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+100 §9(+25)",
+                        "§7Defense: §a+195 §9(+25)",
+                        "§7True Defense: §f+10",
+                        "§7Mining Speed: §6+10",
+                        "§7Mining Fortune: §6+5",
+                        "§7Speed: §f+15",
+                        "§7Gemstones: §8[§7§8] §8[§8§8]",
+                        "",
+                        "§9Growth V",
+                        "§7Grants §a+75 §c Health§7.",
+                        "§9Protection V",
+                        "§7Grants §a+20 §a Defense§7.",
+                        "§9Thorns III",
+                        "§7Grants a §a50% §7chance to rebound §a9%",
+                        "§a§7of damage dealt back at the attacker.",
+                        "",
+                        "§6Full Set Bonus: Expert Miner §7(0/4)",
+                        "§7Grants §6+2 Mining Speed §7per Mining",
+                        "§7Skill level unlocked.",
+                        "",
+                        "§5§lEPIC CHESTPLATE"
+                    ],
+                    "color": 261368,
+                    "Name": "§5Titanic Glacite Chestplate"
+                },
+                "ExtraAttributes": {
+                    "modifier": "titanic",
+                    "id": "GLACITE_CHESTPLATE",
+                    "enchantments": {
+                        "thorns": 3,
+                        "growth": 5,
+                        "protection": 5
+                    },
+                    "uuid": "30d54f7c-ecc5-4d47-8b0e-11defce0739b",
+                    "timestamp": [
+                        416,
+                        1867418971
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 174,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 1,
+                        "id": 6
+                    }
+                ],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+87 §9(+12)",
+                        "§7Defense: §a+90",
+                        "§7True Defense: §f+5",
+                        "§7Intelligence: §b+100 §9(+100)",
+                        "§7Mining Speed: §6+10",
+                        "§7Mining Fortune: §6+5",
+                        "§7Speed: §f+12 §9(+2)",
+                        "§7Respiration: §3+45",
+                        "§7Gemstones: §8[§7§8] §8[§8§8]",
+                        "",
+                        "§9Aqua Affinity I",
+                        "§7Increases your underwater mining",
+                        "§7rate.",
+                        "§9Growth V",
+                        "§7Grants §a+75 §c Health§7.",
+                        "§9Protection V",
+                        "§7Grants §a+20 §a Defense§7.",
+                        "§9Respiration III",
+                        "§7Grants §3+45 Respiration§7, which",
+                        "§7increases the amount of time you",
+                        "§7can stay under water.",
+                        "§9Thorns III",
+                        "§7Grants a §a50% §7chance to rebound §a9%",
+                        "§a§7of damage dealt back at the attacker.",
+                        "",
+                        "§6Full Set Bonus: Expert Miner §7(0/4)",
+                        "§7Grants §6+2 Mining Speed §7per Mining",
+                        "§7Skill level unlocked.",
+                        "",
+                        "§5§lEPIC HELMET"
+                    ],
+                    "Name": "§5Wise Glacite Helmet"
+                },
+                "ExtraAttributes": {
+                    "modifier": "wise",
+                    "id": "GLACITE_HELMET",
+                    "enchantments": {
+                        "thorns": 3,
+                        "growth": 5,
+                        "protection": 5,
+                        "respiration": 3,
+                        "aqua_affinity": 1
+                    },
+                    "uuid": "aaf7d2ce-bdaf-4c02-b216-19306dac3226",
+                    "timestamp": [
+                        416,
+                        1876591265
+                    ]
+                }
+            },
+            "Damage": 0
+        }
+    ]
+}

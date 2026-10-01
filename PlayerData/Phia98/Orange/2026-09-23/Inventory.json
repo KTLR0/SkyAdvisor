@@ -1,0 +1,1202 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/rogue_sword",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 283,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+20",
+                        "",
+                        "§6Ability: Speed Boost  §e§lRIGHT CLICK",
+                        "§7Grants §f+100 Speed §7for §a30s§7.",
+                        "§8Mana Cost: §3§b50",
+                        "§8Cooldown: §a5s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§f§lCOMMON SWORD"
+                    ],
+                    "Name": "§fRogue Sword"
+                },
+                "ExtraAttributes": {
+                    "id": "ROGUE_SWORD",
+                    "uuid": "c2ddb8a1-85be-46d9-b847-00f74d5cfea4",
+                    "timestamp": [
+                        416,
+                        1556918379
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/aspect_of_the_end",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 276,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+100",
+                        "§7Strength: §c+125 §9(+25)",
+                        "§7Crit Damage: §9+50%",
+                        "§7Attack Speed: §e+2% §9(+2%)",
+                        "§7Intelligence: §b+65 §9(+65)",
+                        "§7Gemstones: §8[§7§8]",
+                        "",
+                        "§9Bane of Arthropods V, §9Cleave V, §9Critical V",
+                        "§9Cubism V, §9Ender Slayer V, §9Execute V",
+                        "§9Experience III, §9Fire Aspect II, §9First Strike IV",
+                        "§9Giant Killer V, §9Gravity V, §9Impaling V",
+                        "§9Lethality V, §9Life Steal III, §9Looting III",
+                        "§9Luck V, §9Pyroclasm V, §9Scavenger III",
+                        "§9Sharpness V, §9Smite V, §9Thunderlord V",
+                        "§9Venomous V",
+                        "",
+                        "§6Ability: Instant Transmission  §e§lRIGHT CLICK",
+                        "§7Teleport §a8 blocks§7 ahead of you and",
+                        "§7gain §a+50 §f Speed§7 for §a3 seconds§7.",
+                        "§8Mana Cost: §3§b50",
+                        "",
+                        "§9§lRARE SWORD"
+                    ],
+                    "Name": "§9Heroic Aspect of the End"
+                },
+                "ExtraAttributes": {
+                    "modifier": "heroic",
+                    "id": "ASPECT_OF_THE_END",
+                    "enchantments": {
+                        "bane_of_arthropods": 5,
+                        "impaling": 5,
+                        "luck": 5,
+                        "critical": 5,
+                        "cleave": 5,
+                        "smite": 5,
+                        "looting": 3,
+                        "scavenger": 3,
+                        "ender_slayer": 5,
+                        "fire_aspect": 2,
+                        "experience": 3,
+                        "life_steal": 3,
+                        "execute": 5,
+                        "giant_killer": 5,
+                        "first_strike": 4,
+                        "dragon_hunter": 5,
+                        "venomous": 5,
+                        "magmarizer": 5,
+                        "thunderlord": 5,
+                        "sharpness": 5,
+                        "cubism": 5,
+                        "lethality": 5
+                    },
+                    "uuid": "15d342a7-d99e-45a8-b5f5-a55a94c41a79",
+                    "timestamp": [
+                        416,
+                        1911508718
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/titanium_pickaxe",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 257,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 7",
+                        "",
+                        "§7Damage: §c+60",
+                        "§7Mining Speed: §6+140",
+                        "§7Mining Fortune: §6+30",
+                        "§7Mining Wisdom: §3+1 §9(+1)",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "§9Experience III",
+                        "§7Grants a §a37.5% §7chance for mobs and",
+                        "§7ores to drop double experience.",
+                        "§9Fortune III",
+                        "§7Grants §6+30 Mining Fortune§7, which",
+                        "§7increases your chance for multiple",
+                        "§7drops.",
+                        "",
+                        "§7Grants §6+50 Mining Fortune §7when",
+                        "§7mining §fTitanium Ore§7.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a50s",
+                        "",
+                        "§9Scraped Bonus",
+                        "§7Grants §6+15 Mining Fortune §7if the",
+                        "§7block you are mining has the same §2",
+                        "§2Breaking Power §7as this tool.",
+                        "",
+                        "§9§lRARE PICKAXE"
+                    ],
+                    "Name": "§9Scraped Titanium Pickaxe"
+                },
+                "ExtraAttributes": {
+                    "modifier": "scraped",
+                    "id": "TITANIUM_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 5,
+                        "fortune": 3,
+                        "experience": 3
+                    },
+                    "uuid": "664b0a94-4837-40bb-8a5d-06deb13298bc",
+                    "timestamp": [
+                        416,
+                        1867094332
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 158,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Minion Upgrade",
+                        "",
+                        "§7This item can be used as a minion",
+                        "§7upgrade. This will automatically turn",
+                        "§7materials that a minion produces into",
+                        "§7their block form.",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aCompactor"
+                },
+                "ExtraAttributes": {
+                    "id": "COMPACTOR",
+                    "uuid": "1966328c-f5af-478d-97dc-07933c4f4ac3",
+                    "timestamp": [
+                        416,
+                        1579894284
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amethyst/fine_amethyst_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §5Amethyst §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§a Defense§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Amethyst Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_AMETHYST_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "a112c007-22c2-38bf-b0e0-c0a05b9c239c",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "XKehhCQl/q2WcpS+6aLSl5yzRdAKVo8/sZGNsWx7DLDk01okd+ZIJJPkdkdDmnDMp9ettm/60ifZEse5leOq9PpsV0QcrNuhxgafd6Zcjhx9OhDll+MssU/8oBYeunNzqUzHimRiMIRkDi64YCCSrFQh1Tc1/XJNsYpQ0bfoPJVccocJHp1r3ZslBx+UnbDPA3n+DwxnslXFUCt5Ft2OQ3BNIjx2ekSJvTRKc5H8VfbrlEU6K2MXWqvlEu/wh3jXD4kAYgXrg4uLFtDQF+KkmReZgA48D02A3JbSEX9wiojHFkaH5m9t+/Xsb5HXiltSw7cJHoixYv3dVA5VCbAYGfEi8MQNctNiAKpJRFKDdqoCVwfawgP/26pR2AACqiX6yXmfy1HQHjuOnb9WixupvAPsyefE9Ta7y6UeVvnFQR5XheQ0vNaAV4DESfYecT7mWrmmC9lQDK97dyDNNxXmqfmi2VIBHt++G1A6W3781AOGgxS+3ivj0Sp/+sf7t8VoUQNb89m8DaNJAwdFXFKEmSsqWbbDFmrxipIGnhbV+/FkdFlpw/Em1MPZX6WyDQzP/Z14rTFJrv62wbonTguu+8ja9HFh7zHEfx/nBt2NU2B/rhRGMG1410qIxwAHv1aybTR5qSyGY1AJ1cUliQfsobj96lCeqkUfmNnaQStmCTw=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTU5OTI1MTIyNjEzMywKICAicHJvZmlsZUlkIiA6ICI5ZDQyNWFiOGFmZjg0MGU1OWM3NzUzZjc5Mjg5YjMyZSIsCiAgInByb2ZpbGVOYW1lIiA6ICJUb21wa2luNDIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTE1ZmNlYmJiZTAyZmRiNzJhY2QyMDk1ZDllZGZjZWEwOTVlNjA0YjM2ODJkYjg4OTYzYjViODNiMjkzOWI2NyIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Holds various items obtained from",
+                        "§7§6Mining§7! Items you pickup go directly",
+                        "§7into your sacks.",
+                        "",
+                        "§7Capacity: §e20,160 of each item",
+                        "§8Multiple sacks sum their capacity!",
+                        "",
+                        "§eRight Click to open!",
+                        "",
+                        "§5§lEPIC SACK"
+                    ],
+                    "Name": "§5Large Mining Sack"
+                },
+                "ExtraAttributes": {
+                    "id": "LARGE_MINING_SACK",
+                    "uuid": "4675af64-d8b8-4741-89d4-b94cf5585b48",
+                    "timestamp": [
+                        416,
+                        1603192554
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:special"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "2780c106-e8bf-3a97-8219-149fe4332133",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "cZWvWA04kiZUktlkQ3xGmgsrVtH2q8rCieHDEcByPVBpDTkHFU04k30owTcLFVo/5WY/wWL1GlnUNB8sim8HvOyFiFZHNs3NI5KUYWDZ4AAibOY6C9NNu+7Zq8Mwjrdr3XFk2Ub1n38+u6tSLqbFxnS4yFQU/m3kiqjfXPm8OhZ7LsBT8CbMY7n0SfCCo7EZ6VYhtdZFdJUwEPHmCjvFogdUazdU5OyIGDUF7tg1H+izf/rGpXO6/Dfuen7gHf2J3SCMF0M8fmQVxWQ8417H85s1waD61V4r/mC4dHBdJxDKZ8MT4AxTUJ3qlcmaBRqSlzD4XxXNmIdTEEBlS5bu5W01trpY87hlUJsF3LJTMslvJJQEzdhLtZn8QtRTcEJ7nrH8yM+jCxkNAtMHKZ2HcqouncHQi7tSFhMK8IU9bnYZWIjyohgoBoFdK4vams4QvUMt5XFmuEJLOGGOoHaJNWJoCnW+8goEd8NARiNTXDXlBA7YKvophRtGwSAP+LbVguwgQaWqCI6y4rqCz9keNdMpGzFUWuwMb4wez71tuhHdAHCQlFK/LmnQ7Uh1xTsDc4V4c8/wdxyCWzbDoUZZ2nkel1Rx6nNXDvEFYFntZYS0BKPE4TRA9+rPF04wxibyvoa7RglWPq9QsIDqP26UlP/gdx38JLOMV1H5G196hh4=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY4NjgyMDI5MTY3NiwKICAicHJvZmlsZUlkIiA6ICJkZjRiYzNkNTA2MWM0YThkODk4M2FlNzU1MTgxZDVhZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJEaWRpX0paIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzZjMzM3N2UwNGQ3YTI4ZTkzMDI1NzRhYjYwOWZiN2FjNGU3MmJkZWRhMTAxODlmM2U1NjBjZmE1ZjlmMTZlZmIiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7A device that can be used to contact",
+                        "§7people! Click NPCs to add them to",
+                        "§7your contacts!",
+                        "",
+                        "§7Features:",
+                        " §7Maximum Contacts: §b20 ",
+                        " §a§lContacts Directory",
+                        " §c§lDo Not Disturb Mode",
+                        "",
+                        "§eRight-click to open!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§c§lSPECIAL"
+                    ],
+                    "Name": "§cAⒷiphone"
+                },
+                "ExtraAttributes": {
+                    "soulbound": 1,
+                    "id": "ABINGOPHONE",
+                    "uuid": "e88f4942-3fed-4e6e-b8b9-dff61a3262ac",
+                    "timestamp": [
+                        416,
+                        1555180635
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 399,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7View all of your SkyBlock progress,",
+                        "§7including your Skills, Collections,",
+                        "§7Recipes, and more!",
+                        "",
+                        "§eClick to open!"
+                    ],
+                    "Name": "§aSkyBlock Menu §7(Click)"
+                },
+                "ExtraAttributes": {
+                    "id": "SKYBLOCK_MENU"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 121,
+            "Count": 8,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§a§lUNCOMMON BLOCK"
+                    ],
+                    "Name": "§aEnchanted End Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_ENDSTONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/fine_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §aJade §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 15,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/topaz/fine_topaz_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 7,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §eTopaz §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§5 Pristine§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Topaz Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_TOPAZ_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/flawed_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 7,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of §aJade§7,",
+                        "§7but it could still use some work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/ruby/rough_ruby_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§c Health§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Ruby Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_RUBY_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amethyst/flawed_amethyst_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of",
+                        "§7§5Amethyst§7, but it could still use some",
+                        "§7work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§a Defense§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Amethyst Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_AMETHYST_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/sapphire/flawed_sapphire_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 5,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of",
+                        "§7§bSapphire§7, but it could still use some",
+                        "§7work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§b Intelligence§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Sapphire Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_SAPPHIRE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amber/flawed_amber_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of §6Amber§7,",
+                        "§7but it could still use some work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Amber Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_AMBER_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 5,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "bd8dec98-7302-317c-87be-4797a60fe53e",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "JJs1A80KGYnPsugqI+ZGXgnLhEksBHIIz8ln6wxkIk8twTrY018dyHVoLNBl9HM1rMBF/T0Z+eDdlJrX9I8W317KR/jJKKQlmX1ZiH+oofjDWxy4L5itz51dIF+g487SxCqMNX2iteexl5uUjbT0c85ItvasxIX/ntwPJCCm6pFOA7HtPI3Xi8cFqQdJebfW26n4KGxrUeD+oiro1NU6jlIe0dPEMHD2PxuuUKBl/Ypx2l9ZWV2IljanuCyp08FdzwVIEX84e9TgIk/+xMCKLp5Tplgtxh6K7MAz8LuQSe8EUlANyoVDwIQJvsMP9GCkPl2Y+EiR5+L5hVn8qRM58vCmbBddheus41IdIl8SJYfsCj9hk6u4XC38Hu3XO+5h1B1ato1Efm/RFr5U6bcdKvAb79Wt3P9AdJfLK51dAe1kxvxfH3gywocSoKc2vPWzYqsJ7r42CGDRiVDDckx69gokscvhK2DOJ67zXaVDvx8/A32xeh3zBoA4H0nT3+5z5Rv3A8ZRAqV2Ph2TJTsclXuAM/QpC18OapOTkgTLG5+yJBh/r1W9KDyMHOErOKudm6mp8sCukyd/rUiHEv0TSbA5xBbReA+oUUiG3CP+0EUbuoVuyCgd3vayR6095D/HYmyHGy86CnvDL2miF59T3wVtuqn/5mEWEjpy5n6Mqts=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1MTQwNCwKICAicHJvZmlsZUlkIiA6ICIxN2Q0ODA1ZDRmMTA0YTA5OWRiYzJmNzYzMDNjYmRkZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJnaWZ0bWV0b25uZXMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1MmMxZGQ5NGE2YTZiNmUwZGI1NmFlYThiMmU5N2E2N2JjZWM1MmUyZDgzODQ2OWQ3YjY1OTExNzZjZjZmOSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §b§b Glacial§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Glaciated Brains"
+                },
+                "ExtraAttributes": {
+                    "id": "GLACIATED_BRAINS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/glacite_jewel",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7It is said that there is a lost village",
+                        "§7made of Glacite, deep under the",
+                        "§7Dwarven Mines.",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Glacite Jewel"
+                },
+                "ExtraAttributes": {
+                    "id": "GLACITE_JEWEL"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 5,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "926330fa-7fe1-3428-a92a-90387043537f",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z/vVh6SA6Pislc6+efN0T7ZNL0+3zPjLxGHzdqladVJQmy9ZVY05rGM3oGWqd5eXwjlQrGak+3OjavJRsJglebNbJF6ATdciwL1lt08ioXLiFe8mrdmvB0zjHWInqJqRS8HvCxnUCtfNPkOUG7jkTeLzdpyRI2yBURiiuQ7uynQkWePsEiOGwYbE69MurkP60t7N46hPdFCeDZJ1e21Er36jXIm7wpRPo7ulOF0/dEkvq/jzGxcJEvEDHbj7BjCukflx9g6erL22veABLXme7U5pWbXWET52/5zRH34isnxjy7edvxMX4scmiIWRWaE4/qw8x7kPItff6kiwpBwh4g6f8XgsydM09vREPn6NtL13nIn2Jthxa/pLqGqidX/44Ln3o9c+ACq9zEhrfsFanaL2UDk4bi6VLIt4HRM9R+kIKJlw9vhjq83TAPTWIrO9cimKg012iv9txOCuMzj+qVrktI+XzYUF43zPGZwrF1wndozjgpcC3jPbJwlsDLhQJc5or05WM88pV21h7lRyDZi+0lmpPRHV/2gvkXDK2kfx8xBrVTrShqOZ2eHFrkYjPFE29GlrQUzNau+URrpUkVAMfqhs9NE8jrrDUNlpIdSIUJqGnVhiE9RN0ef0SYVZCK996MpAVduZcKPcvP0Xgvwb3FWBqawHgTxE/Wr2KFA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0Njk2OSwKICAicHJvZmlsZUlkIiA6ICIzZDU1OGQ3Y2NmZjk0ODdkYWE1MzhkMjM4NGE3OWFkZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcnlwdGljTG9zZXIxMyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9jNDY2ZDUxOTZlMGNjNDc0N2RjODUyZDQ4ZTczMzEzNTcxZmI3NDI4ZmY1ZTA2OWVlMTM0ODQxZWYxOGFjMDJiIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Humanoid§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dirty Fingernails"
+                },
+                "ExtraAttributes": {
+                    "id": "DIRTY_FINGERNAILS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 49,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§a§lUNCOMMON BLOCK"
+                    ],
+                    "Name": "§aEnchanted Obsidian"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_OBSIDIAN"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/sapphire/fine_sapphire_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §bSapphire §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§b Intelligence§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Sapphire Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_SAPPHIRE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 9,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "5c98b153-4d4d-3b90-95f1-b61f58058e31",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "K6KxWDSjt32VWislvV78edwheseGmM7m8STHd5/SoCItY8BwhiOCMesScP9LkMbKeD1TEC+th+6vd9Bbi2vJN+F9irtxpRFZ3Bld86d7Ib/bffy02reYJbeLN7agpyZYRERdyIzLa0d7X/qvoTzXxIGYdjNrq2id21Qqw0oyXSRAAT/sxpiROUeP/cDnXYxvcqYZdnWZBWuu3tf4j2Cs2LZolJLEGiAQot5CY37stGTizEmU1EwGH1DQpE1twXSQ5kWgE8/gHnW5pIkEcq5h6Ae7HTgQ3lak5zN1Ns0mO8S3V+WlVpcX4rDZ3UQWkJEQ6nB0V4TCc2fcdtP551H3T9zFHh5+b9QHN9J3xYhyiNncoO0392Ja782lsvPQ0zT9/KyQKR5U6e3oJhM/JikJPO7MIhhqYt1tShBm2mEx0EAOLFdhSjYFpIebvolvJFYuOX5ifAxOmviip39xGqaGcPodLsqAfCqXl6aOoImaXyiO4VoaGEto46OiJmDfOqHGN4NSYPZnFJLlfZQZqJ5HaO5Cm69FWsZ2ZFDF3TvoC1naymtvtxThTZ0WQlTVOdSWcak4H4URAPQh0sPxb1St4KUErR5GF3dFLxBjy9JdCjt/rdLJ+BPG5r/UNiaYlz77B1H9P2P7Yp4FdTDs4Ox58QXBKv99rt9aIvLssillv1c=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk3MzgyNCwKICAicHJvZmlsZUlkIiA6ICJjYzU2NjAzYmZiZjg0OGJmOTM3MzY1N2VjYzUyNGI4NyIsCiAgInByb2ZpbGVOYW1lIiA6ICJpc2FhYWFhYV8iLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcwMWM1MDVhZGFjY2VmMGRiOTMzZTBmNDA2MTc2M2Y4MGVjMzUwN2RlZmU1ZGY2OGViMmMyMTgyODE5NmJjMyIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §6§6",
+                        "§6Subterranean§7 mobs during the §5Year",
+                        "§5of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Jawbreaker"
+                },
+                "ExtraAttributes": {
+                    "id": "JAWBREAKER"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/topaz/rough_topaz_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§5 Pristine§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Topaz Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_TOPAZ_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/stonk",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 285,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 6,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 1",
+                        "",
+                        "§7Mining Speed: §6+380",
+                        "",
+                        "§9Efficiency VI",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§7When mining End Stone with this",
+                        "§7pickaxe, Endermites won't spawn,",
+                        "§7experience will be dropped!",
+                        "§7§a5%§7 chance to drop an extra End",
+                        "§7Stone block.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a50s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC PICKAXE"
+                    ],
+                    "Name": "§5Stonk"
+                },
+                "ExtraAttributes": {
+                    "id": "STONK_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 6
+                    },
+                    "uuid": "cd35fc5b-a744-4cd9-a701-fd7dac4ba176",
+                    "timestamp": [
+                        416,
+                        1735729771
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/bandaged_mithril_pickaxe",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 274,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 5",
+                        "",
+                        "§7Damage: §c+30",
+                        "§7Mining Speed: §6+250",
+                        "§7Mining Fortune: §6+34",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "§9Fortune III",
+                        "§7Grants §6+30 Mining Fortune§7, which",
+                        "§7increases your chance for multiple",
+                        "§7drops.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a50s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§a§lUNCOMMON PICKAXE"
+                    ],
+                    "Name": "§aBandaged Mithril Pickaxe"
+                },
+                "ExtraAttributes": {
+                    "id": "BANDAGED_MITHRIL_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 5,
+                        "fortune": 3
+                    },
+                    "uuid": "6a14c143-f9cb-462f-865b-f298661d3dda",
+                    "timestamp": [
+                        416,
+                        1595889284
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amethyst/rough_amethyst_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§a Defense§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Amethyst Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_AMETHYST_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 17,
+            "Count": 2,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aEnchanted Oak Log"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_OAK_LOG"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/mithril",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 410,
+            "Count": 54,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§9§lRARE DWARVEN METAL"
+                    ],
+                    "Name": "§9Enchanted Mithril"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_MITHRIL"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 265,
+            "Count": 9,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§a§lUNCOMMON ORE"
+                    ],
+                    "Name": "§aEnchanted Iron Ingot"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_IRON"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 17,
+            "Count": 16,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fOak Log"
+                },
+                "ExtraAttributes": {
+                    "id": "LOG"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/sapphire/rough_sapphire_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§b Intelligence§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Sapphire Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_SAPPHIRE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/rough_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        }
+    ]
+}

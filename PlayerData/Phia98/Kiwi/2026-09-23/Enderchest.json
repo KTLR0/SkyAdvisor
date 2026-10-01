@@ -1,0 +1,2560 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/promising_axe",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 258,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+25.5",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§7Blocks Broken: §a3,892",
+                        "",
+                        "§6Ability: Damage Boost  §e§lRIGHT CLICK",
+                        "§7Your axe deals double §c Damage §7to",
+                        "§7creatures on §2Galatea §7for §a10s§7.",
+                        "§8Cooldown: §a110s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§a§lUNCOMMON AXE"
+                    ],
+                    "Name": "§aPromising Axe"
+                },
+                "ExtraAttributes": {
+                    "id": "PROMISING_AXE",
+                    "blocksBroken": 3892,
+                    "enchantments": {
+                        "efficiency": 5
+                    },
+                    "uuid": "1ae7b63d-7df1-4abf-bea7-decf11369d31",
+                    "donated_museum": 1,
+                    "timestamp": [
+                        415,
+                        -629081723
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/sweet_axe",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 258,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+25.5",
+                        "",
+                        "§7§a20% §7chance of dropping an Apple",
+                        "§7when chopping logs.",
+                        "",
+                        "§6Ability: Damage Boost  §e§lRIGHT CLICK",
+                        "§7Your axe deals double §c Damage §7to",
+                        "§7creatures on §2Galatea §7for §a10s§7.",
+                        "§8Cooldown: §a110s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§a§lUNCOMMON AXE"
+                    ],
+                    "Name": "§aSweet Axe"
+                },
+                "ExtraAttributes": {
+                    "id": "SWEET_AXE",
+                    "uuid": "05392af4-8be6-4f35-b57c-47b6f5459287",
+                    "timestamp": [
+                        416,
+                        1148357721
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/stonk",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 285,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 6,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 1",
+                        "",
+                        "§7Mining Speed: §6+380",
+                        "§7Mining Fortune: §6+30",
+                        "",
+                        "§9Efficiency VI",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "§9Fortune III",
+                        "§7Grants §6+30 Mining Fortune§7, which",
+                        "§7increases your chance for multiple",
+                        "§7drops.",
+                        "",
+                        "§7When mining End Stone with this",
+                        "§7pickaxe, Endermites won't spawn,",
+                        "§7experience will be dropped!",
+                        "§7§a5%§7 chance to drop an extra End",
+                        "§7Stone block.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a60s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC PICKAXE"
+                    ],
+                    "Name": "§5Stonk"
+                },
+                "ExtraAttributes": {
+                    "id": "STONK_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 6,
+                        "fortune": 3
+                    },
+                    "uuid": "dccc0767-947f-4482-9748-795aa1390034",
+                    "timestamp": [
+                        416,
+                        151882678
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "1c29b178-a482-31cc-99bd-b207463541c0",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "NeIGEVhTQsg+GfcmtVhCCXdWX6tQpI/iUjPixUKaxea5q8xTpCKFSGqnIhSgG0CjPpxw9UKwC1yr4gIDsM5zPGjnIsD3PDP4F6Jaicx0YsiJGr861zxQDSlxpkcbGXrHRuNq92TT4/zojNMk6qPGtGeFApro7dXxU5Fq7HpyikHR2S4iaTZAF2L65rXqdogmQIBcTI5UVO2cZ3xNSr3j9y/nKGUx0SwVaIryt1sMHj2cO5Lknb9eiiG+vfw/LTlgwOmc9PXHhQB045SoBgGondcBZYBWVGCP9dTCNrvDBp963rzEkJMOfLfL+M2P+BT318BCBQzQ6JGJuILqhdY/Ph7qZJW2P9g8At9chbfnBdwMnHvjTshGN3XMzVg8BdxFAKydJMSocfF4j9KvPCtP1Hilk0pylqRAPe1cn0JpTZ1e/xzorzgqHdo0kXmf8gzLXHXDz8fYanZpQQCemwL3aOHy6nvAFFk/+j6kGLEaetTZgw8WAMJiyAxcpN/elfG9fxoX+pXMFtM9ItRA2Sf6EHdRKJTc4gB+yclkuCd3MgCiRDZU5NwpH8AhTmFZsjd0nHzHLXvpNPmSLAZiYi7EqG9SySEu7pJ4PXHZ0F80jKknNqh0CnnnqH4iKdMIUau33ENPKTLiuxwqxj9bv6ZtsCUZXn/mHWeCOiB6IBPjaR0=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTU5NjQ5MTIwODg4NCwKICAicHJvZmlsZUlkIiA6ICJkNjBmMzQ3MzZhMTI0N2EyOWI4MmNjNzE1YjAwNDhkYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJCSl9EYW5pZWwiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTMzNmQ3Y2M5NWNiZjY2ODlmNWU4Yzk1NDI5NGVjOGQxZWZjNDk0YTQwMzEzMjViYjQyN2JjODFkNTZhNDg0ZCIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§6Ability: Whassup?  §e§lRIGHT CLICK",
+                        "§7Lets you call §5Maddox§7, when he's not busy.",
+                        "",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§5§kX§5 Rift-Transferable §kX",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aMaddox Batphone"
+                },
+                "ExtraAttributes": {
+                    "id": "AATROX_BATPHONE",
+                    "uuid": "19e15ee6-942d-4c96-a478-485d9fee919d",
+                    "timestamp": [
+                        416,
+                        1421180912
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/promising_shovel",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 256,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 7,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§9Efficiency VII",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§7Gains §9Efficiency VIII §7after breaking",
+                        "§7§a5,000 blocks§7!",
+                        "",
+                        "§7Blocks Broken: §a2,358",
+                        "",
+                        "§7Grants a §a7% §7chance to double flint",
+                        "§7drops.",
+                        "",
+                        "§a§lUNCOMMON SHOVEL"
+                    ],
+                    "Name": "§aPromising Shovel"
+                },
+                "ExtraAttributes": {
+                    "id": "PROMISING_SPADE",
+                    "blocksBroken": 2358,
+                    "enchantments": {
+                        "efficiency": 7
+                    },
+                    "uuid": "c6dea9a8-7de6-4ff8-a9b5-7e324043e56e",
+                    "timestamp": [
+                        415,
+                        -534862541
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/spider_queens_stinger",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 261,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+600",
+                        "",
+                        "§9Chance III",
+                        "§9Cubism V",
+                        "§9Gravity V",
+                        "§9Impaling V",
+                        "§9Infinite Quiver V",
+                        "§9Power V",
+                        "§9Snipe III",
+                        "",
+                        "§7Arrows shot using this bow have an",
+                        "§7aura around them that deals",
+                        "§7§c2,456.62 Damage §7to nearby enemies",
+                        "§7instead of dealing impact damage.",
+                        "§7Arrows travel through enemies.",
+                        "",
+                        "§4This item is Arachnal !",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC BOW"
+                    ],
+                    "Name": "§5 Spider Queen's Stinger"
+                },
+                "ExtraAttributes": {
+                    "id": "STARRED_SPIDER_QUEENS_STINGER",
+                    "enchantments": {
+                        "impaling": 5,
+                        "chance": 3,
+                        "dragon_hunter": 5,
+                        "infinite_quiver": 5,
+                        "power": 5,
+                        "snipe": 3,
+                        "cubism": 5
+                    },
+                    "uuid": "0f635cf0-6005-4efe-900c-42d4fb9c8b2d",
+                    "timestamp": [
+                        416,
+                        1155919181
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/combat_3/dragon_shortbow",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 261,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+120",
+                        "§7Strength: §c+40",
+                        "§7Crit Chance: §9+15%",
+                        "§7Crit Damage: §9+50%",
+                        "§7Shot Cooldown: §a0.5s",
+                        "",
+                        "§9Chance III",
+                        "§9Cubism V",
+                        "§9Dragon Tracer V",
+                        "§9Gravity V",
+                        "§9Impaling V",
+                        "§9Infinite Quiver V",
+                        "§9Piercing I",
+                        "§9Power V",
+                        "§9Snipe III",
+                        "",
+                        "§6Ability: Dragon Stalker ",
+                        "§7Deal §a15% §7bonus damage to Dragons.",
+                        "",
+                        "§5Shortbow: Instantly shoots!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§5§lEPIC BOW"
+                    ],
+                    "Name": "§5Dragon Shortbow"
+                },
+                "ExtraAttributes": {
+                    "id": "DRAGON_SHORTBOW",
+                    "enchantments": {
+                        "impaling": 5,
+                        "chance": 3,
+                        "dragon_hunter": 5,
+                        "piercing": 1,
+                        "infinite_quiver": 5,
+                        "power": 5,
+                        "snipe": 3,
+                        "aiming": 5,
+                        "cubism": 5
+                    },
+                    "uuid": "717f261d-d60b-4ad3-a2c9-5a50f123caa5",
+                    "timestamp": [
+                        416,
+                        134605271
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 345,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7When held, points towards the",
+                        "§7nearest unopened present while in",
+                        "§7Jerry's Workshop.",
+                        "",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGift Compass"
+                },
+                "ExtraAttributes": {
+                    "id": "GIFT_COMPASS"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/garden/vacuum/infini_vacuum",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+400 §6(+100)",
+                        "§7Farming Fortune: §6+27 §9(+7)",
+                        "§7Gemstones: §8[§7§8]",
+                        "",
+                        "§7§7Can be used to damage §2 Pests§7.",
+                        "",
+                        "§6Ability: Vacuum  §e§lHOLD RIGHT CLICK",
+                        "§7Deals §c400 §c Damage §7per second to",
+                        "§7nearby §2 Pests§7.",
+                        "",
+                        "§6Ability: Pest Tracker  §e§lLEFT CLICK",
+                        "§7Leads you in the direction of the",
+                        "§7nearest §2 Pest§7.",
+                        "§8Cooldown: §a1s",
+                        "",
+                        "§7Vacuum Bag: §20 Pests",
+                        "§7§8Vacuum  Pests in your Garden to",
+                        "§8increase!",
+                        "",
+                        "§9Buzzing Bonus",
+                        "§7Doubles the §c Damage §7dealt to §2",
+                        "§2Pests§7.",
+                        "",
+                        "§5§lEPIC VACUUM"
+                    ],
+                    "Name": "§5Buzzing InfiniVacuum™"
+                },
+                "ExtraAttributes": {
+                    "bookworm_books": 5,
+                    "modifier": "buzzing",
+                    "id": "INFINI_VACUUM",
+                    "uuid": "19a072f7-659d-4c04-b54a-62ed141feec1",
+                    "timestamp": [
+                        416,
+                        194834634
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/refined_mithril_pickaxe",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 278,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 5",
+                        "",
+                        "§7Damage: §c+50",
+                        "§7Mining Speed: §6+350",
+                        "§7Mining Fortune: §6+49 §9(+9)",
+                        "",
+                        "§9§d§lFlowstate III",
+                        "§7Consecutive blocks broken grant",
+                        "§7§6+3 Mining Speed§7. Stops after §a10s",
+                        "§a§7of not mining and caps at §a200 §7blocks.",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "§9Experience III",
+                        "§7Grants a §a37.5% §7chance for mobs and",
+                        "§7ores to drop double experience.",
+                        "§9Fortune III",
+                        "§7Grants §6+30 Mining Fortune§7, which",
+                        "§7increases your chance for multiple",
+                        "§7drops.",
+                        "§9Smelting Touch I",
+                        "§7Automatically smelts broken blocks",
+                        "§7into their smelted form.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a60s",
+                        "",
+                        "§9Mithraic Bonus",
+                        "§7Grants §6+20 Mining Fortune §7when",
+                        "§7mining §2Mithril §7or §fTitanium§7.",
+                        "",
+                        "§9§lRARE PICKAXE"
+                    ],
+                    "Name": "§9Mithraic Refined Mithril Pickaxe"
+                },
+                "ExtraAttributes": {
+                    "modifier": "mithraic",
+                    "id": "REFINED_MITHRIL_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 5,
+                        "fortune": 3,
+                        "smelting_touch": 1,
+                        "ultimate_flowstate": 3,
+                        "experience": 3
+                    },
+                    "uuid": "ada8fd45-0f8e-4679-9884-85722e92382d",
+                    "timestamp": [
+                        415,
+                        -313330956
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/bandaged_mithril_pickaxe",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 274,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Breaking Power 5",
+                        "",
+                        "§7Damage: §c+30",
+                        "§7Mining Speed: §6+250",
+                        "§7Mining Fortune: §6+34",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "§9Experience III",
+                        "§7Grants a §a37.5% §7chance for mobs and",
+                        "§7ores to drop double experience.",
+                        "§9Fortune III",
+                        "§7Grants §6+30 Mining Fortune§7, which",
+                        "§7increases your chance for multiple",
+                        "§7drops.",
+                        "",
+                        "§6Ability: Pickobulus  §e§lRIGHT CLICK",
+                        "§7Throw your pickaxe to create an",
+                        "§7explosion mining all ores in a §a3 §7block",
+                        "§7radius.",
+                        "§8Cooldown: §a60s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§a§lUNCOMMON PICKAXE"
+                    ],
+                    "Name": "§aBandaged Mithril Pickaxe"
+                },
+                "ExtraAttributes": {
+                    "id": "BANDAGED_MITHRIL_PICKAXE",
+                    "enchantments": {
+                        "efficiency": 5,
+                        "fortune": 3,
+                        "experience": 3
+                    },
+                    "uuid": "1edffd46-72d7-4dbd-a906-6167458e925c",
+                    "timestamp": [
+                        416,
+                        674192149
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 345,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7When held during the §6Spooky",
+                        "§6Festival§7, this compass points towards",
+                        "§7the nearest §6Mega Bat§7. Happy hunting!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aEcholocator"
+                },
+                "ExtraAttributes": {
+                    "id": "ECHOLOCATOR",
+                    "uuid": "2396be99-653a-4fbd-a6a9-4ed31a95ce40",
+                    "timestamp": [
+                        416,
+                        550933840
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/fishing/rod/starter_lava_rod",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 346,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Lava Rod",
+                        "",
+                        "§7Damage: §c+50",
+                        "§7Strength: §c+50",
+                        "§7Fishing Speed: §b+10",
+                        "§7Trophy Chance: §6+5%",
+                        "§7Gemstones: §8[§7§8]",
+                        "",
+                        "§9ථ Hook §8§lNONE",
+                        "§9ꨃ Line §8§lNONE",
+                        "§9࿉ Sinker §8§lNONE",
+                        "",
+                        "§7Talk to §2Roddy §7in the §2Backwater",
+                        "§2Bayou §7to apply parts to this rod.",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§a§lUNCOMMON FISHING ROD"
+                    ],
+                    "Name": "§aStarter Lava Rod"
+                },
+                "ExtraAttributes": {
+                    "id": "STARTER_LAVA_ROD",
+                    "uuid": "e1911acc-c7e6-401f-87a4-8bb53a1c898d",
+                    "timestamp": [
+                        416,
+                        220099867
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/hilt_of_true_ice",
+                "minecraft:tooltip_style": "hypixel_skyblock:legendary"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7Though it’s the coldest thing",
+                        "§7you’ll find on §cJerry's Workshop§7,",
+                        "§7it’s oddly comforting.",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§6§lLEGENDARY"
+                    ],
+                    "Name": "§6True Ice"
+                },
+                "ExtraAttributes": {
+                    "id": "HILT_OF_TRUE_ICE",
+                    "uuid": "8d3bad72-1b85-4b0d-8e40-38c28fa101f2",
+                    "timestamp": [
+                        416,
+                        -1724780523
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "43502fd1-93bf-35d3-b82e-f6f58e4aca8c",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "LPOYn08K8RCP3NkHv6/HjdQw+9Tgj3K+Mtd/cG4mnkVh74eDLlQWSdgXhccLS6NEdSji/wgPOQ3c4MhR2Sal0JUQuH8eyCRbRbympkHV0PNjTNf7bWcYiWjNUo8J11pgME2UwRkGiCgE3qWwDl/2I86DSqimeP7CO/4Va1zLezmfNTRLXnEI8BdKXfxzyDJnKpUumxy0gMl5Xq0lWQrKq9iNDMRWyvXGlvzXnPwdK08o9o1vzAI5RdMwlr8VGO71jsY9o4C4MkXL9ASSeZdT7cqffQLThufG4BQueQNGNYO7jTrJYPWPg5I9+NPJ947f2Es4s1uXAhnuhZhVUf7Q/8V7HIsJSNy4Ub03dpvVMIkuKiUhNU1QRIJJ1jqAeoys4Yj4tfeI4EMimeEcWYekfnqosPq0AAACysMnglqKmL2i3sTF1ByJlq7r2W1NN5JhYlrMR1RevUBLL/g6r7EpVqo6uqBR5g9HBBdhsT/E8YKuIQ2e5BzirDAAR1+xluZHTpuO0KiA0wDwh0uYvJI4OwDQQhdpBWEKvQD/TfNkq4uJ3fBsEBlBdMyUqvl3a80pr3tEZHpChr6evO4is/CN7Z5+NDSvWPaV6hCQyND9jDjFC1K8BY6a1iR9aiYIClNlfUuQvDdsTg0VGOZuKyI7c1hsGyeEO+ugD0o97AReGeE=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxNjQzNjM4MjEwNiwKICAicHJvZmlsZUlkIiA6ICI0NWRjNjlmYTIzNjE0OTdkYTQ3ZTI3MTg0ZGE2ZDlkMyIsCiAgInByb2ZpbGVOYW1lIiA6ICJOZXNzeTE3IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2JmNWQxMGI2NjIxZWQxNGZiMmFiYzQ2NzJjZWY0YTk2YmQwYjFkY2RiZTYwYjQyMGRlZWNlNWZmNDZhYzg3NWUiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Sweep: §2+2 §2(+1)",
+                        "§7Foraging Fortune: §6+5",
+                        "§7Foraging Wisdom: §3+0.5 §2(+0.5)",
+                        "§7Hunting Wisdom: §3+0.5 §2(+0.5)",
+                        "§7Boosters: §2§f⸙§8/§f☯§8/§fꕮ",
+                        "",
+                        "§7Grants §a+5% §7more points towards",
+                        "§7§dStarlyn Contests§7.",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE BELT"
+                    ],
+                    "Name": "§9Moonglade Belt"
+                },
+                "ExtraAttributes": {
+                    "booster_tiers": {
+                        "sweep": 1,
+                        "hunting_wisdom": 1,
+                        "foraging_wisdom": 1
+                    },
+                    "id": "MANGROVE_VINE",
+                    "uuid": "7bcf0e83-8074-43a1-9b38-c0dadccd41e6",
+                    "timestamp": [
+                        415,
+                        -116782514
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/community_center/mayor/diana/ancestral_spade",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 269,
+            "Count": 1,
+            "tag": {
+                "ench": [],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Use to reveal and dig up §eGriffin",
+                        "§eBurrows §7in the hub while Diana's",
+                        "§7§2Mythological Ritual §7is active.",
+                        "",
+                        "§7Maximum Burrow Chain Length: §a4",
+                        "",
+                        "§7Burrows dug with this item may contain:",
+                        "§8 ● §cMonsters",
+                        "§8 ● §fGriffin Feathers",
+                        "§8 ● §6Coins",
+                        "",
+                        "§6Ability: Echo  §e§lRIGHT CLICK",
+                        "§7Show the way to the next or nearby Griffin",
+                        "§7burrow.",
+                        "§8Cooldown: §a3s",
+                        "",
+                        "§9§lRARE "
+                    ],
+                    "Name": "§9Ancestral Spade"
+                },
+                "ExtraAttributes": {
+                    "id": "ANCESTRAL_SPADE",
+                    "uuid": "3afa51bb-3c6e-4631-aa7d-4f678c8b95b2",
+                    "timestamp": [
+                        416,
+                        907015082
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/crimson_isle/bobbin_time/bobbin_scriptures",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7The sacred ways of bobbin', written",
+                        "§7by a long-forgotten worshipper of",
+                        "§7Kuudra.",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Bobbin' Scriptures"
+                },
+                "ExtraAttributes": {
+                    "id": "BOBBIN_SCRIPTURES",
+                    "uuid": "096bdbe1-fb6e-4384-ac5c-1e1bb5e47735",
+                    "timestamp": [
+                        416,
+                        -986831493
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "0b718c1a-42bd-3df2-8780-89ed5bab9e1b",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Kw7VCieWf56V+fcf/ctBMOREczs5Onn1jk8PVQsrtibuAtYzVcvl6dP7Uy/XVbGb7o0MXvAQy0N1Rmn/w12F6R5hvIt/1prcUNaUrmLkPoTN1isyuR1P6kFzM8x1t7DgGTOTP5I1chZf0Sz4NjIEXMOcj7ob9qc7CTn9DfTVV6aL6749PD7dsCF1+Cr9wLXUG/Mrawv2wmGZPf2oxUQzUBLCnbaGAKiIJNmr3mT1EwDoYa5mZQHRhOxzrhOWuu2mnQYg1WWE/Lug/mtqsrL2C2qAwWXST30b26hBWpvblhyy0itZiicI3nkcZcpDUUn2V34Tt51h9LnstskLthZDM37cufqXKX/wXYFnbsUfFt6HWa934/6iG3xU/QiCukFAL+cUtOOcfPvN3iSn6pXpY0egrmXTmZ8xdmt/7OlVv28VCoOXoHqkEy27ZE0A9nQ/kAs5ADhRuklNV66lj54w9IvHuMsKi62hmY4DlNUqimY1xGLAE7zsHAbZDaJDy5Vy0BJTdYEYWXTsNkWcmO12PxZdldkAkMaxtF9FLpAMBZc/njuNlipS5OTLbzFcDFw3TYvmdWHsFPm2hv9jtod/0TvbEFK5CtzZUEhXWXR0MVSz3uKrEBqOVXM0XyBzA5H3Tpgsr8HQtG4oxg1Ohxqwsbfdu+BTRbKVVFeIn8NzzaY=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTYwNTc4NTkwNzc0NCwKICAicHJvZmlsZUlkIiA6ICI5MThhMDI5NTU5ZGQ0Y2U2YjE2ZjdhNWQ1M2VmYjQxMiIsCiAgInByb2ZpbGVOYW1lIiA6ICJCZWV2ZWxvcGVyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzMyNTgxZDU2NGYwMWQ3MTIyNTUxMjVlMWYxMDFlNTM0MjE3Zjc2ZTM1OTlkYWI3ZjRhZTBmZmUzMjhmNzI5ZWIiCiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Speed: §f+1",
+                        "",
+                        "§7Extra chance to fish up Squids!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§f§lCOMMON HELMET"
+                    ],
+                    "Name": "§fSquid Hat"
+                },
+                "ExtraAttributes": {
+                    "id": "SQUID_HAT",
+                    "uuid": "3b8cebd1-4705-4d24-b917-756ff0c2ffbe",
+                    "timestamp": [
+                        416,
+                        -1816418662
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/fishing/rod_part/sinker/prismarine_sinker",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Materializes §fPrismarine Shard§7 or",
+                        "§7§fPrismarine Crystals §7in your",
+                        "§7inventory whenever you catch",
+                        "§7something.",
+                        "",
+                        "§7Talk to §2Roddy §7in the §2Backwater",
+                        "§2Bayou §7to apply this §9Sinker §7to a",
+                        "§7Fishing Rod.",
+                        "",
+                        "§f§lCOMMON ROD PART"
+                    ],
+                    "Name": "§fPrismarine Sinker"
+                },
+                "ExtraAttributes": {
+                    "id": "PRISMARINE_SINKER",
+                    "uuid": "9e863a98-7576-4330-8d2b-d87889337db3"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "03300b17-9cc1-348f-9c4e-f250ecfea85e",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "ejX6QyczthLi6UK104jI8w4e4FmibI7dKXlckiUUctlw/5pdUa5PLO3M/Hxxh19qUWvKJd013ExsAEjiEBSg+bhnjhffHhHHSMey9JqLxxkLhy4xRQ554cgBcKikmix5UB3Oe6AWrsWMlyBe+dWnIke8HGXvA2uc3VykaAmZ7/9JLTWyDb0oXJTdqxVS/eCTqzbD3FNniIfuPp5+1AbxIBXNCafqZ1/rqFpHHoqOCKYwFicUpYd4EwGeECK1IbmrJHou48upYq82zeqUVTc063Zj5btj08sQfORlM2sPWinQqT1twKDl2kFgmMC15tM9EfscliMmC0PWQm1UXhKaTMHYDtRdgj72p9JCDyrbFDio/ArRG2pFmYFUmKjuMfeoiO3zK6c61ypFfSiFO9gHH943L7SWPzltgzgbsDtAAcIpXEL2w1UOkjlRGqqMShbis6PAzl5yRenncVoZ3+OzSdSgP92xOhTTd6fjUWlElPb5E/qsk33DKb00b3/O1kKhXdtu/PSffTankqxr881Sn6QF3WFJW2aP196TAJxcCp4ggRSBxUrmBrEXmhN2I3CC2zoh7KQ4aTgHkaLFfIo8z9maFshzKmUzAXlexHtxLEgkMD7p8/qHEpRtUNvWzWSVf9ka0ygAOrKkkw3N+UQIAlPBiOljmakjh3sj2Y42XnA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY0MzU5OTkwNjU5MiwKICAicHJvZmlsZUlkIiA6ICI5MThhMDI5NTU5ZGQ0Y2U2YjE2ZjdhNWQ1M2VmYjQxMiIsCiAgInByb2ZpbGVOYW1lIiA6ICJCZWV2ZWxvcGVyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2Y3MjAzZDJmMDhhN2QyYjdjOTU1MzI4NjVlYjJiNTkzZTUyNmRkYjkyZmQ1Y2NhOWU3ZDdiNjIyYmM1Mzk5MDYiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+20",
+                        "§7Defense: §a+10",
+                        "",
+                        "§7Reduces damage taken by §c3%§7.",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§a§lUNCOMMON BELT"
+                    ],
+                    "Name": "§aGreen Belt"
+                },
+                "ExtraAttributes": {
+                    "id": "DOJO_GREEN_BELT",
+                    "uuid": "c02e767a-1c05-4785-badd-ffa27e05f253",
+                    "timestamp": [
+                        416,
+                        149942084
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_2/axes/seriously_damaged_axe",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 271,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Damage: §c+10.2",
+                        "§7Sweep: §2+10.2",
+                        "§7Foraging Fortune: §6+5.1",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§6Ability: Throwing Axe  §e§lRIGHT CLICK",
+                        "§7While on §2Foraging Islands§7, throw your Axe at a",
+                        "§7tree! It will sweep §c50% §7of the logs it normally",
+                        "§7would!§7",
+                        "§8Cooldown: §a1s",
+                        "",
+                        "§6Ability: Damage Boost  §e§lRIGHT CLICK",
+                        "§7Your axe deals double §c Damage §7to",
+                        "§7creatures on §2Galatea §7for §a10s§7.",
+                        "§8Cooldown: §a110s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§a§lUNCOMMON AXE"
+                    ],
+                    "Name": "§aSeriously Damaged Axe"
+                },
+                "ExtraAttributes": {
+                    "id": "SERIOUSLY_DAMAGED_AXE",
+                    "enchantments": {
+                        "efficiency": 5
+                    },
+                    "uuid": "e4ebaf3a-aefe-47b2-be83-9dbb6ce7a51c",
+                    "timestamp": [
+                        415,
+                        -620466833
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_2/axes/treecapitator",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 286,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Sweep: §2+25.5",
+                        "§7Gemstones: §8[§8§8] §8[§8§8]",
+                        "",
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§6Ability: Throwing Axe  §e§lRIGHT CLICK",
+                        "§7While on §2Foraging Islands§7, throw your Axe at a",
+                        "§7tree! It will sweep §c50% §7of the logs it normally",
+                        "§7would!§7",
+                        "§8Cooldown: §a1s",
+                        "",
+                        "§6Ability: Park Enthusiast ",
+                        "§7Gain §6+100 Foraging Fortune §7while in §aThe Park§7.",
+                        "",
+                        "§6Ability: Damage Boost  §e§lRIGHT CLICK",
+                        "§7Your axe deals double §c Damage §7to",
+                        "§7creatures on §2Galatea §7for §a10s§7.",
+                        "§8Cooldown: §a110s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC AXE"
+                    ],
+                    "Name": "§5Treecapitator"
+                },
+                "ExtraAttributes": {
+                    "id": "TREECAPITATOR_AXE",
+                    "enchantments": {
+                        "efficiency": 5
+                    },
+                    "uuid": "1fc40e18-9f02-4262-9c51-2bfc641fe8de",
+                    "timestamp": [
+                        415,
+                        -544408823
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 61,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 384,
+            "Count": 2,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Titanic Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "TITANIC_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/fishing/rod_part/hook/common_hook",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Increases the chance to catch",
+                        "§7§F§LCOMMON §3Sea Creatures §7by §a25%§7.",
+                        "",
+                        "§7Talk to §2Roddy §7in the §2Backwater",
+                        "§2Bayou §7to apply this §9Hook §7to a Fishing",
+                        "§7Rod.",
+                        "",
+                        "§f§lCOMMON ROD PART"
+                    ],
+                    "Name": "§fCommon Hook"
+                },
+                "ExtraAttributes": {
+                    "id": "COMMON_HOOK",
+                    "uuid": "7d6841d6-a9e2-44b3-96a7-c89256a42e79"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/fishing/rod_part/sinker/stingy_sinker",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Grants a §a10% §7chance to not consume",
+                        "§7Bait.",
+                        "",
+                        "§7Talk to §2Roddy §7in the §2Backwater",
+                        "§2Bayou §7to apply this §9Sinker §7to a",
+                        "§7Fishing Rod.",
+                        "",
+                        "§a§lUNCOMMON ROD PART"
+                    ],
+                    "Name": "§aStingy Sinker"
+                },
+                "ExtraAttributes": {
+                    "id": "STINGY_SINKER",
+                    "uuid": "ec91f9ea-e9b9-49d7-ae41-5807e5b09e13"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/farming_1/mobys_shears",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 359,
+            "Count": 1,
+            "tag": {
+                "ench": [
+                    {
+                        "lvl": 5,
+                        "id": 32
+                    }
+                ],
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§9Efficiency V",
+                        "§7Increases how quickly your tool",
+                        "§7breaks blocks.",
+                        "",
+                        "§7Collects §a+1 §aGlowing Mushroom§7!",
+                        "",
+                        "§9§lRARE SHEARS"
+                    ],
+                    "Name": "§9Moby's Shears"
+                },
+                "ExtraAttributes": {
+                    "id": "MOBYS_SHEARS",
+                    "enchantments": {
+                        "efficiency": 5
+                    },
+                    "uuid": "31376062-adbc-47b5-a753-0d7820d84a67",
+                    "timestamp": [
+                        416,
+                        -2078064147
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 359,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON SHEARS"
+                    ],
+                    "Name": "§fShears"
+                },
+                "ExtraAttributes": {
+                    "id": "SHEARS",
+                    "uuid": "939f5825-ce69-4b81-8006-04e2eb1d10d6",
+                    "timestamp": [
+                        416,
+                        41060544
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "da6c704c-59b1-31a5-8d09-deb33254dc35",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "KECjBZ9a7Xa9VPPe3dmc6HI4nHuLHCeJ0ev+EIJM3+mPMAYAGoS4ue4usqeCopr+cffbg1wOjxX1iIU1LrO9jBjKYqXgz+iUYEgj8P+PWyLhb5S/OgHha1jH6JcEmrZv0JUJ4UK5Ux/VlAoMz+3TbStwC5oajZWKUv3quMKyCIAzKlzYZaIVxCDIHxleCgEXOtjRxoaqFq+qTXhIrP1gDPIPoUl/CqvbrmQoxFbjV39DdTCePcAgtMQ5jD5BG6OcrafJAvuz6D6RW6iMSGZESkjg9WMnUJQi0bx4L27Gg1nK0rV3mzAi5617+htV0dX1JgUaPHunxwehN2FS/DrGZEOSefpL5F/+d2HDqwO5Im2cc4OXImKNrpDOvZQeCl0FN5G/Pk4yY7Wu/rLMp7FMEgGFe0Hzur8A6UoeoIZivqaWZoWkFBV3oQo76PfaOBFVuFUc/zIXWzDcg+zaG41aReofre2s2WU4GFJ0yQcLYshlEOe1Q4Iob4HD6YF5iGg+kV/idQpAZrRwNVl9xlxleIgOHznt456XtHUpVKX/bSkecvP5C4LtpooSvpLybtuHF9sKQM0y5JybHPmeTTcMGuqQk0uSqnw+smlupsVVRgRUS8dnSp2fK6nd6YRxH2I9RiHHvHK99AZ3eAAdw9oUvaJXmzlIxuCF9sCXW2K+A38=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc0NTk0MjMxMDA0NCwKICAicHJvZmlsZUlkIiA6ICIwNDg0N2ZjNWM5YjY0NTQ1YjI1ZWJkYmJiNzdjNjg2NSIsCiAgInByb2ZpbGVOYW1lIiA6ICJuYXFsdWEiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGE4ZDBkZTY4OGFkNTc0MWRkYTk2YTkzN2ZkYzE3ZjlkNmQzMWI5NTkyZTM4YTUxN2ZkODJmNzg2MDJiMDhhMyIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Fishing Speed: §b+2",
+                        "",
+                        "§6Ability: Reality Check ",
+                        "§7Allows you to conceptualize and",
+                        "§7interact with §dWormholes §7on the §3Lotus",
+                        "§3Atoll §7and §cCrimson Isle§7.",
+                        "",
+                        "§7When fishing in §dWormholes§7:",
+                        "  §6+2.5 Trophy Chance",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE HELMET"
+                    ],
+                    "Name": "§9Silver Froggles"
+                },
+                "ExtraAttributes": {
+                    "id": "FROGGLES_SILVER",
+                    "uuid": "39315871-ee5c-4bb9-acbd-6403b4874717",
+                    "timestamp": [
+                        416,
+                        640570395
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 299,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Trophy Chance: §6+4%",
+                        "",
+                        "§7§7Seems to attract §aBullfrogs §7due to its",
+                        "§7red hue.",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE CHESTPLATE"
+                    ],
+                    "color": 16711680,
+                    "Name": "§9Red Sweater"
+                },
+                "ExtraAttributes": {
+                    "id": "RED_SWEATER",
+                    "uuid": "8259f767-1120-449a-b796-a67dc95b0249",
+                    "timestamp": [
+                        416,
+                        905061436
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 40,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/honey/pots/honey_pot_family_sized",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 8,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Consumed on use",
+                        "",
+                        "§7Use on a §aTree §7with an active §cTree",
+                        "§cProtection Order §7to lather it with",
+                        "§7§6Honeycomb§7!",
+                        "",
+                        "§7After §a30m§7, a unique §a Critter §7will be",
+                        "§7attracted to the §6Honeycomb§7!",
+                        "§7§8Type of mob depends upon type of",
+                        "§8tree lathered.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Family-Sized Pot of Honeycomb"
+                },
+                "ExtraAttributes": {
+                    "id": "FAMILY_SIZED_POT_OF_HONEYCOMB"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 298,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+4 §9(+4)",
+                        "§7Defense: §a+18 §9(+3)",
+                        "§7Strength: §c+4 §9(+4)",
+                        "§7Crit Chance: §9+2% §9(+2%)",
+                        "§7Intelligence: §b+25 §9(+25)",
+                        "§7Mining Speed: §6+15",
+                        "§7Speed: §f+2 §9(+2)",
+                        "",
+                        "§6Full Set Bonus: Beginner's Boost §7(0/4)",
+                        "§7Grants §6+40 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON HELMET"
+                    ],
+                    "color": 8026468,
+                    "Name": "§aMythic Prospecting Helmet"
+                },
+                "ExtraAttributes": {
+                    "modifier": "mythic",
+                    "id": "MINER_OUTFIT_HELMET",
+                    "uuid": "fb8b4d5f-ba5d-4126-8598-3223925c7d68",
+                    "timestamp": [
+                        415,
+                        -631712518
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 298,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+1",
+                        "§7Defense: §a+1",
+                        "§7Intelligence: §b-1",
+                        "§7Speed: §f+10",
+                        "",
+                        "§6Full Set Bonus: Fairy's Outfit §7(0/4)",
+                        "§7Gain §c1❤ §7per Fairy Soul.",
+                        "§7You found: §d66 Fairy Souls",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE HELMET"
+                    ],
+                    "color": 16724889,
+                    "Name": "§9Fairy's Fedora"
+                },
+                "ExtraAttributes": {
+                    "id": "FAIRY_HELMET",
+                    "uuid": "899af4bf-7245-4109-a014-e9cbe82989ae",
+                    "timestamp": [
+                        416,
+                        -1511595015
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "86b6ea61-80c2-33c4-9e74-a042f722a628",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "rNTRDkLGitTHKYq0EYtWUBPHj5ov2RxNCbuoF6H7RPyDilU72Yc27FBh1Mgn+RCkzZRL37fBZyH/fKLuYSCbeYQHbaDRvZnzVeyemGz5ubC4ZvwYSo5pN0KMzVJAW1ANrVmAK/d6co27BV3huXkqAxBrB/wfnF5y5EL7KaOMH6z/gsRpbT01/s23XBq7gMbCLgBCYzXQ+m5yCJcTZZ1anCUjL81OnPxpTBbrY4piVU7/SjTDChFmI/TImZ0vR53wpsiuK+iRil5/C+6O+qa3FnAXC0zs6bylIZNd0h+b4si4kYwz1ha8MuqaK8JMW+qPAcA29FfkgK1eeCZPzZ+Fzbm3ECCH2GOdjBjGULZ3mf8DqM1HmfxDAXgNn1eKR8MuaW3Rh2qJ3S7OWDlEd4ODFOukIB+CZ7vtemk5SwDDzRwZmWATrmUy6Oz07A10FTkHE+IbU0i9HNi6fu88Ga+MP0Xvu4o0pW3BFf9/IcPw+5We3m7BMyBG7iIfnGxpx2faO7g1YM5Kdz94lZrXaFCbaVT8v4uUer7DE8dQGTozLOwy7Xps7inGkIfz4YSP4B5o7x6FCtNIcdL7Xj2MvnM/7Taq1oxRq5VMwTjbT0G4XE4i4dzqGTkRPuRUvi+xCBlj/3FpeOTgOudeztI+dWHH+9pukz/3LX5fsgVmAa2f224=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY2OTM4OTk5MzM4NSwKICAicHJvZmlsZUlkIiA6ICJkMmM1MThjMzJjNTY0OGJmOTM2ZjY0YjhmZDQ1ZThjZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJEcmFjb0JlbGxzIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2IxMmZhYTJlNzk4OTg5ZDkxMGVmYmY5MjgxYjhjYmEyNDE4NTYyMmU5YWEzNTdjNzUyODVhYTRiN2UzMzE0YmMiCiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+5",
+                        "§7Intelligence: §b+5",
+                        "§7Speed: §f+2",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE NECKLACE"
+                    ],
+                    "Name": "§9Snow Necklace"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_NECKLACE",
+                    "uuid": "d8a7c23a-064d-4380-9eb6-871b49111567",
+                    "timestamp": [
+                        416,
+                        762913134
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 41,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§f§lCOMMON"
+                    ],
+                    "Name": "§fPaper"
+                },
+                "ExtraAttributes": {
+                    "id": "PAPER"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 299,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+3 §9(+3)",
+                        "§7Defense: §a+43 §9(+3)",
+                        "§7Strength: §c+3 §9(+3)",
+                        "§7Crit Chance: §9+4% §9(+4%)",
+                        "§7Crit Damage: §9+3% §9(+3%)",
+                        "§7Attack Speed: §e+1% §9(+1%)",
+                        "§7Intelligence: §b+3 §9(+3)",
+                        "§7Mining Speed: §6+15",
+                        "§7Speed: §f+1 §9(+1)",
+                        "",
+                        "§6Full Set Bonus: Beginner's Boost §7(0/4)",
+                        "§7Grants §6+40 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON CHESTPLATE"
+                    ],
+                    "color": 8026468,
+                    "Name": "§aPure Prospecting Chestplate"
+                },
+                "ExtraAttributes": {
+                    "modifier": "pure",
+                    "id": "MINER_OUTFIT_CHESTPLATE",
+                    "uuid": "c670c370-cb4e-41a4-8aae-32f91bfcc509",
+                    "timestamp": [
+                        415,
+                        -631574610
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 299,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+1",
+                        "§7Defense: §a+1",
+                        "§7Intelligence: §b-1",
+                        "§7Speed: §f+10",
+                        "",
+                        "§6Full Set Bonus: Fairy's Outfit §7(0/4)",
+                        "§7Gain §c1❤ §7per Fairy Soul.",
+                        "§7You found: §d66 Fairy Souls",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE CHESTPLATE"
+                    ],
+                    "color": 16737970,
+                    "Name": "§9Fairy's Polo"
+                },
+                "ExtraAttributes": {
+                    "id": "FAIRY_CHESTPLATE",
+                    "uuid": "b2242a1a-218d-49ba-be02-321bf864b2a4",
+                    "timestamp": [
+                        416,
+                        1264622763
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "12820889-db89-362d-8b30-57d0f1afb537",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "a7joEJQF+rPQKrGg0yDVwd/63wv+7xY+MEolhFWWpxeRwAnJYnKi7Ul6K6Q7Wugeu7C+8j6faaqe3Fha+oPRDK03QZvS1py53GHoU1AKRiaELw7sefWEcFh6MiEuXpnJbz+JIkl8YUPCAPK1qoQMfxq1hngQireWIpLF4SRmhxel1Ctxic8j4hisjAsNvDDMrVoUB7khCT5ph+J/rG1j6fudY19B/yBVPKrj5JCjCQmENjpgym31gn9nE4/Y+w+FphyRWvvn3hyVNG0xox4MnfTOTErqRRaxYpggGAprFTYfu/+j4uSdXKRt1b9O8XidbEP8rNnfuoo8d5m0YWwtNiSUGH4fX2NIzO2kKcqfsEgKpQ8LNcSOWeXkzZNtBQVr9oYSQncpwjr2PtJlOIJapdDeArQMAdeHdQgvnY1RSIzqzdrztXuFrba4SNvxY5lePQ+nfls5KW4fiHfBviIMnnkg8fIYKb/wZpP33tCBhLRjf0EvrmBeID9FxiM2Q4pjOkWtR9b2X33/tk+IgvMgcSou3VQOr8PkWs28zZnoOiWXqzXBqPEBwI/I8L8Grjl0hkasm6ZI7ZkRAui9ZGPD9d3eR5mOQvLy5H5Ag0e/H0tdkqY82RtkShYFM9Z4e0YFSKjme0LIPA/UoNJDPMEXrizztQor3JW6yl2VWlvNTd4=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY2OTM4OTk3ODk1NiwKICAicHJvZmlsZUlkIiA6ICJmYzg3ZTI3YTYwZjY0NjdhOGMwMDgyMmI2ZWY5ZTMyNSIsCiAgInByb2ZpbGVOYW1lIiA6ICJhbmRyZWlvX28iLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjEyNGJmYjIyZDZmZjZjMDBhNzNkNWY2NzY5YjkwNzIzMTFiZGU2YzgwMTBkZjU1MWU4Njc1OGU4OTg0YjhiZiIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+5",
+                        "§7Intelligence: §b+5",
+                        "§7Speed: §f+2",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE CLOAK"
+                    ],
+                    "Name": "§9Snow Cloak"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_CLOAK",
+                    "uuid": "8439cc95-2887-45cb-bac6-f1d473d955f8",
+                    "timestamp": [
+                        416,
+                        762911671
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 299,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+20",
+                        "§7Defense: §a+50",
+                        "",
+                        "§6Ability: Block Damage ",
+                        "§7If you are at full §c Health§7, the first damage",
+                        "§7you take will be nullified.",
+                        "§8Cooldown: §a60s",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE CHESTPLATE"
+                    ],
+                    "color": 1143697,
+                    "Name": "§9Guardian Chestplate"
+                },
+                "ExtraAttributes": {
+                    "id": "GUARDIAN_CHESTPLATE",
+                    "uuid": "3300aff1-54f5-4049-9cb8-28157aa8125a",
+                    "timestamp": [
+                        416,
+                        -1722140370
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 300,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+4 §9(+4)",
+                        "§7Defense: §a+33 §9(+3)",
+                        "§7Strength: §c+4 §9(+4)",
+                        "§7Crit Chance: §9+2% §9(+2%)",
+                        "§7Intelligence: §b+25 §9(+25)",
+                        "§7Mining Speed: §6+15",
+                        "§7Speed: §f+2 §9(+2)",
+                        "",
+                        "§6Full Set Bonus: Beginner's Boost §7(0/4)",
+                        "§7Grants §6+40 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON LEGGINGS"
+                    ],
+                    "color": 8026468,
+                    "Name": "§aMythic Prospecting Leggings"
+                },
+                "ExtraAttributes": {
+                    "modifier": "mythic",
+                    "id": "MINER_OUTFIT_LEGGINGS",
+                    "uuid": "89135410-d4ba-4c0d-9b8e-c0052e9e7d01",
+                    "timestamp": [
+                        415,
+                        -631714474
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 300,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+1",
+                        "§7Defense: §a+1",
+                        "§7Intelligence: §b-1",
+                        "§7Speed: §f+10",
+                        "",
+                        "§6Full Set Bonus: Fairy's Outfit §7(0/4)",
+                        "§7Gain §c1❤ §7per Fairy Soul.",
+                        "§7You found: §d66 Fairy Souls",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE LEGGINGS"
+                    ],
+                    "color": 16751052,
+                    "Name": "§9Fairy's Trousers"
+                },
+                "ExtraAttributes": {
+                    "id": "FAIRY_LEGGINGS",
+                    "uuid": "a921d312-ba33-485d-a449-ee095121418d",
+                    "timestamp": [
+                        416,
+                        -1813554530
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "fce4e950-464c-3df6-9b91-c53ff23ffd03",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "p9/w+3LHa985hussV7pRNOp6lgUsvbfCNpTsPJyRFixhf3UzOQQ5wNBhiIjbQ1rwnPKRa7YVaxPIaNc0/W6bXtwApmpKK9RFrXYZxzpQ28oqQDpAWdxipgE24NF2G6jNMQvIebiQN4FfXW74L0lhMQ2yeKX1dK3ceYo1mR/TfzA25dGOSAcoZodP6CKge8H0p0yaKdXozDgJ84/lAkdjFH5kgDdPZI7Nv7W8vBNW+PlyNgXryKsRQ93fEase5MDvfkQOT/6uoPUA5mXByVmEdQYgHLULbBUIyB0d0dmFb8IxnSm9CW4GnpZqyWbM5kVb5RsZ64JZRxrONhdBzJ6GLPM+VTv2CZqy8Q6PlM4Oi25/Wj+0HzPjsmSwiF0PGLlzi+ak009jIJVRLFfxZ+oKON2cgY4WYApGSp3oIYsJN2zTRELtbh0IZ3EdS8DmMgmhSD/hskklG+BY0aHTPq2Ii/miN02LzH4KQ8B7uVbs4FsJxusKjBHP/UVYHWLNvQeWIuhW4xIaHjW01Rpop35F8B9HiRrD7VV8J+dpWJ+TskLOjzyAptRPmfoxF9yeI8K10ddNPOsXDvcF3/Gj2LkZc6MnhqIS2ki6ai+4c3NmqOcxXpARauDNpNW4mAJdC2J6jUvX6e7Kis+dy1fLK6zUT7thzQXv5vNktzfOh0nB+MQ=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY2OTM4OTk2Nzc3NSwKICAicHJvZmlsZUlkIiA6ICJmZTE0M2FhZTVmNGE0YTdiYjM4MzcxM2U1Mjg0YmIxYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJKZWZveHk0IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2JjMDNlODdmYmZhOTAzMjQ4OTRlOTY4YmU5NmI5OTMwZDk5OGVjY2NmNjYzMmRlMDQ3YjNlOWNjNjkxMTFjYzciCiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+5",
+                        "§7Intelligence: §b+5",
+                        "§7Speed: §f+2",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE BELT"
+                    ],
+                    "Name": "§9Snow Belt"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_BELT",
+                    "uuid": "ce26bbed-4244-40ae-820a-ea9a259489c3",
+                    "timestamp": [
+                        416,
+                        762912252
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 300,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+75",
+                        "§7Defense: §a+30",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC LEGGINGS"
+                    ],
+                    "color": 16777215,
+                    "Name": "§5Snow Suit Leggings"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_SUIT_LEGGINGS",
+                    "uuid": "96bf84e0-9692-4b28-a411-4bb8bc1e56b7",
+                    "timestamp": [
+                        416,
+                        758801809
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 421,
+            "Count": 10,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7Can be spent in §bAgatha's Shop§7!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aAgatha's Coupon"
+                },
+                "ExtraAttributes": {
+                    "id": "AGATHA_COUPON"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 421,
+            "Count": 15,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7Can be spent in §bMiria's Shop§7!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Miria's Coupon"
+                },
+                "ExtraAttributes": {
+                    "id": "MIRIA_COUPON"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 301,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+3 §9(+3)",
+                        "§7Defense: §a+18 §9(+3)",
+                        "§7Strength: §c+3 §9(+3)",
+                        "§7Crit Chance: §9+4% §9(+4%)",
+                        "§7Crit Damage: §9+3% §9(+3%)",
+                        "§7Attack Speed: §e+1% §9(+1%)",
+                        "§7Intelligence: §b+3 §9(+3)",
+                        "§7Mining Speed: §6+15",
+                        "§7Speed: §f+1 §9(+1)",
+                        "",
+                        "§6Full Set Bonus: Beginner's Boost §7(0/4)",
+                        "§7Grants §6+40 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON BOOTS"
+                    ],
+                    "color": 8026468,
+                    "Name": "§aPure Prospecting Boots"
+                },
+                "ExtraAttributes": {
+                    "modifier": "pure",
+                    "id": "MINER_OUTFIT_BOOTS",
+                    "uuid": "881df06f-4cbe-42ee-a712-ad43eacc3c92",
+                    "timestamp": [
+                        415,
+                        -631543922
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 301,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+1",
+                        "§7Defense: §a+1",
+                        "§7Intelligence: §b-1",
+                        "§7Speed: §f+10",
+                        "",
+                        "§6Full Set Bonus: Fairy's Outfit §7(0/4)",
+                        "§7Gain §c1❤ §7per Fairy Soul.",
+                        "§7You found: §d66 Fairy Souls",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE BOOTS"
+                    ],
+                    "color": 16764133,
+                    "Name": "§9Fairy's Galoshes"
+                },
+                "ExtraAttributes": {
+                    "id": "FAIRY_BOOTS",
+                    "uuid": "a7bb4eb8-6887-4979-a7da-10b4e493fbcd",
+                    "timestamp": [
+                        415,
+                        -361703168
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "959bc10c-248d-344c-bfbe-f2ed5e56ab65",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "xmUBzWs67CdtVZ4YgV0PT+46Flbgzm1V0XoJoVHnBwLW5FuEyxpX4zb5nCw5gsHitiJnrZN8ObWizcgw7mFuy6qUI8ySf7JIUWNm5vundUYOjmhLDVBDJjO01BntsCg7yuZ2ORWMGi460+idKOF17A/ErsNmH+RtKd1BTLHEBSPdIeboZO6vwxdqgK/Mp4IP70YTZAdb3KokLFYsbpsjLfFLROWDUhkBaTwtFH9pjJkMkaUIPk5AD/CDJAztXlCcCcp1kQzQt0jzfrRSUaaF0WjfbflH7sy0gP3jwLEog5L0guaYpA1hFpmLKqclB20cvXq7LKPfqrAVFwqEvcVlikDpJcA2kVBg0O9ivXohGA5BUNFmWct3xZuj2fzyJsHLkNpiONkqMt+w4WQGnx2IVFO8MCdXyqIM5ZaahiozsutdhnLUVROcvhgp59JEBJZd+KRKCw4y8pae4wQlkrcaJuvOiW64gijGIA773tMUR7oE6SpMNAYXyNkCg1FeTrsA8CpCSUY5CfNcERwVpubZ7o0Onw4swUmpfhmzJVFyFUAOK8+qDBa7hwzOg1eeWCrquLso93ljN/9B/7S7SWMuBzR6ZlevXUxUvGnAvyJYoouPeKfK26RqioXvgKgtoILso5ulkqSSaQcxzQd4QF7u6p7CcC3k8cnDeNJ5fIRVxZY=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY2OTM4OTk1MzIwMywKICAicHJvZmlsZUlkIiA6ICIwNDNkZWIzOGIyNjE0MTg1YTIzYzU4ZmI2YTc5ZWZkYyIsCiAgInByb2ZpbGVOYW1lIiA6ICJWaXRhbFNpZ256MiIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9lODg3NDUwNDk3OGJkODY4ODgwYjAwNGU4ZTYxMTEzYmI1OGExMDIzYWY4NjczN2U3NzUxMTEwOGEyNmVjMDViIgogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+5",
+                        "§7Intelligence: §b+5",
+                        "§7Speed: §f+2",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE GLOVES"
+                    ],
+                    "Name": "§9Snow Gloves"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_GLOVES",
+                    "uuid": "e11bc43f-0a6a-4e29-9b50-2d43f6c076fe",
+                    "timestamp": [
+                        416,
+                        762912708
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 301,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+65",
+                        "§7Defense: §a+25",
+                        "",
+                        "§6Full Set Bonus: Cold Thumb §7(0/8)",
+                        "§7Allows the wearer to shoot unlimited",
+                        "§7snowballs when using §9Frosty the",
+                        "§9Snow Cannon§7.",
+                        "",
+                        "§7Each piece grants a §a5% §7bonus gift",
+                        "§7chance for every present you earn",
+                        "§7from the §cGift Attack §7minigame!",
+                        "",
+                        "§7All stats of this armor piece are",
+                        "§7doubled while on §cJerry's Workshop§7!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§5§lEPIC BOOTS"
+                    ],
+                    "color": 16777215,
+                    "Name": "§5Snow Suit Boots"
+                },
+                "ExtraAttributes": {
+                    "id": "SNOW_SUIT_BOOTS",
+                    "uuid": "abb55cc6-d1e3-40cd-a434-a40df2c75469",
+                    "timestamp": [
+                        416,
+                        758931388
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 301,
+            "Count": 1,
+            "tag": {
+                "Unbreakable": 1,
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+150",
+                        "§7Defense: §a+125",
+                        "§7Strength: §c+20",
+                        "§7Sea Creature Chance: §3+3%",
+                        "§7Gemstones: §8[§8⚔§8] §8[§8§8]",
+                        "",
+                        "§6Ability: Bouncy  §e§lSNEAK",
+                        "§7When falling from a great height, you'll bounce",
+                        "§7straight up!",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§9§lRARE BOOTS"
+                    ],
+                    "color": 2580756,
+                    "Name": "§9Slug Boots"
+                },
+                "ExtraAttributes": {
+                    "id": "SLUG_BOOTS",
+                    "uuid": "ab415b3f-393b-4726-960a-720f71b8778d",
+                    "timestamp": [
+                        416,
+                        -1475982945
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/boosters/common/booster_sweep",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 8,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Booster",
+                        "§7§8Combinable in Anvil",
+                        "",
+                        "§7Applies the §bꕮ Sweep §7booster when",
+                        "§7combined with Foraging Armor,",
+                        "§7Equipment, or Axes.",
+                        "",
+                        "§7Grants §2 Sweep§7.",
+                        "",
+                        "§f§lCOMMON BOOSTER"
+                    ],
+                    "Name": "§fCommon Sweep Booster"
+                },
+                "ExtraAttributes": {
+                    "id": "SWEEP_BOOSTER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/boosters/common/booster_foraging_wisdom",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Booster",
+                        "§7§8Combinable in Anvil",
+                        "",
+                        "§7Applies the §b⸙ Foraging Wisdom",
+                        "§b§7booster when combined with Foraging",
+                        "§7Armor, Equipment, or Axes.",
+                        "",
+                        "§7Grants §3☯ Foraging Wisdom§7.",
+                        "",
+                        "§f§lCOMMON BOOSTER"
+                    ],
+                    "Name": "§fCommon Foraging Wisdom Booster"
+                },
+                "ExtraAttributes": {
+                    "id": "FORAGING_WISDOM_BOOSTER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/boosters/common/booster_hunting_wisdom",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 4,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Booster",
+                        "§7§8Combinable in Anvil",
+                        "",
+                        "§7Applies the §b☯ Hunting Wisdom",
+                        "§b§7booster when combined with Foraging",
+                        "§7Armor, Equipment, or Axes.",
+                        "",
+                        "§7Grants §3☯ Hunting Wisdom§7.",
+                        "",
+                        "§f§lCOMMON BOOSTER"
+                    ],
+                    "Name": "§fCommon Hunting Wisdom Booster"
+                },
+                "ExtraAttributes": {
+                    "id": "HUNTING_WISDOM_BOOSTER_COMMON"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/honey/pots/honey_pot_family_sized",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Consumed on use",
+                        "",
+                        "§7Use on a §aTree §7with an active §cTree",
+                        "§cProtection Order §7to lather it with",
+                        "§7§6Honeycomb§7!",
+                        "",
+                        "§7After §a30m§7, a unique §a Critter §7will be",
+                        "§7attracted to the §6Honeycomb§7!",
+                        "§7§8Type of mob depends upon type of",
+                        "§8tree lathered.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Family-Sized Pot of Honeycomb"
+                },
+                "ExtraAttributes": {
+                    "honey_pot_uses": 2,
+                    "id": "FAMILY_SIZED_POT_OF_HONEYCOMB",
+                    "uuid": "769e5b3f-0573-4333-ad62-4de8230671b5",
+                    "timestamp": [
+                        416,
+                        377918947
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/honey/pots/honey_pot_family_sized",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Consumed on use",
+                        "",
+                        "§7Use on a §aTree §7with an active §cTree",
+                        "§cProtection Order §7to lather it with",
+                        "§7§6Honeycomb§7!",
+                        "",
+                        "§7After §a30m§7, a unique §a Critter §7will be",
+                        "§7attracted to the §6Honeycomb§7!",
+                        "§7§8Type of mob depends upon type of",
+                        "§8tree lathered.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§7§cThis item can be reclaimed! Use",
+                        "§c§e/reclaim §cto take back what's",
+                        "§crightfully yours!",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Family-Sized Pot of Honeycomb"
+                },
+                "ExtraAttributes": {
+                    "id": "FAMILY_SIZED_POT_OF_HONEYCOMB",
+                    "uuid": "a7e4b3e2-e285-468c-beb9-1961c117032e",
+                    "timestamp": [
+                        416,
+                        423304405
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/honey/pots/honey_pot_family_sized",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Consumed on use",
+                        "",
+                        "§7Use on a §aTree §7with an active §cTree",
+                        "§cProtection Order §7to lather it with",
+                        "§7§6Honeycomb§7!",
+                        "",
+                        "§7After §a30m§7, a unique §a Critter §7will be",
+                        "§7attracted to the §6Honeycomb§7!",
+                        "§7§8Type of mob depends upon type of",
+                        "§8tree lathered.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§7§cThis item can be reclaimed! Use",
+                        "§c§e/reclaim §cto take back what's",
+                        "§crightfully yours!",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Family-Sized Pot of Honeycomb"
+                },
+                "ExtraAttributes": {
+                    "id": "FAMILY_SIZED_POT_OF_HONEYCOMB",
+                    "uuid": "d0ba1340-14d4-4fb0-b635-a27c17bbdd7b",
+                    "timestamp": [
+                        416,
+                        143099295
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_3/honey/pots/honey_pot_family_sized",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§8Consumed on use",
+                        "",
+                        "§7Use on a §aTree §7with an active §cTree",
+                        "§cProtection Order §7to lather it with",
+                        "§7§6Honeycomb§7!",
+                        "",
+                        "§7After §a30m§7, a unique §a Critter §7will be",
+                        "§7attracted to the §6Honeycomb§7!",
+                        "§7§8Type of mob depends upon type of",
+                        "§8tree lathered.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§7§cThis item can be reclaimed! Use",
+                        "§c§e/reclaim §cto take back what's",
+                        "§crightfully yours!",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Family-Sized Pot of Honeycomb"
+                },
+                "ExtraAttributes": {
+                    "id": "FAMILY_SIZED_POT_OF_HONEYCOMB",
+                    "uuid": "761ed8d8-62a1-477b-8e31-e0dda7fc204c",
+                    "timestamp": [
+                        416,
+                        401052684
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+    ]
+}

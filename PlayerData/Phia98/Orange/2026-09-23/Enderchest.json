@@ -1,0 +1,2075 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/foraging_2/nets/basic_fishing_net",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Hunting Tool",
+                        "",
+                        "§7Pull: §b+5",
+                        "",
+                        "§6Ability: Yoink  §e§lRIGHT CLICK",
+                        "§7Throw your fishing net at swimming",
+                        "§7fish to catch them!",
+                        "§8Cooldown: §a0.5s",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§a§lUNCOMMON FISHING NET"
+                    ],
+                    "Name": "§aBasic Fishing Net"
+                },
+                "ExtraAttributes": {
+                    "soulbound": 1,
+                    "id": "BASIC_FISHING_NET",
+                    "uuid": "28d71d7e-9312-4a52-b3b5-5929af2ad61a",
+                    "timestamp": [
+                        416,
+                        1609256064
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "bd8dec98-7302-317c-87be-4797a60fe53e",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "JJs1A80KGYnPsugqI+ZGXgnLhEksBHIIz8ln6wxkIk8twTrY018dyHVoLNBl9HM1rMBF/T0Z+eDdlJrX9I8W317KR/jJKKQlmX1ZiH+oofjDWxy4L5itz51dIF+g487SxCqMNX2iteexl5uUjbT0c85ItvasxIX/ntwPJCCm6pFOA7HtPI3Xi8cFqQdJebfW26n4KGxrUeD+oiro1NU6jlIe0dPEMHD2PxuuUKBl/Ypx2l9ZWV2IljanuCyp08FdzwVIEX84e9TgIk/+xMCKLp5Tplgtxh6K7MAz8LuQSe8EUlANyoVDwIQJvsMP9GCkPl2Y+EiR5+L5hVn8qRM58vCmbBddheus41IdIl8SJYfsCj9hk6u4XC38Hu3XO+5h1B1ato1Efm/RFr5U6bcdKvAb79Wt3P9AdJfLK51dAe1kxvxfH3gywocSoKc2vPWzYqsJ7r42CGDRiVDDckx69gokscvhK2DOJ67zXaVDvx8/A32xeh3zBoA4H0nT3+5z5Rv3A8ZRAqV2Ph2TJTsclXuAM/QpC18OapOTkgTLG5+yJBh/r1W9KDyMHOErOKudm6mp8sCukyd/rUiHEv0TSbA5xBbReA+oUUiG3CP+0EUbuoVuyCgd3vayR6095D/HYmyHGy86CnvDL2miF59T3wVtuqn/5mEWEjpy5n6Mqts=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1MTQwNCwKICAicHJvZmlsZUlkIiA6ICIxN2Q0ODA1ZDRmMTA0YTA5OWRiYzJmNzYzMDNjYmRkZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJnaWZ0bWV0b25uZXMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1MmMxZGQ5NGE2YTZiNmUwZGI1NmFlYThiMmU5N2E2N2JjZWM1MmUyZDgzODQ2OWQ3YjY1OTExNzZjZjZmOSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §b§b Glacial§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Glaciated Brains"
+                },
+                "ExtraAttributes": {
+                    "id": "GLACIATED_BRAINS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "bd8dec98-7302-317c-87be-4797a60fe53e",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "JJs1A80KGYnPsugqI+ZGXgnLhEksBHIIz8ln6wxkIk8twTrY018dyHVoLNBl9HM1rMBF/T0Z+eDdlJrX9I8W317KR/jJKKQlmX1ZiH+oofjDWxy4L5itz51dIF+g487SxCqMNX2iteexl5uUjbT0c85ItvasxIX/ntwPJCCm6pFOA7HtPI3Xi8cFqQdJebfW26n4KGxrUeD+oiro1NU6jlIe0dPEMHD2PxuuUKBl/Ypx2l9ZWV2IljanuCyp08FdzwVIEX84e9TgIk/+xMCKLp5Tplgtxh6K7MAz8LuQSe8EUlANyoVDwIQJvsMP9GCkPl2Y+EiR5+L5hVn8qRM58vCmbBddheus41IdIl8SJYfsCj9hk6u4XC38Hu3XO+5h1B1ato1Efm/RFr5U6bcdKvAb79Wt3P9AdJfLK51dAe1kxvxfH3gywocSoKc2vPWzYqsJ7r42CGDRiVDDckx69gokscvhK2DOJ67zXaVDvx8/A32xeh3zBoA4H0nT3+5z5Rv3A8ZRAqV2Ph2TJTsclXuAM/QpC18OapOTkgTLG5+yJBh/r1W9KDyMHOErOKudm6mp8sCukyd/rUiHEv0TSbA5xBbReA+oUUiG3CP+0EUbuoVuyCgd3vayR6095D/HYmyHGy86CnvDL2miF59T3wVtuqn/5mEWEjpy5n6Mqts=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1MTQwNCwKICAicHJvZmlsZUlkIiA6ICIxN2Q0ODA1ZDRmMTA0YTA5OWRiYzJmNzYzMDNjYmRkZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJnaWZ0bWV0b25uZXMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1MmMxZGQ5NGE2YTZiNmUwZGI1NmFlYThiMmU5N2E2N2JjZWM1MmUyZDgzODQ2OWQ3YjY1OTExNzZjZjZmOSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §b§b Glacial§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Glaciated Brains"
+                },
+                "ExtraAttributes": {
+                    "id": "GLACIATED_BRAINS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 45,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "bd8dec98-7302-317c-87be-4797a60fe53e",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "JJs1A80KGYnPsugqI+ZGXgnLhEksBHIIz8ln6wxkIk8twTrY018dyHVoLNBl9HM1rMBF/T0Z+eDdlJrX9I8W317KR/jJKKQlmX1ZiH+oofjDWxy4L5itz51dIF+g487SxCqMNX2iteexl5uUjbT0c85ItvasxIX/ntwPJCCm6pFOA7HtPI3Xi8cFqQdJebfW26n4KGxrUeD+oiro1NU6jlIe0dPEMHD2PxuuUKBl/Ypx2l9ZWV2IljanuCyp08FdzwVIEX84e9TgIk/+xMCKLp5Tplgtxh6K7MAz8LuQSe8EUlANyoVDwIQJvsMP9GCkPl2Y+EiR5+L5hVn8qRM58vCmbBddheus41IdIl8SJYfsCj9hk6u4XC38Hu3XO+5h1B1ato1Efm/RFr5U6bcdKvAb79Wt3P9AdJfLK51dAe1kxvxfH3gywocSoKc2vPWzYqsJ7r42CGDRiVDDckx69gokscvhK2DOJ67zXaVDvx8/A32xeh3zBoA4H0nT3+5z5Rv3A8ZRAqV2Ph2TJTsclXuAM/QpC18OapOTkgTLG5+yJBh/r1W9KDyMHOErOKudm6mp8sCukyd/rUiHEv0TSbA5xBbReA+oUUiG3CP+0EUbuoVuyCgd3vayR6095D/HYmyHGy86CnvDL2miF59T3wVtuqn/5mEWEjpy5n6Mqts=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1MTQwNCwKICAicHJvZmlsZUlkIiA6ICIxN2Q0ODA1ZDRmMTA0YTA5OWRiYzJmNzYzMDNjYmRkZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJnaWZ0bWV0b25uZXMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1MmMxZGQ5NGE2YTZiNmUwZGI1NmFlYThiMmU5N2E2N2JjZWM1MmUyZDgzODQ2OWQ3YjY1OTExNzZjZjZmOSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §b§b Glacial§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Glaciated Brains"
+                },
+                "ExtraAttributes": {
+                    "id": "GLACIATED_BRAINS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "452274b7-56a3-3f3d-a59a-f4c4fc9accb0",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "hzwNtzbohVZVHQvC2vdmbe7jTydT6aKSe5uMhvZdEyUAb6Bb8VoGKgZMJ+eVV2mcDsffEMMww/MLMNiiuIJg4nl7WlkQ+B+jn2a11SfKZfD/nh0S1Gmijf8YUW4UU96B5C+rxkFunBdez50zhyVSNuADm3YSV38EA3D5I02H8IEY+yABXRoTtmzVMQNNKNMcCiQc9RFwinGKy7IvZFmNmuIHFdpTpPV+BwA2Pv0BOEj5CkQwMhMLMCxPOUfKy72lTvpGrkyEmkCa1VjBXZ4/bJLFeSeKE0zhw7jCt7tuVt90bD8TkN94+9AcTaPjLjvrCd59xVmVALZ0QH4JVIRSycixSbOMqct59rY1sKhKfg+/bX35P0T9lc59PsSidm8lxlv6uzJ5xGEMnXFXb99hBOT88dePIOVXdM8mlJ/QWPDRfy8ZjAzypenDUssmp6H1wOPL82hovW4qSvGlSxZ9hfdxMxDsKGkDq6UZmZFwRrY028tFVPcPAcSZRVRn8JF+Iv+O/AGBp4xjnBNgDdp9/DFzaCuIGMGqgVB5IMW0yVtUsKMRX9wAvMUR69J/lsWbZcgIwlKuvSpzO+pSUzj5SF6BijQf2p1Y76BHh0EQNF20h87RPttXQ0ndtu6Qn1WS0I2BZSl4mIjzfbtXl0lJaN84m6U1DaH17IL5GtV0crs=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTU3OTk4NywKICAicHJvZmlsZUlkIiA6ICI1OGZmZWI5NTMxNGQ0ODcwYTQwYjVjYjQyZDRlYTU5OCIsCiAgInByb2ZpbGVOYW1lIiA6ICJTa2luREJuZXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmEwYjQ1YjM5YTdiYjY2Zjg0YzE3MjM0ZjgzMDUwY2NhNDU2Zjk4NjE2NjIzMGFmMWQyOTI3MDliOGE3N2U1MSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §4§4 Infernal§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Smoldering Embers"
+                },
+                "ExtraAttributes": {
+                    "id": "SMOLDERING_EMBERS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 5,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "4d5d0559-ace4-3678-8b19-549364bf7d0b",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "oQA05IICm2ex6CcrD0rR1c3imQ2vVz53H+HoXapzGa5NlFftkO5EDPkySt1vvCPqARFko3qRxTBaGPpF/yA8Lp5CZ/qEKFThisBswA7CKh8py2NDcAb+z4WmGU69ZiYnR2VfZ15oqkpDkl1nUmQstaGMXWp4pSe/QB0Jn9MomJZE/W03qrYkGI3xkcuQdPJ5y4LYTEHJQ7173mdHv6DJBYoEQUPCI7Oh00aCssNtjgWMA2a3D13q2gaIKQRZkp0WpdPAklRLxpeRiL6HF/3iIWMhYZXSH7kalajkxU85Roh/eNN3vKkIOAmDnc2gk68IjjCxXv9IQUggI4u9xb0e+0MsuzHFeSiAMxVWJ336TFwLDr8y8Z36Qk+pKyE9nKX/YU/NnTwevs3h9itEQBSwVSfEk7Gw7yNdYE/RFpFhQF4fcNKQhA8D63nzxD2JOPNyYihs05+uyF1Tc+ruQ9CqAHVZ5vftRUE3EWhd7E6SgKNY2tGAvxt06PNJ0sJ5MF+ZO4igwFyMnpDyfHTK8q2bocqUwB8x1Ip1hToJq2cbUMGnbtbo3pCl1I0LUlG/IWfZ985eUw/zjMj37Ff9A83ITGP0Dn3HxI1ozwTlDS65RkxdMkPT8s8ydm02/1/yG3CcxnExIb1tgxuLTvTNuVDMsBdplyFF7ZzoCgjskkozcf0=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTU0NDAxNiwKICAicHJvZmlsZUlkIiA6ICJhNzdkNmQ2YmFjOWE0NzY3YTFhNzU1NjYxOTllYmY5MiIsCiAgInByb2ZpbGVOYW1lIiA6ICIwOEJFRDUiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjFmMjNlYjM5NWNiNTE2N2VmMzk4NmYwYWZhZWI1NTY1M2M2YTI2OTMwMjE1OGQ2ZmZhNTUxZTE1MWEyNThlZiIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §7§7 Airborne§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Ruffled Feather"
+                },
+                "ExtraAttributes": {
+                    "id": "RUFFLED_FEATHER"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 28,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "0769d68a-d778-397e-94fc-0c05445a6a96",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "v4buivGM0wdZ7Q2QHZ9ouY+qrFPS6dhcJjpMTb1wybPrrpZb7yDM8SZ5RtjsxgcxtA+4tYOzFryjM7Op9DQrcCAWMsAjbMcNMKkB59DYxOGbGOZtq7l7okgSKk5CX6dyJSCJWQXhyvUvCsvWYj77EHNuFyFT1FyBM76ioQZPysu5KmU3BKA3KWycSU4yb90qi95MuHCmr1OV1Ik/AVTjCdIUzKB+zdU0SAzVCF3ikeI0JQVAhWGrLWVlFauPErUvkG4AraaUe/OYL84R7oNQTVnVNc4QF+7gZeuxT+4F7u0eZMhbyap8g4sJOc4iHnXq2HeSPNr+VD+q0wuEsuKGjxU2CIdd7e2WB1cN5573zqwF7TS49N/ksR9xGKHuAMGDVZq8zDLI5ydR5zJFmHGysisHZnbk26vXTxV18xQkEavGP65e7UuYP75YopEu6afgKhWgKymJqL/hhDepBeRWHDGBbFTcCQl3JdYU09Ek+S0E+zIawn3cHzENeJyaDI3/ekQO+/lGG7QitiwZ8fAGSq5Ky+JdSkomDFb1FCTWtDi9G1/yY2nnQ0xj3Oy/OuTmv+hvpvQKVH3v4ZyBfmpDFLPr81UBpd2e1oRxhenODyN4N+E+UX/IXiQljH368YeiU0s0MxohITDnP9EvwDfMFtYS0eAaA0fJAsnk/S7uZuQ=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0NDYyNywKICAicHJvZmlsZUlkIiA6ICJmMGMwMDM5OGEyMTQ0ZGM3OWE5MDk4NjMzMDQ0ZDY5MSIsCiAgInByb2ZpbGVOYW1lIiA6ICJLb21lbmRhbnRaUGxvY2thIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2U0NzlkNGVmMjQxM2ZjZGM0YjM5Y2RjMjBjNTU2NGI1YjhkMjRjMWVkZjRkY2VjMWQwNjNiM2UyZDhjMjVmNTMiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §7§7 Construct§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Console Panel"
+                },
+                "ExtraAttributes": {
+                    "id": "CONSOLE_PANEL"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 4,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "b74d7567-8667-3bd4-a71c-3b88cbcb2477",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "WEsPwVhjW4LN7+FDd6K0ojiOZuhbaCbbubY6A8TR+GUJRxuNcUODdHMTF3YD8IvzWj4N010V57U1+a45MgVPbIJNUFRQRn9I6kuxC3E89zWtnamUYS54oBJPATaCqbQZmaNOjV4D1q/wYz66HcbbHEV+Srd6lB+Rtve3yrfQC/ae4c26sPMOXUcMR1xHFFGHfdoBcg4OOf5Qa/DZJ0/a0ON6QZ4YC8nr+S+6sN3WKtU4zZ9L60i8i3lkWW4ZE/rQDOdFQvzlEXNc4GMrMGM1YX50KLCykOnC1L9aK0OxYeUgd7srcUzsO+P7q/U71APwiBEoiylFcSo6+RiNzE0OjIdGLYPP1Ri7RXGon1IHHspm6kb7lnwqaN1x9kVFIIurIiQIRg4ZRLrrCe9ZjXD7oIl4BSyLRgh5hXmDJqcb7JmrUTK5oqfoYnotGZ8B9y8ntgpAKfI9bsSsLzPlsd4oqAomaM0ZgcfTErTB7JZTooFB6o9qZEDuE2Iy7Irqsi/F0yDoPdblMNkJEJfExsDfucZ1SXiVilAYTn8D4CpIq182uYxLQpdS1AHNWtNkiubxbSE3ObyjkQhQbeiGEPcBFnkNIuGbnzhBbA60W20JaZAjhyszOaQtdy8BSWRXWz+nl+oPQVFfRUgoisGH1u2ROdVOMYfvWvhsMQwD184bYbE=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1MzMyNCwKICAicHJvZmlsZUlkIiA6ICI4OGMyOGYwOTY3MjU0NmNkYTg3ZjVhMTc0ODU0MzExYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJOaXRlQ2F2ZSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS8xZThmMzZiMjcxNWFlNGQ4OTdhY2RhN2YwNmNiMmIwNTNkZTUzMjg4NjllM2ZhNzYwOGVmNWVjNzUyMzhhZDJkIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §f§f Skeletal§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Funny Bone"
+                },
+                "ExtraAttributes": {
+                    "id": "FUNNY_BONE"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 10,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "5c98b153-4d4d-3b90-95f1-b61f58058e31",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "K6KxWDSjt32VWislvV78edwheseGmM7m8STHd5/SoCItY8BwhiOCMesScP9LkMbKeD1TEC+th+6vd9Bbi2vJN+F9irtxpRFZ3Bld86d7Ib/bffy02reYJbeLN7agpyZYRERdyIzLa0d7X/qvoTzXxIGYdjNrq2id21Qqw0oyXSRAAT/sxpiROUeP/cDnXYxvcqYZdnWZBWuu3tf4j2Cs2LZolJLEGiAQot5CY37stGTizEmU1EwGH1DQpE1twXSQ5kWgE8/gHnW5pIkEcq5h6Ae7HTgQ3lak5zN1Ns0mO8S3V+WlVpcX4rDZ3UQWkJEQ6nB0V4TCc2fcdtP551H3T9zFHh5+b9QHN9J3xYhyiNncoO0392Ja782lsvPQ0zT9/KyQKR5U6e3oJhM/JikJPO7MIhhqYt1tShBm2mEx0EAOLFdhSjYFpIebvolvJFYuOX5ifAxOmviip39xGqaGcPodLsqAfCqXl6aOoImaXyiO4VoaGEto46OiJmDfOqHGN4NSYPZnFJLlfZQZqJ5HaO5Cm69FWsZ2ZFDF3TvoC1naymtvtxThTZ0WQlTVOdSWcak4H4URAPQh0sPxb1St4KUErR5GF3dFLxBjy9JdCjt/rdLJ+BPG5r/UNiaYlz77B1H9P2P7Yp4FdTDs4Ox58QXBKv99rt9aIvLssillv1c=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk3MzgyNCwKICAicHJvZmlsZUlkIiA6ICJjYzU2NjAzYmZiZjg0OGJmOTM3MzY1N2VjYzUyNGI4NyIsCiAgInByb2ZpbGVOYW1lIiA6ICJpc2FhYWFhYV8iLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcwMWM1MDVhZGFjY2VmMGRiOTMzZTBmNDA2MTc2M2Y4MGVjMzUwN2RlZmU1ZGY2OGViMmMyMTgyODE5NmJjMyIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §6§6",
+                        "§6Subterranean§7 mobs during the §5Year",
+                        "§5of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Jawbreaker"
+                },
+                "ExtraAttributes": {
+                    "id": "JAWBREAKER"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "ffc1d72e-2ee3-3f3b-bce8-7f2ab1bea616",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "ZypEtQ+YvtB71R3kxaoUnajQ65t2L0YJnyEsmhDwK6WfbT8tW1VeSYa3MQbQtjqEyKIKxpT/QJWnrGIkkGd6S+NfhuAPxAjXuUrX8Bvk1g5jR6he9VkL4EI47BGSaW0FZHNrvkuWXHr5hsKVzw9wMOiXIJh0Q+9+bhZMwLaD1zxHBxzozTLzIa2okjtLAd32CUVVndMH/ApB0FE1zRvu0Ek/yjoJRMzHV+TETZdMqDGMvPG6zD0wqBYDadWLq8edTkOtVkyMH2MeOCAHVLJUfrfGqvIHgaBtBX+a1TpzaHZ0isXbD928UJp06P+Jv+5ngJu8Udc21aDm3YBE/jIdY/jLCHltSLYrWXEDy1/nOe0P/lvexK5tvDho2wM6RgIOMMoACl20IDQhaVoMFTJgI37G5N6ecSnFj365+nOIa0NHwp9Ng58Qo3cNKKp50+pOob15lnkTBeEl96wSOKALA5jqy+P4/nJ/8GYeQo4aNgqEaFibJChfllUufLV+ND4Ti37nqEwUmwtDLOJy+RcxOsIQh+Ii9+kRL7unLNeDBeMLTCaqKJQXmJoElbSNv94GNO/w3j/lxMMUV1VXaH+vjC80DoJGyxOOpdzVRI7/8y3XMZ81RfExg7YKllruq+bkWQ20Xk7cnj6yur3X2cW7nUrqJx2gIxZiYlAl3TNco/g=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0MzU0NiwKICAicHJvZmlsZUlkIiA6ICJiMWQ4MTJlYzI4YTU0NDNhOTUxODhmNDkyZjVjYzIyMSIsCiAgInByb2ZpbGVOYW1lIiA6ICJzcGlmZnRvcGlhIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2FlYzI3M2U5MTkzOGMyNTMyNTgxOTNlMDY3OTYxNzRlODM5N2VhNjBiMTE1ZjA5MjMzMzQzYjFiNjI5M2EzZTUiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §8§8 Wither§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Brittle Powder"
+                },
+                "ExtraAttributes": {
+                    "id": "BRITTLE_POWDER"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 31,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "1168453b-d423-34f8-97b7-63626366565a",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z2OvLSTrX8JKr/OSDh2u1yv8PUOe6JtHac3AsVWpZsPiftWZtbaydeAGRgkjW0Rzf0A7aClh1hu3wz0fqoRWZmJdR8OGmn+3MjgWiJOfU8qFh74jR2h3OWZiCHxeJXiv6wiVjNIvBDJFoAcH+e0vhaUxLCaJSmJO3nz6k+WQcyW1cVI/2jC93BHAVePiTyoqpUuiu2ifvrwQwGQQmgMnc6VKvEgqFAPDgzhWjGvs+RlRi3dHXgaX3djqhtZvvB4r3bMI9DXKex5davGBifflGojUdzc2xxcu7OAdlwrSm1YZkTRCnoBv+mgUQJetbCgGOeN9Hv4O9y7bovS7haSidsA+Zi9XbOtiaSFDB6XNZMTvCTQJZuNDXMToprP3ugwx+p9KtgcCSzEBJZ7qTuAdqPFdlX1um05BVTQHXDiiB5hnDLMBKVgQyt6AnR7VgJYxln1OzQzNEhMqWsWu/ZXCPX9/z9p/2jV8xnem41A5aj8ZUoP4s9mhXvR4xrsdxoD3rmkXptJc93JWbny/7Y49Nr/7h9z4JhiGYE8iM3clILFjsKJQfFO/qDNzo8WsPlIoYjURd0pardZ3ntbiF+8pbrsAszrszVH9YNjDBY1d85cBnrDK11VAmzSiPkzaccJiYYOX9ILPJTBDXP2xMx3szFyFplUGV8ptc+YdgnFKzew=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTU4MTU2NCwKICAicHJvZmlsZUlkIiA6ICJlOThhZTBlMTI5MDg0ZDA5OTk0MTg4N2Q2YTk0ZTI2NCIsCiAgInByb2ZpbGVOYW1lIiA6ICJTZXh5SGF1c2VNYXN0ZXIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQzMGM2MDVkMmMzNDA2MWIxYzUzMmYxNmNlMmQxZDY1YzM5YjQ2ZTU0YzYwNTE5ZGRkZjM3NDIzYTY3MWU0OCIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §5§5 Arcane§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Spell Soot"
+                },
+                "ExtraAttributes": {
+                    "id": "SPELL_SOOT"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 33,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "ef97f7e5-3f5a-3ddf-8ac7-1547e0f01c81",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "ntQ0VwOVW04KCPXGL4IhN1EhnSS87df7lVIsMc77U1JWXqc/Cyr3449gud4y7bGEDDVUrvdILE7JttVHhG4YPx7uga3T0iE3BUthL2vmlGLl7+zIfbMAYLLr/C1cl3deBPdwlgOxPOspcBXlWhl5mFm5T7iUPa7zKy2P877vwurcHrxG4FrusrBuNrb05NFC+ZqyCs1M4kj7JvGg462ooFx94XeS/KyH4CBhDSFiHh3sarUMU0ll0SabRnSPxdRz9cjhax+U1oI9GS0Z+GJ934yU0I0JBq4tGHYf7y93Fjb5pq3sqAAgJ3vbwYGGQ+S5HMmgh8XZUha3cyXKZ3MPyi3nJv4odLDmiVHcNRRxvgIMgACuMlSaRX80FwYNC1DvOIqflws5OQZ6Y1QmNL+O10inbqu5a8p8EDHxGzmFwTe0SlfIW5UurZUF0c+TZLfkwiY4V7ecyd1HTSipTaztBdA5pOHQ5rKYlpe5U5lWGytoPK+52D7w5qLvvVD3TSdSRCuKxV0hCkOVSRMR/9AcdZQAqnAbbh3WyJznk6Ujx3ol0yvv1oAvizfyfXNgHgBk9JW0nCPM2EKmbb+JgTiKV73Um0Qy08UNGhlc6CbE1LM3a1nXiEo1QzJkg3KIkTDTbw9Ipp/WcGTCgmDf6f36mki/w5cTz6iVqur6hg1BNJs=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTY5NDIzMCwKICAicHJvZmlsZUlkIiA6ICI2OTU3YjQyOTZiOTI0NGJkOGQzNWJiZGU4M2JiZDI3OSIsCiAgInByb2ZpbGVOYW1lIiA6ICJjb2xpblBBUEEiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzg2NmJkMmZjN2Y5ZWNjNThkYTAxZDg0NmJmZWU3NTFiODgzYTU2NmVlOGMwZjhjYmViYTRjZTMwOTMxNWJiMSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §5§5 Ender§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Void Ooze"
+                },
+                "ExtraAttributes": {
+                    "id": "VOID_OOZE"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 29,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "4b957e13-c83a-3ea3-abe4-2118b0c85883",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "MN3GjC11SoJ68dgrHWzRQLEajsX+t+7tENGPwQndJ7RQmzaEdwA8ooCj5eO9k5TbbMpEpmDMpZFsb+sQ2djNrbC6qzVoMlCvrH/jjUMdyzumOAw6BQrpi4XohIt3bPeXemJZDkGoRmLmZY1NqcpTN4X1R+EEj9OnayQZRv7IlHe8pvKzfc0M6aw6fJIimppSn9GSBoc+lva8PylPC5ueBJ09JoNlh17S63B9IINZDoh7ybfGpMEu4Qt4227oAD5wHoQ7w/kwITJS41Nn2r0IGORvVsFD5x8EjsIMJau23GxGp6bXPYJJ7cDVT/A2JYp1xD9cuZedXvygFBf36hLDYvTpmnLmajmkg3viHXM6aFleb8tR9irHRg+GiCQ48D+HfrUFaAT0QfLZ23xqGoPury4lHFcwDDq4QSTeiGwmZpdmnAhARGOeKUUHwZKOgA9j0FAFSJt5fl7qof8nAdnTt7JrZ3LIhpFkE0vO/u1wIXhA0uR6HxUoP/EDVdIsEoqw26xGeAFM3/VdvV4yo61gV5ViInPTwNU83lBzlGSegK7ngk5Zs+pjxSqKq1uE7oTXJXfwaITRYpxsvDRExDZfzy/8hfTalP+qsYkO67IR565DE9MwWluat7QHxwiiF1LldR6Kop2W0ZzNEvD1mSyYws+Cwc2iu7EoR3pKwTZCJMA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTU4NTc5MywKICAicHJvZmlsZUlkIiA6ICI0N2U2MjJjNmE1OWU0NmNhOWU3OGNjYzE1ZDliNzhhZiIsCiAgInByb2ZpbGVOYW1lIiA6ICJBbnRpbGFmTVgiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTdkYTIxZTI1ZDc2NDkyOThiMTA1NTg1OGFjYjg5ZDNhMmUwOTNkOGRhNzc4NGEzYjFmMjc3MDZkYTY3NmMyOSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §4§4 Arthropod§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Spider Egg"
+                },
+                "ExtraAttributes": {
+                    "id": "SPIDER_EGG"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 8,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "c39daa39-3cad-303b-8aea-97214bdb8d36",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "QgZWEBxE76PAsRiPW9XYTPunf7u+sksQoUD5VF4etdeblMiexkB9EfYgQHwhz4JSnrHYkfkFW+AVCiLShW5wsnyLf7HIeiotVx0WxgIJyZHp4CW6j1TpWcdp9RZurzuFF5nxoBUeeXrEoZDgVQIADlLryCRgLqkRXFq4cSUSbqqqjD493J0dT/Ku8P5Fk3dB9ACC9Mv13xtYyF8cdDD4iFFpnZSkX8XYeA4Tp1ENREhUzL+Y1Pykhu9pWNAhpH6NfvMPM8bSYbKMRRn+QmwgAiGit0CQL7Km8QPlDfBZkNQHNr9BMIdcSIGssQ2NcGD3K+V6BmqMNl9ERApqhylNQM55N9EkVuHz2nS586K/J6nPtQh9tiRHDyUaZwUGrzHddOj5Wtgp5QTYhnvwNuRIeBobqIQL+oZYsEOoQdZax3G5/DrYLhYcbp1fuKLFpF/42ARVTEPQXOh6pWCR7NSNQEqggum5kTHdRZY0PYx5ymlkmrYDFMC91jlqAgeXNq6nvCpFn1bojPmQbfrCwbCcnD+tATzrF4o8PwAQdgK8sFJhMQYegjzq5/Vld2IiuZho/giu6wXO4axQzIMgc3W7mvyYgXrQ/2BY8sSDnhhc6cK6B9jZ8IVSaOO0EICLXFm2G/H7YdOEUOYsn4v9LZ4nqv/wacfA/A5qoKv9y9cd7n0=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1ODA3MiwKICAicHJvZmlsZUlkIiA6ICI1ZjU5NmViY2JlOTQ0NmQxYmI0M2JlNGYzZjRiOGJlNSIsCiAgInByb2ZpbGVOYW1lIiA6ICJUZWlsMHNzIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2YwOTY4MzcwNDc5NjYxYjc0NjVjZTJkYTQxODk1YTQxOGIwMzgxNmFiMGYyYTk4Y2NlN2ZkZTIwNzE0NDVmMzIiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §2§2 Undead§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Festering Fly"
+                },
+                "ExtraAttributes": {
+                    "id": "FESTERING_FLY"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "039ae867-3114-3feb-bbe1-4babef76b552",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "qCD+mFCAA1PYEnDAaVJdbZsoRSBb/rABHSFVFZcNWapGqfz76PWg0LRS/h58CNg5w3tvUk7VAa3Ltg/gywZKAHJuvWf//dbHZZuveb5EL+w+oY1rPC3uNetI2PVUdTwyHiSBFles4dBK2K47ZqTVCivvS1S2jbhBehAoh/TmIVbS6sdpXu1HJJeEyEGSEgM7t6qGhnQyog7QF7YwATTulYHrG9JAau05lhljvHwfvwQa4L3XHMvmzcc/wwlmzlWl4VoyMqe6E4Gxu9PUvJoXqxZcjMNzU2veMa63oNqUCi1qJ3a5eHG9DuPMjz0BFTIqIWwoeMa7TXIBGmN8sE7MMA908G26aQ5dfU0Mf4px3TP5bIech3zkdnatXO+HQ6wQkeCRiShZS7S2EGSj6N9Mmed3+K4do0O4k+quRy1ygliN0wB6FnYNSOHW5vFkRjPQx26Z0ZHBYEBnd2EPqH0IhuNriOgAUb3OZSI1DV1HwPMtyFsH4RJzvuaHP07whO4citKN3VkuJz0CdapAJKK8si+HTAMdJdhv9GVJVVNQF2mbvt0aUMHycYxR8iV7HckjZ72DoN+RqKdlr7Xnmut6XrEUvPIgioPd3ZbedegcdX5mIt8ezZMxvecl4v7yds2Cg6Z44pXValtP4HhxM0ZLjKyPWVRSQNpq/ZJ3xfa2Nwc=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk1NDU0MCwKICAicHJvZmlsZUlkIiA6ICJjM2ZmNTY5OWZlNWI0OTY2YTYzYzdhMTEzNTBjZGIyNSIsCiAgInByb2ZpbGVOYW1lIiA6ICJUZWNobzkwMDAiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDNlOWU5YjBhOWI1N2E0N2Q0MmNiNWRhNjFlNmU2MzRiZDNjZDVhN2FjNjc0MTI1NDJkNTUxZDk0NWIwNTFmNyIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §a§a Cubic§7 mobs",
+                        "§7during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Gelatinous Gloop"
+                },
+                "ExtraAttributes": {
+                    "id": "GELATINOUS_GLOOP"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "926330fa-7fe1-3428-a92a-90387043537f",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z/vVh6SA6Pislc6+efN0T7ZNL0+3zPjLxGHzdqladVJQmy9ZVY05rGM3oGWqd5eXwjlQrGak+3OjavJRsJglebNbJF6ATdciwL1lt08ioXLiFe8mrdmvB0zjHWInqJqRS8HvCxnUCtfNPkOUG7jkTeLzdpyRI2yBURiiuQ7uynQkWePsEiOGwYbE69MurkP60t7N46hPdFCeDZJ1e21Er36jXIm7wpRPo7ulOF0/dEkvq/jzGxcJEvEDHbj7BjCukflx9g6erL22veABLXme7U5pWbXWET52/5zRH34isnxjy7edvxMX4scmiIWRWaE4/qw8x7kPItff6kiwpBwh4g6f8XgsydM09vREPn6NtL13nIn2Jthxa/pLqGqidX/44Ln3o9c+ACq9zEhrfsFanaL2UDk4bi6VLIt4HRM9R+kIKJlw9vhjq83TAPTWIrO9cimKg012iv9txOCuMzj+qVrktI+XzYUF43zPGZwrF1wndozjgpcC3jPbJwlsDLhQJc5or05WM88pV21h7lRyDZi+0lmpPRHV/2gvkXDK2kfx8xBrVTrShqOZ2eHFrkYjPFE29GlrQUzNau+URrpUkVAMfqhs9NE8jrrDUNlpIdSIUJqGnVhiE9RN0ef0SYVZCK996MpAVduZcKPcvP0Xgvwb3FWBqawHgTxE/Wr2KFA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0Njk2OSwKICAicHJvZmlsZUlkIiA6ICIzZDU1OGQ3Y2NmZjk0ODdkYWE1MzhkMjM4NGE3OWFkZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcnlwdGljTG9zZXIxMyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9jNDY2ZDUxOTZlMGNjNDc0N2RjODUyZDQ4ZTczMzEzNTcxZmI3NDI4ZmY1ZTA2OWVlMTM0ODQxZWYxOGFjMDJiIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Humanoid§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dirty Fingernails"
+                },
+                "ExtraAttributes": {
+                    "id": "DIRTY_FINGERNAILS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 15,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "a3bb5b2b-3b90-35a4-b011-0467841af9a4",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "NDzk/2pPaOetcwBp79uXXre616bNtvWkMVs9Q0KHAn4+Qu6pIrrnoKG8b84t86jNhczeOZ/8e9Q2oCSZe7nza5tW3krkio+Et/WdAs+ikI4Diang/rNm0dloLIAdfzPJ5TMKL1lRcCNFbSnnMw1B6hMyvzGtUizW7RgvwwaRDsevpHPn9rC5XLMeUomSLNmzevpEe55f30evwFOK/HBLNkGy5c3lNqK35Fvy9lMh+2NJyF8md9zB9Nv+YJA0GVzRiQlbb9yWzAz0EYbLA3qF+0nKSBz9hps0QUoi8zZRXJ00/Pqss49MtSeDGmoZ7Bt0vcvoXsCjNturm9VG2zrsFTRsKL+iBuwoZPMNyywK0Y8wSbzTORvAvPiQjj7AT1ar2OmLibimKmvi6m+S9uXZDPeTJSdzqmSWili31ATSRZzyd/aYxB334qEbhxaEB0b66zJUiFSuIEWflx9u/wm3yPaNijG/k/7Bw8EjhLHyZWPEo6fckTX8CLNYNDRNpBpc5SBlIodgBx1Bdw9b1QMEgJPzDMuolwDnGANMKNlrIjW8TuMAEJ7eNIB+zkDrZBhNmbuHIU2AhzdhrulqDEJSXPTDybS/KiTdCz5s4xrmPnCKQV3IBHze/5Yt7LZCM22zOAhVF1xlkoBCv7HmXZk/0lfKwbMyF7EKH3UlxQTK6DQ=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgzMTU0Mjg1MywKICAicHJvZmlsZUlkIiA6ICI2NmRmYzFmNTRlNTU0ZTZmODJjNTA5ZjM1NTJiYTkwZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJadWFyaWciLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGEwMmExNDQ4ZTJkMDEyYWY2MTRhNjJmYzFhYjBkOWZjNWJhMDVlZDc3N2Y1ZmUxYTM3ZmQ2MmQ2ZDMzYmE3MSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §d§d Elusive§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Pixie Dust"
+                },
+                "ExtraAttributes": {
+                    "id": "PIXIE_DUST"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "926330fa-7fe1-3428-a92a-90387043537f",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z/vVh6SA6Pislc6+efN0T7ZNL0+3zPjLxGHzdqladVJQmy9ZVY05rGM3oGWqd5eXwjlQrGak+3OjavJRsJglebNbJF6ATdciwL1lt08ioXLiFe8mrdmvB0zjHWInqJqRS8HvCxnUCtfNPkOUG7jkTeLzdpyRI2yBURiiuQ7uynQkWePsEiOGwYbE69MurkP60t7N46hPdFCeDZJ1e21Er36jXIm7wpRPo7ulOF0/dEkvq/jzGxcJEvEDHbj7BjCukflx9g6erL22veABLXme7U5pWbXWET52/5zRH34isnxjy7edvxMX4scmiIWRWaE4/qw8x7kPItff6kiwpBwh4g6f8XgsydM09vREPn6NtL13nIn2Jthxa/pLqGqidX/44Ln3o9c+ACq9zEhrfsFanaL2UDk4bi6VLIt4HRM9R+kIKJlw9vhjq83TAPTWIrO9cimKg012iv9txOCuMzj+qVrktI+XzYUF43zPGZwrF1wndozjgpcC3jPbJwlsDLhQJc5or05WM88pV21h7lRyDZi+0lmpPRHV/2gvkXDK2kfx8xBrVTrShqOZ2eHFrkYjPFE29GlrQUzNau+URrpUkVAMfqhs9NE8jrrDUNlpIdSIUJqGnVhiE9RN0ef0SYVZCK996MpAVduZcKPcvP0Xgvwb3FWBqawHgTxE/Wr2KFA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0Njk2OSwKICAicHJvZmlsZUlkIiA6ICIzZDU1OGQ3Y2NmZjk0ODdkYWE1MzhkMjM4NGE3OWFkZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcnlwdGljTG9zZXIxMyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9jNDY2ZDUxOTZlMGNjNDc0N2RjODUyZDQ4ZTczMzEzNTcxZmI3NDI4ZmY1ZTA2OWVlMTM0ODQxZWYxOGFjMDJiIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Humanoid§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dirty Fingernails"
+                },
+                "ExtraAttributes": {
+                    "id": "DIRTY_FINGERNAILS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "926330fa-7fe1-3428-a92a-90387043537f",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z/vVh6SA6Pislc6+efN0T7ZNL0+3zPjLxGHzdqladVJQmy9ZVY05rGM3oGWqd5eXwjlQrGak+3OjavJRsJglebNbJF6ATdciwL1lt08ioXLiFe8mrdmvB0zjHWInqJqRS8HvCxnUCtfNPkOUG7jkTeLzdpyRI2yBURiiuQ7uynQkWePsEiOGwYbE69MurkP60t7N46hPdFCeDZJ1e21Er36jXIm7wpRPo7ulOF0/dEkvq/jzGxcJEvEDHbj7BjCukflx9g6erL22veABLXme7U5pWbXWET52/5zRH34isnxjy7edvxMX4scmiIWRWaE4/qw8x7kPItff6kiwpBwh4g6f8XgsydM09vREPn6NtL13nIn2Jthxa/pLqGqidX/44Ln3o9c+ACq9zEhrfsFanaL2UDk4bi6VLIt4HRM9R+kIKJlw9vhjq83TAPTWIrO9cimKg012iv9txOCuMzj+qVrktI+XzYUF43zPGZwrF1wndozjgpcC3jPbJwlsDLhQJc5or05WM88pV21h7lRyDZi+0lmpPRHV/2gvkXDK2kfx8xBrVTrShqOZ2eHFrkYjPFE29GlrQUzNau+URrpUkVAMfqhs9NE8jrrDUNlpIdSIUJqGnVhiE9RN0ef0SYVZCK996MpAVduZcKPcvP0Xgvwb3FWBqawHgTxE/Wr2KFA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0Njk2OSwKICAicHJvZmlsZUlkIiA6ICIzZDU1OGQ3Y2NmZjk0ODdkYWE1MzhkMjM4NGE3OWFkZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcnlwdGljTG9zZXIxMyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9jNDY2ZDUxOTZlMGNjNDc0N2RjODUyZDQ4ZTczMzEzNTcxZmI3NDI4ZmY1ZTA2OWVlMTM0ODQxZWYxOGFjMDJiIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Humanoid§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dirty Fingernails"
+                },
+                "ExtraAttributes": {
+                    "id": "DIRTY_FINGERNAILS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 7,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "3cc43cb6-c98c-3baf-8dfa-8f3bf646ea7b",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "rv1tZiYHTP+TX6KrFe7V9L4vkk9J9wGOTPgre6VTaXT23/36Mqfw5FYH096tRXCfOxOwnGxDDcuHj1b9d90uQf/EO/iaG6Bo81w8X3fIZj2IdsG9cBmxffB+xD4STEMQcDPsjKkOPQPo5SV8SGqdFu2eBj1vtY/qoQT3oRkLcoWlBZdYvLULFyOSY279UQHpDBVmGzeVL9zJmlGpxwTMZbc/QttRAWVYgk4ZVuiPjBtqewgpQfNT2za+wvmqBVoL1nz9I2C2DY3/wpuFwhk5x4qAEEsE8/FSxq58UyG2qk8Ss/qN7G48QERCK5WeCOmXl81+DTtHa2QY8YF9TjDJ21nHVYLgvUd9thmBMnk+J7LACn6ESEPQBE5d0+Oz/9XzGUA68sc1AtS8CNUZUrsBcFIenTHiWZ/0smraLlRw3fRnxN6x+HzG1BgqlhHjhTzzlhxv8CsTTjcD4Xf1gaYucIRlZZLynN01EVcGSrRDxsf5I51VG292TEw6i8P1fssK1L0SjcgOutKRswqCKzrNp6CBnjdNuWL6kAnb4ZZLJuunvthTA3ki4+jUtGg05pJs9FOCiRJc6uS+32vp/3zdzFl3AxVcn6UlQ+R9YtLwTADMf+Re75hQ4blt/Ow3sqP2A1aSY2c9oRBy0Q936353oo3YPKx/+gOp3BO7R2dshY8=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc3MTU5MDgyNDg5OCwKICAicHJvZmlsZUlkIiA6ICIzZGE2ZDgxOTI5MTY0MTNlODhlNzg2MjQ3NzA4YjkzZSIsCiAgInByb2ZpbGVOYW1lIiA6ICJGZXJTdGlsZSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9iMGJkYmIxYWM1ZTRmNzFkNWFhZTYxOWIwNWNlNTEzMTZhNmFlZWQ0NThmMzEwZGI0NjhlMGVhZDViNDZmMmVlIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Shielded§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Shield Dust"
+                },
+                "ExtraAttributes": {
+                    "id": "SHIELD_DUST"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 23,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "926330fa-7fe1-3428-a92a-90387043537f",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Z/vVh6SA6Pislc6+efN0T7ZNL0+3zPjLxGHzdqladVJQmy9ZVY05rGM3oGWqd5eXwjlQrGak+3OjavJRsJglebNbJF6ATdciwL1lt08ioXLiFe8mrdmvB0zjHWInqJqRS8HvCxnUCtfNPkOUG7jkTeLzdpyRI2yBURiiuQ7uynQkWePsEiOGwYbE69MurkP60t7N46hPdFCeDZJ1e21Er36jXIm7wpRPo7ulOF0/dEkvq/jzGxcJEvEDHbj7BjCukflx9g6erL22veABLXme7U5pWbXWET52/5zRH34isnxjy7edvxMX4scmiIWRWaE4/qw8x7kPItff6kiwpBwh4g6f8XgsydM09vREPn6NtL13nIn2Jthxa/pLqGqidX/44Ln3o9c+ACq9zEhrfsFanaL2UDk4bi6VLIt4HRM9R+kIKJlw9vhjq83TAPTWIrO9cimKg012iv9txOCuMzj+qVrktI+XzYUF43zPGZwrF1wndozjgpcC3jPbJwlsDLhQJc5or05WM88pV21h7lRyDZi+0lmpPRHV/2gvkXDK2kfx8xBrVTrShqOZ2eHFrkYjPFE29GlrQUzNau+URrpUkVAMfqhs9NE8jrrDUNlpIdSIUJqGnVhiE9RN0ef0SYVZCK996MpAVduZcKPcvP0Xgvwb3FWBqawHgTxE/Wr2KFA=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTc2NzgyMjk0Njk2OSwKICAicHJvZmlsZUlkIiA6ICIzZDU1OGQ3Y2NmZjk0ODdkYWE1MzhkMjM4NGE3OWFkZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJDcnlwdGljTG9zZXIxMyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9jNDY2ZDUxOTZlMGNjNDc0N2RjODUyZDQ4ZTczMzEzNTcxZmI3NDI4ZmY1ZTA2OWVlMTM0ODQxZWYxOGFjMDJiIiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7§7Drops sometimes from §e§e Humanoid§7",
+                        "§7mobs during the §5Year of the Witch§7!",
+                        "",
+                        "§7§7Bring to §dAlcina§7 in the §aHub§7 to craft it",
+                        "§7into §dStews§7!",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dirty Fingernails"
+                },
+                "ExtraAttributes": {
+                    "id": "DIRTY_FINGERNAILS"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 397,
+            "Count": 2,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "d70ff087-0e8c-3f4c-972f-55ed88af7680",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "PArx5rWRGrE8kZ8p02c7u2dCFN9Ux0gCzpoRR/HqbsmeyTvoNnK84N+rzydc13sPbMIr4nmDhcpeeJYOE2VcR9Fk9OC8NkGsKcNnctEgBS4qeE2YAIScfy6MkB0/eBFIEgArmAvIgiz2MOnqfbf8SNQzU2/7PjYzgkAZm7QsBkZs1QlV1dlQgd8tczb8tEOXKlFvC93scY1ekIg3l6SHj/BYjs72HWjmrSaBrYt1t3oOQYkd95nBzdZyf9sRYLELg8D6Y/+oFScTxMX2aTepUOgeVU8MMHtx5WOlCjhA8k28wdci9Bfvax2By4WBhYKh/IeHzPfIfG+7iuaxIS/6hMEZPzixRNbrT7jtom41yaJZd/NpDpOMvpSK4V3R89+VURh5XSW4xic+imhACRWtnrFg+Hi+fp5OCx2mbnL5nORvqzyGVy3Du9gxu3W97Ufq4ZF8erjnP3FJ8OkKmA2GPLVImsVY8ttczgCrVFl/EXwKSumAc1KW9Vlg57A8uZ4XKo3CEv1pW+iaEccGbSrmCR8GSAekiMYEzEPwy6nzhKTQ8YNm9U9JEJh9cVEk9p4l2ZsEV4n0ww7HGFzoHfmJI0nRh82fNk27jv8owvfpmB5Z4Bsb01QPP8dnxgrYdB2AvzbEjHVXmNZdxdRZXftgOkVAdcwDkBblCGaaYNulODU=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxOTUwNDA2MTA0MSwKICAicHJvZmlsZUlkIiA6ICJjYTU4NzNhYmY0Y2U0YWUxODAxZmVmODgzNjhlMWExNiIsCiAgInByb2ZpbGVOYW1lIiA6ICJEZXRocm9uZXMiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2RjNTdjNzVhZGYzOWVjNmYwZTA5MTYwNDlkZDk2NzFlOThhOGExZTYwMDEwNGU4NGU2NDVjOTg4OTUwYmQ3IiwKICAgICAgIm1ldGFkYXRhIiA6IHsKICAgICAgICAibW9kZWwiIDogInNsaW0iCiAgICAgIH0KICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§8Requires level 2",
+                        "§8Weapons",
+                        "",
+                        "§7Freeze monsters to death!",
+                        "",
+                        "§7Apply this rune to weapons or fuse",
+                        "§7two together at the Runic Pedestal!",
+                        "",
+                        "§f§lCOMMON COSMETIC"
+                    ],
+                    "Name": "§f◆ Snow Rune I"
+                },
+                "ExtraAttributes": {
+                    "runes": {
+                        "SNOW": 1
+                    },
+                    "id": "RUNE"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/flawed_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of §aJade§7,",
+                        "§7but it could still use some work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amber/flawed_amber_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 339,
+            "Count": 8,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A slightly better version of §6Amber§7,",
+                        "§7but it could still use some work.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Speed§7.",
+                        "",
+                        "§a§lUNCOMMON GEMSTONE"
+                    ],
+                    "Name": "§a Flawed Amber Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FLAWED_AMBER_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/rough_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 39,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "d01b7d36-96fb-3053-97bf-03df206f868a",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "fIba2qcgxRIeE2XWlO9RQY8g4ACwCA0BF8DigF9HrDbhHl0rq9k5Zw7Uiqh2HqmR4RO+Y0NPCf205Ou9MpnUclu03ukvDujF8fxDu9GXT2Q0gb1m3QoTDKSjKa8eiqDOjsCG+UswJ8/d59icgaegi+dLFZfhMjyG7uLzgzWCHczIn0miw/ml6y/2L48Ylv2qiZjhMIWVFKKnaMTbNTbSj/yklMsw4L6jhMA1jnisD6fHCiMRvofre+Gqcza0C3TK2Aun0CWOBAd5wlzPiyy8WGVzqqF7sivbT783DqpHMaaAz4wkL0aFsgX4VFcSpM606KrNJQ/RDqIBVzl6EVE/HMAVZzehsH7XsG4Vo9I0nd/dl2tBVmzquX0BYEfOI/60BE4yGU4A+J8aAEVHD5znf12SWChSR4bWJWuPWr9S+5HXORYHvqyLaKXF3UPu7InbH+dF0nquK3USMcEEmY1gAbtf0iCgon1ieyKyjJhyfu7f6nim8cs2pBCuB9Gem9qkPdWOd+20rr6/Ipyjgiy36bQZbLetHluNLSu9R+JbY3jadKHDlR87yGjiAdeY1nRS5n3dWnZusZZ3GCChs/TtMrROAbQ3NxZgPMw0jE2tHsEXK1GHryUBshTkMqxcJTBemB2kTUtr6et97coEchMrhn3fO0L2tZJNfJBGmcUpi6s=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxNjQ5MTE0NDQzMSwKICAicHJvZmlsZUlkIiA6ICJhMmI1ZjhlM2MxZDI0ZmUzYTlkMzNiZTFhNzEzYTUwYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJOYXBpb0dvZCIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS80ZjZiZGRiYTFlM2QwMTRmYzc1ZTcwZTI3MjIzY2EzMGNiZmE0Mjk5MGQ0NDhkOWE5NDBlNTAwYTY0MzViZWMiCiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§8Consumable",
+                        "",
+                        "§7The first §a5 §7times you consume this,",
+                        "§7gain a permanent §6+2 Block Fortune§7.",
+                        "",
+                        "§eRight-click to consume!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Dwarven O's Block Bran"
+                },
+                "ExtraAttributes": {
+                    "id": "DWARVEN_OS_BLOCK_BRAN",
+                    "uuid": "b7d047c7-c280-4262-ac76-ba7e9d3e7fc0",
+                    "timestamp": [
+                        416,
+                        2055394605
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amber/rough_amber_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Speed§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Amber Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_AMBER_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/mithril",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 410,
+            "Count": 45,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§9§lRARE DWARVEN METAL"
+                    ],
+                    "Name": "§9Enchanted Mithril"
+                },
+                "ExtraAttributes": {
+                    "id": "ENCHANTED_MITHRIL"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 64,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 13,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/jade/fine_jade_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §aJade §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§6 Mining Fortune§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Jade Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_JADE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/topaz/fine_topaz_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 10,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7A type of §eTopaz §7that has clearly",
+                        "§7been treated with care.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§5 Pristine§7.",
+                        "",
+                        "§9§lRARE GEMSTONE"
+                    ],
+                    "Name": "§9 Fine Topaz Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "FINE_TOPAZ_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/sapphire/rough_sapphire_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§b Intelligence§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Sapphire Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_SAPPHIRE_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/abysmal_lasso",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Hunting Tool",
+                        "",
+                        "§7§7§oThis is barely holding together,",
+                        "§7§oseriously who made this?",
+                        "",
+                        "§6Ability: Throw  §e§lRIGHT CLICK",
+                        "§7Throw the Lasso at §2Forest",
+                        "§2§7creatures and hold them still until",
+                        "§7they lose all their §9stamina§7.",
+                        "",
+                        "§6Ability: Reel In  §e§lRIGHT CLICK",
+                        "§7Reel in creatures caught by the",
+                        "§7Lasso each time their §9stamina",
+                        "§9§7depletes.",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§f§lCOMMON LASSO"
+                    ],
+                    "Name": "§fAbysmal Lasso"
+                },
+                "ExtraAttributes": {
+                    "soulbound": 1,
+                    "id": "ABYSMAL_LASSO",
+                    "uuid": "07e08c3d-8a82-4fd1-a2eb-02b41770851a",
+                    "timestamp": [
+                        416,
+                        1609427194
+                    ]
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "9dcb534b-3a14-37c7-b003-0ee8db591271",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "kHw81kRsiuqMiEVwBr/xROYYMnean1z2tKeYnPEzRQSpA4A9DDyukQ/FBneyaUHx1y9hbjsG/MEAYyhQujZXvsLosC7Wmpzob0TEk+hWnwcdSdFnzDz59Iq5M5RrLC5xzacHbIH+ZWm5OcqHD3Uipfpl6OZCpCLYLiGZd/E9C7yxXAM8nXdm1QA25Ax90AUkeEmZskGOtTfGjoENOd7pkl21/hZvx3xRPcX8k/HMn8b8Dyjlv5hVEpGUhJDAiT/oj48ZPzusllrPr37KXn/7COjqa4v0lJR7x46F6MQfj/XxtB7qGiTmhQ0kapFK3e56GFYZYKJjwR0c2kPr824QmnnFW0nLJ67O4oIh0sNxFhoJr4BN3E8YLY+7UBoluMBRTY+LN1Jso5COMA1ULL0gV9RW1BvPoj37p0rVtMsr+/dUklt6QHrt/dQPx/71Yw7p9C2oV+z80q62qAocc4jh1/2TRyOANhy+hQmxKuNYkDzisyKk18UU0Mi1ez5DGzx4otFW4sw1WYY0MUa9xQYvGA2vqDiA36Q/0KjZd6N7S6WIlOpCO6ve/37NPsEaT9neK2YMbTPU5pDLVygCpteQhGvpAaiXnWlW59CKWgmV50bJJSqwJMfi9K+zGW9XXIDf9crY8Gfvb+vONuJBGW+daPpiEkn/NGGFenyu0xb6HS0=",
+                                "Value": "eyJ0aW1lc3RhbXAiOjE0OTg2ODkzODA5ODgsInByb2ZpbGVJZCI6IjkyZGVhZmE5NDMwNzQyZDliMDAzODg2MDE1OThkNmMwIiwicHJvZmlsZU5hbWUiOiJNSEZfQ2hpY2tlbiIsInNpZ25hdHVyZVJlcXVpcmVkIjp0cnVlLCJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTYzODQ2OWE1OTljZWVmNzIwNzUzNzYwMzI0OGE5YWIxMWZmNTkxZmQzNzhiZWE0NzM1YjM0NmE3ZmFlODkzIn19fQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+20",
+                        "",
+                        "§7Lay eggs when you sneak! Has a",
+                        "§7cooldown of §a5 §7seconds. Also",
+                        "§7reduces fall damage by §a5%§7.",
+                        "",
+                        "§7§8This item can be reforged!",
+                        "§f§lCOMMON HELMET"
+                    ],
+                    "Name": "§fChicken Hat"
+                },
+                "ExtraAttributes": {
+                    "id": "CHICKEN_HEAD",
+                    "uuid": "ae493279-723a-4306-8396-74a2b82f6fd3",
+                    "timestamp": [
+                        416,
+                        1839288434
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 64,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 64,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 64,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 64,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 384,
+            "Count": 37,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§a§lUNCOMMON"
+                    ],
+                    "Name": "§aGrand Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "GRAND_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 384,
+            "Count": 7,
+            "tag": {
+                "ench": [],
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7Smash it open to receive experience!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Titanic Experience Bottle"
+                },
+                "ExtraAttributes": {
+                    "id": "TITANIC_EXP_BOTTLE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/mining_3/goblins/eggs/goblin_egg",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 10,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7§oWhat came first the goblin or the",
+                        "§7§oegg?",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Goblin Egg"
+                },
+                "ExtraAttributes": {
+                    "id": "GOBLIN_EGG"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/electron_transmitter",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A key component needed by the",
+                        "§7Professor to repair §bAutomaton Prime",
+                        "§b§7in the §bLost Precursor City§7!",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Electron Transmitter"
+                },
+                "ExtraAttributes": {
+                    "id": "ELECTRON_TRANSMITTER"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/ftx_3070",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A key component needed by the",
+                        "§7Professor to repair §bAutomaton Prime",
+                        "§b§7in the §bLost Precursor City§7!",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9FTX 3070"
+                },
+                "ExtraAttributes": {
+                    "id": "FTX_3070"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/control_switch",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A key component needed by the",
+                        "§7Professor to repair §bAutomaton Prime",
+                        "§b§7in the §bLost Precursor City§7!",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Control Switch"
+                },
+                "ExtraAttributes": {
+                    "id": "CONTROL_SWITCH"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/robotron_reflector",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A key component needed by the",
+                        "§7Professor to repair §bAutomaton Prime",
+                        "§b§7in the §bLost Precursor City§7!",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Robotron Reflector"
+                },
+                "ExtraAttributes": {
+                    "id": "ROBOTRON_REFLECTOR"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/synthetic_heart",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A key component needed by the",
+                        "§7Professor to repair §bAutomaton Prime",
+                        "§b§7in the §bLost Precursor City§7!",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Synthetic Heart"
+                },
+                "ExtraAttributes": {
+                    "id": "SYNTHETIC_HEART"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "6b0b6860-d9bd-3253-8148-78eb325b4939",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "n5QHhMVcGLMHOZSlpgFgVxX0pcoCPPckS9x5623EDm5p8LV/iSTlU6xGziadGsTB/QbTZfHWtDQ/Qz+xh5ZcQBe/5sIi6VV48uuFYUQ+CdfjEEkAWi2em1AQdpPs2lBGeMCJ8j96T5LgTIbrx217wLFHzFvbPgRADGnVNaxHcIDCB3b73DTyggUVDIvqDR5DzEVCgEW0wclVrV5rKtVv4KRxCpaN6gclrcfiIiWPSHWjN0V9GghevJIM0+NYnxLQNQBYWPdipPIY/GkS1P/XOZ1ACaPwfT3A29uFmSNa4fPvN0gmPI7oO+4q2v06MtWs11QVyAQqeJXQaoNIfF8Mx+NSj1NoV/b5pY6mcx/zVErRhCyix9iIqpZXeroZeqBaVt+oo5k7B8ITQSX3fU/vbPBpY1XKdXabUtXe3t6uyzfSy4RgTWzxKFkBk8FGwVto3p0cyubVnGgDV4CFDF8qUQamhWvLdW/JIJgo+0zXsk3AW4tav4MZk4u16u0yMXYXjZIBaK/H/Nta/zRjbzOQvGk2cNl4661+/YALIdQ9j7gP/u2e0xcJzXugMeTYngRmZmh40AeAg+qhsnoTeakhiYIouaJPCUFYAcZeM3KDeG7WJUkfVK3UhmPahDAkxFdiWAbR2o0kJxNjQo5ZojVaTORAod6xxGtUpRUnbyYbS1M=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxOTQyMjE2ODIwMiwKICAicHJvZmlsZUlkIiA6ICIyMmNiM2U0ZDdmOTY0ZmNjYjE1MDIyNWIwN2YzMTEyMCIsCiAgInByb2ZpbGVOYW1lIiA6ICJ0dWxleW1hbkIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY5MGMxOGUyYjg3ODBjOTI3ZmQxMjFkNWEzNjE5NmE1M2E3MmM2NzBhODlkNzg1ZGVlZGVlMzE1NTAyNGIyYSIsCiAgICAgICJtZXRhZGF0YSIgOiB7CiAgICAgICAgIm1vZGVsIiA6ICJzbGltIgogICAgICB9CiAgICB9CiAgfQp9"
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Accessory Power: §6+5",
+                        "",
+                        "§7Grants a 1 in 10,000,000,000",
+                        "§7chance to deal §c+100% §7damage.",
+                        "",
+                        "§7§8True love is tough to find, but",
+                        "§8finding it hits you hard!",
+                        "",
+                        "§7Requires quest progress!",
+                        "",
+                        "§8Works while in Accessory Bag!",
+                        "§a§lUNCOMMON ACCESSORY"
+                    ],
+                    "Name": "§aMediocre Ring of Love"
+                },
+                "ExtraAttributes": {
+                    "id": "WEDDING_RING_2",
+                    "uuid": "8eb23f1e-a87a-4432-85ec-a2a8992ab314",
+                    "timestamp": [
+                        416,
+                        2038967325
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {},
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 397,
+            "Count": 19,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "730a6086-ad87-38fa-8fa4-0b76a060f4fc",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "d9k296WS79Ha4wIzRD1L5WdKRklU8OCa+9lv/6B1OHqa0ZPMSJV0Vc8dx/RX+4FxfNYG/ZOohmhcs1KRcU81Ty6SV+7o/6jNBQ14HWbsmb4W+hv/aaLvcO8Jkua7QFUgLs01AHU+K3qFKrW1+5mwvzzbPu8Po0zpj1MjpsDV67Urvf6AMXrLlY2P+wuGXdR7tkireZ/IWvOXYQ3IoptKS8ejSGfxE3rHsVNMG146OsEH9Khv+zV8V48yQDA6S1KBBI9PI3pQQMT1ktrsV6delHw9EQxG1voehNpNfBSraeGQ8S6tKUhZgX/aAdd5R00Fp+i1DyDnXcXB4eehLvTEnIkcwBeYuMC6PbyqFqI2Fr2FF8dTQay6IoxNEG7A8DLubfjVRBI6HXwq2iHkZPzywCSzLs6fleHtstmiY0Gmtay/RU4DrW13AE2+HHWSNalPX8Uu8zqfLCjt1JXTfDEKtFw3h1sKE2Mqy3XZPAnSJS7WNon6nnW7e+n9Z4ed4mrvzxuyZR1clz9YBjaSxJEBcO5XswOq/BSWh7IVo/rBgvM4zrB4+gM4S8U4gvBBXW6eysxEU3lcsRjK3ugrV21wvxNfndugyXwjbLawRw0ny3DAe9Zz/+RYDNM/N+wSYnBSETfSejymhZp155wVGyB+DtkDWzCd3TVyQ0iQydDxuIg=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTYyMDQ0NTc2NDQ1MSwKICAicHJvZmlsZUlkIiA6ICJmNDY0NTcxNDNkMTU0ZmEwOTkxNjBlNGJmNzI3ZGNiOSIsCiAgInByb2ZpbGVOYW1lIiA6ICJSZWxhcGFnbzA1IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2RmMDNhZDk2MDkyZjNmNzg5OTAyNDM2NzA5Y2RmNjlkZTZiNzI3YzEyMWIzYzJkYWVmOWZmYTFjY2FlZDE4NmMiLAogICAgICAibWV0YWRhdGEiIDogewogICAgICAgICJtb2RlbCIgOiAic2xpbSIKICAgICAgfQogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§b§6Glossy Fortune I",
+                        "§7Increases your chance of finding",
+                        "§7§5Glossy Gemstones §7during §6Mining",
+                        "§6Fiestas §7by §a+1%§7.",
+                        "",
+                        "§7You can Syphon this shard from",
+                        "§7your §aHunting Box§7.",
+                        "",
+                        "§eRight-click to send to Hunting Box!",
+                        "§eShift Right-click to move all!",
+                        "",
+                        "§5§lEPIC COMBAT SHARD §8(ID E60)"
+                    ],
+                    "Name": "§5Scatha Shard"
+                },
+                "ExtraAttributes": {
+                    "attributes": {
+                        "glossy_fortune": 1
+                    },
+                    "id": "ATTRIBUTE_SHARD"
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/community_center/mayor/cole/refined_mineral",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 351,
+            "Count": 9,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7A material so pure it comes",
+                        "§7pre-refined from its place of origin.",
+                        "",
+                        "§eRight-click to view recipes!",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Refined Mineral"
+                },
+                "ExtraAttributes": {
+                    "id": "REFINED_MINERAL"
+                }
+            },
+            "Damage": 12
+        },
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/refined_titanium",
+                "minecraft:tooltip_style": "hypixel_skyblock:legendary"
+            },
+            "id": 339,
+            "Count": 2,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§6§lLEGENDARY DWARVEN METAL"
+                    ],
+                    "Name": "§6Refined Titanium"
+                },
+                "ExtraAttributes": {
+                    "id": "REFINED_TITANIUM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/uncategorized/refined_mithril",
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 339,
+            "Count": 3,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§5§lEPIC DWARVEN METAL"
+                    ],
+                    "Name": "§5Refined Mithril"
+                },
+                "ExtraAttributes": {
+                    "id": "REFINED_MITHRIL"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/island_relevant/mining_3/goblins/eggs/blue_goblin_egg",
+                "minecraft:tooltip_style": "hypixel_skyblock:rare"
+            },
+            "id": 339,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§7§oWhat came first the goblin or the",
+                        "§7§oegg?",
+                        "",
+                        "§9§lRARE"
+                    ],
+                    "Name": "§9Blue Goblin Egg"
+                },
+                "ExtraAttributes": {
+                    "id": "GOBLIN_EGG_BLUE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/topaz/rough_topaz_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 40,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§5 Pristine§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Topaz Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_TOPAZ_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/amethyst/rough_amethyst_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 20,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§a Defense§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Amethyst Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_AMETHYST_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:item_model": "hypixel_skyblock:item/collections/gemstone/ruby/rough_ruby_gem",
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 339,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7Harvested from the plentiful",
+                        "§7gemstone veins in the §5Crystal Hollows§7.",
+                        "",
+                        "§7§7Some say that when §eharnessed",
+                        "§eproperly§7, it can give its owner extra",
+                        "§7§c Health§7.",
+                        "",
+                        "§f§lCOMMON GEMSTONE"
+                    ],
+                    "Name": "§f Rough Ruby Gemstone"
+                },
+                "ExtraAttributes": {
+                    "id": "ROUGH_RUBY_GEM"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:common"
+            },
+            "id": 1,
+            "Count": 64,
+            "tag": {
+                "HideFlags": 254,
+                "display": {
+                    "Lore": [
+                        "§7§8Collection Item",
+                        "",
+                        "§7§7A condensed form of rock only",
+                        "§7found at extreme depths.",
+                        "",
+                        "§f§lCOMMON BLOCK"
+                    ],
+                    "Name": "§fHard Stone"
+                },
+                "ExtraAttributes": {
+                    "id": "HARD_STONE"
+                }
+            },
+            "Damage": 0
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+    ]
+}

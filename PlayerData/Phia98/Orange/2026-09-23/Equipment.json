@@ -1,0 +1,222 @@
+{
+    "i": [
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "6d8130a5-c017-34cd-92d8-c160f3ad30c2",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "DoEVE+WZ88Ovzk8nZU68D0pAkWXIc7ilEaazoxRac2UQjXI0ErXJ0QQ603gu/1O1lsVUEokNoRHphh0tH/seOd2gLkW6czLMSUO3m1on5MhcQFl3fjjZIxDrW5ojdbzKWc5sAud/OR++mh7Pko2bctPiqbEET08Sgo7rzBwZObKYmEmmHCYqy/44l/HdYafaiPU41LRpawC8CTS/HgY6BqBsRJLHKg/kRdvGQXPj9J03tuNF3Lchr/pJ2sckIJsG2KRpjVJV06Xiel3XEE+DOtKJE7t/pbUGxD0gxNYTAB4cIg1KtN8r74O1ydJzNYrlyp90Up8HvV6OZcr2k4PZt/rYZHlQspLtB7KTUu8Kb4Au0nymW/HpPofSvFcRNC1qMbN78nPgPrQ/GwfyonqXFegZbzWcbZRfvM54L0ZLObS8u28lLS2qdrUCUz5z/pm5QrQ5Fl7r6KGxNIoOjUw02D2b7A+4ZtA1qX3bOHkrfP7YhCjZ5jVACIOH/atnd5hMLKYvDD0Z+RQgVUF7bEDDRkWYyviFja/36sNMZ9duTn9SyjfHFJURRtSsDO0jKvp8ExQ9bQ3adRC2yYx9+zOwG8Dz2SD+0eYwbSrJixXboXd6qpaz6qea/Xxlxcvelbgsfht2Wu1NODXZbKNvTPyqJaq+wg7ltkcbGlW+ncAhf2k=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY1NjUzNzc4NTE1MCwKICAicHJvZmlsZUlkIiA6ICIwODFiZTAxZmZlMmU0ODMyODI3MDIwMjBlNmI1M2ExNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJMeXJpY1BsYXRlMjUyNDIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzZkYTdiOTU3YjgyMTAzYjE3MTQwZTcxMTc5MTE0NjQ4YTAwMjkxYjA1NjU3YzI3ZDNmOTNkNzI2ZTg3ZTY0MCIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+20 §9(+5)",
+                        "§7Defense: §a+11 §9(+1)",
+                        "§7Crit Chance: §9+1% §9(+1%)",
+                        "§7Crit Damage: §9+2% §9(+2%)",
+                        "§7Attack Speed: §e+1% §9(+1%)",
+                        "§7Speed: §f+1 §9(+1)",
+                        "",
+                        "§7All stats on this piece of equipment",
+                        "§7are multiplied by §52x §7while on the End",
+                        "§7Island!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§5§lEPIC NECKLACE"
+                    ],
+                    "Name": "§5Soft Ender Necklace"
+                },
+                "ExtraAttributes": {
+                    "modifier": "soft",
+                    "id": "ENDER_NECKLACE",
+                    "uuid": "54548a8b-7248-42e3-8abf-01a69297414f",
+                    "timestamp": [
+                        416,
+                        1771647235
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:uncommon"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "4a7b6934-7e97-35df-9154-7d01c8a687ac",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "ENFdDVWWRzKb8sk8WMJihcjbkWj03/ukfrleheIMI/BL12s4EQ1oMY2UHzdSbYqp2eOSlg4PDvND5JoQE6pBwVeitnp9WXoWKfRKZ53BeV9mVRKtVQ2+raySfaEfSHKeEA+NszeqV2UorAgy7GNnozjhww4p6PKIb5yf9QCn9+ed9weudIocc2bhOMF8sUVCk6dn+XNDFVpz8JRK2P5XidjZYnF2aoQQt1m2VyL8cV2Qgdusm0/7Dnkyq//tozxpRWpyeBYdNYtoQbHQd/umIIJO1eC5Fb0N3ZCXCTT7PBHgDEs97UZHwnnpcGKYLeqzAjza9z3mniZeQyqgqfyuSBMYxJFA0SB5T96YTF52tF37OEbcuHsp7oUtFtB86bJR6i+FSyeZnt6zffThypUWJV8uEOdA4M2uvWENWiNkyc4Y8XBUKMDAtb8Nsi7hTvnt/y4vy/zjV6IRydkRabmHqqlFJ4qx/tNdCLrPkZIpTCik6eN+ky1ZfkC49xwMLT+nVp8FW+B5tFtuRxOe217tXJnvQdUFydqJ9PfZ2VVcDjGjaeb5QbuJKnCM1+VlG6wkjG7dIzrCKLQdxg9KwCVeXJ7bclN6YPpdvB038LZuTFj9MENciJWL4vDR2eVroBPgXiHCuxHRLkdYbBskq5M/efBiAI73uqYijPaypBRf3z4=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTcxOTI2MjMyNzM3NywKICAicHJvZmlsZUlkIiA6ICIyMmNiM2U0ZDdmOTY0ZmNjYjE1MDIyNWIwN2YzMTEyMCIsCiAgInByb2ZpbGVOYW1lIiA6ICJ0dWxleW1hbkIiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjY5MzUxNjNiMTAyMzU2YTRiNTE5MGJhNTYyMTJlMjVkZGVjY2VlZjFmN2E0MmQyYTYxMzljMGQwZjZiMjljZiIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+54",
+                        "§7Strength: §c+13",
+                        "§7Sweep: §2+9",
+                        "§7Foraging Fortune: §6+2",
+                        "§7Mining Speed: §6+6 §9(+6)",
+                        "§7Mining Fortune: §6+1 §9(+1)",
+                        "§7Hunting Fortune: §d+6",
+                        "§7Magic Find: §b+2",
+                        "§7Foraging Wisdom: §3+1",
+                        "§7Hunting Wisdom: §3+1",
+                        "",
+                        "§7The more you Hunt, the stronger this",
+                        "§7cloak gets!",
+                        "",
+                        "§7Talk to §bDavid §7to view your progress!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Royal Bonus",
+                        "§7Earn §2+15% ᠅ Mithril Powder §7from",
+                        "§7§bMining Events §7in the §2Dwarven Mines§7.",
+                        "",
+                        "§8§l* §8Soulbound §8§l*",
+                        "§a§lUNCOMMON CLOAK"
+                    ],
+                    "Name": "§aRoyal David's Cloak"
+                },
+                "ExtraAttributes": {
+                    "attributeMenuValue": 7,
+                    "modifier": "royal",
+                    "id": "DAVIDS_CLOAK",
+                    "uuid": "30cae214-b1bf-414b-a419-cc7e25277525",
+                    "timestamp": [
+                        416,
+                        1610081274
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "aaebec27-4dca-3f2b-9de5-6ad7373ff578",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "Bq00jnR6GvTizVYuXrpRl/XFNMQp1b7tSexOOadcsPpSHvj6GtVV4DkF0qI8IbMyfE4yxu4cLUI9XhoSLoNGFF3xwjyxs0+147mZgEL5BMfPT4AKukToggE6xDuxMJt2hHBTbKBydhIGRwB0WJbe8O3WirxXvXayGFvMACAI0afALpzSKurehCFHnwMtV5p/hD+z74/eNxXHmIlshnxJPPToU2XNqkXPwBTp4t74dTpWMUhIsc3BBtE8JfzefVaGiAKu/TXb3pWnk+7bZYCDRBoPi6ZFro+sbKpf2yCafNh0xcSyhm8cVNv1SGonUZF/rekiHqUm+dFuVuBHWVXIcmI/w9tp+iUkq75Uwl3pHM4EdNrB38g2vCKoWzQXupGTi5YxKDoDxV2yoC9YRXQK5W3NdTY4Qn9byC/2ijAi2PLnSNo7Ff9rR+Q+6hdmEIth5yHChiLDrBBo48DE3qjRWvYapEQtuWChHR5iIDEufpKzkCvUWMiClclZMS90Nox0boZj0M5DE+iTwep91JzbbmKydcZ4lj4ElwbjTQMZ2ZmxI/S+PRDrAVDA2q7tB2CfaHHeCLNawVTAR91PN4n0L0ZeiDnWEXnYWgREhgILF8Epm7JW0ZqYcFyOHkYbQzJUgQl6hKoRQUk4OSEmT+yn9FBXH1+kgNbPYcRxwxaLtZ4=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY1NjUzNzgwNDIwNywKICAicHJvZmlsZUlkIiA6ICJlZDUzZGQ4MTRmOWQ0YTNjYjRlYjY1MWRjYmE3N2U2NiIsCiAgInByb2ZpbGVOYW1lIiA6ICI0MTQxNDE0MWgiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjAzMmEwMTY2MjFlMTI2ODcwZmEwMGMyOWM1MWQ5NDJhZmRiYTVhOTRhMjMyN2YyNjRmZTFhOTQwOWU0NTVhZSIKICAgIH0KICB9Cn0="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+15",
+                        "§7Defense: §a+10",
+                        "§7Mining Speed: §6+10 §9(+10)",
+                        "§7Mining Fortune: §6+2 §9(+2)",
+                        "",
+                        "§7All stats on this piece of equipment",
+                        "§7are multiplied by §52x §7while on the End",
+                        "§7Island!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§9Royal Bonus",
+                        "§7Earn §2+15% ᠅ Mithril Powder §7from",
+                        "§7§bMining Events §7in the §2Dwarven Mines§7.",
+                        "",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§5§lEPIC BELT"
+                    ],
+                    "Name": "§5Royal Ender Belt"
+                },
+                "ExtraAttributes": {
+                    "modifier": "royal",
+                    "id": "ENDER_BELT",
+                    "uuid": "a3933db9-be68-4bfe-998b-d5bdf4cfc275",
+                    "timestamp": [
+                        416,
+                        1773965157
+                    ]
+                }
+            },
+            "Damage": 3
+        },
+        {
+            "components": {
+                "minecraft:tooltip_style": "hypixel_skyblock:epic"
+            },
+            "id": 397,
+            "Count": 1,
+            "tag": {
+                "HideFlags": 254,
+                "SkullOwner": {
+                    "Id": "566b049e-3cb3-3bea-a21c-620eb658c15a",
+                    "hypixelPopulated": 1,
+                    "Properties": {
+                        "textures": [
+                            {
+                                "Signature": "RWFqag3M/zjtaU+d4uoGPVbEFx0duGQdKukUZncUiSsB7ey3gJfYYGlQPbRCJqTAtQvYnAiQDa3lqe/qQ6DG6urM7KhtWdbE2Zqg9iwfCS4prBHnIQ0Bdc1TYja9XXhnGXtAzXi6QsrzYYWPEpT0oJgVReBLu7THoIm5fQr+qtxNFfpK5/26QjngRXlh7d8qMd7snBx/xsYAIAVCqTAsxz87UMdULKfug5umEGvKrNJDdnO3kdUMNoExyHWbSUaVxMcWsZ5/beXzgxeX+7FgYgiDayk24YTlA+f98+DGINlOuSk+pFd1icdE70bNO+nfgV/GTjoS4TkHSuPQUFTBAttmo+bUtyp3Ns4OzEq1kR9KNSUgoxjPsHpuhCetFk9sjjawBFis9fmfY4alPIGQdJ9zVZ3OCtRKzRvsGoL23fHfu1nP5cWxpas2I1dywa/EU3V8x93OotmxkEt5HxHWn/Q6OXgyb9Ize9NEhAwSCuxy76bmtlnYLkAjv2KPTlM5tXyMOHz8UXcmLUKdnJbmJ04XtLCmS9J8rYGmbf6WwXqtU9ugIOgCmQZ4UEy1F2pskKUDElPdCn1fpJEF3Ra2Hk2sASNIA6jZZeWDZZBS1/oJj2bFayPZq6j8Ge1/q8ZByOEpzYMP3Xmak1OOVYQN7gUDjr5X/+Av2VtexrUTTns=",
+                                "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY1NjUzNzgyMzQ3NCwKICAicHJvZmlsZUlkIiA6ICIyMWUzNjdkNzI1Y2Y0ZTNiYjI2OTJjNGEzMDBhNGRlYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJHZXlzZXJNQyIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS8yMmI4ODEzZmJkOGEwNDlkMGU0MmE3Nzk5ZjhkYjY5ZGZlZDljZGQ0NGU3MzUwY2FlZWM1ZjAyM2M3MTUxYzJmIgogICAgfQogIH0KfQ=="
+                            }
+                        ]
+                    }
+                },
+                "display": {
+                    "Lore": [
+                        "§7Health: §c+15",
+                        "§7Defense: §a+10",
+                        "§7Crit Chance: §9+1% §9(+1%)",
+                        "§7Crit Damage: §9+4% §9(+4%)",
+                        "",
+                        "§7All stats on this piece of equipment",
+                        "§7are multiplied by §52x §7while on the End",
+                        "§7Island!",
+                        "",
+                        "§7§eRight-click to equip!",
+                        "",
+                        "§8§l* §8Co-op Soulbound §8§l*",
+                        "§5§lEPIC GLOVES"
+                    ],
+                    "Name": "§5Menacing Ender Gauntlet"
+                },
+                "ExtraAttributes": {
+                    "modifier": "menacing",
+                    "id": "ENDER_GAUNTLET",
+                    "uuid": "d74cc460-1e3b-4bb6-9e10-18dfc19c69d6",
+                    "timestamp": [
+                        416,
+                        1742792723
+                    ]
+                }
+            },
+            "Damage": 3
+        }
+    ]
+}
