@@ -1,10 +1,19 @@
 {
   "name": "skyadvisor",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "SkyAdvisor: React client and Express Minecraft username lookup",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently --kill-others --names server,client \"npm run dev --workspace server\" \"npm run dev --workspace client\"",
+    "build": "npm run build --workspace client",
+    "test": "npm run test --workspace server"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +21,8 @@
   "dependencies": {
     "dotenv": "^18.0.3",
     "prismarine-nbt": "^2.8.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
   }
 }

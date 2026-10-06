@@ -1,0 +1,14 @@
+{
+  "name": "skyadvisor-server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "test": "node --test app.test.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1"
+  }
+}
