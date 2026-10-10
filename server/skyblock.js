@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
 const nbt = require('prismarine-nbt');
+const { getDatabase } = require('./database');
 
 const PLAYER_DATA_ROOT = path.join(__dirname, '..', 'PlayerData');
 
@@ -80,93 +81,34 @@ function parseTimestampDirectory(name) {
  * accidentally counting a single fetch multiple times because the
  * player has multiple SkyBlock profiles.
  */
-function getPlayerFetchTimestamps(username) {
-  const playerDirectory = path.join(
-    PLAYER_DATA_ROOT,
-    safePathComponent(username),
-  );
-
-  if (!fs.existsSync(playerDirectory)) {
-    return [];
-  }
-
-  const timestamps = new Set();
-
-  for (const profileName of fs.readdirSync(playerDirectory, {
-    withFileTypes: true,
-  })) {
-    if (!profileName.isDirectory()) {
-      continue;
-    }
-
-    const profileDirectory = path.join(
-      playerDirectory,
-      profileName.name,
-    );
-
-    for (const timestampDirectory of fs.readdirSync(profileDirectory, {
-      withFileTypes: true,
-    })) {
-      if (!timestampDirectory.isDirectory()) {
-        continue;
-      }
-
-      const timestamp = parseTimestampDirectory(timestampDirectory.name);
-
-      if (timestamp !== null) {
-        timestamps.add(timestamp);
-      }
-    }
-  }
-
-  return [...timestamps].sort((a, b) => b - a);
+async function getPlayerFetchTimestamps(uuid) {
+  const db = await getDatabase();
+  const events = await db.collection('fetchEvents')
+    .find({ playerUuid: uuid, fetchedAt: { $gte: new Date(Date.now() - TWENTY_FOUR_HOURS_MS) } })
+    .sort({ fetchedAt: -1 })
+    .project({ fetchedAt: 1, _id: 0 })
+    .toArray();
+  return events.map((event) => event.fetchedAt.getTime());
 }
 
-function getFetchEligibility(username, now = Date.now()) {
-  const timestamps = getPlayerFetchTimestamps(username);
+async function getFetchEligibility(uuid, now = Date.now()) {
+  const db = await getDatabase();
+  const recentTimestamps = await db.collection('fetchEvents')
+    .find({ playerUuid: uuid, fetchedAt: { $gte: new Date(now - TWENTY_FOUR_HOURS_MS) } })
+    .sort({ fetchedAt: -1 })
+    .project({ fetchedAt: 1, _id: 0 })
+    .toArray();
+  const timestamps = recentTimestamps.map((event) => event.fetchedAt.getTime());
+  const newestTimestamp = timestamps[0] ?? null;
 
-  const recentTimestamps = timestamps.filter(
-    (timestamp) => now - timestamp < TWENTY_FOUR_HOURS_MS,
-  );
-
-  const newestTimestamp = recentTimestamps[0] ?? null;
-
-  if (newestTimestamp !== null) {
-    const age = now - newestTimestamp;
-
-    if (age < ONE_HOUR_MS) {
-      return {
-        allowed: false,
-        reason: 'hour',
-        newestTimestamp,
-        fetchesLast24Hours: recentTimestamps.length,
-        retryAfterMs: ONE_HOUR_MS - age,
-      };
-    }
+  if (newestTimestamp !== null && now - newestTimestamp < ONE_HOUR_MS) {
+    return { allowed: false, reason: 'hour', newestTimestamp, fetchesLast24Hours: timestamps.length, retryAfterMs: ONE_HOUR_MS - (now - newestTimestamp) };
   }
-
-  if (recentTimestamps.length >= MAX_FETCHES_PER_24_HOURS) {
-    const oldestRecentTimestamp =
-      recentTimestamps[recentTimestamps.length - 1];
-
-    return {
-      allowed: false,
-      reason: 'daily',
-      newestTimestamp,
-      fetchesLast24Hours: recentTimestamps.length,
-      retryAfterMs:
-        TWENTY_FOUR_HOURS_MS -
-        (now - oldestRecentTimestamp),
-    };
+  if (timestamps.length >= MAX_FETCHES_PER_24_HOURS) {
+    const oldest = timestamps[timestamps.length - 1];
+    return { allowed: false, reason: 'daily', newestTimestamp, fetchesLast24Hours: timestamps.length, retryAfterMs: TWENTY_FOUR_HOURS_MS - (now - oldest) };
   }
-
-  return {
-    allowed: true,
-    reason: null,
-    newestTimestamp,
-    fetchesLast24Hours: recentTimestamps.length,
-    retryAfterMs: 0,
-  };
+  return { allowed: true, reason: null, newestTimestamp, fetchesLast24Hours: timestamps.length, retryAfterMs: 0 };
 }
 
 /**
@@ -323,280 +265,166 @@ async function fetchSkyBlockData({
     throw new Error('Hypixel API key is not configured.');
   }
 
-  const eligibility = getFetchEligibility(username);
+  const db = await getDatabase();
+  const players = db.collection('players');
+  const snapshots = db.collection('skyblockSnapshots');
+  const events = db.collection('fetchEvents');
+  const locks = db.collection('fetchLocks');
+  const playerUuid = uuid.toLowerCase();
 
-  if (!eligibility.allowed) {
-    const error = new Error(
-      eligibility.reason === 'hour'
-        ? 'This player was fetched less than one hour ago.'
-        : 'This player has already been fetched four times within the last 24 hours.',
-    );
-
-    error.code =
-      eligibility.reason === 'hour'
-        ? 'FETCH_TOO_SOON'
-        : 'FETCH_DAILY_LIMIT';
-
-    error.retryAfterMs = eligibility.retryAfterMs;
-    error.fetchesLast24Hours = eligibility.fetchesLast24Hours;
-
-    throw error;
-  }
-
-  const hypixelUrl =
-    `https://api.hypixel.net/v2/skyblock/profiles` +
-    `?key=${encodeURIComponent(apiKey)}` +
-    `&uuid=${encodeURIComponent(uuid)}`;
-
-  let response;
-
+  // A unique per-player lock prevents concurrent requests from bypassing the
+  // fetch limit. Expiration is a crash-recovery backstop, not polling.
   try {
-    response = await fetch(hypixelUrl, {
-      headers: {
-        'User-Agent': 'SkyAdvisor/1.0',
-      },
-      signal: AbortSignal.timeout(10000),
-    });
+    await locks.insertOne({ _id: playerUuid, createdAt: new Date() });
   } catch (error) {
-    if (
-      error.name === 'TimeoutError' ||
-      error.name === 'AbortError'
-    ) {
-      const timeoutError = new Error(
-        'Hypixel API request timed out.',
-      );
-
-      timeoutError.code = 'HYPIXEL_TIMEOUT';
-      throw timeoutError;
+    if (error.code === 11000) {
+      const locked = new Error('A SkyBlock fetch is already in progress for this player.');
+      locked.code = 'FETCH_IN_PROGRESS';
+      throw locked;
     }
-
-    const networkError = new Error(
-      'Could not reach the Hypixel API.',
-    );
-
-    networkError.code = 'HYPIXEL_NETWORK';
-    throw networkError;
-  }
-
-  const contentType =
-    response.headers.get('content-type') || '';
-
-  if (!contentType.includes('application/json')) {
-    const error = new Error(
-      'Hypixel returned an unexpected response.',
-    );
-
-    error.code = 'HYPIXEL_INVALID_RESPONSE';
     throw error;
   }
-
-  let body;
 
   try {
-    body = await response.json();
-  } catch {
-    const error = new Error(
-      'Hypixel returned invalid JSON.',
-    );
-
-    error.code = 'HYPIXEL_INVALID_RESPONSE';
-    throw error;
-  }
-
-  if (!response.ok || body.success !== true) {
-    const error = new Error(
-      body.cause || 'Hypixel API request failed.',
-    );
-
-    error.code = 'HYPIXEL_API_ERROR';
-    throw error;
-  }
-
-  if (!Array.isArray(body.profiles)) {
-    const error = new Error(
-      'Hypixel returned no SkyBlock profiles.',
-    );
-
-    error.code = 'NO_PROFILES';
-    throw error;
-  }
-
-  const timestamp = formatTimestamp();
-  const playerDirectory = path.join(
-    PLAYER_DATA_ROOT,
-    safePathComponent(username),
-  );
-
-  const savedProfiles = [];
-
-  for (const profile of body.profiles) {
-    const profileName = safePathComponent(
-      profile.cute_name || profile.profile_id || 'Unknown',
-    );
-
-    const profileDirectory = path.join(
-      playerDirectory,
-      profileName,
-      timestamp,
-    );
-
-    const memberData = profile.members?.[uuid];
-
-    const normalized = await buildProfileData(memberData);
-
-    fs.mkdirSync(profileDirectory, {
-      recursive: true,
-    });
-
-    for (const filename of DATA_FILES) {
-      writeJson(
-        profileDirectory,
-        filename,
-        normalized[filename],
+    const eligibility = await getFetchEligibility(playerUuid);
+    if (!eligibility.allowed) {
+      const error = new Error(
+        eligibility.reason === 'hour'
+          ? 'This player was fetched less than one hour ago.'
+          : 'This player has already been fetched four times within the last 24 hours.',
       );
+      error.code = eligibility.reason === 'hour' ? 'FETCH_TOO_SOON' : 'FETCH_DAILY_LIMIT';
+      error.retryAfterMs = eligibility.retryAfterMs;
+      error.fetchesLast24Hours = eligibility.fetchesLast24Hours;
+      throw error;
     }
 
-    savedProfiles.push({
-      profile: profile.cute_name || profile.profile_id || 'Unknown',
-      timestamp,
-      directory: path.relative(
-        path.join(__dirname, '..'),
-        profileDirectory,
-      ),
-    });
-  }
+    const hypixelUrl = `https://api.hypixel.net/v2/skyblock/profiles?key=${encodeURIComponent(apiKey)}&uuid=${encodeURIComponent(uuid)}`;
+    let response;
+    try {
+      response = await fetch(hypixelUrl, {
+        headers: { 'User-Agent': 'SkyAdvisor/1.0' },
+        signal: AbortSignal.timeout(10000),
+      });
+    } catch (error) {
+      const wrapped = new Error(error.name === 'TimeoutError' || error.name === 'AbortError' ? 'Hypixel API request timed out.' : 'Could not reach the Hypixel API.');
+      wrapped.code = error.name === 'TimeoutError' || error.name === 'AbortError' ? 'HYPIXEL_TIMEOUT' : 'HYPIXEL_NETWORK';
+      throw wrapped;
+    }
 
-  return {
-    username,
-    uuid,
-    timestamp,
-    profiles: savedProfiles,
-    fetchesLast24Hours:
-      getPlayerFetchTimestamps(username).filter(
-        (value) => Date.now() - value < TWENTY_FOUR_HOURS_MS,
-      ).length,
-  };
-}
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      const error = new Error('Hypixel returned an unexpected response.');
+      error.code = 'HYPIXEL_INVALID_RESPONSE';
+      throw error;
+    }
 
-function getLatestTimestampForProfile(profileDirectory) {
-  if (!fs.existsSync(profileDirectory)) {
-    return null;
-  }
+    let body;
+    try { body = await response.json(); } catch {
+      const error = new Error('Hypixel returned invalid JSON.');
+      error.code = 'HYPIXEL_INVALID_RESPONSE';
+      throw error;
+    }
+    if (!response.ok || body.success !== true) {
+      const error = new Error(body.cause || 'Hypixel API request failed.');
+      error.code = 'HYPIXEL_API_ERROR';
+      throw error;
+    }
+    if (!Array.isArray(body.profiles) || body.profiles.length === 0) {
+      const error = new Error('Hypixel returned no SkyBlock profiles.');
+      error.code = 'NO_PROFILES';
+      throw error;
+    }
 
-  const timestamps = fs.readdirSync(profileDirectory, {
-    withFileTypes: true,
-  })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => ({
-      name: entry.name,
-      timestamp: parseTimestampDirectory(entry.name),
-    }))
-    .filter((entry) => entry.timestamp !== null)
-    .sort((a, b) => b.timestamp - a.timestamp);
+    const fetchedAt = new Date();
+    const timestamp = formatTimestamp(fetchedAt);
+    const savedProfiles = [];
+    const snapshotDocuments = [];
 
-  return timestamps[0] || null;
-}
+    for (const profile of body.profiles) {
+      const profileId = String(profile.profile_id || profile.cute_name || 'Unknown');
+      const profileName = String(profile.cute_name || profile.profile_id || 'Unknown');
+      const normalized = await buildProfileData(profile.members?.[uuid] || profile.members?.[playerUuid]);
+      const document = {
+        playerUuid,
+        username,
+        profileId,
+        profileName,
+        fetchedAt,
+        timestamp,
+        schemaVersion: 1,
+        data: normalized,
+      };
+      snapshotDocuments.push(document);
+      savedProfiles.push({ profile: profileName, profileId, timestamp });
+    }
 
-function readJsonFile(filePath) {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  } catch {
-    return {
-      error: `Could not read ${path.basename(filePath)}`,
-    };
-  }
-}
-
-function loadSnapshot(profileDirectory, timestampName) {
-  const timestampDirectory = path.join(
-    profileDirectory,
-    timestampName,
-  );
-
-  const data = {};
-
-  for (const filename of DATA_FILES) {
-    const filePath = path.join(
-      timestampDirectory,
-      `${filename}.json`,
+    await players.updateOne(
+      { uuid: playerUuid },
+      { $set: { username, lastFetchedAt: fetchedAt }, $setOnInsert: { uuid: playerUuid, createdAt: fetchedAt } },
+      { upsert: true },
     );
+    await snapshots.insertMany(snapshotDocuments);
+    await events.insertOne({ playerUuid, username, fetchedAt, profileCount: snapshotDocuments.length });
 
-    if (fs.existsSync(filePath)) {
-      data[filename] = readJsonFile(filePath);
-    } else {
-      data[filename] = {};
-    }
-  }
-
-  return data;
-}
-
-function loadLatestSkyBlockData(username) {
-  if (!validateUsername(username)) {
-    throw new Error('Invalid Minecraft username.');
-  }
-
-  const playerDirectory = path.join(
-    PLAYER_DATA_ROOT,
-    safePathComponent(username),
-  );
-
-  if (!fs.existsSync(playerDirectory)) {
     return {
       username,
-      profiles: [],
+      uuid: playerUuid,
+      timestamp,
+      profiles: savedProfiles,
+      fetchesLast24Hours: (await getPlayerFetchTimestamps(playerUuid)).length,
     };
+  } finally {
+    await locks.deleteOne({ _id: playerUuid }).catch(() => {});
   }
+}
 
-  const profiles = [];
+async function loadLatestSkyBlockData(username) {
+  if (!validateUsername(username)) throw new Error('Invalid Minecraft username.');
+  const db = await getDatabase();
+  const players = db.collection('players');
+  const snapshots = db.collection('skyblockSnapshots');
+  const player = await players.findOne({ username: { $regex: `^${username.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' } });
+  if (!player) return { username, profiles: [] };
 
-  for (const profileEntry of fs.readdirSync(playerDirectory, {
-    withFileTypes: true,
-  })) {
-    if (!profileEntry.isDirectory()) {
-      continue;
-    }
-
-    const profileDirectory = path.join(
-      playerDirectory,
-      profileEntry.name,
-    );
-
-    const latest = getLatestTimestampForProfile(
-      profileDirectory,
-    );
-
-    if (!latest) {
-      continue;
-    }
-
-    profiles.push({
-      profile: profileEntry.name,
-      timestamp: latest.name,
-      timestampMs: latest.timestamp,
-      data: loadSnapshot(
-        profileDirectory,
-        latest.name,
-      ),
-    });
-  }
-
-  profiles.sort(
-    (a, b) => b.timestampMs - a.timestampMs,
-  );
+  const latestByProfile = await snapshots.aggregate([
+    { $match: { playerUuid: player.uuid } },
+    { $sort: { fetchedAt: -1 } },
+    { $group: { _id: '$profileId', snapshot: { $first: '$$ROOT' } } },
+    { $replaceRoot: { newRoot: '$snapshot' } },
+    { $sort: { fetchedAt: -1 } },
+  ]).toArray();
 
   return {
-    username,
-    profiles,
+    username: player.username,
+    profiles: latestByProfile.map((snapshot) => ({
+      profile: snapshot.profileName,
+      profileId: snapshot.profileId,
+      timestamp: snapshot.timestamp,
+      timestampMs: snapshot.fetchedAt.getTime(),
+      data: snapshot.data,
+    })),
   };
 }
 
-
+async function loadSkyBlockHistory(username) {
+  if (!validateUsername(username)) throw new Error('Invalid Minecraft username.');
+  const db = await getDatabase();
+  const player = await db.collection('players').findOne({ username: { $regex: `^${username.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' } });
+  if (!player) return { username, snapshots: [] };
+  const snapshots = await db.collection('skyblockSnapshots')
+    .find({ playerUuid: player.uuid })
+    .sort({ fetchedAt: -1 })
+    .project({ _id: 0, profileId: 1, profileName: 1, timestamp: 1, fetchedAt: 1 })
+    .toArray();
+  return { username: player.username, snapshots: snapshots.map((snapshot) => ({ ...snapshot, fetchedAt: snapshot.fetchedAt.toISOString() })) };
+}
 
 module.exports = {
   fetchSkyBlockData,
   getFetchEligibility,
   getPlayerFetchTimestamps,
+  loadSkyBlockHistory,
   parseNbtContainer,
   formatTimestamp,
   loadLatestSkyBlockData,

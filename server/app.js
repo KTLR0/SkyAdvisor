@@ -3,6 +3,7 @@ const express = require('express');
 const {
   fetchSkyBlockData,
   loadLatestSkyBlockData,
+  loadSkyBlockHistory,
 } = require('./skyblock');
 
 const app = express();
@@ -79,7 +80,7 @@ app.get('/api/player/:username', async (req, res) => {
   }
 });
 
-app.get('/api/player/:username/skyblock', (req, res) => {
+app.get('/api/player/:username/skyblock', async (req, res) => {
   const username = req.params.username.trim();
 
   if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
@@ -90,17 +91,30 @@ app.get('/api/player/:username/skyblock', (req, res) => {
 
   try {
     return res.json(
-      loadLatestSkyBlockData(username),
+      await loadLatestSkyBlockData(username),
     );
   } catch (error) {
     console.error(
-      'Could not load local SkyBlock data:',
+      'Could not load MongoDB SkyBlock data:',
       error,
     );
 
     return res.status(500).json({
-      error: 'Stored SkyBlock data could not be loaded.',
+      error: 'Stored SkyBlock data could not be loaded. Check the MongoDB connection and server logs.',
     });
+  }
+});
+
+app.get('/api/player/:username/skyblock/history', async (req, res) => {
+  const username = req.params.username.trim();
+  if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
+    return res.status(400).json({ error: 'Invalid Minecraft username.' });
+  }
+  try {
+    return res.json(await loadSkyBlockHistory(username));
+  } catch (error) {
+    console.error('Could not load MongoDB snapshot history:', error);
+    return res.status(500).json({ error: 'Snapshot history could not be loaded. Check the MongoDB connection and server logs.' });
   }
 });
 
@@ -141,6 +155,10 @@ app.post('/api/player/:username/skyblock', async (req, res) => {
       ...result,
     });
   } catch (error) {
+    if (error.code === 'FETCH_IN_PROGRESS') {
+      return res.status(409).json({ error: error.message });
+    }
+
     if (error.code === 'FETCH_TOO_SOON') {
       return res.status(429).json({
         error: error.message,
