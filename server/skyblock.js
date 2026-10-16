@@ -299,11 +299,14 @@ async function fetchSkyBlockData({
       throw error;
     }
 
-    const hypixelUrl = `https://api.hypixel.net/v2/skyblock/profiles?key=${encodeURIComponent(apiKey)}&uuid=${encodeURIComponent(uuid)}`;
+    const hypixelUrl = `https://api.hypixel.net/v2/skyblock/profiles?uuid=${encodeURIComponent(uuid)}`;
     let response;
     try {
       response = await fetch(hypixelUrl, {
-        headers: { 'User-Agent': 'SkyAdvisor/1.0' },
+        headers: {
+          'API-Key': apiKey,
+          'User-Agent': 'SkyAdvisor/1.0',
+        },
         signal: AbortSignal.timeout(10000),
       });
     } catch (error) {
@@ -326,8 +329,16 @@ async function fetchSkyBlockData({
       throw error;
     }
     if (!response.ok || body.success !== true) {
-      const error = new Error(body.cause || 'Hypixel API request failed.');
-      error.code = 'HYPIXEL_API_ERROR';
+      const cause = typeof body.cause === 'string' ? body.cause : 'Hypixel API request failed.';
+      const error = new Error(cause);
+      error.httpStatus = response.status;
+      if (response.status === 401 || response.status === 403 || /invalid api.key|api.key.*invalid|missing.*api.key/i.test(cause)) {
+        error.code = 'HYPIXEL_AUTH';
+      } else if (response.status === 429) {
+        error.code = 'HYPIXEL_RATE_LIMIT';
+      } else {
+        error.code = 'HYPIXEL_API_ERROR';
+      }
       throw error;
     }
     if (!Array.isArray(body.profiles) || body.profiles.length === 0) {
@@ -414,10 +425,50 @@ async function loadSkyBlockHistory(username) {
   if (!player) return { username, snapshots: [] };
   const snapshots = await db.collection('skyblockSnapshots')
     .find({ playerUuid: player.uuid })
-    .sort({ fetchedAt: -1 })
-    .project({ _id: 0, profileId: 1, profileName: 1, timestamp: 1, fetchedAt: 1 })
+    .sort({ fetchedAt: -1, profileId: 1 })
+    .project({ _id: 0, playerUuid: 1, profileId: 1, profileName: 1, timestamp: 1, fetchedAt: 1, schemaVersion: 1 })
     .toArray();
-  return { username: player.username, snapshots: snapshots.map((snapshot) => ({ ...snapshot, fetchedAt: snapshot.fetchedAt.toISOString() })) };
+  return {
+    username: player.username,
+    uuid: player.uuid,
+    snapshots: snapshots.map((snapshot) => ({
+      ...snapshot,
+      fetchedAt: snapshot.fetchedAt.toISOString(),
+    })),
+  };
+}
+
+
+async function loadSkyBlockSnapshot(username, timestamp, profileId) {
+  if (!validateUsername(username)) throw new Error('Invalid Minecraft username.');
+  if (!/^\d{4}-\d{2}-\d{2}--\d{2}--\d{2}$/.test(timestamp)) {
+    throw new Error('Invalid snapshot timestamp.');
+  }
+
+  const db = await getDatabase();
+  const player = await db.collection('players').findOne({
+    username: { $regex: `^${username.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' },
+  });
+  if (!player) return { username, timestamp, snapshots: [] };
+
+  const filter = { playerUuid: player.uuid, timestamp };
+  if (typeof profileId === 'string' && profileId.length > 0) filter.profileId = profileId;
+
+  const snapshots = await db.collection('skyblockSnapshots')
+    .find(filter)
+    .sort({ profileId: 1 })
+    .project({ _id: 0 })
+    .toArray();
+
+  return {
+    username: player.username,
+    uuid: player.uuid,
+    timestamp,
+    snapshots: snapshots.map((snapshot) => ({
+      ...snapshot,
+      fetchedAt: snapshot.fetchedAt.toISOString(),
+    })),
+  };
 }
 
 module.exports = {
@@ -425,6 +476,7 @@ module.exports = {
   getFetchEligibility,
   getPlayerFetchTimestamps,
   loadSkyBlockHistory,
+  loadSkyBlockSnapshot,
   parseNbtContainer,
   formatTimestamp,
   loadLatestSkyBlockData,

@@ -4,6 +4,7 @@ const {
   fetchSkyBlockData,
   loadLatestSkyBlockData,
   loadSkyBlockHistory,
+  loadSkyBlockSnapshot,
 } = require('./skyblock');
 
 const app = express();
@@ -118,6 +119,26 @@ app.get('/api/player/:username/skyblock/history', async (req, res) => {
   }
 });
 
+app.get('/api/player/:username/skyblock/history/:timestamp', async (req, res) => {
+  const username = req.params.username.trim();
+  if (!/^[A-Za-z0-9_]{3,16}$/.test(username)) {
+    return res.status(400).json({ error: 'Invalid Minecraft username.' });
+  }
+  try {
+    return res.json(await loadSkyBlockSnapshot(
+      username,
+      req.params.timestamp,
+      req.query.profileId,
+    ));
+  } catch (error) {
+    if (error.message === 'Invalid snapshot timestamp.') {
+      return res.status(400).json({ error: error.message });
+    }
+    console.error('Could not load historical SkyBlock snapshot:', error);
+    return res.status(500).json({ error: 'Historical snapshot could not be loaded. Check the MongoDB connection and server logs.' });
+  }
+});
+
 /*
  * Explicit user-initiated SkyBlock data fetch.
  *
@@ -196,9 +217,24 @@ app.post('/api/player/:username/skyblock', async (req, res) => {
       });
     }
 
-    if (error.code === 'HYPIXEL_API_ERROR') {
+    if (error.code === 'HYPIXEL_AUTH') {
+      console.error('Hypixel authentication failed:', error.message);
       return res.status(502).json({
-        error: 'Hypixel rejected the API request.',
+        error: 'Hypixel rejected the API key. Confirm the current key is in the root .env as HYPIXEL_API_KEY, then restart the server. Check the server log for Hypixel’s rejection reason.',
+      });
+    }
+
+    if (error.code === 'HYPIXEL_RATE_LIMIT') {
+      console.error('Hypixel API rate limit reached:', error.message);
+      return res.status(429).json({
+        error: 'Hypixel rate-limited this API key. Wait for the API key limit to reset before trying again.',
+      });
+    }
+
+    if (error.code === 'HYPIXEL_API_ERROR') {
+      console.error(`Hypixel API error (HTTP ${error.httpStatus || 'unknown'}):`, error.message);
+      return res.status(502).json({
+        error: `Hypixel API request failed (HTTP ${error.httpStatus || 'unknown'}). Check the server console for the rejection reason.`,
       });
     }
 

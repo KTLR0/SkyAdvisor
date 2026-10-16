@@ -46,9 +46,29 @@ function getDatabase() {
     await client.connect();
     const dbName = process.env.MONGODB_DATABASE || 'skyadvisor';
     database = client.db(dbName);
+    const snapshots = database.collection('skyblockSnapshots');
+
+    let existingSnapshotIndexes = [];
+    try {
+      existingSnapshotIndexes = await snapshots.listIndexes().toArray();
+    } catch (error) {
+      if (error.code !== 26 && error.codeName !== 'NamespaceNotFound') throw error;
+    }
+    for (const index of existingSnapshotIndexes) {
+      const keys = Object.keys(index.key || {});
+      const isUniquePlayerOnlyIndex = index.unique === true
+        && keys.length === 1
+        && index.key.playerUuid === 1;
+      if (isUniquePlayerOnlyIndex && index.name !== '_id_') {
+        await snapshots.dropIndex(index.name);
+        console.warn(`Removed obsolete unique snapshot index: ${index.name}`);
+      }
+    }
+
     await Promise.all([
       database.collection('players').createIndex({ uuid: 1 }, { unique: true }),
-      database.collection('skyblockSnapshots').createIndex({ playerUuid: 1, fetchedAt: -1 }),
+      snapshots.createIndex({ playerUuid: 1, profileId: 1, fetchedAt: -1 }),
+      snapshots.createIndex({ playerUuid: 1, timestamp: 1, profileId: 1 }),
       database.collection('fetchEvents').createIndex({ playerUuid: 1, fetchedAt: -1 }),
       database.collection('fetchLocks').createIndex({ createdAt: 1 }, { expireAfterSeconds: 120 }),
     ]);
