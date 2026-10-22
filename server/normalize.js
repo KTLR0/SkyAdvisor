@@ -27,11 +27,16 @@ function section(status, reason = null, entries = []) {
 function normalizeSkills(member, legacy = false) {
   if (member.api_settings?.skills === false) return section('private', 'Skill API sharing is disabled.');
   const experience = member.player_data?.experience;
+  const farmingCapUpgrades = member.jacobs_contest?.perks?.farming_level_cap;
   const entries = SKILLS.map((id) => {
     const value = experience?.[`SKILL_${id.toUpperCase()}`] ?? member[`experience_skill_${id}`];
     const ambiguous = legacy && value === 0;
     return {
       id, label: label(id), xp: number(value) && !ambiguous ? value : null,
+      // Missing upgrades must not silently become zero upgrades. Old snapshots
+      // cannot establish this cap; the client stays conservative around level 50.
+      levelCap: id === 'farming' && !legacy && Number.isInteger(farmingCapUpgrades)
+        && farmingCapUpgrades >= 0 && farmingCapUpgrades <= 10 ? 50 + farmingCapUpgrades : null,
       status: ambiguous ? 'unavailable' : number(value) ? 'available' : 'missing',
       reason: ambiguous ? 'This older snapshot cannot distinguish zero from missing XP.'
         : number(value) ? null : 'XP was not provided by the API.',

@@ -5,7 +5,7 @@ const { createSkyBlockService } = require('./skyblock');
 const { createMemoryDatabase } = require('./test-support/memory-db');
 const { PLAYER, PLAYER_ID, PROFILE_A, FETCHED_AT, profilesReply } = require('./fixtures/skyblock');
 
-async function fixtureServer(t) {
+async function fixtureServer(t, appOptions = {}) {
   const memory = createMemoryDatabase();
   let upstreamCalls = 0;
   const resolveMinecraftPlayer = async () => PLAYER;
@@ -14,7 +14,7 @@ async function fixtureServer(t) {
     request: async () => { upstreamCalls++; return Response.json(profilesReply()); },
     now: () => new Date(FETCHED_AT),
   });
-  const app = createApp({ service, resolveMinecraftPlayer, getApiKey: () => 'fixture-key' });
+  const app = createApp({ service, resolveMinecraftPlayer, getApiKey: () => 'fixture-key', ...appOptions });
   const server = await new Promise((resolve, reject) => {
     const listener = app.listen(0, '127.0.0.1', (error) => error ? reject(error) : resolve(listener));
   });
@@ -67,4 +67,29 @@ test('Express rejects mismatched identities, invalid read IDs, and invalid histo
   });
   const invalidProfile = await fixture.request(`/api/player/FixturePlayer/skyblock/history/${FETCHED_AT}?profileId=invalid`);
   assert.equal(invalidProfile.status, 400);
+});
+
+test('public skill thresholds are served without fetching or saving player data', async (t) => {
+  const { normalizeSkillResource } = require('./skill-resource');
+  const { officialSkillsFixture } = require('./fixtures/skill-resource');
+  const resource = { ...normalizeSkillResource(officialSkillsFixture()), fetchedAt: FETCHED_AT, stale: false };
+  const fixture = await fixtureServer(t, { loadSkillResource: async () => resource });
+  const response = await fixture.request('/api/resources/skills');
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.skills.mining.levels[1].totalXp, 175);
+  assert.equal(body.skills.runecrafting.levels[1].totalXp, 150);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal(fixture.calls(), 0);
+  assert.equal(fixture.memory.rows('skyblockSnapshots').length, 0);
+});
+
+test('threshold endpoint failures return a useful 503 without fabricated curves', async (t) => {
+  const fixture = await fixtureServer(t, { loadSkillResource: async () => { throw new Error('Offline'); } });
+  const response = await fixture.request('/api/resources/skills');
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get('retry-after'), '60');
+  const body = await response.json();
+  assert.match(body.error, /temporarily unavailable/);
+  assert.equal(body.skills, undefined);
 });

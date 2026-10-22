@@ -92,3 +92,14 @@ test('distinct legacy wood collections retain their IDs, amounts, and unambiguou
   assert.deepEqual(read.Collections.entries.map((entry) => entry.amount), [10, 20]);
   assert.equal(oldV2.Collections.entries[0].label, 'Log 2');
 });
+
+test('farming cap upgrades retain explicit zero and do not fabricate missing unlock metadata', async () => {
+  const capped = await buildProfileData({ jacobs_contest: { perks: { farming_level_cap: 0 } } });
+  assert.equal(skill(capped, 'farming').levelCap, 50);
+  const upgraded = await buildProfileData({ jacobs_contest: { perks: { farming_level_cap: 7 } } });
+  assert.equal(skill(upgraded, 'farming').levelCap, 57);
+  const unknown = await buildProfileData({});
+  assert.equal(skill(unknown, 'farming').levelCap, null);
+  const old = normalizeStoredData({ Skills: { farming: 100 } }, 1);
+  assert.equal(skill(old, 'farming').levelCap, null);
+});

@@ -2,9 +2,10 @@ const express = require('express');
 const { resolvePlayer } = require('./minecraft');
 
 const skyblock = require('./skyblock');
+const { getSkillResource } = require('./skill-resource');
 
 function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
-  getApiKey = () => process.env.HYPIXEL_API_KEY } = {}) {
+  getApiKey = () => process.env.HYPIXEL_API_KEY, loadSkillResource = getSkillResource } = {}) {
   const { fetchSkyBlockData, loadLatestSkyBlockData, loadSkyBlockHistory, loadSkyBlockSnapshot } = service;
 
   const app = express();
@@ -13,6 +14,16 @@ function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
 
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
+  });
+
+  app.get('/api/resources/skills', async (req, res) => {
+    try {
+      res.set('Cache-Control', 'no-store');
+      return res.json(await loadSkillResource());
+    } catch {
+      res.set('Retry-After', '60');
+      return res.status(503).json({ error: 'Skill level thresholds are temporarily unavailable. XP totals are still available.' });
+    }
   });
 
   app.get('/api/player/:username', async (req, res) => {
