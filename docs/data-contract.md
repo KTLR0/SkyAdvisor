@@ -16,6 +16,87 @@ fetch. Duplicate profile entries in one upstream reply are deduplicated by ID.
 fetch has the same time. New `timestamp` values are precise ISO UTC strings.
 Old minute-based history identifiers remain accepted.
 
+## Saved timeline reads
+
+Timeline routes use UUIDs directly; no Minecraft lookup or Hypixel request is made.
+They use `getReadDatabase()`, which connects without creating/dropping indexes.
+Normal server startup/manual-save initialization retains its existing indexes.
+No timeline read writes records, fetch events, or locks. No new indexes or data
+migrations are required. The timestamp-based history routes remain compatible.
+
+`GET /api/players/:playerUuid/profiles/:profileId/snapshots?limit=20&cursor=<token>`:
+
+```text
+{ playerUuid, profileId,
+  snapshots: [{ snapshotId, fetchedAt, sourceSchemaVersion }],
+  page: { limit, hasMore, nextCursor }
+}
+```
+
+`limit` is 1–50, default 20. `nextCursor` is null on the final page; otherwise pass
+it unchanged as `cursor`. Records sort by `(fetchedAt descending, _id descending)`.
+Cursor anchors are looked up within the requested player/profile, so a cursor
+cannot select another profile's history. A newly saved latest snapshot does not
+shift remaining cursor pages. A deleted cursor anchor returns 400; there is no
+cross-request database snapshot/transaction. Same-time snapshots are ordered by
+ID, not inferred gameplay chronology. Existing indexes narrow player/profile/time
+reads; very large histories may eventually need a compound index including `_id`
+for sorting. This step does not create it.
+
+`snapshotId` is a versioned opaque token derived from the immutable document `_id`.
+It distinguishes legacy ObjectIds from schema-2 string IDs and remains stable
+across reads and server restarts. Clients must not parse it. Tokens are not secrets
+or authorization credentials. Both dashed/undashed and uppercase/lowercase UUID
+representations are matched without rewriting records. Only existing ObjectId and
+string document IDs are supported.
+
+`GET /api/players/:playerUuid/profiles/:profileId/snapshots/:snapshotId`:
+
+```text
+{ playerUuid, profileId,
+  snapshot: { snapshotId, fetchedAt, sourceSchemaVersion, data: { Skills, Collections } },
+  previousSnapshot: { snapshotId, fetchedAt, sourceSchemaVersion } | null,
+  changes: { Skills, Collections }
+}
+```
+
+Details and their immediate predecessor are scoped to the same player and profile.
+The predecessor is independently queried using the same ordering, even across
+page boundaries. An unavailable predecessor is never skipped for an older usable
+baseline. These detail reads project only Skills/Collections; the original
+timestamp route still provides the other saved dashboard categories.
+
+Each changes category has `status` (`available`, `partial`, `unavailable`), nullable
+`reason`, `hasUnexpectedDecreases`, and `entries`:
+
+```text
+{ id, label, unit: "XP" | "items", current: number | null,
+  previous: number | null, delta: number | null,
+  status: "available" | "unavailable" | "decrease",
+  unexpectedDecrease: boolean, reason: string | null }
+```
+
+Compare normalized totals by entry ID only when both categories are `available`
+or `partial`, both entries are `available`, and both totals are finite and
+nonnegative. Confirmed zero is valid. Missing entries, privacy/unavailability,
+invalid values, ambiguous legacy skill zeros, and duplicate entry IDs return null
+delta and “Comparison unavailable.” Empty collections never imply all counts are
+zero. With no predecessor, the category reason is “No previous snapshot.” Signed
+negative deltas are retained with `decrease` status and a warning; they are not
+earned progress. No skill levels, threshold resources, or XP interpolation are
+needed. Legacy nonempty collection dictionaries retain their explicit counts.
+
+Malformed UUIDs/tokens/limits, or missing/out-of-scope cursors, return 400. A valid
+snapshot token absent from the player/profile returns 404. Unknown player/profile
+lists are empty. Database failures return a generic 500. Timeline responses use
+`Cache-Control: no-store`.
+
+Mixed ObjectId/string tie pagination uses expression `$lt`, which compares BSON
+types in the same order as sorting, rather than query `$lt` type bracketing:
+https://www.mongodb.com/docs/manual/reference/operator/aggregation/lt/
+
+## Latest dashboard reads
+
 `GET /api/player/:username/skyblock?uuid=<resolved UUID>` returns:
 
 ```text

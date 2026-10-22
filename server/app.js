@@ -3,9 +3,11 @@ const { resolvePlayer } = require('./minecraft');
 
 const skyblock = require('./skyblock');
 const { getSkillResource } = require('./skill-resource');
+const timeline = require('./timeline');
 
 function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
-  getApiKey = () => process.env.HYPIXEL_API_KEY, loadSkillResource = getSkillResource } = {}) {
+  getApiKey = () => process.env.HYPIXEL_API_KEY, loadSkillResource = getSkillResource,
+  timelineService = timeline } = {}) {
   const { fetchSkyBlockData, loadLatestSkyBlockData, loadSkyBlockHistory, loadSkyBlockSnapshot } = service;
 
   const app = express();
@@ -15,6 +17,25 @@ function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
   });
+
+  // Saved data only: no identity resolution, player refresh, or resource fetch.
+  const snapshotPath = '/api/players/:playerUuid/profiles/:profileId/snapshots';
+  async function readTimeline(req, res, detail) {
+    try {
+      res.set('Cache-Control', 'no-store');
+      const { playerUuid, profileId, snapshotId } = req.params;
+      const result = detail ? await timelineService.loadSnapshot(playerUuid, profileId, snapshotId)
+        : await timelineService.listSnapshots(playerUuid, profileId, {
+          limit: req.query.limit, cursor: req.query.cursor,
+        });
+      return res.json(result);
+    } catch (error) {
+      if ([400, 404].includes(error.status)) return res.status(error.status).json({ error: error.message });
+      return res.status(500).json({ error: 'Saved snapshot data could not be loaded.' });
+    }
+  }
+  app.get(snapshotPath, (req, res) => readTimeline(req, res, false));
+  app.get(`${snapshotPath}/:snapshotId`, (req, res) => readTimeline(req, res, true));
 
   app.get('/api/resources/skills', async (req, res) => {
     try {
