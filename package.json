@@ -1,7 +1,7 @@
 {
   "name": "skyadvisor",
   "version": "1.0.0",
-  "description": "SkyAdvisor: React client and Express Minecraft username lookup",
+  "description": "SkyAdvisor: React client, Express API, and MongoDB Atlas-backed SkyBlock snapshots",
   "private": true,
   "workspaces": [
     "client",

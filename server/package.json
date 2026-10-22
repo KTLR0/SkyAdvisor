@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "node --watch index.js",
     "start": "node index.js",
-    "test": "node --test app.test.js"
+    "test": "node --test *.test.js"
   },
   "dependencies": {
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
-    "prismarine-nbt": "^2.8.0"
+    "prismarine-nbt": "^2.8.0",
+    "mongodb": "^6.17.0"
   }
 }

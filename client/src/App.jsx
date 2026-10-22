@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SkyBlockPage from './SkyBlockPage';
+import SkyBlockPage from './SkyblockPage.jsx';
 
 export default function App() {
   const [status, setStatus] = useState('checking');
@@ -16,9 +16,9 @@ export default function App() {
 
     const name = username.trim();
 
-    if (!/^[A-Za-z0-9_]{3,16}$/.test(name)) {
+    if (!/^[A-Za-z0-9_]{1,16}$/.test(name)) {
       setLookupError(
-        'Use 3–16 letters, numbers, or underscores.',
+        'Use 1–16 letters, numbers, or underscores.',
       );
       return;
     }
@@ -125,7 +125,7 @@ export default function App() {
             id="username-help"
             className="hint"
           >
-            3–16 letters, numbers, or underscores.
+            1–16 letters, numbers, or underscores.
           </p>
 
           <div className="lookup-controls">
