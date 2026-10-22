@@ -10,6 +10,7 @@ function createMemoryDatabase() {
     return Object.entries(filter).every(([key, wanted]) => {
       const actual = document[key];
       if (wanted?.$regex) return new RegExp(wanted.$regex, wanted.$options).test(actual);
+      if (wanted?.$in) return wanted.$in.includes(actual);
       if (wanted?.$gt !== undefined) return actual > wanted.$gt;
       return actual === wanted;
     });
