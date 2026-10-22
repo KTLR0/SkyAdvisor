@@ -45,8 +45,8 @@ function getDatabase() {
     });
     await client.connect();
     const dbName = process.env.MONGODB_DATABASE || 'skyadvisor';
-    database = client.db(dbName);
-    const snapshots = database.collection('skyblockSnapshots');
+    const db = client.db(dbName);
+    const snapshots = db.collection('skyblockSnapshots');
 
     let existingSnapshotIndexes = [];
     try {
@@ -66,16 +66,19 @@ function getDatabase() {
     }
 
     await Promise.all([
-      database.collection('players').createIndex({ uuid: 1 }, { unique: true }),
+      db.collection('players').createIndex({ uuid: 1 }, { unique: true }),
       snapshots.createIndex({ playerUuid: 1, profileId: 1, fetchedAt: -1 }),
       snapshots.createIndex({ playerUuid: 1, timestamp: 1, profileId: 1 }),
-      database.collection('fetchEvents').createIndex({ playerUuid: 1, fetchedAt: -1 }),
-      database.collection('fetchLocks').createIndex({ createdAt: 1 }, { expireAfterSeconds: 120 }),
+      db.collection('fetchEvents').createIndex({ playerUuid: 1, fetchedAt: -1 }),
+      db.collection('fetchLocks').createIndex({ createdAt: 1 }, { expireAfterSeconds: 120 }),
     ]);
+    database = db;
     return database;
-  })().catch((error) => {
+  })().catch(async (error) => {
+    await client?.close().catch(() => {});
     connecting = null;
     client = null;
+    database = null;
     throw error;
   });
 
@@ -89,4 +92,14 @@ async function closeDatabase() {
   connecting = null;
 }
 
-module.exports = { getDatabase, closeDatabase, buildMongoUri };
+async function withDatabaseTransaction(work) {
+  const db = await getDatabase();
+  const session = client.startSession();
+  try {
+    return await session.withTransaction(() => work(db, session));
+  } finally {
+    await session.endSession();
+  }
+}
+
+module.exports = { getDatabase, closeDatabase, buildMongoUri, withDatabaseTransaction };

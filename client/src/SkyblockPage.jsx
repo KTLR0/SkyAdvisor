@@ -1,705 +1,253 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const DATA_TABS = [
-  'Armor',
-  'Equipment',
-  'Inventory',
-  'Backpacks',
-  'Enderchest',
-  'Talismans',
-  'Pets',
-  'Skills',
-  'Collections',
-];
+const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
+  'Backpacks', 'Enderchest', 'Talismans', 'Pets'];
+const ITEM_TABS = new Set(['Inventory', 'Armor', 'Equipment', 'Backpacks', 'Enderchest', 'Talismans']);
+const STATUS_LABELS = {
+  available: 'Available', partial: 'Partially available', empty: 'Empty',
+  missing: 'Not provided', private: 'API sharing disabled', unavailable: 'Unavailable',
+};
+const formatNumber = (value) => value === null || value === undefined ? 'Not provided'
+  : new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(value);
 
-const ITEM_DATA_TABS = new Set([
-  'Armor',
-  'Equipment',
-  'Inventory',
-  'Backpacks',
-  'Enderchest',
-  'Talismans',
-]);
-
-const MC_ASSETS_BASE =
-  'https://mcasset.cloud/1.21.4/assets/minecraft/textures/item';
-
-function formatKey(key) {
-  return String(key)
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (character) =>
-      character.toUpperCase(),
-    );
-}
-
-function normalizeItemId(value) {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  let id = value
-    .replace(/^minecraft:/i, '')
-    .toLowerCase();
-
-  id = id.replace(/[^a-z0-9_]/g, '');
-
-  return id || null;
-}
-
-function getItemId(item) {
-  if (!item || typeof item !== 'object') {
-    return null;
-  }
-
+function Availability({ data }) {
+  if (!data || data.status === 'available') return null;
   return (
-    item.id ||
-    item.ID ||
-    item.item_id ||
-    item.ItemID ||
-    item.tag?.id ||
-    item.tag?.ExtraAttributes?.id ||
-    item.tag?.extra_attributes?.id ||
-    item.nbt?.id ||
-    item.nbt?.ExtraAttributes?.id ||
-    null
+    <p className={`availability ${data.status}`} role="status">
+      <strong>{STATUS_LABELS[data.status] || 'Unavailable'}.</strong>{' '}
+      {data.reason || (data.status === 'empty' ? 'The API returned no entries for this category.'
+        : 'This information was not provided. Check the player’s in-game API sharing settings.')}
+    </p>
   );
 }
 
-function getItemCount(item) {
-  if (!item || typeof item !== 'object') {
-    return null;
-  }
-
-  const count =
-    item.Count ??
-    item.count ??
-    item.Amount ??
-    item.amount;
-
-  return typeof count === 'number'
-    ? count
-    : null;
-}
-
-function getItemName(item) {
-  if (!item || typeof item !== 'object') {
-    return 'Unknown Item';
-  }
-
-  return (
-    item.name ||
-    item.Name ||
-    item.display?.Name ||
-    item.tag?.display?.Name ||
-    item.tag?.ExtraAttributes?.id ||
-    item.tag?.extra_attributes?.id ||
-    getItemId(item) ||
-    'Unknown Item'
-  );
-}
-
-function getTextureUrl(item) {
-  const rawId = getItemId(item);
-  const id = normalizeItemId(rawId);
-
-  if (!id) {
-    return null;
-  }
-
-  /*
-   * Vanilla Minecraft item IDs can be mapped directly to
-   * the corresponding MC Assets texture.
-   *
-   * Custom Hypixel IDs will simply fail to load and the
-   * UI will fall back to the item initials.
-   */
-  return `${MC_ASSETS_BASE}/${id}.png`;
-}
-
-function isProbablyItem(value) {
-  if (!value || typeof value !== 'object') {
-    return false;
-  }
-
-  return Boolean(
-    getItemId(value) ||
-    value.Count !== undefined ||
-    value.count !== undefined ||
-    value.tag?.ExtraAttributes ||
-    value.tag?.extra_attributes,
-  );
-}
-
-function collectItems(value, path = 'root') {
-  const items = [];
-
-  if (Array.isArray(value)) {
-    value.forEach((entry, index) => {
-      if (isProbablyItem(entry)) {
-        items.push({
-          item: entry,
-          path: `${path}[${index}]`,
-        });
-      } else if (
-        entry &&
-        typeof entry === 'object'
-      ) {
-        items.push(
-          ...collectItems(
-            entry,
-            `${path}[${index}]`,
-          ),
-        );
-      }
-    });
-
-    return items;
-  }
-
-  if (!value || typeof value !== 'object') {
-    return items;
-  }
-
-  if (isProbablyItem(value)) {
-    items.push({
-      item: value,
-      path,
-    });
-
-    return items;
-  }
-
-  for (const [key, child] of Object.entries(value)) {
-    if (isProbablyItem(child)) {
-      items.push({
-        item: child,
-        path: `${path}.${key}`,
-      });
-    } else if (
-      child &&
-      typeof child === 'object'
-    ) {
-      items.push(
-        ...collectItems(
-          child,
-          `${path}.${key}`,
-        ),
-      );
-    }
-  }
-
-  return items;
-}
-
-function ItemCard({ item, path, onClick }) {
-  const [imageFailed, setImageFailed] =
-    useState(false);
-
-  const textureUrl = getTextureUrl(item);
-  const name = getItemName(item);
-  const count = getItemCount(item);
-  const id = getItemId(item);
-
-  return (
-    <button
-      type="button"
-      className="mc-item"
-      onClick={() => onClick(item, path)}
-      title={`${name}${id ? ` (${id})` : ''}`}
-    >
-      <div className="mc-item-icon">
-        {textureUrl && !imageFailed ? (
-          <img
-            src={textureUrl}
-            alt=""
-            onError={() => setImageFailed(true)}
-          />
-        ) : (
-          <span>
-            {String(name)
-              .slice(0, 2)
-              .toUpperCase()}
-          </span>
-        )}
-      </div>
-
-      {count !== null && count > 1 && (
-        <span className="mc-item-count">
-          {count}
-        </span>
-      )}
-
-      <span className="mc-item-name">
-        {name}
-      </span>
-    </button>
-  );
-}
-
-function JsonValue({
-  value,
-  name,
-  depth = 0,
-}) {
-  const [expanded, setExpanded] =
-    useState(depth < 1);
-
-  if (
-    value === null ||
-    typeof value !== 'object'
-  ) {
-    return (
-      <div className="json-row">
-        {name !== undefined && (
-          <span className="json-key">
-            {name}
-          </span>
-        )}
-
-        <span className="json-primitive">
-          {typeof value === 'string'
-            ? `"${value}"`
-            : String(value)}
-        </span>
-      </div>
-    );
-  }
-
-  const entries = Array.isArray(value)
-    ? value.map((entry, index) => [
-        index,
-        entry,
-      ])
-    : Object.entries(value);
-
-  return (
-    <div className="json-node">
-      <button
-        type="button"
-        className="json-toggle"
-        onClick={() =>
-          setExpanded((current) => !current)
-        }
-      >
-        <span>
-          {expanded ? '▼' : '▶'}
-        </span>
-
-        {name !== undefined && (
-          <strong>{name}</strong>
-        )}
-
-        <span className="json-type">
-          {Array.isArray(value)
-            ? `Array (${value.length})`
-            : `Object (${entries.length})`}
-        </span>
-      </button>
-
-      {expanded && (
-        <div className="json-children">
-          {entries.map(
-            ([key, child]) => (
-              <JsonValue
-                key={String(key)}
-                name={String(key)}
-                value={child}
-                depth={depth + 1}
-              />
-            ),
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ItemGrid({
-  data,
-  onItemClick,
-}) {
-  const items = useMemo(
-    () => collectItems(data),
-    [data],
-  );
-
-  if (items.length === 0) {
-    return (
-      <div className="empty-state">
-        No item compounds were detected in this
-        dataset.
-      </div>
-    );
-  }
-
-  return (
-    <div className="item-grid">
-      {items.map(({ item, path }) => (
-        <ItemCard
-          key={path}
-          item={item}
-          path={path}
-          onClick={onItemClick}
-        />
+function SkillsView({ data }) {
+  return <>
+    <p className="hint">Total experience earned per skill. XP is not a skill level; missing XP is never shown as zero.</p>
+    <Availability data={data} />
+    <div className="skill-grid">
+      {(data?.entries || []).map((entry) => (
+        <article className="skill-card" key={entry.id}>
+          <h3>{entry.label}</h3>
+          <p className="skill-value">{entry.xp === null ? 'Unavailable' : <>{formatNumber(entry.xp)} <small>XP</small></>}</p>
+          {entry.reason && <p className="hint">{entry.reason}</p>}
+        </article>
       ))}
     </div>
-  );
+  </>;
 }
 
-function ItemDetails({
-  item,
-  path,
-  onClose,
-}) {
-  return (
-    <aside className="item-details">
-      <div className="item-details-header">
-        <h3>{getItemName(item)}</h3>
-
-        <button
-          type="button"
-          onClick={onClose}
-        >
-          Close
-        </button>
-      </div>
-
-      <p>
-        <strong>Path:</strong>{' '}
-        <code>{path}</code>
-      </p>
-
-      {getItemId(item) && (
-        <p>
-          <strong>Item ID:</strong>{' '}
-          <code>{getItemId(item)}</code>
-        </p>
-      )}
-
-      {getItemCount(item) !== null && (
-        <p>
-          <strong>Count:</strong>{' '}
-          {getItemCount(item)}
-        </p>
-      )}
-
-      <div className="item-detail-json">
-        <JsonValue value={item} />
-      </div>
-    </aside>
-  );
+function CollectionsView({ data }) {
+  return <>
+    <p className="hint">Personal item collection counts reported for this profile. These are counts, not collection tiers.</p>
+    <Availability data={data} />
+    {!!data?.entries?.length && <div className="table-scroll">
+      <table className="collection-table">
+        <caption>Items collected by this player</caption>
+        <thead><tr><th scope="col">Collection</th><th scope="col">Items collected</th></tr></thead>
+        <tbody>{data.entries.map((entry) => <tr key={entry.id} data-collection-id={entry.id}>
+          <th scope="row">{entry.label}</th><td>{formatNumber(entry.amount)}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>}
+  </>;
 }
 
-export default function SkyBlockPage({
-  player,
-  onBack,
-}) {
-  const [storedData, setStoredData] =
-    useState(null);
+function ItemCard({ item, onClick }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const textureUrl = item.minecraftId && /^[a-z0-9_]+$/i.test(item.minecraftId)
+    ? `https://mcasset.cloud/1.21.4/assets/minecraft/textures/item/${item.minecraftId.toLowerCase()}.png` : null;
+  return <button type="button" className="mc-item" onClick={() => onClick(item)}
+    title={`${item.name} · ${item.container}, slot ${item.slot}`}>
+    <span className="mc-item-icon">
+      {textureUrl && !imageFailed ? <img src={textureUrl} alt="" onError={() => setImageFailed(true)} />
+        : <span aria-hidden="true">{item.name.slice(0, 2).toUpperCase()}</span>}
+    </span>
+    {item.count !== null && item.count > 1 && <span className="mc-item-count">{formatNumber(item.count)}</span>}
+    <span className="mc-item-name">{item.name}</span>
+  </button>;
+}
 
-  const [selectedProfile, setSelectedProfile] =
-    useState(null);
+// The optional item inspector preserves the existing advanced NBT inspection feature.
+function JsonValue({ value, name, depth = 0 }) {
+  const [expanded, setExpanded] = useState(depth < 1);
+  if (value === null || typeof value !== 'object') {
+    return <div className="json-row"><strong>{name}</strong><span>{String(value)}</span></div>;
+  }
+  const entries = Object.entries(value);
+  return <div className="json-node">
+    <button type="button" className="json-toggle" aria-expanded={expanded}
+      onClick={() => setExpanded((current) => !current)}>
+      {expanded ? '▼' : '▶'} {name || 'Item data'} ({entries.length})
+    </button>
+    {expanded && <div className="json-children">{entries.map(([key, child]) => (
+      <JsonValue key={key} name={key} value={child} depth={depth + 1} />
+    ))}</div>}
+  </div>;
+}
 
-  const [selectedTab, setSelectedTab] =
-    useState('Armor');
+function ItemDetails({ item, onClose }) {
+  useEffect(() => {
+    const closeOnEscape = (event) => { if (event.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [onClose]);
+  return <aside className="item-details" aria-labelledby="item-details-title">
+    <div className="item-details-header"><h3 id="item-details-title">{item.name}</h3>
+      <button type="button" onClick={onClose}>Close</button></div>
+    <dl className="item-facts">
+      <dt>Item ID</dt><dd><code>{item.id}</code></dd>
+      <dt>Count</dt><dd>{formatNumber(item.count)}</dd>
+      <dt>Location</dt><dd>{item.container}, slot {item.slot}</dd>
+    </dl>
+    {!!item.lore.length && <ul className="item-lore">{item.lore.map((line, index) => <li key={index}>{line}</li>)}</ul>}
+    <details className="item-detail-json"><summary>Advanced NBT details</summary><JsonValue value={item.raw} /></details>
+  </aside>;
+}
 
-  const [selectedItem, setSelectedItem] =
-    useState(null);
+function InventoryView({ data, onItemClick }) {
+  return <>
+    <Availability data={data} />
+    {!!data?.items?.length && <>
+      <p className="hint">{data.items.length} item stacks. Select an item to see its count, location, lore, and details.</p>
+      <div className="item-grid">{data.items.map((item, index) => (
+        <ItemCard key={`${item.container}:${item.slot}:${index}`} item={item} onClick={onItemClick} />
+      ))}</div>
+    </>}
+  </>;
+}
 
-  const [isLoading, setIsLoading] =
-    useState(true);
+function PetsView({ data }) {
+  return <><Availability data={data} /><div className="skill-grid">
+    {(data?.entries || []).map((pet) => <article key={pet.id} className="skill-card">
+      <h3>{pet.name}</h3><p>{pet.rarity}{pet.active ? ' · Active pet' : ''}</p><p>{formatNumber(pet.xp)} XP</p>
+    </article>)}
+  </div></>;
+}
 
-  const [isFetching, setIsFetching] =
-    useState(false);
+async function readResponse(response) {
+  let data;
+  try { data = await response.json(); } catch { throw new Error('Could not read the server response. Check the server and try again.'); }
+  if (!response.ok) {
+    const retry = data.retryAfterMs ? ` Try again in about ${Math.ceil(data.retryAfterMs / 60000)} minutes.` : '';
+    throw new Error((data.error || 'The request failed. Please try again.') + retry);
+  }
+  return data;
+}
 
-  const [error, setError] =
-    useState('');
+export default function SkyBlockPage({ player, onBack }) {
+  const [storedData, setStoredData] = useState(null);
+  const [selectedProfileId, setSelectedProfileId] = useState(null);
+  const [selectedTab, setSelectedTab] = useState('Skills');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState('');
+  const [fetchMessage, setFetchMessage] = useState('');
+  const refreshController = useRef(null);
+  const endpoint = `/api/player/${encodeURIComponent(player.name)}/skyblock`;
 
-  const [fetchMessage, setFetchMessage] =
-    useState('');
-
-  async function loadStoredData() {
+  const loadStoredData = useCallback(async (signal) => {
     setIsLoading(true);
     setError('');
-
     try {
-      const response = await fetch(
-        `/api/player/${encodeURIComponent(
-          player.name,
-        )}/skyblock`,
-        {
-          cache: 'no-store',
-          signal: AbortSignal.timeout(10000),
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.error ||
-            'Could not load stored data.',
-        );
-      }
-
+      const response = await fetch(`/api/player/${encodeURIComponent(player.name)}/skyblock?uuid=${player.uuid}`, {
+        cache: 'no-store', signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15000)]) : AbortSignal.timeout(15000),
+      });
+      const data = await readResponse(response);
+      if (signal?.aborted) return false;
       setStoredData(data);
-
-      if (
-        data.profiles?.length &&
-        !selectedProfile
-      ) {
-        setSelectedProfile(
-          data.profiles[0].profile,
-        );
-      }
+      setSelectedProfileId((current) => data.profiles.some((entry) => entry.profileId === current) ? current
+        : (data.profiles.find((entry) => entry.selected) || data.profiles[0])?.profileId ?? null);
+      setSelectedItem(null);
+      return true;
     } catch (requestError) {
-      setError(requestError.message);
+      if (!signal?.aborted) setError(requestError.name === 'TimeoutError' ? 'Loading saved data timed out. Try again.'
+        : requestError.message || 'Could not load saved data.');
+      return false;
     } finally {
-      setIsLoading(false);
+      if (!signal?.aborted) setIsLoading(false);
     }
-  }
+  }, [player.name, player.uuid]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    loadStoredData(controller.signal);
+    return () => { controller.abort(); refreshController.current?.abort(); };
+  }, [loadStoredData]);
 
   async function fetchFreshData() {
     setError('');
     setFetchMessage('');
     setIsFetching(true);
-
+    refreshController.current = new AbortController();
     try {
-      const response = await fetch(
-        `/api/player/${encodeURIComponent(
-          player.name,
-        )}/skyblock`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            uuid: player.uuid,
-          }),
-          signal: AbortSignal.timeout(30000),
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.error ||
-            'SkyBlock data fetch failed.',
-        );
+      const response = await fetch(endpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uuid: player.uuid }),
+        signal: AbortSignal.any([refreshController.current.signal, AbortSignal.timeout(45000)]),
+      });
+      const data = await readResponse(response);
+      if (await loadStoredData(refreshController.current.signal)) {
+        setFetchMessage(`Saved and loaded ${data.profiles.length} profile${data.profiles.length === 1 ? '' : 's'}.`);
       }
-
-      setFetchMessage(
-        `Saved ${data.profiles.length} profile(s) at ${data.timestamp}.`,
-      );
-
-      await loadStoredData();
     } catch (requestError) {
-      setError(requestError.message);
+      if (!refreshController.current.signal.aborted) setError(requestError.name === 'TimeoutError'
+        ? 'Fetching timed out. Reload saved data before trying another fetch.' : requestError.message);
     } finally {
       setIsFetching(false);
     }
   }
 
-  useEffect(() => {
-    loadStoredData();
-  }, [player.name]);
+  const profile = storedData?.profiles.find((entry) => entry.profileId === selectedProfileId);
+  const currentData = profile?.data[selectedTab];
+  const fetchedAt = profile?.fetchedAt ? new Date(profile.fetchedAt) : null;
 
-  const profile = storedData?.profiles?.find(
-    (entry) =>
-      entry.profile === selectedProfile,
-  );
-
-  const currentData =
-    profile?.data?.[selectedTab] ?? {};
-
-  return (
-    <main className="skyblock-page">
-      <header className="skyblock-header">
-        <div>
-          <p className="eyebrow">
-            SkyBlock profile
-          </p>
-
-          <h1>{player.name}</h1>
-
-          <p>
-            UUID:{' '}
-            <code>{player.uuid}</code>
-          </p>
-        </div>
-
-        <div className="skyblock-actions">
-          <button
-            type="button"
-            onClick={fetchFreshData}
-            disabled={isFetching}
-          >
-            {isFetching
-              ? 'Fetching…'
-              : 'Fetch fresh data'}
-          </button>
-
-          <button
-            type="button"
-            onClick={onBack}
-          >
-            Back
-          </button>
-        </div>
-      </header>
-
-      {error && (
-        <p
-          className="status offline"
-          role="alert"
-        >
-          {error}
-        </p>
-      )}
-
-      {fetchMessage && (
-        <p
-          className="status online"
-          role="status"
-        >
-          {fetchMessage}
-        </p>
-      )}
-
-      {isLoading ? (
-        <p>Loading stored SkyBlock data…</p>
-      ) : (
-        <>
-          {!storedData?.profiles?.length ? (
-            <section>
-              <h2>No stored SkyBlock data</h2>
-
-              <p>
-                Fetch the player's SkyBlock data
-                to create the first local snapshot.
-              </p>
-            </section>
-          ) : (
-            <>
-              <section className="profile-section">
-                <h2>Profiles</h2>
-
-                <div className="profile-tabs">
-                  {storedData.profiles.map(
-                    (entry) => (
-                      <button
-                        type="button"
-                        key={entry.profile}
-                        className={
-                          selectedProfile ===
-                          entry.profile
-                            ? 'active'
-                            : ''
-                        }
-                        onClick={() => {
-                          setSelectedProfile(
-                            entry.profile,
-                          );
-                          setSelectedItem(null);
-                        }}
-                      >
-                        {entry.profile}
-                      </button>
-                    ),
-                  )}
-                </div>
-
-                {profile && (
-                  <p className="snapshot-time">
-                    Snapshot:{' '}
-                    <code>
-                      {profile.timestamp}
-                    </code>
-                  </p>
-                )}
-              </section>
-
-              {profile && (
-                <section className="data-section">
-                  <nav className="data-tabs">
-                    {DATA_TABS.map((tab) => (
-                      <button
-                        type="button"
-                        key={tab}
-                        className={
-                          selectedTab === tab
-                            ? 'active'
-                            : ''
-                        }
-                        onClick={() => {
-                          setSelectedTab(tab);
-                          setSelectedItem(null);
-                        }}
-                      >
-                        {tab}
-                      </button>
-                    ))}
-                  </nav>
-
-                  <div className="data-toolbar">
-                    <h2>
-                      {formatKey(selectedTab)}
-                    </h2>
-
-                    <span>
-                      {ITEM_DATA_TABS.has(
-                        selectedTab,
-                      )
-                        ? 'Item view + raw data'
-                        : 'Complete stored data'}
-                    </span>
-                  </div>
-
-                  {ITEM_DATA_TABS.has(
-                    selectedTab,
-                  ) && (
-                    <ItemGrid
-                      data={currentData}
-                      onItemClick={(item, path) =>
-                        setSelectedItem({
-                          item,
-                          path,
-                        })
-                      }
-                    />
-                  )}
-
-                  <div className="raw-data">
-                    <h3>
-                      Complete JSON data
-                    </h3>
-
-                    <JsonValue
-                      value={currentData}
-                    />
-                  </div>
-
-                  {selectedItem && (
-                    <ItemDetails
-                      item={
-                        selectedItem.item
-                      }
-                      path={
-                        selectedItem.path
-                      }
-                      onClose={() =>
-                        setSelectedItem(null)
-                      }
-                    />
-                  )}
-                </section>
-              )}
-            </>
-          )}
-        </>
-      )}
-    </main>
-  );
+  return <main className="skyblock-page">
+    <header className="skyblock-header">
+      <div><p className="eyebrow">SkyAdvisor · Player dashboard</p><h1>{player.name}</h1>
+        <p className="player-uuid">Player UUID: <code>{player.uuid}</code></p>
+        {profile && <><h2 className="selected-profile">{profile.profile} profile</h2>
+          <p className="snapshot-time">Last fetched: {fetchedAt
+            ? <time dateTime={profile.fetchedAt}>{fetchedAt.toLocaleString()}</time> : 'Unknown for this saved snapshot'}</p></>}
+      </div>
+      <div className="skyblock-actions">
+        <button type="button" onClick={fetchFreshData} disabled={isFetching || isLoading}>
+          {isFetching ? 'Fetching fresh data…' : 'Fetch fresh data'}
+        </button>
+        <button type="button" className="secondary" onClick={() => loadStoredData()} disabled={isFetching || isLoading}>Reload saved data</button>
+        <button type="button" className="secondary" onClick={onBack} disabled={isFetching}>Back</button>
+      </div>
+    </header>
+    <p className="hint">Fresh data is fetched only when you request it. Limit: once per hour and four times per 24 hours per player.</p>
+    {error && <p className="availability error" role="alert">{error}</p>}
+    {fetchMessage && <p className="status online" role="status">{fetchMessage}</p>}
+    {(isLoading || isFetching) && <p role="status">{isFetching ? 'Fetching and saving this player’s profiles…' : 'Loading saved profiles…'}</p>}
+    {!isLoading && storedData?.profiles.length === 0 && <section className="empty-state">
+      <h2>No saved profiles yet</h2><p>Choose “Fetch fresh data” to retrieve this player’s SkyBlock profiles and save a snapshot.</p>
+    </section>}
+    {profile && <>
+      <section className="profile-section" aria-labelledby="profiles-heading">
+        <h2 id="profiles-heading">Select a profile</h2>
+        <div className="profile-tabs">{storedData.profiles.map((entry) => <button type="button"
+          key={entry.profileId} className={selectedProfileId === entry.profileId ? 'active' : ''}
+          aria-pressed={selectedProfileId === entry.profileId}
+          onClick={() => { setSelectedProfileId(entry.profileId); setSelectedItem(null); }}>
+          {entry.profile}
+        </button>)}</div>
+        <p className="hint profile-id">Profile ID: <code>{profile.profileId}</code></p>
+      </section>
+      <section className="data-section" aria-label="Profile data">
+        <nav className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
+          className={selectedTab === tab ? 'active' : ''} aria-pressed={selectedTab === tab}
+          onClick={() => { setSelectedTab(tab); setSelectedItem(null); }}>{tab}</button>)}</nav>
+        <h2>{selectedTab === 'Enderchest' ? 'Ender chest' : selectedTab}</h2>
+        {profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
+        {selectedTab === 'Skills' && <SkillsView data={currentData} />}
+        {selectedTab === 'Collections' && <CollectionsView data={currentData} />}
+        {ITEM_TABS.has(selectedTab) && <InventoryView data={currentData} onItemClick={setSelectedItem} />}
+        {selectedTab === 'Pets' && <PetsView data={currentData} />}
+      </section>
+      {selectedItem && <ItemDetails item={selectedItem} onClose={() => setSelectedItem(null)} />}
+    </>}
+  </main>;
 }

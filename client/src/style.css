@@ -318,3 +318,44 @@ dd { margin-left: 0; overflow-wrap: anywhere; }
     width: auto;
   }
 }
+/* Dashboard values are readable on both desktop and narrow screens. */
+.skyblock-page { max-width: 1180px; padding: clamp(16px, 4vw, 40px); }
+.skyblock-header { flex-wrap: wrap; gap: 20px; }
+.skyblock-actions { max-width: 330px; }
+.player-uuid, .profile-id { overflow-wrap: anywhere; }
+.player-uuid { color: #476175; font-size: 0.875rem; }
+.selected-profile { margin-bottom: 4px; font-size: 1.5rem; }
+.snapshot-time { margin-top: 4px; opacity: 1; color: #476175; }
+button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white; }
+.profile-tabs, .data-tabs { border-color: #d3e0ea; }
+.profile-tabs button, .data-tabs button { background: #f1f6fa; border-color: #c1d2df; }
+.profile-tabs button.active, .data-tabs button.active { color: white; background: #235b85; border-color: #235b85; }
+.availability { padding: 14px 16px; border-radius: 8px; background: #f1f6fa; color: #385269; }
+.availability.partial { background: #fff6df; color: #715314; }
+.availability.private, .availability.unavailable, .availability.error { background: #fff0ed; color: #8a3526; }
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 14px; }
+.skill-card { padding: 18px; border: 1px solid #d3e0ea; border-radius: 10px; background: #f9fbfd; }
+.skill-card h3 { margin: 0 0 10px; font-size: 1rem; }
+.skill-value { margin: 0; font-size: 1.5rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.skill-value small { font-size: 0.85rem; color: #476175; }
+.skill-card .hint { margin-top: 12px; }
+.table-scroll { overflow-x: auto; }
+.collection-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.collection-table caption { text-align: left; padding: 10px 0; color: #476175; }
+.collection-table th, .collection-table td { padding: 12px; border-bottom: 1px solid #dce6ee; text-align: left; }
+.collection-table thead { background: #f1f6fa; }
+.collection-table td:last-child, .collection-table thead th:last-child { text-align: right; }
+.mc-item:hover, .mc-item:focus-visible { color: #172a3a; background: #e5f0f8; border-color: #235b85; }
+.mc-item-count { color: #172a3a; text-shadow: 0 1px 2px white; }
+.mc-item-name { white-space: normal; overflow-wrap: anywhere; }
+.item-facts { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; }
+.item-facts dt { margin: 0; }
+.item-lore { padding-left: 18px; line-height: 1.7; }
+.json-key, .json-primitive { color: inherit; }
+.json-row { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); }
+.empty-state { opacity: 1; border-color: #b3cadb; }
+@media (max-width: 480px) {
+  .skyblock-actions { max-width: none; width: 100%; }
+  .skyblock-actions button { flex: 1 1 100%; }
+  .data-section, .profile-section { padding: 16px; }
+}

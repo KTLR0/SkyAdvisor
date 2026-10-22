@@ -48,7 +48,7 @@ test('returns the canonical player name and UUID', async () => {
 
 test('rejects invalid usernames without contacting Minecraft', async () => {
   const upstream = mock.method(globalThis, 'fetch', async () => { throw new Error('Must not fetch'); });
-  for (const username of ['ab', '12345678901234567', 'bad-name', 'bad%2Fname', '%20%20%20']) {
+  for (const username of ['12345678901234567', 'bad-name', 'bad%2Fname', '%20%20%20']) {
     assert.equal((await request(`/api/player/${username}`)).status, 400);
   }
   assert.equal(upstream.mock.callCount(), 0);
@@ -59,6 +59,14 @@ test('trims surrounding spaces before lookup', async () => {
   assert.equal((await request('/api/player/%20Phia98%20')).status, 200);
   assert.equal(upstream.mock.calls[0].arguments[0],
     'https://api.minecraftservices.com/minecraft/profile/lookup/name/Phia98');
+});
+
+test('accepts existing one- and two-character Minecraft names', async () => {
+  mock.method(globalThis, 'fetch', async (url) => Response.json({
+    id: profile.id, name: url.endsWith('/8') ? '8' : 'ab',
+  }));
+  assert.equal((await request('/api/player/8')).body.name, '8');
+  assert.equal((await request('/api/player/ab')).body.name, 'ab');
 });
 
 test('returns 404 for missing players', async () => {
