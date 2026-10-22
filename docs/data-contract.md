@@ -41,9 +41,12 @@ Every category has `status` and nullable `reason`:
 - `private`: an explicit API-sharing setting disabled the category.
 - `unavailable`: decoding failed or an older snapshot is ambiguous.
 
-`Skills`: `{ status, reason, entries: [{ id, label, xp, status, reason }] }`.
+`Skills`: `{ status, reason, entries: [{ id, label, xp, status, reason, levelCap }] }`.
 XP is a finite nonnegative number or `null`; a confirmed zero is kept as zero.
-These are XP totals, not calculated skill levels. Current and older skill-field
+Stored values are XP totals; the UI derives level progress from the cached
+official Hypixel resource. `levelCap` is nullable and records an explicitly known
+personal cap (currently Farming upgrades). It is never defaulted from missing
+unlock metadata. See `skill-progress.md`. Current and older skill-field
 layouts are supported. A missing individual skill is never inferred to be zero.
 
 `Collections`: `{ status, reason, entries: [{ id, label, amount, status }] }`.

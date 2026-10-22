@@ -47,17 +47,21 @@ stop that process or change `PORT` for Express, then restart both apps.
 1. Enter a Minecraft Java username and choose **Find player**.
 2. Choose **Continue to SkyBlock data**. Previously saved profiles load from MongoDB.
 3. Use **Fetch fresh data** to request and save this one player's profiles.
-4. Select a profile and a category. Skills show XP, Collections show item counts,
+4. Select a profile and a category. Skills show personal level progress, Collections show item counts,
    and Inventory shows item cards with count, location, lore, and optional NBT details.
 
 The header shows the selected player/profile and the snapshot's fetch time.
 A real zero is shown as zero. Missing, private, empty, and undecodable data have
 separate states. Existing schema-1 snapshots remain readable but ambiguous older
-zeros are marked unavailable until a fresh fetch.
+zeros are marked unavailable until a fresh fetch. Skill levels use the official
+Hypixel Skills resource, cached for 12 hours without polling. Missing or
+unverified personal level caps suppress progress rather than guessing. See
+`docs/skill-progress.md` for formulas, caps, and caching behavior.
 
 Fetches are manual only: once per hour and at most four per rolling 24 hours per
 player. A database lock prevents overlapping requests. Reloading saved data and
-switching profiles do not contact Hypixel or consume the fetch allowance.
+switching profiles do not request new player data from Hypixel or consume the
+player fetch allowance.
 
 ## Checks
 
@@ -79,6 +83,8 @@ hosting is not configured by this project.
 - `server/app.js`: health, identity, snapshots/history, and manual fetch routes.
 - `server/minecraft.js`: canonical Minecraft username/UUID resolution.
 - `server/normalize.js`: predictable, availability-aware category objects.
+- `server/skill-resource.js`: validated, cached official skill thresholds.
+- `client/src/SkillsView.jsx` and `skill-progress.js`: accessible personal progress cards and calculations.
 - `server/skyblock.js`: identity checks, fetching, atomic persistence, and readback.
 - `server/database.js`: MongoDB setup and transaction lifecycle.
 - `docs/data-contract.md`: stored/API shapes and legacy compatibility.

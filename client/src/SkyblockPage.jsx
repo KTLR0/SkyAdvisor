@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import SkillsView from './SkillsView.jsx';
 
 const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets'];
@@ -19,22 +20,6 @@ function Availability({ data }) {
         : 'This information was not provided. Check the player’s in-game API sharing settings.')}
     </p>
   );
-}
-
-function SkillsView({ data }) {
-  return <>
-    <p className="hint">Total experience earned per skill. XP is not a skill level; missing XP is never shown as zero.</p>
-    <Availability data={data} />
-    <div className="skill-grid">
-      {(data?.entries || []).map((entry) => (
-        <article className="skill-card" key={entry.id}>
-          <h3>{entry.label}</h3>
-          <p className="skill-value">{entry.xp === null ? 'Unavailable' : <>{formatNumber(entry.xp)} <small>XP</small></>}</p>
-          {entry.reason && <p className="hint">{entry.reason}</p>}
-        </article>
-      ))}
-    </div>
-  </>;
 }
 
 function CollectionsView({ data }) {

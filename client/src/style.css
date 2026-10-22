@@ -339,6 +339,28 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .skill-value { margin: 0; font-size: 1.5rem; font-weight: 650; font-variant-numeric: tabular-nums; }
 .skill-value small { font-size: 0.85rem; color: #476175; }
 .skill-card .hint { margin-top: 12px; }
+.skill-progress-grid { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.skill-progress-card { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.skill-card-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.skill-card-heading h3 { margin: 0; font-size: 1.05rem; }
+.skill-level { padding: 4px 9px; border-radius: 6px; background: #e5eef7; color: #234e71; font-size: 0.8rem; font-weight: 650; }
+.skill-level.is-unavailable { background: #edf0f3; color: #536271; }
+.skill-total-xp { margin: 0; font-size: 0.8rem; color: #52697b; }
+.skill-total-xp strong { margin-left: 5px; font-variant-numeric: tabular-nums; font-weight: 500; }
+.skill-progress-label { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.skill-progress-label strong { font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+.skill-progress-label span { font-size: 0.8rem; color: #52697b; }
+.skill-progress-track { height: 10px; background: #dce6ee; border-radius: 8px; overflow: hidden; }
+.skill-progress-fill { display: block; height: 100%; background: #356e9b; border-radius: inherit; }
+.skill-remaining { margin: 0; font-size: 0.8rem; color: #52697b; }
+.skill-remaining strong { color: #28465d; font-weight: 600; font-variant-numeric: tabular-nums; }
+.skill-progress-card.is-maxed .skill-level { background: #e1f0e9; color: #286347; }
+.skill-progress-card.is-maxed .skill-progress-fill { background: #418265; }
+.skill-progress-unavailable { margin: 0; color: #5c6c78; font-size: 0.85rem; line-height: 1.6; }
+.skill-source { margin-top: 18px; }
+.skill-source a { color: #235b85; text-underline-offset: 3px; }
+.skill-resource-error { padding: 14px; margin-bottom: 16px; border: 1px solid #dbc5ae; border-radius: 8px; background: #fff8ef; }
+.skill-resource-error p { margin-top: 0; }
 .table-scroll { overflow-x: auto; }
 .collection-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .collection-table caption { text-align: left; padding: 10px 0; color: #476175; }
