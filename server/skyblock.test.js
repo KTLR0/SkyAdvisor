@@ -142,3 +142,102 @@ test('readback collapses legacy profile-ID casing variants onto the latest stabl
   assert.equal(loaded.profiles.length, 2);
   assert.equal(loaded.profiles.find((entry) => entry.profileId === PROFILE_A).fetchedAt, FETCHED_AT);
 });
+
+function snapshotReadSetup() {
+  const forbidden = async () => { throw new Error('Snapshot reads must not fetch or write.'); };
+  const fixture = setup({ request: forbidden, resolveMinecraftPlayer: forbidden,
+    withDatabaseTransaction: forbidden });
+  fixture.memory.rows('players').push({ uuid: PLAYER_ID, username: PLAYER.name });
+  const legacy = {
+    _id: 'legacy-snapshot', playerUuid: PLAYER_ID, profileId: PROFILE_A.toUpperCase(),
+    profileName: 'Apple', timestamp: '2026-10-17--00--16',
+    fetchedAt: new Date('2026-10-17T00:16:27.832Z'), data: { Skills: { mining: 100 } },
+  };
+  const current = {
+    _id: `fixture-fetch:${PROFILE_A}`, fetchId: 'fixture-fetch', schemaVersion: 2,
+    playerUuid: PLAYER_ID, profileId: PROFILE_A, profileName: 'Apple',
+    timestamp: FETCHED_AT, fetchedAt: new Date(FETCHED_AT),
+    data: { Skills: { status: 'available', entries: [
+      { id: 'mining', label: 'Mining', xp: 200, status: 'available' },
+    ] } },
+  };
+  fixture.memory.rows('skyblockSnapshots').push(legacy, current);
+  return { ...fixture, legacy, current };
+}
+
+const dashedProfileA = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
+for (const [kind, storedId] of [
+  ['legacy', PROFILE_A.toUpperCase()],
+  ['legacy', dashedProfileA],
+  ['legacy', dashedProfileA.toUpperCase()],
+  ['current', PROFILE_A],
+]) {
+  const format = `${storedId.includes('-') ? 'dashed' : 'undashed'} ${storedId === storedId.toUpperCase() ? 'uppercase' : 'lowercase'}`;
+  test(`snapshot detail reads ${kind} ${format} IDs without rewriting records`, async () => {
+    const { service, memory, [kind]: snapshot } = snapshotReadSetup();
+    snapshot.profileId = storedId;
+    const before = structuredClone(memory.rows('skyblockSnapshots'));
+    for (const profileId of [PROFILE_A, PROFILE_A.toUpperCase(), dashedProfileA, dashedProfileA.toUpperCase()]) {
+      const result = await service.loadSkyBlockSnapshot(PLAYER.name, snapshot.timestamp, profileId);
+      assert.equal(result.snapshots.length, 1);
+      assert.equal(result.snapshots[0].profileId, PROFILE_A);
+      assert.equal(result.snapshots[0].playerUuid, PLAYER_ID);
+      assert.equal(result.snapshots[0].timestamp, snapshot.timestamp);
+      assert.equal(result.snapshots[0].sourceSchemaVersion, kind === 'legacy' ? 1 : 2);
+      assert.equal(result.snapshots[0].data.Skills.entries.find(e => e.id === 'mining').xp,
+        kind === 'legacy' ? 100 : 200);
+    }
+    assert.deepEqual(memory.rows('skyblockSnapshots'), before);
+    assert.deepEqual(memory.writes, []);
+  });
+}
+
+test('missing snapshot details stay empty rather than falling back to a different date or profile', async () => {
+  const { service, legacy, current } = snapshotReadSetup();
+  for (const [username, timestamp, profileId] of [
+    [PLAYER.name, '2026-10-18--00--16', PROFILE_A],
+    [PLAYER.name, '2026-10-23T12:34:56.789Z', PROFILE_A],
+    [PLAYER.name, legacy.timestamp, PROFILE_B],
+    [PLAYER.name, current.timestamp, PROFILE_B],
+    ['UnknownPlayer', current.timestamp, PROFILE_A],
+  ]) {
+    assert.deepEqual((await service.loadSkyBlockSnapshot(username, timestamp, profileId)).snapshots, []);
+  }
+});
+
+test('snapshot detail queries isolate profiles that share the same timestamp', async () => {
+  const { service, memory, legacy, current } = snapshotReadSetup();
+  for (const snapshot of [legacy, current]) {
+    memory.rows('skyblockSnapshots').push({ ...structuredClone(snapshot),
+      _id: `${snapshot._id}-other-profile`, profileId: PROFILE_B.toUpperCase(), profileName: 'Banana' });
+    for (const profileId of [PROFILE_A, PROFILE_B]) {
+      const result = await service.loadSkyBlockSnapshot(PLAYER.name, snapshot.timestamp, profileId);
+      assert.equal(result.snapshots.length, 1);
+      assert.equal(result.snapshots[0].profileId, profileId);
+      assert.equal(result.snapshots[0].profileName, profileId === PROFILE_A ? 'Apple' : 'Banana');
+    }
+  }
+});
+
+test('snapshot detail queries isolate players sharing a profile ID and timestamp', async () => {
+  const { service, memory, legacy, current } = snapshotReadSetup();
+  const otherPlayer = { username: 'OtherPlayer', uuid: '2'.repeat(32) };
+  memory.rows('players').push(otherPlayer);
+  for (const snapshot of [legacy, current]) {
+    memory.rows('skyblockSnapshots').push({ ...structuredClone(snapshot),
+      _id: `${snapshot._id}-other-player`, playerUuid: otherPlayer.uuid, profileName: 'Other player data' });
+    for (const player of [{ username: PLAYER.name, uuid: PLAYER_ID }, otherPlayer]) {
+      const result = await service.loadSkyBlockSnapshot(player.username, snapshot.timestamp, PROFILE_A);
+      assert.equal(result.snapshots.length, 1);
+      assert.equal(result.snapshots[0].playerUuid, player.uuid);
+    }
+  }
+});
+
+test('an explicitly empty or malformed profile ID cannot broaden a snapshot detail query', async () => {
+  const { service, current } = snapshotReadSetup();
+  for (const profileId of ['', null, '.*', PROFILE_A.slice(1), [PROFILE_A]]) {
+    await assert.rejects(service.loadSkyBlockSnapshot(PLAYER.name, current.timestamp, profileId),
+      /Invalid profile ID/);
+  }
+});

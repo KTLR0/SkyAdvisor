@@ -3,6 +3,8 @@ const { MongoClient } = require('mongodb');
 let client;
 let database;
 let connecting;
+let initializing;
+let indexesReady = false;
 
 function buildMongoUri(env = process.env) {
   let uri = (env.MONGODB_URI || '').trim();
@@ -33,7 +35,8 @@ function buildMongoUri(env = process.env) {
   return uri;
 }
 
-function getDatabase() {
+// Connecting for a saved-data read must not create/drop indexes or write records.
+function getReadDatabase() {
   if (database) return Promise.resolve(database);
   if (connecting) return connecting;
 
@@ -45,7 +48,25 @@ function getDatabase() {
     });
     await client.connect();
     const dbName = process.env.MONGODB_DATABASE || 'skyadvisor';
-    const db = client.db(dbName);
+    database = client.db(dbName);
+    return database;
+  })().catch(async (error) => {
+    await client?.close().catch(() => {});
+    connecting = null;
+    client = null;
+    database = null;
+    throw error;
+  });
+
+  return connecting;
+}
+
+// Existing startup/manual-save initialization stays separate from timeline reads.
+function getDatabase() {
+  if (indexesReady) return getReadDatabase();
+  if (initializing) return initializing;
+  initializing = (async () => {
+    const db = await getReadDatabase();
     const snapshots = db.collection('skyblockSnapshots');
 
     let existingSnapshotIndexes = [];
@@ -72,24 +93,28 @@ function getDatabase() {
       db.collection('fetchEvents').createIndex({ playerUuid: 1, fetchedAt: -1 }),
       db.collection('fetchLocks').createIndex({ createdAt: 1 }, { expireAfterSeconds: 120 }),
     ]);
-    database = db;
-    return database;
+    indexesReady = true;
+    return db;
   })().catch(async (error) => {
-    await client?.close().catch(() => {});
-    connecting = null;
-    client = null;
-    database = null;
+    // Preserve startup failure cleanup; a failed initializer must not keep the
+    // process alive or leave a stale connection cached for the next attempt.
+    await closeDatabase();
     throw error;
   });
 
-  return connecting;
+  return initializing;
 }
 
 async function closeDatabase() {
-  if (client) await client.close();
-  client = null;
-  database = null;
-  connecting = null;
+  try {
+    if (client) await client.close();
+  } finally {
+    client = null;
+    database = null;
+    connecting = null;
+    initializing = null;
+    indexesReady = false;
+  }
 }
 
 async function withDatabaseTransaction(work) {
@@ -102,4 +127,4 @@ async function withDatabaseTransaction(work) {
   }
 }
 
-module.exports = { getDatabase, closeDatabase, buildMongoUri, withDatabaseTransaction };
+module.exports = { getDatabase, getReadDatabase, closeDatabase, buildMongoUri, withDatabaseTransaction };

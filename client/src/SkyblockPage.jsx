@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SkillsView from './SkillsView.jsx';
+import TimelineView from './TimelineView.jsx';
 
 const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
-  'Backpacks', 'Enderchest', 'Talismans', 'Pets'];
+  'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
 const ITEM_TABS = new Set(['Inventory', 'Armor', 'Equipment', 'Backpacks', 'Enderchest', 'Talismans']);
 const STATUS_LABELS = {
   available: 'Available', partial: 'Partially available', empty: 'Empty',
@@ -226,7 +227,9 @@ export default function SkyBlockPage({ player, onBack }) {
           className={selectedTab === tab ? 'active' : ''} aria-pressed={selectedTab === tab}
           onClick={() => { setSelectedTab(tab); setSelectedItem(null); }}>{tab}</button>)}</nav>
         <h2>{selectedTab === 'Enderchest' ? 'Ender chest' : selectedTab}</h2>
-        {profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
+        {selectedTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
+        {selectedTab === 'Timeline' && <TimelineView key={`${player.uuid}:${profile.profileId}`}
+          playerUuid={player.uuid} profileId={profile.profileId} />}
         {selectedTab === 'Skills' && <SkillsView data={currentData} />}
         {selectedTab === 'Collections' && <CollectionsView data={currentData} />}
         {ITEM_TABS.has(selectedTab) && <InventoryView data={currentData} onItemClick={setSelectedItem} />}

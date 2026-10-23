@@ -367,6 +367,31 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .collection-table th, .collection-table td { padding: 12px; border-bottom: 1px solid #dce6ee; text-align: left; }
 .collection-table thead { background: #f1f6fa; }
 .collection-table td:last-child, .collection-table thead th:last-child { text-align: right; }
+.timeline-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+.timeline-controls .hint { margin: 0; }
+.timeline-strip { display: flex; gap: 10px; overflow-x: auto; padding: 6px 4px 16px; max-width: 100%; }
+.timeline-date { flex: 0 0 170px; border: 1px solid #b7ccdc; background: #f1f6fa; color: #28465d; text-align: left; }
+.timeline-date.active { background: #235b85; color: white; border-color: #235b85; box-shadow: inset 0 -3px 0 #b9dcf7; }
+.timeline-date time { display: block; font-variant-numeric: tabular-nums; }
+.timeline-load { margin: 8px 0; }
+.timeline-detail > h3 { margin: 24px 0 4px; }
+.timeline-first { color: #28465d; font-weight: 600; }
+.timeline-category { margin-top: 18px; padding: 16px; }
+.timeline-category h3 { margin: 0 0 8px; }
+.timeline-table { table-layout: fixed; font-size: 0.9rem; }
+.timeline-table th, .timeline-table td { vertical-align: top; overflow-wrap: anywhere; }
+.timeline-table th:first-child { width: 30%; }
+.timeline-table th:nth-child(2) { width: 25%; }
+.timeline-table td:last-child, .timeline-table thead th:last-child { text-align: left; }
+.timeline-decrease { color: #9a4b19; }
+.timeline-error { padding: 12px; border: 1px solid #dbc5ae; border-radius: 8px; background: #fff8ef; margin: 12px 0; }
+.timeline-error p { margin-top: 0; }
+@media (max-width: 480px) {
+  .timeline-category { padding: 10px; }
+  .timeline-table th, .timeline-table td { padding: 9px 5px; font-size: 0.8rem; }
+  .timeline-table th:first-child { width: 32%; }
+  .timeline-table th:nth-child(2) { width: 27%; }
+}
 .mc-item:hover, .mc-item:focus-visible { color: #172a3a; background: #e5f0f8; border-color: #235b85; }
 .mc-item-count { color: #172a3a; text-shadow: 0 1px 2px white; }
 .mc-item-name { white-space: normal; overflow-wrap: anywhere; }

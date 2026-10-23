@@ -199,9 +199,13 @@ function createSkyBlockService({
     const player = await findPlayer(db, username);
     if (!player) return { username, timestamp, snapshots: [] };
     const filter = { playerUuid: player.uuid, timestamp };
-    if (profileId) {
+    if (profileId !== undefined) {
       if (!validId(profileId)) throw new Error('Invalid profile ID.');
-      filter.profileId = canonicalId(profileId);
+      const id = canonicalId(profileId);
+      const dashedId = `${id.slice(0, 8)}-${id.slice(8, 12)}-${id.slice(12, 16)}-${id.slice(16, 20)}-${id.slice(20)}`;
+      // Legacy IDs can contain dashes or uppercase letters. Exact alternatives
+      // keep the player/timestamp/profile index usable without rewriting data.
+      filter.profileId = { $in: [id, id.toUpperCase(), dashedId, dashedId.toUpperCase()] };
     }
     const snapshots = await db.collection('skyblockSnapshots').find(filter).sort({ profileId: 1 }).toArray();
     return { username: player.username, uuid: player.uuid, timestamp,

@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { createApp } = require('./app');
 const { createSkyBlockService } = require('./skyblock');
 const { createMemoryDatabase } = require('./test-support/memory-db');
-const { PLAYER, PLAYER_ID, PROFILE_A, FETCHED_AT, profilesReply } = require('./fixtures/skyblock');
+const { PLAYER, PLAYER_ID, PROFILE_A, PROFILE_B, FETCHED_AT, profilesReply } = require('./fixtures/skyblock');
 
 async function fixtureServer(t, appOptions = {}) {
   const memory = createMemoryDatabase();
@@ -92,4 +92,43 @@ test('threshold endpoint failures return a useful 503 without fabricated curves'
   const body = await response.json();
   assert.match(body.error, /temporarily unavailable/);
   assert.equal(body.skills, undefined);
+});
+
+test('Express history details select only the requested legacy or current profile without fetching or writing', async (t) => {
+  const fixture = await fixtureServer(t);
+  fixture.memory.rows('players').push({ uuid: PLAYER_ID, username: PLAYER.name });
+  const legacyTimestamp = '2026-10-17--00--16';
+  for (const timestamp of [legacyTimestamp, FETCHED_AT]) {
+    const legacy = timestamp === legacyTimestamp;
+    for (const profileId of [PROFILE_A, PROFILE_B]) {
+      fixture.memory.rows('skyblockSnapshots').push({
+        _id: `${timestamp}:${profileId}`, playerUuid: PLAYER_ID,
+        profileId: legacy ? profileId.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5') : profileId,
+        profileName: profileId === PROFILE_A ? 'Apple' : 'Banana', timestamp,
+        fetchedAt: new Date(legacy ? '2026-10-17T00:16:27.832Z' : FETCHED_AT),
+        schemaVersion: legacy ? 1 : 2,
+        data: legacy ? { Skills: { mining: 100 } }
+          : { Skills: { status: 'available', entries: [{ id: 'mining', xp: 200, status: 'available' }] } },
+      });
+    }
+  }
+  const before = structuredClone(fixture.memory.rows('skyblockSnapshots'));
+  const history = await (await fixture.request('/api/player/FixturePlayer/skyblock/history')).json();
+  assert.equal(history.snapshots.length, 4);
+  for (const snapshot of history.snapshots) {
+    const response = await fixture.request(`/api/player/FixturePlayer/skyblock/history/${snapshot.timestamp}?profileId=${snapshot.profileId}`);
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.snapshots.length, 1);
+    assert.equal(result.snapshots[0].profileId, snapshot.profileId.replaceAll('-', '').toLowerCase());
+    assert.equal(result.snapshots[0].timestamp, snapshot.timestamp);
+  }
+  const missing = await fixture.request(`/api/player/FixturePlayer/skyblock/history/2026-10-18--00--16?profileId=${PROFILE_A}`);
+  assert.equal(missing.status, 200);
+  assert.deepEqual((await missing.json()).snapshots, []);
+  const emptyProfile = await fixture.request(`/api/player/FixturePlayer/skyblock/history/${FETCHED_AT}?profileId=`);
+  assert.equal(emptyProfile.status, 400);
+  assert.equal(fixture.calls(), 0);
+  assert.deepEqual(fixture.memory.writes, []);
+  assert.deepEqual(fixture.memory.rows('skyblockSnapshots'), before);
 });
