@@ -49,6 +49,16 @@ stop that process or change `PORT` for Express, then restart both apps.
 3. Use **Fetch fresh data** to request and save this one player's profiles.
 4. Select a profile and a category. Skills show personal level progress, Collections show item counts,
    and Inventory shows item cards with count, location, lore, and optional NBT details.
+5. Choose **Timeline** to browse this profile's saved snapshots. Scroll the dated
+   buttons, select a date, or use **Previous** (older) / **Next** (newer).
+   **Load older snapshots** reads the next saved page. Skills XP and Collections
+   counts show changes from the immediate predecessor, with explicit unavailable
+   and unexpected decrease labels. The first snapshot has no comparison baseline.
+
+Timeline browsing only calls saved-snapshot GET routes. It does not fetch Hypixel
+data or skill thresholds, refresh the player, or write to MongoDB. Profile changes
+reset its dates and selection. Snapshot times are shown in your browser's local
+time zone. To see newly saved records, reopen Timeline after an explicit refresh.
 
 The header shows the selected player/profile and the snapshot's fetch time.
 A real zero is shown as zero. Missing, private, empty, and undecodable data have
@@ -68,6 +78,7 @@ player fetch allowance.
 ```sh
 npm test
 npm run build
+node scripts/check-timeline.cjs
 ```
 
 Tests use synthetic fixtures and local HTTP; they need no live API or database.
@@ -75,6 +86,13 @@ They cover lookup/errors, normalization, NBT items, save/readback, duplicates,
 transaction rollback, and rate limits. These fixture checks do not prove live
 Atlas/Hypixel connectivity. Build output goes into `client/dist/`; production
 hosting is not configured by this project.
+
+The timeline browser check uses synthetic records and temporary local servers;
+it checks paging, selection, missing values, decreases, errors/retries, profile
+switching, mobile layout, and that browsing sends only saved-snapshot GETs. It
+requires an installed Chrome/Chromium browser (set `CHROME_BIN` if not at the
+default macOS Chrome path). Preview screenshots are written to the OS temporary
+directory. It does not read `.env` or connect to Atlas/Hypixel.
 
 ## Important files
 
