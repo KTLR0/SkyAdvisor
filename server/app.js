@@ -4,10 +4,11 @@ const { resolvePlayer } = require('./minecraft');
 const skyblock = require('./skyblock');
 const { getSkillResource } = require('./skill-resource');
 const timeline = require('./timeline');
+const recommendations = require('./recommendation-service');
 
 function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
   getApiKey = () => process.env.HYPIXEL_API_KEY, loadSkillResource = getSkillResource,
-  timelineService = timeline } = {}) {
+  timelineService = timeline, recommendationService = recommendations } = {}) {
   const { fetchSkyBlockData, loadLatestSkyBlockData, loadSkyBlockHistory, loadSkyBlockSnapshot } = service;
 
   const app = express();
@@ -36,6 +37,21 @@ function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
   }
   app.get(snapshotPath, (req, res) => readTimeline(req, res, false));
   app.get(`${snapshotPath}/:snapshotId`, (req, res) => readTimeline(req, res, true));
+
+  // Explicit requests only; browser-supplied profile facts are never accepted.
+  app.post('/api/players/:playerUuid/profiles/:profileId/recommendations', async (req, res) => {
+    res.set('Cache-Control', 'no-store');
+    if (!req.body || Array.isArray(req.body) || Object.keys(req.body).length !== 1
+        || !Object.hasOwn(req.body, 'goal')) {
+      return res.status(400).json({ error: 'Provide only a recommendation goal.' });
+    }
+    try {
+      return res.json(await recommendationService.recommend(req.params.playerUuid, req.params.profileId, req.body.goal));
+    } catch (error) {
+      if ([400, 404].includes(error.status)) return res.status(error.status).json({ error: error.message });
+      return res.status(500).json({ error: 'Saved recommendation data could not be loaded.' });
+    }
+  });
 
   app.get('/api/resources/skills', async (req, res) => {
     try {

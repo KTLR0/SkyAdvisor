@@ -55,9 +55,13 @@ function createSkillResourceCache({ request = (...args) => globalThis.fetch(...a
     })();
     try { return await pending; } finally { pending = null; }
   }
-  return { load };
+  // Recommendations may reuse existing metadata, but must never fetch it.
+  function peek() {
+    return cached && now() - fetchedAt <= MAX_STALE_MS ? result() : null;
+  }
+  return { load, peek };
 }
 
 const cache = createSkillResourceCache();
-module.exports = { getSkillResource: cache.load, createSkillResourceCache, normalizeSkillResource,
+module.exports = { getSkillResource: cache.load, peekSkillResource: cache.peek, createSkillResourceCache, normalizeSkillResource,
   CACHE_MS, MAX_STALE_MS, RETRY_MS };

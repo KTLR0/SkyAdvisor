@@ -86,6 +86,7 @@ export default function App() {
   if (page === 'skyblock' && player) {
     return (
       <SkyBlockPage
+        key={player.uuid}
         player={player}
         onBack={() => setPage('lookup')}
       />
