@@ -2,7 +2,7 @@ const database = require('./database');
 const { normalizeStoredData } = require('./normalize');
 const { peekSkillResource } = require('./skill-resource');
 const { buildRecommendationInput, GOALS, RECOMMENDATION_RESPONSE_SCHEMA: SCHEMA } = require('./ai-recommendations');
-const { createGeminiClient } = require('./gemini');
+const { createGeminiClient, RECOMMENDATION_TIMEOUT_MS } = require('./gemini');
 
 const failure = (status, message) => Object.assign(new Error(message), { status });
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -10,6 +10,11 @@ const exactKeys = (value, keys) => object(value) && Object.keys(value).length ==
   && keys.every(key => Object.hasOwn(value, key));
 const label = id => id[0].toUpperCase() + id.slice(1);
 const positive = value => typeof value === 'number' && Number.isFinite(value) && value > 0;
+const MODEL_FAILURE_REASONS = {
+  MODEL_TIMEOUT: 'timeout', GEMINI_UNAVAILABLE: 'model_unavailable', GEMINI_ACCESS: 'model_access_denied',
+  GEMINI_QUOTA: 'model_quota', GEMINI_MODEL: 'model_not_found', GEMINI_REQUEST: 'model_request_invalid',
+  GEMINI_INVALID_RESPONSE: 'invalid_response',
+};
 
 function idVariants(value, name) {
   if (typeof value !== 'string'
@@ -39,6 +44,44 @@ function supported(action, fact, goal) {
     || (action.reason === 'known_item' && inventory);
 }
 
+// Constrain generation with the same rules used to verify it. This lists eligible
+// combinations, not final recommendations: the model still chooses and ranks them.
+function buildPlanSchema(input) {
+  const schema = structuredClone(SCHEMA);
+  schema.properties.contractVersion.enum = [SCHEMA.properties.contractVersion.const];
+  schema.properties.goal.enum = [input.goal];
+  const item = schema.properties.actions.items;
+  const facts = [...factsById(input).values()].filter(fact => fact.factId.length <= item.properties.focusFactId.maxLength);
+  item.properties.supportingFactIds.items.enum = facts.map(fact => fact.factId);
+  const groups = new Map();
+  const inventoryItems = new Set();
+  for (const fact of facts) {
+    if (fact.itemId) {
+      if (fact.count === 0 || inventoryItems.has(fact.itemId)) continue;
+      inventoryItems.add(fact.itemId);
+    }
+    for (const kind of item.properties.kind.enum) {
+      const reasons = item.properties.reason.enum.filter(reason => supported({ kind, reason }, fact, input.goal));
+      if (!reasons.length) continue;
+      const key = `${kind}:${reasons.join(',')}`;
+      if (!groups.has(key)) groups.set(key, { kind, reasons, ids: [] });
+      groups.get(key).ids.push(fact.factId);
+    }
+  }
+  if (!groups.size) {
+    schema.properties.actions.maxItems = 0;
+    // Empty enum arrays are invalid JSON Schema; no actions can reference facts.
+    delete item.properties.supportingFactIds.items.enum;
+  } else {
+    item.anyOf = [...groups.values()].map(group => ({ type: 'object', properties: {
+      kind: { type: 'string', enum: [group.kind] },
+      reason: { type: 'string', enum: group.reasons },
+      focusFactId: { type: 'string', enum: group.ids },
+    } }));
+  }
+  return schema;
+}
+
 function validatePlan(plan, input) {
   const actionSchema = SCHEMA.properties.actions;
   if (!exactKeys(plan, SCHEMA.required) || plan.contractVersion !== SCHEMA.properties.contractVersion.const
@@ -64,6 +107,14 @@ function validatePlan(plan, input) {
     seen.add(key);
     return true;
   });
+}
+
+function onlyDuplicateActions(plan, input) {
+  return exactKeys(plan, SCHEMA.required) && plan.contractVersion === SCHEMA.properties.contractVersion.const
+    && plan.goal === input.goal && Array.isArray(plan.actions)
+    && plan.actions.length > 1 && plan.actions.length <= SCHEMA.properties.actions.maxItems
+    && plan.actions.every((action, index) => action?.priority === index + 1
+      && validatePlan({ ...plan, actions: [{ ...action, priority: 1 }] }, input));
 }
 
 function fallbackPlan(input) {
@@ -112,10 +163,21 @@ function renderAction(action, input) {
 
 async function generateWithDeadline(client, input, timeoutMs) {
   const controller = new AbortController();
+  const schema = buildPlanSchema(input);
   let timer;
   try {
     return await Promise.race([
-      Promise.resolve().then(() => client.generate({ input, schema: SCHEMA, signal: controller.signal })),
+      Promise.resolve().then(async () => {
+        const plan = await client.generate({ input, schema, signal: controller.signal });
+        controller.signal.throwIfAborted();
+        if (!validatePlan(plan, input) && onlyDuplicateActions(plan, input)) {
+          return client.generate({ input, schema, signal: controller.signal,
+            correction: 'The last plan repeated an action. Return a corrected plan with each focusFactId used only once. '
+              + 'Different reasons for training the same skill describe ONE action, not separate actions. '
+              + 'Review each item type at most once. Use consecutive priorities and choose fewer actions if needed.' });
+        }
+        return plan;
+      }),
       new Promise((_, reject) => {
         timer = setTimeout(() => {
           reject(Object.assign(new Error('Recommendation timeout.'), { code: 'MODEL_TIMEOUT' }));
@@ -130,7 +192,7 @@ async function generateWithDeadline(client, input, timeoutMs) {
 }
 
 function createRecommendationService({ getDatabase = database.getReadDatabase,
-  modelClient = createGeminiClient(), timeoutMs = 15000,
+  modelClient = createGeminiClient(), timeoutMs = RECOMMENDATION_TIMEOUT_MS,
   getMetadata = () => ({ skillDefinitions: peekSkillResource()?.skills || {} }) } = {}) {
   async function recommend(playerUuid, profileId, goal) {
     const players = idVariants(playerUuid, 'player UUID');
@@ -156,7 +218,8 @@ function createRecommendationService({ getDatabase = database.getReadDatabase,
         if (validatePlan(plan, input)) { actions = plan.actions; source = 'ai'; }
         else fallbackReason = 'invalid_response';
       } catch (error) {
-        fallbackReason = error?.code === 'MODEL_TIMEOUT' ? 'timeout' : 'model_failed';
+        fallbackReason = Object.hasOwn(MODEL_FAILURE_REASONS, error?.code)
+          ? MODEL_FAILURE_REASONS[error.code] : 'model_failed';
       }
     }
     return { contractVersion: 2, playerUuid: players[0], profileId: profiles[0], goal, source,
@@ -166,4 +229,4 @@ function createRecommendationService({ getDatabase = database.getReadDatabase,
   return { recommend };
 }
 
-module.exports = { ...createRecommendationService(), createRecommendationService, validatePlan };
+module.exports = { ...createRecommendationService(), createRecommendationService, validatePlan, buildPlanSchema };

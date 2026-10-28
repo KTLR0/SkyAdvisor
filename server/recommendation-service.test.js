@@ -1,6 +1,9 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { createRecommendationService } = require('./recommendation-service');
+const { createRecommendationService, buildPlanSchema, validatePlan } = require('./recommendation-service');
+const { buildRecommendationInput, RECOMMENDATION_RESPONSE_SCHEMA } = require('./ai-recommendations');
+const { createGeminiClient } = require('./gemini');
+const { randomUUID } = require('node:crypto');
 const { createApp } = require('./app');
 const { createMemoryDatabase } = require('./test-support/memory-db');
 const { timelineRows } = require('./fixtures/timeline');
@@ -48,6 +51,113 @@ test('valid model selection and ordering survive while displayed factual values 
   const reordered = await chosen.request();
   assert.equal(reordered.source, 'ai');
   assert.deepEqual(reordered.actions.map(entry => entry.kind), ['grow_collection', 'train_skill']);
+});
+
+test('each goal gets only eligible action/reason/fact combinations and its own evidence IDs', () => {
+  const data = {
+    Skills: { status: 'available', entries: ['farming', 'mining', 'combat'].map(id => ({ id, xp: 100, status: 'available' })) },
+    Collections: { status: 'available', entries: [{ id: 'WHEAT', amount: 0, status: 'available' }] },
+    Inventory: { status: 'available', items: [0, 1].map(slot => ({ id: 'DIAMOND_SWORD', slot, count: 1, container: 'Inventory' })) },
+  };
+  const originalSchema = structuredClone(RECOMMENDATION_RESPONSE_SCHEMA);
+  const metadata = { skillDefinitions: normalizeSkillResource(officialSkillsFixture()).skills };
+  for (const goal of ['general', 'farming', 'mining', 'combat']) {
+    const input = buildRecommendationInput({ data, fetchedAt: '2026-10-28T12:00:00Z' }, goal, metadata);
+    const before = structuredClone(input);
+    const schema = buildPlanSchema(input);
+    assert.deepEqual(schema.properties.goal.enum, [goal]);
+    assert.deepEqual(schema.properties.contractVersion.enum, [2]);
+    const item = schema.properties.actions.items;
+    assert.ok(!item.properties.supportingFactIds.items.enum.includes('skill:missing'));
+    const focuses = item.anyOf.flatMap(branch => branch.properties.focusFactId.enum);
+    assert.ok(focuses.includes(`skill:${goal === 'general' ? 'mining' : goal}`));
+    if (goal !== 'general') assert.deepEqual(focuses.filter(id => id.startsWith('skill:')), [`skill:${goal}`]);
+    assert.equal(focuses.filter(id => id.startsWith('inventory:')).length, 1);
+    for (const branch of item.anyOf) {
+      for (const focusFactId of branch.properties.focusFactId.enum) {
+        for (const reason of branch.properties.reason.enum) {
+          const candidate = plan([action({ kind: branch.properties.kind.enum[0], reason, focusFactId,
+            supportingFactIds: [focusFactId] })], { goal });
+          assert.equal(validatePlan(candidate, input), true);
+        }
+      }
+    }
+    const collection = item.anyOf.find(branch => branch.properties.kind.enum[0] === 'grow_collection');
+    assert.deepEqual(collection.properties.reason.enum, ['recorded_progress']);
+    assert.deepEqual(input, before);
+  }
+  assert.deepEqual(RECOMMENDATION_RESPONSE_SCHEMA, originalSchema);
+  const input = buildRecommendationInput({ data }, 'mining');
+  const schema = buildPlanSchema(input);
+  assert.ok(schema.properties.actions.items.anyOf.filter(branch => branch.properties.kind.enum[0] === 'train_skill')
+    .every(branch => !branch.properties.reason.enum.includes('next_level')));
+  const empty = buildPlanSchema(buildRecommendationInput({ data: {} }, 'combat'));
+  assert.equal(empty.properties.actions.maxItems, 0);
+});
+
+test('the model receives a goal-scoped schema before selection and invalid model combinations still fail', async () => {
+  for (const goal of ['combat', 'mining']) {
+    let receivedSchema;
+    const f = await fixture({ modelClient: { isConfigured: () => true, generate: async ({ input, schema }) => {
+      receivedSchema = schema;
+      const branch = schema.properties.actions.items.anyOf.find(item => item.properties.kind.enum[0] === 'grow_collection');
+      return plan([action({ kind: 'grow_collection', reason: 'recorded_progress',
+        focusFactId: branch.properties.focusFactId.enum[0], supportingFactIds: [branch.properties.focusFactId.enum[0]] })], { goal: input.goal });
+    } } });
+    assert.equal((await f.request(goal)).source, 'ai');
+    assert.deepEqual(receivedSchema.properties.goal.enum, [goal]);
+  }
+  const invalid = await fixture({ modelClient: { isConfigured: () => true, generate: async () => plan([
+    action({ kind: 'grow_collection', reason: 'goal_alignment', focusFactId: 'collection:WHEAT', supportingFactIds: ['collection:WHEAT'] }),
+  ]) } });
+  assert.equal((await invalid.request()).fallbackReason, 'invalid_response');
+});
+
+test('duplicate-only plans get one model correction and the corrected choices are validated', async () => {
+  let calls = 0;
+  const f = await fixture({ modelClient: { isConfigured: () => true, generate: async request => {
+    calls++;
+    if (calls === 1) {
+      assert.equal(request.correction, undefined);
+      return plan([action(), action({ priority: 2, reason: 'next_level' })]);
+    }
+    assert.match(request.correction, /each focusFactId used only once/);
+    return plan([action({ reason: 'next_level' })]);
+  } } });
+  const result = await f.request();
+  assert.equal(result.source, 'ai');
+  assert.equal(result.actions.length, 1);
+  assert.equal(result.actions[0].reason, 'next_level');
+  assert.equal(calls, 2);
+});
+
+test('correction is bounded and never repairs unsupported evidence or numerical claims locally', async () => {
+  for (const [response, expectedCalls] of [
+    [plan([action(), action({ priority: 2 })]), 2],
+    [plan([action({ supportingFactIds: ['skill:unknown'] })]), 1],
+    [plan([action({ whatToDo: 'Earn 999999 XP' }), action({ priority: 2 })]), 1],
+  ]) {
+    let calls = 0;
+    const f = await fixture({ modelClient: { isConfigured: () => true, generate: async () => { calls++; return response; } } });
+    assert.equal((await f.request()).fallbackReason, 'invalid_response');
+    assert.equal(calls, expectedCalls);
+  }
+});
+
+test('a late duplicate response cannot trigger a correction after the deadline', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let calls = 0, finish;
+  const f = await fixture({ timeoutMs: 5, modelClient: { isConfigured: () => true, generate: () => {
+    calls++;
+    return new Promise(resolve => { finish = resolve; });
+  } } });
+  const pending = f.request();
+  await new Promise(resolve => setImmediate(resolve));
+  t.mock.timers.tick(5);
+  assert.equal((await pending).fallbackReason, 'timeout');
+  finish(plan([action(), action({ priority: 2 })]));
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 1);
 });
 
 test('invalid shape, goal, evidence, priorities, duplicate actions, and invented numbers all use fallback', async () => {
@@ -112,6 +222,53 @@ test('uses the latest snapshot for exactly the selected player/profile, includin
   await assert.rejects(f.request('mining', PLAYER_ID, 'bad'), { status: 400 });
   await assert.rejects(f.request('unknown'), { status: 400 });
   assert.equal(f.calls(), 4);
+});
+
+test('provider failures return specific safe fallback reasons without raw upstream details', async () => {
+  for (const [code, reason] of [['GEMINI_UNAVAILABLE', 'model_unavailable'], ['GEMINI_ACCESS', 'model_access_denied'],
+    ['GEMINI_QUOTA', 'model_quota'], ['GEMINI_MODEL', 'model_not_found'], ['GEMINI_REQUEST', 'model_request_invalid'],
+    ['GEMINI_INVALID_RESPONSE', 'invalid_response']]) {
+    const f = await fixture({ modelClient: { isConfigured: () => true,
+      generate: async () => { throw Object.assign(new Error('Private provider details'), { code }); },
+    } });
+    const result = await f.request();
+    assert.equal(result.source, 'fallback');
+    assert.equal(result.fallbackReason, reason);
+    assert.ok(!JSON.stringify(result).includes('Private provider'));
+  }
+});
+
+test('one recommendation deadline cancels Gemini backoff without another network attempt', async () => {
+  let attempts = 0;
+  const client = createGeminiClient({ getApiKey: () => randomUUID(), request: async () => {
+    attempts++;
+    return new Response(null, { status: 503 });
+  } });
+  const f = await fixture({ timeoutMs: 5, modelClient: client });
+  const result = await f.request();
+  assert.equal(result.fallbackReason, 'timeout');
+  assert.equal(attempts, 1);
+});
+
+test('valid responses after the old 15-second limit succeed; the new 45-second deadline still aborts', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let finish, signal;
+  const f = await fixture({ modelClient: { isConfigured: () => true, generate: request => {
+    signal = request.signal;
+    return new Promise(resolve => { finish = resolve; });
+  } } });
+  const slowResponse = f.request();
+  await new Promise(resolve => setImmediate(resolve));
+  t.mock.timers.tick(16000);
+  assert.equal(signal.aborted, false);
+  finish(plan());
+  assert.equal((await slowResponse).source, 'ai');
+
+  const stalledResponse = f.request();
+  await new Promise(resolve => setImmediate(resolve));
+  t.mock.timers.tick(45000);
+  assert.equal((await stalledResponse).fallbackReason, 'timeout');
+  assert.equal(signal.aborted, true);
 });
 
 test('unknown thresholds cannot support a next-level claim; no evidence yields an empty fallback', async () => {

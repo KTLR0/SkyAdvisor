@@ -2,7 +2,8 @@
 
 Part 1 prepares saved evidence. Part 2 adds an explicit server recommendation
 request using Gemini 3.8 Flash, validates its plan, and renders factual values
-from that evidence. There is no recommendation UI or background generation.
+from that evidence. Part 3 adds dashboard controls and saved-evidence cards.
+There is no background generation.
 
 ## Input preparation
 
@@ -119,6 +120,22 @@ become current-state claims. The returned snapshot time identifies their age.
 The response is advisory: collection/equipment focuses for a goal are suggested
 planning steps, not verified game mechanics or guaranteed gains.
 
+Before calling Gemini, `buildPlanSchema(input)` narrows the base response schema
+to the requested goal and the fact IDs in that exact summary. Its `anyOf` groups
+bind each allowed action kind to eligible focus IDs and supported reasons using
+the same evidence rules as the validator. Missing level/collection thresholds
+never offer a next-level/tier reason. A specific goal offers only its own skill
+for training; repeated stacks offer one review focus per item type. The model
+still chooses the action focuses, reasons, count, and priorities. The server
+does not preselect a final list or accept invalid output to make the AI label
+appear. The full validator still runs on every returned plan.
+If a plan fails only because it repeats otherwise individually valid actions,
+the service asks Gemini once for a corrected plan. The correction is a fixed
+server-authored instruction; no raw invalid model response is sent back. Both
+generations share the original deadline. The corrected plan must pass the full
+validator; otherwise the service returns fallback. Unknown evidence, unsupported
+numbers, incorrect goals, and malformed plans do not trigger this correction.
+
 ## Synthetic, redacted example
 
 All values below are synthetic; player/profile identifiers and item text are
@@ -213,15 +230,46 @@ A successful HTTP 200 response has this shape:
 
 The schema file describes the model plan; these server-rendered fields and
 source/snapshot metadata belong to the endpoint envelope. Missing key, model
-failure, invalid output, or a 15-second deadline returns one deterministic
+failure, invalid output, or a 45-second model deadline returns one deterministic
 fallback action from the first supported skill, then collection, then Inventory
 fact. No supported facts means an empty fallback and no model call. Fallback
-codes are `not_configured`, `model_failed`, `invalid_response`, `timeout`, and
-`insufficient_evidence`. Valid model plans can also contain no actions.
+codes include `not_configured`, `model_failed`, `invalid_response`, `timeout`,
+`insufficient_evidence`, `model_unavailable`, `model_access_denied`, `model_quota`,
+`model_not_found`, and `model_request_invalid`. Valid model plans can also contain no actions.
 All actions, including fallback, use the same verified renderer. The service
-aborts timed-out calls and does not retry. Upstream error bodies are neither
-logged nor returned. Malformed input is HTTP 400; no saved player/profile
+aborts timed-out calls, including retry waits. Each generation's HTTP 500/502/503/504 can retry
+twice, with exponential backoff and jitter, only within the original 45-second
+request deadline. `Retry-After` is honored; waits beyond the deadline return
+fallback immediately. Access, quota, model-not-found, and invalid-request errors
+do not retry. Upstream error bodies are neither logged nor returned.
+Malformed input is HTTP 400; no saved player/profile
 snapshot is 404; storage failures return a generic 500. Responses use `no-store`.
+
+## Dashboard recommendations (Part 3)
+
+The selected profile's dashboard has a separate **Recommendations** section below
+the existing data views. Choose General progress, Farming, Mining, or Combat,
+then click **Get recommendations**. Only that action, or a manual **Try again**,
+sends the recommendation POST, containing just the goal. Opening the dashboard,
+switching profiles/goals, inspecting Inventory, and browsing Timeline do not
+generate recommendations. Timeline date selection does not change the latest
+saved snapshot used by the recommendation endpoint.
+
+Up to three ordered cards show priority, what to do, why it fits the goal, and
+readable saved facts. Skill/collection zero values are preserved; unknown item
+counts stay explicitly unrecorded. Each result shows **AI** or **Basic fallback**
+and its own snapshot fetch time in the browser's local time zone. Saved data is
+identified as historical rather than current progress.
+
+The section handles loading, insufficient saved data, failed requests, and manual
+retry. A pending request disables duplicate submission. A basic fallback explains whether AI was temporarily
+unavailable, timed out, rejected access, reached a usage limit, or returned
+unverifiable advice, without showing provider error bodies or credentials.
+A player/profile/snapshot change remounts the section and cancels the old request; changing goals cancels
+and clears it immediately. Late responses are ignored even if network cancellation
+does not stop them. Response identity and goal must match the current selection
+before cards are shown. Existing category and Timeline views remain independent.
+On desktop the cards fit across the section; on mobile controls and cards stack.
 
 ## Configuration and checks
 
@@ -229,13 +277,37 @@ Set `GEMINI_API_KEY` privately in the root `.env` or server environment.
 `GEMINI_MODEL` defaults to `gemini-3.8-flash` and can be overridden. The existing
 server bootstrap loads `.env`; do not use a `VITE_` variable or expose the key
 to the client. `.env.example` contains only an empty key variable. No key is
-required to serve fallback results. No local key was configured during this
-implementation, so no live Gemini request was made.
+required to serve fallback results. A later synthetic check with a locally
+configured key reached the model-list endpoint, but generation on
+`gemini-3.8-flash` returned HTTP 503 on all three bounded attempts, including a
+separate minimal request. With user approval, alternate-model checks found
+`gemini-3.7-flash` also returned 503, while `gemini-3.6-flash` returned HTTP 200
+and a nonempty plan that passed evidence validation using synthetic data. The
+local model override was set to `gemini-3.6-flash`; the source default remains
+`gemini-3.8-flash`. No credentials or real player data were included in the test output.
+A later synthetic Farming check with skill levels, collections, and Inventory
+returned two evidence-validated AI actions in about eight seconds using the
+revised low-thinking setting. Another synthetic response was rejected by
+validation, so availability and valid output still cannot be guaranteed per call.
+A follow-up Combat/Mining validation fix added the goal-scoped generation schema
+and synthetic regression coverage. Its live verification was blocked by HTTP 429
+from the configured model; no quota or billing settings were changed.
+After the user requested 3.1/3.5 alternatives, 3.1 Flash-Lite returned 503 and
+3.5 Flash returned 429. A 3.5 Flash-Lite response exposed duplicate training
+actions with different reasons. The bounded correction path and clearer prompt
+were added without relaxing validation. Subsequent synthetic live checks on
+3.5 Flash-Lite returned two valid Combat actions in about 18 seconds and three
+valid Mining actions in about 20 seconds. The local model override is now
+`gemini-3.5-flash-lite`; the key and all other local settings were preserved.
 
 `server/gemini.js` calls the fixed Google `generateContent` REST endpoint with
 the compact summary and v2 structured-output schema. Credentials are sent only
 in `x-goog-api-key`. Model configuration cannot change the destination host.
-There are no tools, search, automatic generation, startup calls, or retries.
+The request omits `candidateCount`, which Gemini 3 does not support, and allows
+4096 output tokens. Gemini 3 models use `thinkingLevel: LOW` for this bounded
+selection task. The browser waits up to 60 seconds, leaving room for the saved
+snapshot read and the server's full 45-second model deadline. The loading message
+explains this wait. There are no tools, search, automatic generation, or startup calls.
 Only an explicit POST invokes the model. Dashboard GETs do not generate plans.
 
 References: [Gemini 3.8 Flash model](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash),
@@ -247,3 +319,15 @@ cover valid selections/order, shape and priority violations, duplicate actions,
 unknown evidence, invented numbers (digits and words), transport failures,
 timeouts/abort, missing configuration, profile isolation, read-only behavior,
 and the absence of model calls during browsing.
+
+Run `node scripts/check-recommendations.cjs` for Chrome checks using mocked endpoint
+responses and synthetic saved records. It checks the four backend-supported goals,
+click-only POSTs and duplicate-click prevention, loading, all three cards, readable
+evidence and confirmed zero, AI/basic labels, no usable data, failure/retry,
+malformed or wrong-profile responses, and stale responses across goal/profile/
+player changes. It also checks the existing data views and captures desktop/mobile
+previews in the OS temporary directory. It needs installed Chrome/Chromium
+(`CHROME_BIN` can override the default macOS location). It does not load `.env`,
+call live Gemini/Hypixel, or connect to Atlas. The separate synthetic live check
+verified generation and evidence validation with Gemini 3.6 Flash; it does not
+guarantee availability or valid output for every future player request.

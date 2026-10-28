@@ -56,6 +56,11 @@ stop that process or change `PORT` for Express, then restart both apps.
    **Load older snapshots** reads the next saved page. Skills XP and Collections
    counts show changes from the immediate predecessor, with explicit unavailable
    and unexpected decrease labels. The first snapshot has no comparison baseline.
+6. In **Recommendations**, choose **General progress**, **Farming**, **Mining**, or
+   **Combat**, then click **Get recommendations**. Up to three cards explain the
+   suggested actions and their saved evidence. Each result shows its snapshot
+   time and an **AI** or **Basic fallback** label. Changing player, profile, or goal
+   clears advice; browsing data or Timeline never requests new advice.
 
 Timeline browsing only calls saved-snapshot GET routes. It does not fetch Hypixel
 data or skill thresholds, refresh the player, or write to MongoDB. Profile changes
@@ -81,6 +86,7 @@ player fetch allowance.
 npm test
 npm run build
 node scripts/check-timeline.cjs
+node scripts/check-recommendations.cjs
 ```
 
 Tests use synthetic fixtures and local HTTP; they need no live API or database.
@@ -96,10 +102,16 @@ requires an installed Chrome/Chromium browser (set `CHROME_BIN` if not at the
 default macOS Chrome path). Preview screenshots are written to the OS temporary
 directory. It does not read `.env` or connect to Atlas/Hypixel.
 
+The recommendations browser check also uses synthetic data and mocked responses.
+It checks click-only requests, loading, evidence and zero values, AI/basic labels,
+empty/error/retry states, selection changes and late responses, plus desktop and
+mobile layouts. It does not call Gemini or use credentials.
+
 ## Important files
 
 - `client/src/App.jsx`: username lookup and dashboard navigation.
 - `client/src/SkyblockPage.jsx`: profile selection and category displays.
+- `client/src/RecommendationsView.jsx`: explicit goal-based requests and saved-evidence cards.
 - `server/app.js`: health, identity, snapshots/history, and manual fetch routes.
 - `server/minecraft.js`: canonical Minecraft username/UUID resolution.
 - `server/normalize.js`: predictable, availability-aware category objects.

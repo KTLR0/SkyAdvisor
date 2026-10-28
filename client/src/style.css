@@ -386,6 +386,24 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .timeline-decrease { color: #9a4b19; }
 .timeline-error { padding: 12px; border: 1px solid #dbc5ae; border-radius: 8px; background: #fff8ef; margin: 12px 0; }
 .timeline-error p { margin-top: 0; }
+.recommendations-section h2 { margin-top: 0; }
+.recommendation-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.recommendation-goal { display: grid; gap: 6px; min-width: 0; }
+.recommendation-goal select { padding: 10px 12px; border: 1px solid #8ba5b8; border-radius: 6px; color: inherit; background: white; font: inherit; }
+.recommendation-goal select:focus-visible { outline: 3px solid #235b85; outline-offset: 2px; }
+.recommendation-intro { margin-top: 16px; }
+.recommendation-result-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 16px; margin-top: 16px; }
+.recommendation-source { display: inline-block; padding: 4px 10px; border-radius: 6px; font-weight: 650; background: #e5eef7; color: #234e71; }
+.recommendation-source.fallback { background: #edf0f3; color: #385269; }
+.recommendation-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; list-style: none; padding: 0; margin: 20px 0 0; }
+.recommendation-list > li { min-width: 0; }
+.recommendation-card { height: 100%; padding: 20px; border: 1px solid #d3e0ea; border-radius: 10px; background: #f9fbfd; overflow-wrap: anywhere; }
+.recommendation-priority { margin: 0 0 6px; color: #476175; font-size: 0.8rem; font-weight: 650; }
+.recommendation-card h3 { margin: 0 0 16px; font-size: 1.1rem; }
+.recommendation-card h4 { margin: 16px 0 4px; font-size: 0.9rem; }
+.recommendation-card p { margin-top: 4px; }
+.recommendation-evidence { margin: 6px 0 0; padding-left: 20px; color: #385269; font-size: 0.875rem; }
+.recommendation-evidence li + li { margin-top: 6px; }
 @media (max-width: 480px) {
   .timeline-category { padding: 10px; }
   .timeline-table th, .timeline-table td { padding: 9px 5px; font-size: 0.8rem; }
@@ -405,4 +423,7 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
   .skyblock-actions { max-width: none; width: 100%; }
   .skyblock-actions button { flex: 1 1 100%; }
   .data-section, .profile-section { padding: 16px; }
+  .recommendations-section, .recommendation-card { padding: 16px; }
+  .recommendation-controls { align-items: stretch; flex-direction: column; }
+  .recommendation-goal select { width: 100%; }
 }

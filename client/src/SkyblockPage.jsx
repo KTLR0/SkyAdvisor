@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SkillsView from './SkillsView.jsx';
 import TimelineView from './TimelineView.jsx';
+import RecommendationsView from './RecommendationsView.jsx';
 
 const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
@@ -235,6 +236,8 @@ export default function SkyBlockPage({ player, onBack }) {
         {ITEM_TABS.has(selectedTab) && <InventoryView data={currentData} onItemClick={setSelectedItem} />}
         {selectedTab === 'Pets' && <PetsView data={currentData} />}
       </section>
+      <RecommendationsView key={`${player.uuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`}
+        playerUuid={player.uuid} profileId={profile.profileId} />
       {selectedItem && <ItemDetails item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </>}
   </main>;
