@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SkyAdvisor recommendation response v1",
+  "title": "SkyAdvisor model recommendation plan v2",
   "type": "object",
   "additionalProperties": false,
   "required": ["contractVersion", "goal", "actions"],
   "properties": {
-    "contractVersion": { "const": 1 },
+    "contractVersion": { "type": "integer", "const": 2 },
     "goal": { "enum": ["general", "farming", "mining", "combat"] },
     "actions": {
       "type": "array",
@@ -13,12 +13,12 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["priority", "title", "whatToDo", "whyItFitsGoal", "supportingFactIds"],
+        "required": ["priority", "kind", "focusFactId", "reason", "supportingFactIds"],
         "properties": {
           "priority": { "type": "integer", "minimum": 1, "maximum": 3 },
-          "title": { "type": "string", "minLength": 1, "maxLength": 120 },
-          "whatToDo": { "type": "string", "minLength": 1, "maxLength": 600 },
-          "whyItFitsGoal": { "type": "string", "minLength": 1, "maxLength": 600 },
+          "kind": { "enum": ["train_skill", "grow_collection", "review_inventory"] },
+          "focusFactId": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "reason": { "enum": ["goal_alignment", "next_level", "next_collection_tier", "recorded_progress", "known_item"] },
           "supportingFactIds": {
             "type": "array",
             "minItems": 1,

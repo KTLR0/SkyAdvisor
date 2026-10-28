@@ -27,6 +27,8 @@ Configure these names in the root `.env` (never commit credentials):
   placeholders or does not already contain credentials.
 - `MONGODB_DATABASE`: optional database name.
 - `HYPIXEL_API_KEY`: required for fresh Hypixel fetches, not for reading saved data.
+- `GEMINI_API_KEY`: optional, server-only; enables explicit AI recommendation requests.
+- `GEMINI_MODEL`: optional, defaults to `gemini-3.8-flash`.
 - `PORT`: optional Express port, also used by Vite's API proxy.
 
 Allow your machine's network address in Atlas and give the database user read/write
@@ -106,8 +108,9 @@ directory. It does not read `.env` or connect to Atlas/Hypixel.
 - `server/skyblock.js`: identity checks, fetching, atomic persistence, and readback.
 - `server/database.js`: MongoDB setup and transaction lifecycle.
 - `docs/data-contract.md`: stored/API shapes and legacy compatibility.
-- `server/ai-recommendations.js` and `docs/ai-recommendations.md`: saved-only AI input
-  preparation and the future recommendation response contract (Part 1).
+- `server/ai-recommendations.js`, `server/recommendation-service.js`, and
+  `docs/ai-recommendations.md`: saved-only AI input, explicit backend recommendation
+  requests, verified text rendering, and deterministic fallback behavior.
 
 `test.js`, `cache.json`, and tracked `PlayerData/` files are preserved legacy export
 experiments. The app does not use them as a database fallback. `test.js` is not a

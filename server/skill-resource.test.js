@@ -77,3 +77,20 @@ test('an expired resource is replaced only by a successful validated refresh', a
   assert.equal((await cache.load()).version, 'fixture-next');
   assert.equal(calls, 2);
 });
+
+test('peeking at skill metadata never fetches, including on a cold or expired cache', async () => {
+  let calls = 0, time = 1000;
+  const cache = createSkillResourceCache({ now: () => time, request: async () => {
+    calls++;
+    return Response.json(officialSkillsFixture());
+  } });
+  assert.equal(cache.peek(), null);
+  assert.equal(calls, 0);
+  await cache.load();
+  assert.ok(cache.peek().skills.mining);
+  time += CACHE_MS;
+  assert.equal(cache.peek().stale, true);
+  time = 1000 + MAX_STALE_MS + 1;
+  assert.equal(cache.peek(), null);
+  assert.equal(calls, 1);
+});
