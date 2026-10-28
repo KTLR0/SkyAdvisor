@@ -106,6 +106,8 @@ directory. It does not read `.env` or connect to Atlas/Hypixel.
 - `server/skyblock.js`: identity checks, fetching, atomic persistence, and readback.
 - `server/database.js`: MongoDB setup and transaction lifecycle.
 - `docs/data-contract.md`: stored/API shapes and legacy compatibility.
+- `server/ai-recommendations.js` and `docs/ai-recommendations.md`: saved-only AI input
+  preparation and the future recommendation response contract (Part 1).
 
 `test.js`, `cache.json`, and tracked `PlayerData/` files are preserved legacy export
 experiments. The app does not use them as a database fallback. `test.js` is not a
