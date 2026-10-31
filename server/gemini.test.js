@@ -13,6 +13,7 @@ test('Gemini transport sends compact evidence and structured schema with credent
   // Random synthetic transport token; no actual credentials are loaded by tests.
   const token = randomUUID();
   const input = { contractVersion: 1, goal: 'general', skills: [] };
+  const allowedActions = [{ kind: 'train_skill', reasons: ['recorded_progress'], focusFactIds: ['skill:mining'] }];
   const signal = new AbortController().signal;
   for (const model of [DEFAULT_MODEL, 'gemini-3.6-flash', 'gemini-2.5-flash', 'synthetic-model']) {
     let calls = 0;
@@ -27,6 +28,7 @@ test('Gemini transport sends compact evidence and structured schema with credent
         assert.ok(!options.body.includes(token));
         const body = JSON.parse(options.body);
         assert.deepEqual(JSON.parse(body.contents[0].parts[0].text), input);
+        assert.deepEqual(body.contents[0].parts[1], { text: JSON.stringify({ allowedActions }) });
         assert.equal(body.generationConfig.responseFormat.text.mimeType, 'APPLICATION_JSON');
         assert.equal(body.generationConfig.candidateCount, undefined, 'Gemini 3 does not support candidateCount');
         assert.deepEqual(body.generationConfig.thinkingConfig,
@@ -36,7 +38,7 @@ test('Gemini transport sends compact evidence and structured schema with credent
         return reply();
       } });
     assert.equal(client.isConfigured(), true);
-    assert.deepEqual(await client.generate({ input, schema, signal }), plan);
+    assert.deepEqual(await client.generate({ input, schema, allowedActions, signal }), plan);
     assert.equal(calls, 1);
   }
 });
@@ -57,13 +59,15 @@ test('temporary Gemini errors retry with bounded backoff and can recover', async
 
 test('a server-authored duplicate correction reaches the model alongside the same saved input', async () => {
   const input = { contractVersion: 1, goal: 'combat', skills: [] };
+  const allowedActions = [{ kind: 'train_skill', reasons: ['recorded_progress'], focusFactIds: ['skill:combat'] }];
   const correction = 'Return each training focus only once.';
   const client = createGeminiClient({ getApiKey: () => randomUUID(), request: async (url, options) => {
     const body = JSON.parse(options.body);
-    assert.deepEqual(body.contents[0].parts, [{ text: JSON.stringify(input) }, { text: correction }]);
+    assert.deepEqual(body.contents[0].parts, [{ text: JSON.stringify(input) },
+      { text: JSON.stringify({ allowedActions }) }, { text: correction }]);
     return reply();
   } });
-  await client.generate({ input, schema, correction });
+  await client.generate({ input, schema, allowedActions, correction });
 });
 
 test('persistent server errors stop after three attempts and expose only safe status metadata', async () => {

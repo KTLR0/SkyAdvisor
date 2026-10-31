@@ -121,14 +121,19 @@ The response is advisory: collection/equipment focuses for a goal are suggested
 planning steps, not verified game mechanics or guaranteed gains.
 
 Before calling Gemini, `buildPlanSchema(input)` narrows the base response schema
-to the requested goal and the fact IDs in that exact summary. Its `anyOf` groups
-bind each allowed action kind to eligible focus IDs and supported reasons using
-the same evidence rules as the validator. Missing level/collection thresholds
-never offer a next-level/tier reason. A specific goal offers only its own skill
-for training; repeated stacks offer one review focus per item type. The model
-still chooses the action focuses, reasons, count, and priorities. The server
-does not preselect a final list or accept invalid output to make the AI label
-appear. The full validator still runs on every returned plan.
+to the requested goal and contract version. The schema stays the same size as
+profile evidence grows; it does not embed fact-ID enums or per-fact `anyOf`
+branches. Full-sized synthetic profiles reproduced HTTP 400 with the former
+fact-dependent schema, while the same evidence succeeded with a small schema.
+
+`buildAllowedActions(input)` sends eligible kind/reason/focus-ID groups as separate
+prompt data, using the same evidence rules as the validator. Missing level or
+collection thresholds never offer a next-level/tier reason. A specific goal
+offers only its own skill for training; repeated stacks offer one review focus
+per item type. These groups describe eligible options; the model still chooses
+the focuses, reasons, count, and priorities. Supporting IDs must exist in the
+saved input. The full validator still independently checks every returned plan,
+including after correction, and rejects unsupported facts and numerical claims.
 If a plan fails only because it repeats otherwise individually valid actions,
 the service asks Gemini once for a corrected plan. The correction is a fixed
 server-authored instruction; no raw invalid model response is sent back. Both
@@ -299,6 +304,12 @@ were added without relaxing validation. Subsequent synthetic live checks on
 3.5 Flash-Lite returned two valid Combat actions in about 18 seconds and three
 valid Mining actions in about 20 seconds. The local model override is now
 `gemini-3.5-flash-lite`; the key and all other local settings were preserved.
+The later full-profile HTTP 400 fix was checked with 11 skills, 100 collections,
+and 40 Inventory facts. Keeping the schema small and moving eligible combinations
+into prompt data returned validated AI results for all four goals on the same
+configured model: General (three actions, about 13 seconds), Farming (one, 16
+seconds), Mining (three, 11 seconds), and Combat (two, 30 seconds including one
+duplicate correction). These explicit checks used synthetic saved records only.
 
 `server/gemini.js` calls the fixed Google `generateContent` REST endpoint with
 the compact summary and v2 structured-output schema. Credentials are sent only
@@ -328,6 +339,6 @@ malformed or wrong-profile responses, and stale responses across goal/profile/
 player changes. It also checks the existing data views and captures desktop/mobile
 previews in the OS temporary directory. It needs installed Chrome/Chromium
 (`CHROME_BIN` can override the default macOS location). It does not load `.env`,
-call live Gemini/Hypixel, or connect to Atlas. The separate synthetic live check
-verified generation and evidence validation with Gemini 3.6 Flash; it does not
+call live Gemini/Hypixel, or connect to Atlas. Separate synthetic live checks
+verified generation and evidence validation with the configured models; they do not
 guarantee availability or valid output for every future player request.

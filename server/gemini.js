@@ -8,7 +8,8 @@ const statusCode = status => status === 401 || status === 403 ? 'GEMINI_ACCESS'
     : status === 400 ? 'GEMINI_REQUEST' : TRANSIENT_STATUSES.has(status) ? 'GEMINI_UNAVAILABLE' : 'GEMINI_FAILED';
 const SYSTEM_INSTRUCTION = `You plan next actions for a Hypixel SkyBlock video-game profile in Minecraft using only the supplied saved evidence.
 Choose and prioritize zero to three distinct actions for the selected goal; do not return a fixed checklist.
-The response schema enumerates the allowed kind/reason/focusFactId combinations for this goal and snapshot. Choose only those combinations.
+The supplied allowedActions groups list eligible kind/reasons/focusFactIds for this goal and snapshot.
+For each action, choose a group's kind, one of its reasons, and one of its focusFactIds. These groups are options, not a ranked checklist.
 Never repeat a focusFactId or review the same item type twice, even with a different reason or storage location.
 For one skill, goal_alignment, next_level, and recorded_progress are alternate reasons for ONE training action, not different actions.
 Return a JSON plan matching the provided schema. Choose kind, focusFactId and reason; never add prose or numerical claims.
@@ -30,7 +31,7 @@ function createGeminiClient({ request = (...args) => globalThis.fetch(...args),
     const key = getApiKey();
     return typeof key === 'string' && Boolean(key.trim());
   };
-  async function generate({ input, schema, signal, correction }) {
+  async function generate({ input, schema, allowedActions, signal, correction }) {
     const apiKey = getApiKey()?.trim();
     const model = getModel()?.trim();
     if (!apiKey || typeof model !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,119}$/.test(model)) {
@@ -43,7 +44,9 @@ function createGeminiClient({ request = (...args) => globalThis.fetch(...args),
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-        contents: [{ role: 'user', parts: [{ text: JSON.stringify(input) }, ...(correction ? [{ text: correction }] : [])] }],
+        contents: [{ role: 'user', parts: [{ text: JSON.stringify(input) },
+          ...(allowedActions ? [{ text: JSON.stringify({ allowedActions }) }] : []),
+          ...(correction ? [{ text: correction }] : [])] }],
         generationConfig: { maxOutputTokens: 4096,
           // This bounded selection task does not need the Gemini 3 default's deeper reasoning.
           ...(/^gemini-3(?:[.-]|$)/.test(model) ? { thinkingConfig: { thinkingLevel: 'LOW' } } : {}),

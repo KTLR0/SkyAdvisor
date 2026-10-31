@@ -44,15 +44,11 @@ function supported(action, fact, goal) {
     || (action.reason === 'known_item' && inventory);
 }
 
-// Constrain generation with the same rules used to verify it. This lists eligible
-// combinations, not final recommendations: the model still chooses and ranks them.
-function buildPlanSchema(input) {
-  const schema = structuredClone(SCHEMA);
-  schema.properties.contractVersion.enum = [SCHEMA.properties.contractVersion.const];
-  schema.properties.goal.enum = [input.goal];
-  const item = schema.properties.actions.items;
+// Describe eligible combinations as prompt data, not schema branches/enums whose
+// decoding complexity grows with the profile. The model still chooses and ranks.
+function buildAllowedActions(input) {
+  const item = SCHEMA.properties.actions.items;
   const facts = [...factsById(input).values()].filter(fact => fact.factId.length <= item.properties.focusFactId.maxLength);
-  item.properties.supportingFactIds.items.enum = facts.map(fact => fact.factId);
   const groups = new Map();
   const inventoryItems = new Set();
   for (const fact of facts) {
@@ -68,17 +64,14 @@ function buildPlanSchema(input) {
       groups.get(key).ids.push(fact.factId);
     }
   }
-  if (!groups.size) {
-    schema.properties.actions.maxItems = 0;
-    // Empty enum arrays are invalid JSON Schema; no actions can reference facts.
-    delete item.properties.supportingFactIds.items.enum;
-  } else {
-    item.anyOf = [...groups.values()].map(group => ({ type: 'object', properties: {
-      kind: { type: 'string', enum: [group.kind] },
-      reason: { type: 'string', enum: group.reasons },
-      focusFactId: { type: 'string', enum: group.ids },
-    } }));
-  }
+  return [...groups.values()].map(({ kind, reasons, ids }) => ({ kind, reasons, focusFactIds: ids }));
+}
+
+function buildPlanSchema(input) {
+  const schema = structuredClone(SCHEMA);
+  schema.properties.contractVersion.enum = [SCHEMA.properties.contractVersion.const];
+  schema.properties.goal.enum = [input.goal];
+  if (!buildAllowedActions(input).length) schema.properties.actions.maxItems = 0;
   return schema;
 }
 
@@ -164,14 +157,15 @@ function renderAction(action, input) {
 async function generateWithDeadline(client, input, timeoutMs) {
   const controller = new AbortController();
   const schema = buildPlanSchema(input);
+  const allowedActions = buildAllowedActions(input);
   let timer;
   try {
     return await Promise.race([
       Promise.resolve().then(async () => {
-        const plan = await client.generate({ input, schema, signal: controller.signal });
+        const plan = await client.generate({ input, schema, allowedActions, signal: controller.signal });
         controller.signal.throwIfAborted();
         if (!validatePlan(plan, input) && onlyDuplicateActions(plan, input)) {
-          return client.generate({ input, schema, signal: controller.signal,
+          return client.generate({ input, schema, allowedActions, signal: controller.signal,
             correction: 'The last plan repeated an action. Return a corrected plan with each focusFactId used only once. '
               + 'Different reasons for training the same skill describe ONE action, not separate actions. '
               + 'Review each item type at most once. Use consecutive priorities and choose fewer actions if needed.' });
@@ -229,4 +223,4 @@ function createRecommendationService({ getDatabase = database.getReadDatabase,
   return { recommend };
 }
 
-module.exports = { ...createRecommendationService(), createRecommendationService, validatePlan, buildPlanSchema };
+module.exports = { ...createRecommendationService(), createRecommendationService, validatePlan, buildPlanSchema, buildAllowedActions };

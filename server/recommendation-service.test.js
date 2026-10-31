@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { createRecommendationService, buildPlanSchema, validatePlan } = require('./recommendation-service');
+const { createRecommendationService, buildPlanSchema, buildAllowedActions, validatePlan } = require('./recommendation-service');
 const { buildRecommendationInput, RECOMMENDATION_RESPONSE_SCHEMA } = require('./ai-recommendations');
 const { createGeminiClient } = require('./gemini');
 const { randomUUID } = require('node:crypto');
@@ -10,6 +10,7 @@ const { timelineRows } = require('./fixtures/timeline');
 const { PLAYER_ID, PROFILE_A, PROFILE_B } = require('./fixtures/skyblock');
 const { normalizeSkillResource } = require('./skill-resource');
 const { officialSkillsFixture } = require('./fixtures/skill-resource');
+const { fullRecommendationProfile } = require('./fixtures/recommendations');
 
 const action = (extra = {}) => ({ priority: 1, kind: 'train_skill', focusFactId: 'skill:mining',
   reason: 'goal_alignment', supportingFactIds: ['skill:mining'], ...extra });
@@ -67,42 +68,41 @@ test('each goal gets only eligible action/reason/fact combinations and its own e
     const schema = buildPlanSchema(input);
     assert.deepEqual(schema.properties.goal.enum, [goal]);
     assert.deepEqual(schema.properties.contractVersion.enum, [2]);
-    const item = schema.properties.actions.items;
-    assert.ok(!item.properties.supportingFactIds.items.enum.includes('skill:missing'));
-    const focuses = item.anyOf.flatMap(branch => branch.properties.focusFactId.enum);
+    const choices = buildAllowedActions(input);
+    const focuses = choices.flatMap(group => group.focusFactIds);
+    assert.ok(!focuses.includes('skill:missing'));
     assert.ok(focuses.includes(`skill:${goal === 'general' ? 'mining' : goal}`));
     if (goal !== 'general') assert.deepEqual(focuses.filter(id => id.startsWith('skill:')), [`skill:${goal}`]);
     assert.equal(focuses.filter(id => id.startsWith('inventory:')).length, 1);
-    for (const branch of item.anyOf) {
-      for (const focusFactId of branch.properties.focusFactId.enum) {
-        for (const reason of branch.properties.reason.enum) {
-          const candidate = plan([action({ kind: branch.properties.kind.enum[0], reason, focusFactId,
+    for (const group of choices) {
+      for (const focusFactId of group.focusFactIds) {
+        for (const reason of group.reasons) {
+          const candidate = plan([action({ kind: group.kind, reason, focusFactId,
             supportingFactIds: [focusFactId] })], { goal });
           assert.equal(validatePlan(candidate, input), true);
         }
       }
     }
-    const collection = item.anyOf.find(branch => branch.properties.kind.enum[0] === 'grow_collection');
-    assert.deepEqual(collection.properties.reason.enum, ['recorded_progress']);
+    const collection = choices.find(group => group.kind === 'grow_collection');
+    assert.deepEqual(collection.reasons, ['recorded_progress']);
     assert.deepEqual(input, before);
   }
   assert.deepEqual(RECOMMENDATION_RESPONSE_SCHEMA, originalSchema);
   const input = buildRecommendationInput({ data }, 'mining');
-  const schema = buildPlanSchema(input);
-  assert.ok(schema.properties.actions.items.anyOf.filter(branch => branch.properties.kind.enum[0] === 'train_skill')
-    .every(branch => !branch.properties.reason.enum.includes('next_level')));
+  assert.ok(buildAllowedActions(input).filter(group => group.kind === 'train_skill')
+    .every(group => !group.reasons.includes('next_level')));
   const empty = buildPlanSchema(buildRecommendationInput({ data: {} }, 'combat'));
   assert.equal(empty.properties.actions.maxItems, 0);
 });
 
-test('the model receives a goal-scoped schema before selection and invalid model combinations still fail', async () => {
+test('the model receives goal-scoped schema and action options; invalid combinations still fail', async () => {
   for (const goal of ['combat', 'mining']) {
     let receivedSchema;
-    const f = await fixture({ modelClient: { isConfigured: () => true, generate: async ({ input, schema }) => {
+    const f = await fixture({ modelClient: { isConfigured: () => true, generate: async ({ input, schema, allowedActions }) => {
       receivedSchema = schema;
-      const branch = schema.properties.actions.items.anyOf.find(item => item.properties.kind.enum[0] === 'grow_collection');
+      const group = allowedActions.find(item => item.kind === 'grow_collection');
       return plan([action({ kind: 'grow_collection', reason: 'recorded_progress',
-        focusFactId: branch.properties.focusFactId.enum[0], supportingFactIds: [branch.properties.focusFactId.enum[0]] })], { goal: input.goal });
+        focusFactId: group.focusFactIds[0], supportingFactIds: [group.focusFactIds[0]] })], { goal: input.goal });
     } } });
     assert.equal((await f.request(goal)).source, 'ai');
     assert.deepEqual(receivedSchema.properties.goal.enum, [goal]);
@@ -113,15 +113,58 @@ test('the model receives a goal-scoped schema before selection and invalid model
   assert.equal((await invalid.request()).fallbackReason, 'invalid_response');
 });
 
-test('duplicate-only plans get one model correction and the corrected choices are validated', async () => {
+test('full-sized profiles keep a constant schema and send all eligible options as prompt data for every goal', async () => {
+  const profile = fullRecommendationProfile();
+  const metadata = { skillDefinitions: normalizeSkillResource(officialSkillsFixture()).skills };
+  const memory = createMemoryDatabase();
+  memory.rows('skyblockSnapshots').push({ _id: 'synthetic-full-profile', playerUuid: PLAYER_ID,
+    profileId: PROFILE_A, schemaVersion: 2, fetchedAt: profile.fetchedAt, data: profile.data });
   let calls = 0;
+  const client = createGeminiClient({ getApiKey: () => randomUUID(), request: async (url, options) => {
+    calls++;
+    const body = JSON.parse(options.body);
+    const input = JSON.parse(body.contents[0].parts[0].text);
+    const { allowedActions } = JSON.parse(body.contents[0].parts[1].text);
+    assert.equal(input.skills.length, 11);
+    assert.equal(input.collections.length, 100);
+    assert.equal(input.inventory.length, 40);
+    assert.deepEqual(allowedActions, buildAllowedActions(input));
+    const { $schema, ...smallSchema } = buildPlanSchema(buildRecommendationInput({ data: {
+      Skills: { status: 'available', entries: [{ id: input.goal === 'general' ? 'mining' : input.goal, xp: 0, status: 'available' }] },
+    } }, input.goal));
+    // The evidence count, ID lengths, and possible actions must not expand the
+    // provider's constrained-decoding schema (the original HTTP 400 trigger).
+    assert.deepEqual(body.generationConfig.responseFormat.text.schema, smallSchema);
+    const group = allowedActions.find(item => item.kind === 'train_skill');
+    const focusFactId = group.focusFactIds[0];
+    return Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(
+      plan([action({ focusFactId, supportingFactIds: [focusFactId], reason: group.reasons[0] })], { goal: input.goal })
+    ) }] } }] });
+  } });
+  const service = createRecommendationService({ getDatabase: async () => memory.db, getMetadata: () => metadata, modelClient: client });
+  for (const goal of ['general', 'farming', 'mining', 'combat']) {
+    const result = await service.recommend(PLAYER_ID, PROFILE_A, goal);
+    assert.equal(result.source, 'ai');
+    assert.equal(result.goal, goal);
+    assert.equal(result.actions.length, 1);
+    const input = buildRecommendationInput(profile, goal, metadata);
+    assert.equal(validatePlan(plan(result.actions.map(({ priority, kind, focusFactId, reason, supportingFactIds }) =>
+      ({ priority, kind, focusFactId, reason, supportingFactIds })), { goal }), input), true);
+  }
+  assert.equal(calls, 4);
+});
+
+test('duplicate-only plans get one model correction and the corrected choices are validated', async () => {
+  let calls = 0, originalOptions;
   const f = await fixture({ modelClient: { isConfigured: () => true, generate: async request => {
     calls++;
     if (calls === 1) {
       assert.equal(request.correction, undefined);
+      originalOptions = structuredClone(request.allowedActions);
       return plan([action(), action({ priority: 2, reason: 'next_level' })]);
     }
     assert.match(request.correction, /each focusFactId used only once/);
+    assert.deepEqual(request.allowedActions, originalOptions);
     return plan([action({ reason: 'next_level' })]);
   } } });
   const result = await f.request();
