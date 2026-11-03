@@ -131,3 +131,16 @@ test('missing configuration makes no request; HTTP failures and blocked, truncat
     await assert.rejects(client.generate({ input: {}, schema }));
   }
 });
+
+test('progression calls may supply a dedicated guide instruction without changing the transport', async () => {
+  const guideSchema = { type: 'object', properties: { heading: { type: 'string' } },
+    required: ['heading'], additionalProperties: false };
+  const client = createGeminiClient({ getApiKey: () => randomUUID(), request: async (url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.systemInstruction.parts[0].text, 'Write a detailed progress guide.');
+    assert.deepEqual(body.generationConfig.responseFormat.text.schema, guideSchema);
+    return reply(JSON.stringify({ heading: 'Progress' }));
+  } });
+  assert.deepEqual(await client.generate({ input: { skill: 'mining' }, schema: guideSchema,
+    instruction: 'Write a detailed progress guide.' }), { heading: 'Progress' });
+});

@@ -5,10 +5,11 @@ const skyblock = require('./skyblock');
 const { getSkillResource } = require('./skill-resource');
 const timeline = require('./timeline');
 const recommendations = require('./recommendation-service');
+const progressions = require('./progression-service');
 
 function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
   getApiKey = () => process.env.HYPIXEL_API_KEY, loadSkillResource = getSkillResource,
-  timelineService = timeline, recommendationService = recommendations } = {}) {
+  timelineService = timeline, recommendationService = recommendations, progressionService = progressions } = {}) {
   const { fetchSkyBlockData, loadLatestSkyBlockData, loadSkyBlockHistory, loadSkyBlockSnapshot } = service;
 
   const app = express();
@@ -51,6 +52,33 @@ function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
       if ([400, 404].includes(error.status)) return res.status(error.status).json({ error: error.message });
       return res.status(500).json({ error: 'Saved recommendation data could not be loaded.' });
     }
+  });
+
+  // User-initiated, Wiki-backed guided progression. No client-provided player facts.
+  const progressionPath = '/api/players/:playerUuid/profiles/:profileId/progression';
+  function progressionError(res, error) {
+    return res.status(error.safe && Number.isInteger(error.status) ? error.status : 500)
+      .json({ error: error.safe ? error.message : 'Progression guide could not be loaded.' });
+  }
+  app.post(progressionPath, async (req, res) => {
+    res.set('Cache-Control', 'no-store');
+    if (!req.body || Array.isArray(req.body) || Object.keys(req.body).sort().join(',') !== 'mode,skill') {
+      return res.status(400).json({ error: 'Provide only a skill and a progression mode.' });
+    }
+    try {
+      return res.json(await progressionService.start(req.params.playerUuid, req.params.profileId,
+        req.body.skill, req.body.mode));
+    } catch (error) { return progressionError(res, error); }
+  });
+  app.post(`${progressionPath}/:sessionId/continue`, async (req, res) => {
+    res.set('Cache-Control', 'no-store');
+    if (!req.body || Array.isArray(req.body) || Object.keys(req.body).join(',') !== 'optionId') {
+      return res.status(400).json({ error: 'Provide only the selected follow-up option.' });
+    }
+    try {
+      return res.json(await progressionService.continueSession(req.params.playerUuid,
+        req.params.profileId, req.params.sessionId, req.body.optionId));
+    } catch (error) { return progressionError(res, error); }
   });
 
   app.get('/api/resources/skills', async (req, res) => {

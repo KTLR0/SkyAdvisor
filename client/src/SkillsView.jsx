@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { calculateSkillProgress, displayPercent } from './skill-progress.js';
+import ProgressionChat from './ProgressionChat.jsx';
 
 const number = (value) => new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(value);
 
-function SkillCard({ entry, definition, categoryStatus, loading }) {
+function SkillCard({ entry, definition, categoryStatus, loading, onPlan }) {
   const titleId = useId();
   const descriptionId = useId();
   const progress = calculateSkillProgress(entry, definition, categoryStatus);
@@ -44,10 +45,14 @@ function SkillCard({ entry, definition, categoryStatus, loading }) {
     </> : <p className="skill-progress-unavailable" role="status">
       {loading && reliableXp ? 'Loading official skill thresholds…' : progress.reason}
     </p>}
+    {onPlan && <button type="button" className="secondary skill-plan-button" onClick={() => onPlan(entry.id)}>Plan next steps</button>}
   </article>;
 }
 
-export default function SkillsView({ data }) {
+export default function SkillsView({ data, playerUuid, profileId }) {
+  const [selectedSkill, setSelectedSkill] = useState(null);
+  const guideRef = useRef(null);
+  useEffect(() => { if (selectedSkill) guideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, [selectedSkill]);
   const [resource, setResource] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -92,8 +97,11 @@ export default function SkillsView({ data }) {
     {resource?.stale && <p className="availability partial" role="status">Hypixel is unavailable. Showing progress using previously verified, cached thresholds.</p>}
     <div className="skill-grid skill-progress-grid" aria-busy={loading}>
       {(data?.entries || []).map((entry) => <SkillCard key={entry.id} entry={entry}
-        definition={resource?.skills[entry.id]} categoryStatus={data.status} loading={loading} />)}
+        definition={resource?.skills[entry.id]} categoryStatus={data.status} loading={loading}
+        onPlan={playerUuid && profileId ? setSelectedSkill : null} />)}
     </div>
+    {selectedSkill && <div ref={guideRef}><ProgressionChat key={selectedSkill} skill={selectedSkill}
+      playerUuid={playerUuid} profileId={profileId} /></div>}
     <p className="hint skill-source">Level thresholds: <a href="https://api.hypixel.net/v2/resources/skyblock/skills" target="_blank" rel="noreferrer">Hypixel Skills resource</a>.
       {' '}Remaining XP is rounded up to a whole XP.</p>
   </>;
