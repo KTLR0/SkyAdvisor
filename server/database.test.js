@@ -49,7 +49,7 @@ test('normal startup still initializes the existing indexes once after a read-on
   assert.equal(await database.getDatabase(), readDb);
   assert.equal(await database.getDatabase(), readDb);
   assert.equal(connect.mock.callCount(), 1);
-  assert.equal(indexWrites.length, 5);
+  assert.equal(indexWrites.length, 6);
   assert.deepEqual(indexWrites.find(write => write.name === 'players').args,
     [{ uuid: 1 }, { unique: true }]);
 });

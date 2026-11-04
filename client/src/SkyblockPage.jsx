@@ -231,7 +231,8 @@ export default function SkyBlockPage({ player, onBack }) {
         {selectedTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
         {selectedTab === 'Timeline' && <TimelineView key={`${player.uuid}:${profile.profileId}`}
           playerUuid={player.uuid} profileId={profile.profileId} />}
-        {selectedTab === 'Skills' && <SkillsView data={currentData} />}
+        <div hidden={selectedTab !== 'Skills'}><SkillsView key={`${player.uuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`}
+          data={profile.data.Skills} playerUuid={player.uuid} profileId={profile.profileId} /></div>
         {selectedTab === 'Collections' && <CollectionsView data={currentData} />}
         {ITEM_TABS.has(selectedTab) && <InventoryView data={currentData} onItemClick={setSelectedItem} />}
         {selectedTab === 'Pets' && <PetsView data={currentData} />}

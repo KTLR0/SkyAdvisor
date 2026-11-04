@@ -92,6 +92,7 @@ function getDatabase() {
       snapshots.createIndex({ playerUuid: 1, timestamp: 1, profileId: 1 }),
       db.collection('fetchEvents').createIndex({ playerUuid: 1, fetchedAt: -1 }),
       db.collection('fetchLocks').createIndex({ createdAt: 1 }, { expireAfterSeconds: 120 }),
+      db.collection('progressionSessions').createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }),
     ]);
     indexesReady = true;
     return db;
