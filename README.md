@@ -56,11 +56,15 @@ stop that process or change `PORT` for Express, then restart both apps.
    **Load older snapshots** reads the next saved page. Skills XP and Collections
    counts show changes from the immediate predecessor, with explicit unavailable
    and unexpected decrease labels. The first snapshot has no comparison baseline.
-6. In **Recommendations**, choose **General progress**, **Farming**, **Mining**, or
-   **Combat**, then click **Get recommendations**. Up to three cards explain the
-   suggested actions and their saved evidence. Each result shows its snapshot
-   time and an **AI** or **Basic fallback** label. Changing player, profile, or goal
-   clears advice; browsing data or Timeline never requests new advice.
+6. Use **Plan next steps** on a Skills card or Collections row. The planner opens
+   with that skill or exact collection selected. Skill plans offer **Find my next
+   item** and **Choose my next collection**; collection plans target the clicked
+   collection’s next verified tier. Press **Build step-by-step guide**, continue
+   with the three follow-up choices, and **Download steps (.txt)** to export.
+   Use **Back to Skills** or **Back to Collections** to return. Reopening the same
+   button restores the current guide; selecting a different target resets it.
+   Player/profile/snapshot changes also reset and cancel pending work. Browsing or
+   opening a planner does not generate advice.
 
 Timeline browsing only calls saved-snapshot GET routes. It does not fetch Hypixel
 data or skill thresholds, refresh the player, or write to MongoDB. Profile changes
@@ -86,7 +90,7 @@ player fetch allowance.
 npm test
 npm run build
 node scripts/check-timeline.cjs
-node scripts/check-recommendations.cjs
+node scripts/check-next-steps.cjs
 ```
 
 Tests use synthetic fixtures and local HTTP; they need no live API or database.
@@ -102,16 +106,17 @@ requires an installed Chrome/Chromium browser (set `CHROME_BIN` if not at the
 default macOS Chrome path). Preview screenshots are written to the OS temporary
 directory. It does not read `.env` or connect to Atlas/Hypixel.
 
-The recommendations browser check also uses synthetic data and mocked responses.
-It checks click-only requests, loading, evidence and zero values, AI/basic labels,
-empty/error/retry states, selection changes and late responses, plus desktop and
-mobile layouts. It does not call Gemini or use credentials.
+The Next Steps browser check uses synthetic saved profiles, mocked model/resources,
+and in-memory planner sessions. It covers desktop/mobile navigation, skill and collection
+entry points and both skill paths, follow-ups, TXT export, profile/skill/snapshot resets,
+request cancellation, unavailable skills, and the absence of the old Recommendations
+panel or automatic generation requests. It does not use credentials or live services.
 
 ## Important files
 
 - `client/src/App.jsx`: username lookup and dashboard navigation.
 - `client/src/SkyblockPage.jsx`: profile selection and category displays.
-- `client/src/RecommendationsView.jsx`: explicit goal-based requests and saved-evidence cards.
+- `client/src/ProgressionChat.jsx`: the contextual skill/collection planner.
 - `server/app.js`: health, identity, snapshots/history, and manual fetch routes.
 - `server/minecraft.js`: canonical Minecraft username/UUID resolution.
 - `server/normalize.js`: predictable, availability-aware category objects.

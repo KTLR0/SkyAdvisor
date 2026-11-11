@@ -1,8 +1,8 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function exportGuide(session) {
   const lines = [
-    'SKYADVISOR — SKILL PROGRESSION GUIDE',
+    'SKYADVISOR — PROGRESSION GUIDE',
     `Skill: ${session.skill}`,
     `Path: ${session.mode === 'item' ? 'Next item' : 'Next collection'}`,
     `Objective: ${session.objective.name} (${session.objective.id})`,
@@ -36,9 +36,8 @@ function exportGuide(session) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export default function ProgressionChat({ playerUuid, profileId, skill }) {
-  const headingId = useId();
-  const [mode, setMode] = useState(null);
+export default function ProgressionChat({ playerUuid, profileId, skill, collectionId = null }) {
+  const [mode, setMode] = useState(collectionId ? 'collection' : null);
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -65,7 +64,7 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
       const endpoint = `/api/players/${encodeURIComponent(playerUuid)}/profiles/${encodeURIComponent(profileId)}/progression`;
       const response = await fetch(optionId ? `${endpoint}/${encodeURIComponent(session.sessionId)}/continue` : endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(optionId ? { optionId } : { skill, mode }),
+        body: JSON.stringify(optionId ? { optionId } : collectionId ? { collectionId } : { skill, mode }),
         cache: 'no-store', signal: AbortSignal.any([active.signal, AbortSignal.timeout(130000)]),
       });
       const data = await response.json();
@@ -73,7 +72,8 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
       if (active.signal.aborted || controller.current !== active) return;
       if (data.contractVersion !== 1 || data.playerUuid !== playerUuid.replaceAll('-', '').toLowerCase()
           || data.profileId !== profileId.replaceAll('-', '').toLowerCase()
-          || data.skill !== skill || data.mode !== mode || !Array.isArray(data.turns)) {
+          || (collectionId ? data.objective?.id !== collectionId : data.skill !== skill)
+          || data.mode !== mode || !Array.isArray(data.turns)) {
         throw new Error('The progression response was invalid. Please try again.');
       }
       setSession(data);
@@ -91,13 +91,11 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
     }
   }
 
-  return <section className="progression-chat" aria-labelledby={headingId}>
-    <div className="progression-header">
-      <div><p className="eyebrow">AI progression planner</p><h3 id={headingId}>Level {skill[0].toUpperCase() + skill.slice(1)}</h3></div>
-      {session && <button type="button" className="secondary" disabled={loading} onClick={() => changeMode(null)}>Start over</button>}
-    </div>
-    <p className="hint">Choose one route. The assistant uses saved profile snapshots, official Hypixel metadata, and the Hypixel SkyBlock Wiki.</p>
-    {!session && <div className="progression-modes" role="group" aria-label="Choose a progression route">
+  return <div className="progression-chat">
+    {session && <div className="progression-header"><button type="button" className="secondary" disabled={loading}
+      onClick={() => changeMode(collectionId ? 'collection' : null)}>Start over</button></div>}
+    {!session && <p className="hint">{collectionId ? 'Build a guide for this collection’s next verified tier.' : 'Choose an item or collection path.'}</p>}
+    {!session && !collectionId && <div className="progression-modes" role="group" aria-label="Choose a progression route">
       <button type="button" className={mode === 'item' ? 'active' : 'secondary'} disabled={loading}
         aria-pressed={mode === 'item'} onClick={() => changeMode('item')}>Find my next item</button>
       <button type="button" className={mode === 'collection' ? 'active' : 'secondary'} disabled={loading}
@@ -111,8 +109,8 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
     {error && <p className="availability error" role="alert">{error}</p>}
     {session && <>
       <div className="progression-objective">
-        <span className="recommendation-priority">{mode === 'item' ? 'Recommended item' : 'Recommended collection'}</span>
-        <h4>{session.objective.name}</h4>
+        {!collectionId && <><span className="recommendation-priority">{mode === 'item' ? 'Recommended item' : 'Recommended collection'}</span>
+          <h3>{session.objective.name}</h3></>}
         {mode === 'collection' && <p>Recorded: {session.objective.currentAmount.toLocaleString()} · Next tier: {session.objective.nextTier}
           {' '}· {session.objective.remaining.toLocaleString()} more required</p>}
         {session.objective.verification === 'not_in_readable_saved_inventory' && <p className="availability partial">
@@ -123,7 +121,7 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
       <div className="progression-turns">
         {session.turns.map((turn, index) => <article className="progression-turn" key={index}>
           {turn.choice && <p className="progression-choice">You chose: {turn.choice}</p>}
-          <h4>{turn.heading}</h4><p>{turn.summary}</p>
+          <h3>{turn.heading}</h3><p>{turn.summary}</p>
           <ol className="progression-steps">{turn.steps.map((step, stepIndex) => <li key={stepIndex}>
             <strong>{step.title}</strong><p>{step.detail}</p>
           </li>)}</ol>
@@ -138,5 +136,5 @@ export default function ProgressionChat({ playerUuid, profileId, skill }) {
       <div className="progression-export"><button type="button" className="secondary" onClick={() => exportGuide(session)}>
         Download steps (.txt)</button></div>
     </>}
-  </section>;
+  </div>;
 }

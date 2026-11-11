@@ -149,10 +149,11 @@ function createProgressionService({ getDatabase = database.getDatabase, modelCli
       steps: result.steps.map(step => ({ title: step.title.trim(), detail: step.detail.trim() })),
       options: result.options.map((option, index) => ({ id: String(index + 1), label: option.label.trim() })) };
   }
-  async function start(playerUuid, profileId, skill, mode) {
+  async function start(playerUuid, profileId, skill, mode, collectionId = null) {
     const players = uuidVariants(playerUuid, 'player UUID');
     const profiles = uuidVariants(profileId, 'profile ID');
-    if (!validSkill(skill) || !['item', 'collection'].includes(mode)) {
+    if (collectionId !== null ? typeof collectionId !== 'string' || !/^[A-Z0-9:_-]{1,100}$/.test(collectionId)
+      || mode !== 'collection' : !validSkill(skill) || !['item', 'collection'].includes(mode)) {
       throw fail(400, 'Choose a valid skill and either item or collection.');
     }
     const db = await getDatabase();
@@ -162,7 +163,21 @@ function createProgressionService({ getDatabase = database.getDatabase, modelCli
       .sort({ fetchedAt: -1, _id: -1 }).limit(1).toArray();
     if (!saved) throw fail(404, 'No saved snapshot exists for this player and profile.');
     const data = normalizeStoredData(saved.data, saved.schemaVersion ?? 1);
-    if (!data.Skills?.entries?.some(entry => entry.id === skill)) {
+    let collections;
+    if (collectionId !== null) {
+      if (!['available', 'partial'].includes(data.Collections?.status)
+        || !data.Collections.entries.some(entry => entry.id === collectionId && entry.status === 'available' && number(entry.amount))) {
+        throw fail(422, 'That collection has no reliable progress in the latest profile snapshot.');
+      }
+      try { collections = await resources.collections(); }
+      catch { throw fail(503, 'Hypixel public collection metadata is temporarily unavailable.'); }
+      const metadata = collections.find(entry => entry.id === collectionId);
+      if (typeof metadata?.category !== 'string' || !validSkill(metadata.category.toLowerCase())) {
+        throw fail(422, 'That collection is not supported by official metadata.');
+      }
+      skill = metadata.category.toLowerCase();
+      collections = [metadata];
+    } else if (!data.Skills?.entries?.some(entry => entry.id === skill)) {
       throw fail(422, 'That skill is not recorded in the latest profile snapshot.');
     }
     const facts = snapshotFacts(data, skill);
@@ -181,11 +196,13 @@ function createProgressionService({ getDatabase = database.getDatabase, modelCli
         const pets = usable(data.Pets) ? petCandidates(skill, facts.pets, facts.owned) : [];
         candidates = [...equipment.slice(0, 70), ...pets];
       } else {
-        candidates = collectionCandidates(await resources.collections(), skill, facts.savedAmounts);
+        candidates = collectionCandidates(collections || await resources.collections(), skill, facts.savedAmounts);
       }
     } catch { throw fail(503, 'Hypixel public item or collection metadata is temporarily unavailable.'); }
-    if (!candidates.length) throw fail(422, 'There are no verified candidates for this skill and path in the saved data.');
-    const choice = await generate({ skill, mode, snapshot: { fetchedAt: saved.fetchedAt,
+    if (!candidates.length) throw fail(422, collectionId !== null
+      ? 'No next tier is available for this collection in the saved data.'
+      : 'There are no verified candidates for this skill and path in the saved data.');
+    const choice = collectionId !== null ? { targetId: collectionId } : await generate({ skill, mode, snapshot: { fetchedAt: saved.fetchedAt,
       skillXp: facts.skillXp, skillLevel: facts.skillLevel, absenceVerified: facts.absenceVerified,
       recordedItems: [...facts.owned].slice(0, 60), recordedPets: [...facts.pets].slice(0, 30) }, candidates }, SELECT_SCHEMA, CHOOSE_INSTRUCTION);
     const target = candidates.find(row => row.id === choice?.targetId);
@@ -243,7 +260,8 @@ function createProgressionService({ getDatabase = database.getDatabase, modelCli
     if (result?.matchedCount === 0) throw fail(409, 'This guide changed in another request. Refresh the session.');
     return publicSession({ ...session, turns: updatedTurns });
   }
-  return { start, continueSession };
+  const startCollection = (playerUuid, profileId, collectionId) => start(playerUuid, profileId, null, 'collection', collectionId);
+  return { start, startCollection, continueSession };
 }
 
 module.exports = { ...createProgressionService(), createProgressionService, validGuide, snapshotFacts,

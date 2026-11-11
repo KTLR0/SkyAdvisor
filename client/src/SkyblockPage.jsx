@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SkillsView from './SkillsView.jsx';
 import TimelineView from './TimelineView.jsx';
-import RecommendationsView from './RecommendationsView.jsx';
+import ProgressionChat from './ProgressionChat.jsx';
 
 const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
@@ -24,16 +24,20 @@ function Availability({ data }) {
   );
 }
 
-function CollectionsView({ data }) {
+function CollectionsView({ data, onPlan }) {
   return <>
     <p className="hint">Personal item collection counts reported for this profile. These are counts, not collection tiers.</p>
     <Availability data={data} />
     {!!data?.entries?.length && <div className="table-scroll">
-      <table className="collection-table">
+      <table className="collection-table collections-table">
         <caption>Items collected by this player</caption>
-        <thead><tr><th scope="col">Collection</th><th scope="col">Items collected</th></tr></thead>
+        <thead><tr><th scope="col">Collection</th><th scope="col" className="collection-amount">Items collected</th><th scope="col">Next steps</th></tr></thead>
         <tbody>{data.entries.map((entry) => <tr key={entry.id} data-collection-id={entry.id}>
-          <th scope="row">{entry.label}</th><td>{formatNumber(entry.amount)}</td>
+          <th scope="row">{entry.label}</th><td className="collection-amount">{formatNumber(entry.amount)}</td>
+          <td className="collection-plan">{['available', 'partial'].includes(data.status) && entry.status === 'available'
+            && typeof entry.amount === 'number' && Number.isFinite(entry.amount) && entry.amount >= 0
+            ? <button type="button" className="secondary" aria-label={`Plan next steps for ${entry.label}`}
+              onClick={() => onPlan(entry)}>Plan next steps</button> : <span className="hint">Unavailable</span>}</td>
         </tr>)}</tbody>
       </table>
     </div>}
@@ -112,6 +116,52 @@ function PetsView({ data }) {
   </div></>;
 }
 
+// Keep Skills mounted while the planner resets with its player/profile/snapshot.
+function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClick }) {
+  const scope = `${playerUuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`;
+  const [selection, setSelection] = useState(null);
+  const target = selection?.scope === scope ? selection : null;
+  const activeTab = selectedTab === 'Planner' && !target ? 'Skills' : selectedTab;
+  const returnTab = target?.kind === 'collection' ? 'Collections' : 'Skills';
+  function openPlanner(kind, entry) {
+    setSelection(current => current?.scope === scope && current.kind === kind && current.id === entry.id
+      ? current : { scope, kind, id: entry.id, label: entry.label });
+    onSelectTab('Planner');
+  }
+  const heading = useRef(null);
+
+  useEffect(() => { setSelection(null); }, [scope]);
+
+  useEffect(() => {
+    if (activeTab === 'Planner') {
+      heading.current?.focus();
+      heading.current?.scrollIntoView({ block: 'start' });
+    }
+  }, [activeTab, target?.kind, target?.id]);
+
+  return <section className="data-section" aria-label="Profile data">
+    <nav className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
+      className={activeTab === tab ? 'active' : ''} aria-pressed={activeTab === tab}
+      onClick={() => onSelectTab(tab)}>{tab}</button>)}</nav>
+    <div className="planner-page-header">
+      <h2 ref={heading} tabIndex={-1}>{activeTab === 'Planner' ? `Next steps for ${target.label}`
+        : activeTab === 'Enderchest' ? 'Ender chest' : activeTab}</h2>
+      {activeTab === 'Planner' && <button type="button" className="secondary" onClick={() => onSelectTab(returnTab)}>Back to {returnTab}</button>}
+    </div>
+    {activeTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
+    {activeTab === 'Timeline' && <TimelineView key={`${playerUuid}:${profile.profileId}`}
+      playerUuid={playerUuid} profileId={profile.profileId} />}
+    <div hidden={activeTab !== 'Skills'}><SkillsView data={profile.data.Skills}
+      onPlan={skill => openPlanner('skill', profile.data.Skills.entries.find(entry => entry.id === skill))} /></div>
+    <div hidden={activeTab !== 'Planner'}>{target && <ProgressionChat key={`${scope}:${target.kind}:${target.id}`}
+      playerUuid={playerUuid} profileId={profile.profileId}
+      skill={target.kind === 'skill' ? target.id : null} collectionId={target.kind === 'collection' ? target.id : null} />}</div>
+    {activeTab === 'Collections' && <CollectionsView data={profile.data.Collections} onPlan={entry => openPlanner('collection', entry)} />}
+    {ITEM_TABS.has(activeTab) && <InventoryView data={profile.data[activeTab]} onItemClick={onItemClick} />}
+    {activeTab === 'Pets' && <PetsView data={profile.data.Pets} />}
+  </section>;
+}
+
 async function readResponse(response) {
   let data;
   try { data = await response.json(); } catch { throw new Error('Could not read the server response. Check the server and try again.'); }
@@ -186,7 +236,6 @@ export default function SkyBlockPage({ player, onBack }) {
   }
 
   const profile = storedData?.profiles.find((entry) => entry.profileId === selectedProfileId);
-  const currentData = profile?.data[selectedTab];
   const fetchedAt = profile?.fetchedAt ? new Date(profile.fetchedAt) : null;
 
   return <main className="skyblock-page">
@@ -223,22 +272,8 @@ export default function SkyBlockPage({ player, onBack }) {
         </button>)}</div>
         <p className="hint profile-id">Profile ID: <code>{profile.profileId}</code></p>
       </section>
-      <section className="data-section" aria-label="Profile data">
-        <nav className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
-          className={selectedTab === tab ? 'active' : ''} aria-pressed={selectedTab === tab}
-          onClick={() => { setSelectedTab(tab); setSelectedItem(null); }}>{tab}</button>)}</nav>
-        <h2>{selectedTab === 'Enderchest' ? 'Ender chest' : selectedTab}</h2>
-        {selectedTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
-        {selectedTab === 'Timeline' && <TimelineView key={`${player.uuid}:${profile.profileId}`}
-          playerUuid={player.uuid} profileId={profile.profileId} />}
-        <div hidden={selectedTab !== 'Skills'}><SkillsView key={`${player.uuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`}
-          data={profile.data.Skills} playerUuid={player.uuid} profileId={profile.profileId} /></div>
-        {selectedTab === 'Collections' && <CollectionsView data={currentData} />}
-        {ITEM_TABS.has(selectedTab) && <InventoryView data={currentData} onItemClick={setSelectedItem} />}
-        {selectedTab === 'Pets' && <PetsView data={currentData} />}
-      </section>
-      <RecommendationsView key={`${player.uuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`}
-        playerUuid={player.uuid} profileId={profile.profileId} />
+      <ProfileData profile={profile} playerUuid={player.uuid} selectedTab={selectedTab}
+        onSelectTab={(tab) => { setSelectedTab(tab); setSelectedItem(null); }} onItemClick={setSelectedItem} />
       {selectedItem && <ItemDetails item={selectedItem} onClose={() => setSelectedItem(null)} />}
     </>}
   </main>;

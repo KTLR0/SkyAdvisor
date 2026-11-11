@@ -428,22 +428,24 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
   .recommendation-goal select { width: 100%; }
 }
 
-/* Branching progression guide: scoped to the Skills page. */
+/* One contextual planner, opened from a skill or collection. */
+.planner-page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 16px 0 12px; }
+.planner-page-header h2 { margin: 0; }
+.collection-amount, .collection-plan { text-align: right; }
+.collection-plan button { min-width: 105px; font-size: 0.875rem; padding: 8px 10px; }
 .skill-plan-button { margin-top: 12px; width: 100%; }
-.progression-chat { margin: 22px 0; padding: 20px; border: 1px solid #b7ccdc; border-radius: 12px; background: #f9fbfd; }
+.progression-chat { margin: 0; }
 .progression-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.progression-header h3 { margin: 3px 0 8px; }
-.progression-header .eyebrow { margin: 0; }
 .progression-modes { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
 .progression-modes .active { background: #235b85; border-color: #235b85; color: #fff; }
 .progression-modes button { flex: 1 1 220px; }
 .progression-busy { padding: 10px 0; color: #385269; }
 .progression-objective { margin-top: 18px; padding: 16px; background: #eaf3fa; border: 1px solid #cbdae7; border-radius: 9px; }
-.progression-objective h4 { font-size: 1.15rem; margin: 6px 0 10px; }
+.progression-objective h3 { font-size: 1.15rem; margin: 6px 0 10px; }
 .progression-objective a { color: #235b85; }
 .progression-turns { display: grid; gap: 16px; margin-top: 18px; }
 .progression-turn { padding: 18px; background: #fff; border: 1px solid #d3e0ea; border-radius: 10px; overflow-wrap: anywhere; }
-.progression-turn h4 { margin: 0 0 10px; font-size: 1.05rem; }
+.progression-turn h3 { margin: 0 0 10px; font-size: 1.05rem; }
 .progression-turn > p { line-height: 1.6; }
 .progression-choice { color: #235b85; font-size: .9rem; font-weight: 600; }
 .progression-steps { padding-left: 28px; margin: 14px 0; }
@@ -455,7 +457,8 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .progression-options button { text-align: left; white-space: normal; }
 .progression-export { display: flex; justify-content: flex-end; margin-top: 16px; }
 @media (max-width: 480px) {
-  .progression-chat, .progression-turn { padding: 13px; }
+  .collections-table th, .collections-table td { padding: 10px 6px; }
+  .progression-turn { padding: 13px; }
   .progression-header { flex-direction: column; }
   .progression-export button { width: 100%; }
 }

@@ -21,7 +21,7 @@ async function run() {
   const memory = createMemoryDatabase();
   let thresholdRequests = 0;
   let playerFetches = 0;
-  let offline = false;
+  let offline = true;
   const thresholds = { ...normalizeSkillResource(officialSkillsFixture()), fetchedAt: FETCHED_AT, stale: false };
   const resolveMinecraftPlayer = async () => PLAYER;
   const service = createSkyBlockService({ getDatabase: async () => memory.db,
@@ -102,6 +102,10 @@ async function run() {
   await click('Find player');
   await waitFor("document.body.textContent.includes('Continue to SkyBlock data')");
   await click('Continue to SkyBlock data');
+  await waitFor("document.querySelector('.skill-resource-error') !== null");
+  assert.equal(await evaluate("document.querySelectorAll('[role=progressbar]').length"), 0);
+  offline = false;
+  await click('Retry thresholds');
   await waitFor(`${card('farming')}?.querySelector('[role=progressbar]') !== null && ${card('farming')}?.querySelector('[role=progressbar]') !== undefined`);
   assert.equal(await progressValue('farming'), '50');
   assert.equal(await evaluate(`${card('farming')}.querySelector('.skill-level').textContent`), 'Level 1');
@@ -147,15 +151,12 @@ async function run() {
   fs.writeFileSync(mobilePath, Buffer.from(mobile.data, 'base64'));
   console.log('PASS: mobile viewport fits without horizontal scrolling');
   await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
-  offline = true;
+  const beforeTabSwitch = thresholdRequests;
   await click('Collections');
   await waitFor("document.querySelector('.collection-table') !== null");
   await click('Skills');
-  await waitFor("document.querySelector('.skill-resource-error') !== null");
-  assert.equal(await evaluate("document.querySelectorAll('[role=progressbar]').length"), 0);
-  offline = false;
-  await click('Retry thresholds');
   await waitFor(`${card('farming')}?.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow') === '50'`);
+  assert.equal(thresholdRequests, beforeTabSwitch, 'Category switching preserves loaded thresholds');
   assert.equal(exceptions.length, 0);
   console.log('PASS: unavailable threshold service hides percentages and manual retry restores them; no uncaught browser errors');
   console.log(JSON.stringify({ desktopPreview: desktopPath, mobilePreview: mobilePath, syntheticData: true }, null, 2));
