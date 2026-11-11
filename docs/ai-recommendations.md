@@ -250,31 +250,14 @@ do not retry. Upstream error bodies are neither logged nor returned.
 Malformed input is HTTP 400; no saved player/profile
 snapshot is 404; storage failures return a generic 500. Responses use `no-store`.
 
-## Dashboard recommendations (Part 3)
+## Dashboard guidance
 
-The selected profile's dashboard has a separate **Recommendations** section below
-the existing data views. Choose General progress, Farming, Mining, or Combat,
-then click **Get recommendations**. Only that action, or a manual **Try again**,
-sends the recommendation POST, containing just the goal. Opening the dashboard,
-switching profiles/goals, inspecting Inventory, and browsing Timeline do not
-generate recommendations. Timeline date selection does not change the latest
-saved snapshot used by the recommendation endpoint.
-
-Up to three ordered cards show priority, what to do, why it fits the goal, and
-readable saved facts. Skill/collection zero values are preserved; unknown item
-counts stay explicitly unrecorded. Each result shows **AI** or **Basic fallback**
-and its own snapshot fetch time in the browser's local time zone. Saved data is
-identified as historical rather than current progress.
-
-The section handles loading, insufficient saved data, failed requests, and manual
-retry. A pending request disables duplicate submission. A basic fallback explains whether AI was temporarily
-unavailable, timed out, rejected access, reached a usage limit, or returned
-unverifiable advice, without showing provider error bodies or credentials.
-A player/profile/snapshot change remounts the section and cancels the old request; changing goals cancels
-and clears it immediately. Late responses are ignored even if network cancellation
-does not stop them. Response identity and goal must match the current selection
-before cards are shown. Existing category and Timeline views remain independent.
-On desktop the cards fit across the section; on mobile controls and cards stack.
+The old player-facing Recommendations panel has been removed. The dashboard now
+uses contextual **Plan next steps** actions on Skills and Collections, documented
+in `docs/progression.md`. The planner is not a main-navigation destination.
+`RecommendationsView.jsx` remains unmounted, and the existing recommendation
+route, backend service, schema, and server tests remain available. The two services
+share the Gemini transport but do not depend on each other's endpoints.
 
 ## Configuration and checks
 
@@ -331,14 +314,7 @@ unknown evidence, invented numbers (digits and words), transport failures,
 timeouts/abort, missing configuration, profile isolation, read-only behavior,
 and the absence of model calls during browsing.
 
-Run `node scripts/check-recommendations.cjs` for Chrome checks using mocked endpoint
-responses and synthetic saved records. It checks the four backend-supported goals,
-click-only POSTs and duplicate-click prevention, loading, all three cards, readable
-evidence and confirmed zero, AI/basic labels, no usable data, failure/retry,
-malformed or wrong-profile responses, and stale responses across goal/profile/
-player changes. It also checks the existing data views and captures desktop/mobile
-previews in the OS temporary directory. It needs installed Chrome/Chromium
-(`CHROME_BIN` can override the default macOS location). It does not load `.env`,
-call live Gemini/Hypixel, or connect to Atlas. Separate synthetic live checks
-verified generation and evidence validation with the configured models; they do not
-guarantee availability or valid output for every future player request.
+Run `node scripts/check-next-steps.cjs` for the current dashboard browser checks.
+It verifies explicit planner requests, desktop/mobile skill and collection entry points, and the absence
+of the old Recommendations panel or requests to its endpoint. The recommendation
+backend's existing server tests remain part of `npm test`.

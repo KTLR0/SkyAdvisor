@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useId } from 'react';
 import { calculateSkillProgress, displayPercent } from './skill-progress.js';
-import ProgressionChat from './ProgressionChat.jsx';
 
 const number = (value) => new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(value);
 
@@ -45,44 +44,11 @@ function SkillCard({ entry, definition, categoryStatus, loading, onPlan }) {
     </> : <p className="skill-progress-unavailable" role="status">
       {loading && reliableXp ? 'Loading official skill thresholds…' : progress.reason}
     </p>}
-    {onPlan && <button type="button" className="secondary skill-plan-button" onClick={() => onPlan(entry.id)}>Plan next steps</button>}
+    {onPlan && reliableXp && <button type="button" className="secondary skill-plan-button" onClick={() => onPlan(entry.id)}>Plan next steps</button>}
   </article>;
 }
 
-export default function SkillsView({ data, playerUuid, profileId }) {
-  const [selectedSkill, setSelectedSkill] = useState(null);
-  const guideRef = useRef(null);
-  useEffect(() => { if (selectedSkill) guideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, [selectedSkill]);
-  const [resource, setResource] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const loadResource = useCallback(async (signal) => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await fetch('/api/resources/skills', {
-        signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(12000)]) : AbortSignal.timeout(12000),
-      });
-      if (!response.ok) throw new Error('Official skill thresholds are unavailable. XP totals are still shown.');
-      const result = await response.json();
-      if (!result.skills || typeof result.skills !== 'object') throw new Error('Official skill thresholds are unavailable.');
-      if (!signal?.aborted) setResource(result);
-    } catch (requestError) {
-      if (!signal?.aborted) {
-        setResource(null);
-        setError(requestError.name === 'TimeoutError' ? 'Loading skill thresholds timed out. Please try again.'
-          : requestError.message);
-      }
-    } finally {
-      if (!signal?.aborted) setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    loadResource(controller.signal);
-    return () => controller.abort();
-  }, [loadResource]);
+export default function SkillsView({ data, onPlan, resource, loading, error, onRetry }) {
 
   return <>
     <p className="hint skill-section-intro">Your XP toward each skill’s next level. Missing XP and unknown level caps are never treated as zero.</p>
@@ -92,16 +58,14 @@ export default function SkillsView({ data, playerUuid, profileId }) {
         : data?.reason || 'Reliable skill XP was not provided for this profile.'}
     </p>}
     {error && <div className="skill-resource-error" role="status">
-      <p>{error}</p><button type="button" className="secondary" onClick={() => loadResource()} disabled={loading}>Retry thresholds</button>
+      <p>{error}</p><button type="button" className="secondary" onClick={() => onRetry()} disabled={loading}>Retry thresholds</button>
     </div>}
     {resource?.stale && <p className="availability partial" role="status">Hypixel is unavailable. Showing progress using previously verified, cached thresholds.</p>}
     <div className="skill-grid skill-progress-grid" aria-busy={loading}>
       {(data?.entries || []).map((entry) => <SkillCard key={entry.id} entry={entry}
         definition={resource?.skills[entry.id]} categoryStatus={data.status} loading={loading}
-        onPlan={playerUuid && profileId ? setSelectedSkill : null} />)}
+        onPlan={onPlan} />)}
     </div>
-    {selectedSkill && <div ref={guideRef}><ProgressionChat key={selectedSkill} skill={selectedSkill}
-      playerUuid={playerUuid} profileId={profileId} /></div>}
     <p className="hint skill-source">Level thresholds: <a href="https://api.hypixel.net/v2/resources/skyblock/skills" target="_blank" rel="noreferrer">Hypixel Skills resource</a>.
       {' '}Remaining XP is rounded up to a whole XP.</p>
   </>;

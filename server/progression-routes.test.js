@@ -46,3 +46,19 @@ test('progression routes return safe errors without exposing provider internals'
   assert.equal(result.status, 503);
   assert.equal(result.body.error, 'Hypixel public metadata is unavailable.');
 });
+
+test('collection-specific starts accept only the exact collection ID payload', async t => {
+  const calls = [];
+  const url = await serve(t, { startCollection: async (...args) => {
+    calls.push(args);
+    return { contractVersion: 1, objective: { id: args[2] }, turns: [] };
+  } });
+  const result = await post(url, { collectionId: 'LOG:2' });
+  assert.equal(result.status, 200);
+  assert.equal(result.noStore, 'no-store');
+  assert.deepEqual(calls, [[PLAYER_ID, PROFILE_A, 'LOG:2']]);
+  for (const extra of [{ skill: 'foraging' }, { mode: 'collection' }, { amount: 100 }, { playerFacts: {} }]) {
+    assert.equal((await post(url, { collectionId: 'LOG:2', ...extra })).status, 400);
+  }
+  assert.equal(calls.length, 1);
+});

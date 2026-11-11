@@ -62,10 +62,13 @@ function createApp({ service = skyblock, resolveMinecraftPlayer = resolvePlayer,
   }
   app.post(progressionPath, async (req, res) => {
     res.set('Cache-Control', 'no-store');
-    if (!req.body || Array.isArray(req.body) || Object.keys(req.body).sort().join(',') !== 'mode,skill') {
-      return res.status(400).json({ error: 'Provide only a skill and a progression mode.' });
+    const fields = req.body && !Array.isArray(req.body) ? Object.keys(req.body).sort().join(',') : '';
+    if (!['mode,skill', 'collectionId'].includes(fields)) {
+      return res.status(400).json({ error: 'Provide a skill and progression mode, or only a collection ID.' });
     }
     try {
+      if (fields === 'collectionId') return res.json(await progressionService.startCollection(
+        req.params.playerUuid, req.params.profileId, req.body.collectionId));
       return res.json(await progressionService.start(req.params.playerUuid, req.params.profileId,
         req.body.skill, req.body.mode));
     } catch (error) { return progressionError(res, error); }

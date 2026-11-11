@@ -68,6 +68,13 @@ Failed refreshes have a one-minute backoff. After seven days, or without any val
 cache, the endpoint returns 503; the UI hides percentages and offers manual retry.
 A server restart starts with an empty metadata cache. No API key is needed.
 
+Overview and Skills share `client/src/useSkillResource.js` and the same progress
+calculator. Overview displays two saved skill previews, with the full card list
+available in Skills. Category and profile changes reuse the loaded thresholds;
+retry remains an explicit action on Skills. Unavailable thresholds leave reliable
+saved XP visible without an invented level or percentage. Neither preview loading
+nor navigation refreshes player data or generates AI advice.
+
 ## Verification and preview
 
 `npm test` includes frozen official resource fixtures (version 0.27.2.12, retrieved
