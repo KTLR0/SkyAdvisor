@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { createProgressionService, validGuide } = require('./progression-service');
 const { createMemoryDatabase } = require('./test-support/memory-db');
 const { PLAYER_ID, PROFILE_A, PROFILE_B } = require('./fixtures/skyblock');
+const { buildProfileData } = require('./normalize');
 
 const guide = (title = 'Obtain the target') => ({ heading: title,
   summary: 'Follow these actions using the provided Wiki reference.',
@@ -64,6 +65,24 @@ test('collection start uses verified collection amount and authoritative next ti
   assert.equal(result.objective.nextTier, 2);
   assert.equal(result.objective.targetAmount, 500);
   assert.equal(result.objective.remaining, 400);
+});
+
+test('normalized saved multiword pets are excluded before objective selection', async () => {
+  const { service, memory, calls } = await setup();
+  const normalized = await buildProfileData({ pets_data: { pets: [
+    { uuid: 'synthetic-pet', type: 'MITHRIL_GOLEM', tier: 'RARE', exp: 0 },
+  ] } });
+  const saved = memory.rows('skyblockSnapshots')[0];
+  saved.data.Pets = normalized.Pets;
+  await service.start(PLAYER_ID, PROFILE_A, 'mining', 'item');
+  const candidates = calls[0].input.candidates;
+  assert.ok(!candidates.some(candidate => candidate.id === 'PET:MITHRIL_GOLEM'));
+  assert.ok(candidates.some(candidate => candidate.id === 'PET:SILVERFISH'));
+  // The exclusion must also hold when the player changes the selected profile.
+  memory.rows('skyblockSnapshots').push({ ...structuredClone(saved), _id: 'other-profile',
+    profileId: PROFILE_B, data: { ...structuredClone(saved.data), Pets: { status: 'empty', entries: [] } } });
+  await service.start(PLAYER_ID, PROFILE_B, 'mining', 'item');
+  assert.ok(calls[2].input.candidates.some(candidate => candidate.id === 'PET:MITHRIL_GOLEM'));
 });
 
 test('follow-up accepts only the last recorded option and preserves prior guide', async () => {

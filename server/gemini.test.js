@@ -57,6 +57,22 @@ test('temporary Gemini errors retry with bounded backoff and can recover', async
   assert.ok(waits[1] >= 1000 && waits[1] < 1250);
 });
 
+test('recommendation instructions keep reason codes and saved-evidence rules separate from progression guides', async () => {
+  const client = createGeminiClient({ getApiKey: () => randomUUID(), request: async (url, options) => {
+    const body = JSON.parse(options.body);
+    const instruction = body.systemInstruction.parts[0].text;
+    assert.match(instruction, /using only the supplied saved evidence/);
+    assert.match(instruction, /never add prose or numerical claims/);
+    for (const reason of schema.properties.actions.items.properties.reason.enum) {
+      assert.ok(instruction.includes(reason));
+    }
+    assert.match(instruction, /Never infer ownership or absence from omitted items/);
+    assert.doesNotMatch(instruction, /5 part procedure|Wiki|Forums|assume the player does not have/i);
+    return reply();
+  } });
+  await client.generate({ input: { goal: 'general', coverage: { inventoryAbsenceSupported: false } }, schema });
+});
+
 test('a server-authored duplicate correction reaches the model alongside the same saved input', async () => {
   const input = { contractVersion: 1, goal: 'combat', skills: [] };
   const allowedActions = [{ kind: 'train_skill', reasons: ['recorded_progress'], focusFactIds: ['skill:combat'] }];

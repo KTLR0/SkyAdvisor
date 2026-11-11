@@ -71,3 +71,20 @@ test('pet candidates omit species recorded in the saved pet inventory', () => {
   assert.ok(candidates.some(entry => entry.name === 'Mithril Golem Pet'));
   assert.ok(candidates.every(entry => entry.id.startsWith('PET:')));
 });
+
+test('pet ownership accepts saved display names as well as species keys', () => {
+  for (const [skill, species, displayName] of [
+    ['mining', 'MITHRIL_GOLEM', 'MITHRIL GOLEM'],
+    ['farming', 'MOOSHROOM_COW', 'MOOSHROOM COW'],
+    ['combat', 'ENDER_DRAGON', 'ENDER DRAGON'],
+    ['fishing', 'FLYING_FISH', 'FLYING FISH'],
+  ]) {
+    for (const name of [species, displayName, `${displayName} PET`]) {
+      assert.ok(!petCandidates(skill, new Set([name])).some(candidate => candidate.id === `PET:${species}`));
+    }
+    for (const name of [`PET:${species}`, `${displayName} PET`]) {
+      assert.ok(!petCandidates(skill, new Set(), new Set([name])).some(candidate => candidate.id === `PET:${species}`));
+    }
+    assert.ok(petCandidates(skill, new Set()).some(candidate => candidate.id === `PET:${species}`));
+  }
+});

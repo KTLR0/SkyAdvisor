@@ -103,6 +103,7 @@ const PETS_BY_SKILL = Object.freeze({
 });
 function petCandidates(skill, ownedPets, ownedItems = new Set()) {
   return (PETS_BY_SKILL[skill] || []).filter(id => !ownedPets.has(id)
+    && !ownedPets.has(id.replaceAll('_', ' '))
     && !ownedPets.has(`${id.replaceAll('_', ' ')} PET`)
     && !ownedItems.has(`PET:${id}`)
     && !ownedItems.has(`${id.replaceAll('_', ' ')} PET`)).map(id => ({
