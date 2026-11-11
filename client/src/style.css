@@ -474,8 +474,28 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 /* One contextual planner, opened from a skill or collection. */
 .planner-page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 16px 0 12px; }
 .planner-page-header h2 { margin: 0; }
-.collection-amount, .collection-plan { text-align: right; }
-.collection-plan button { min-width: 105px; font-size: 0.875rem; padding: 8px 10px; }
+.collections-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 240px); align-items: end; gap: 12px; margin-top: 16px; }
+.collections-controls > div { display: grid; gap: 6px; }
+.collections-controls label { font-size: 0.875rem; }
+.collections-controls input, .collections-controls select { width: 100%; min-width: 0; height: 42px; padding: 8px 12px; border: 1px solid #8ba5b8; border-radius: 7px; background: white; color: inherit; font: inherit; }
+.collections-controls select:focus-visible { outline: 3px solid #235b85; outline-offset: 2px; }
+.collections-results { margin: 12px 0 0; color: #52697b; font-size: 0.8rem; }
+.collection-group { margin-top: 22px; padding: 0; border: 0; background: none; }
+.collection-group > h3 { display: flex; gap: 8px; align-items: center; margin: 0 0 10px; font-size: 1rem; }
+.collection-group > h3 span { color: #52697b; font-size: 0.8rem; font-weight: 500; }
+.collection-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.collection-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) minmax(100px, auto) auto; align-items: center; gap: 14px; padding: 14px; border: 1px solid #d3e0ea; border-radius: 9px; background: #f9fbfd; }
+.collection-icon { display: grid; place-items: center; width: 40px; height: 40px; background: #e8f0f6; color: #52697b; border-radius: 9px; }
+.collection-icon img, .collection-icon svg { width: 26px; height: 26px; }
+.collection-row h4 { margin: 0; overflow-wrap: anywhere; font-size: 1rem; }
+.collection-count { display: grid; gap: 2px; margin: 0; font-variant-numeric: tabular-nums; }
+.collection-count strong { font-size: 1.1rem; }
+.collection-count span, .collection-plan-unavailable { font-size: 0.75rem; color: #52697b; }
+.collection-count.is-unavailable strong { font-size: 0.875rem; color: #52697b; }
+.collection-plan { min-height: 40px; font-size: 0.875rem; padding: 8px 12px; }
+.collections-state { margin: 16px 0; padding: 20px; border: 1px dashed #b3cadb; border-radius: 9px; }
+.collections-state h3 { margin: 0 0 6px; font-size: 1rem; }
+.collections-state p { margin: 0 0 12px; color: #52697b; }
 .skill-plan-button { margin-top: 12px; width: 100%; }
 .progression-chat { margin: 0; }
 .progression-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
@@ -500,7 +520,11 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .progression-options button { text-align: left; white-space: normal; }
 .progression-export { display: flex; justify-content: flex-end; margin-top: 16px; }
 @media (max-width: 480px) {
-  .collections-table th, .collections-table td { padding: 10px 6px; }
+  .collections-controls { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .collection-row { grid-template-columns: 36px minmax(0, 1fr) minmax(76px, auto); gap: 10px 12px; padding: 12px; }
+  .collection-icon { width: 36px; height: 36px; }
+  .collection-count { grid-column: 3; grid-row: 1; }
+  .collection-row .collection-plan, .collection-plan-unavailable { grid-column: 2 / -1; justify-self: start; }
   .progression-turn { padding: 13px; }
   .progression-header { flex-direction: column; }
   .progression-export button { width: 100%; }

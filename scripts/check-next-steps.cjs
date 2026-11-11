@@ -51,7 +51,7 @@ async function run() {
     row.selected = row.profileName === 'Apple';
   }
   rows.push({ ...structuredClone(latest), _id: 'no-skills', profileId: PROFILE_C, profileName: 'Coconut',
-    selected: false, data: { Skills: { status: 'private', entries: [] } } });
+    selected: false, data: { Skills: { status: 'private', entries: [] }, Collections: { status: 'empty', entries: [] } } });
   rows.push({ ...structuredClone(latest), _id: 'private-collections', profileId: 'd'.repeat(32),
     profileName: 'Date', selected: false, fetchedAt: 'unavailable',
     data: { Skills: { status: 'missing', entries: [] }, Collections: { status: 'private', entries: [] } } });
@@ -168,9 +168,18 @@ async function run() {
   }
   async function openCollection(id, label) {
     await click('Collections');
+    if (!await evaluate(`document.querySelector('[data-collection-id="${id}"] button') !== null`)) await searchCollections('');
     await evaluate(`document.querySelector('[data-collection-id="${id}"] button').click()`);
     await waitFor(`${pageHeading}.textContent === ${JSON.stringify('Next steps for ' + label)}`);
     assert.equal(await evaluate(`document.activeElement === ${pageHeading}`), true);
+  }
+  async function searchCollections(value) {
+    await evaluate(`(() => { const input = document.querySelector('.collections-controls input'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, ${JSON.stringify(value)}); input.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await waitFor(`document.querySelector('.collections-controls input').value === ${JSON.stringify(value)}`);
+  }
+  async function sortCollections(value) {
+    await evaluate(`(() => { const select = document.querySelector('.collections-controls select'); select.value = ${JSON.stringify(value)}; select.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    await waitFor(`document.querySelector('.collections-controls select').value === ${JSON.stringify(value)}`);
   }
   const previews = [];
   async function screenshot(name, viewport = false) {
@@ -196,7 +205,7 @@ async function run() {
     await send('Page.navigate', { url: `http://127.0.0.1:${vite.httpServer.address().port}/` });
     await enterPlayer(PLAYER.name); await noLegacyPanel();
     assert.equal(await evaluate("[...document.querySelectorAll('.data-tabs button')].some(b => b.textContent === 'Next Steps')"), false);
-    assert.equal(await evaluate("document.querySelectorAll('.next-steps-skill,.data-section select').length"), 0);
+    assert.equal(await evaluate("document.querySelectorAll('.next-steps-skill').length"), 0);
     assert.equal(await plannerCount(), 0);
     assert.equal(await evaluate(`${pageHeading}.textContent`), 'Overview');
     assert.equal(await evaluate("document.querySelector('.data-details').open"), false);
@@ -224,9 +233,18 @@ async function run() {
     assert.ok(await evaluate("document.querySelector('.snapshot-time').textContent.includes('Time unavailable')"));
     assert.equal(await evaluate("document.querySelectorAll('.overview-collection-list li').length"), 0);
     await screenshot(`${label}-unavailable`, true);
+    await click('View Collections');
+    await waitFor("document.querySelector('.collections-state h3')?.textContent === 'Collection sharing is disabled'");
+    assert.equal(await evaluate("document.querySelectorAll('.collection-row').length"), 0);
+    await screenshot(`${label}-collections-private`);
+    await chooseProfile('Coconut');
+    await waitFor("document.querySelector('.collections-state h3')?.textContent === 'No collections recorded'");
+    assert.equal(await evaluate("document.querySelectorAll('.collection-row').length"), 0);
+    await screenshot(`${label}-collections-empty`);
+    await click('Overview');
     await chooseProfile('Apple'); await click('Open Timeline'); await waitFor("document.querySelector('.timeline-detail')");
     await click('Overview'); await click('View Collections');
-    await waitFor("document.querySelector('.collections-table')");
+    await waitFor("document.querySelector('.collections-controls')");
     await click('Overview'); await click('View Skills');
     await waitFor(`${pageHeading}.textContent === 'Skills'`);
     assert.equal(starts.length + collectionStarts.length, browseStart, 'Overview and profile/category shortcuts do not generate advice');
@@ -265,7 +283,36 @@ async function run() {
     assert.ok(await evaluate("document.querySelector('.progression-objective').textContent.includes('Recorded: 0')"));
     await click('Collections');
     assert.equal(await evaluate("document.querySelector('[data-collection-id=UNKNOWN] button') === null"), true);
+    const collectionRequestsBefore = requests.length;
+    assert.deepEqual(await evaluate("[...document.querySelectorAll('.collection-group')].map(g => g.dataset.collectionCategory)"),
+      ['FARMING', 'FORAGING', 'MINING', 'uncategorized']);
+    assert.equal(await evaluate("document.querySelector('[data-collection-id=UNKNOWN] .collection-count strong').textContent"), 'Not provided');
+    assert.equal(await evaluate("document.querySelector('[data-collection-id=WHEAT] .collection-count strong').textContent"), '0');
+    assert.equal(await evaluate("document.querySelectorAll('.collections-view [role=progressbar]').length"), 0, 'Counts have no guessed tier percentages');
+    await waitFor("[...document.querySelectorAll('.collection-icon img')].every(img => img.complete && img.naturalWidth > 0)");
+    assert.ok(await evaluate("(() => { const src = document.querySelector('[data-collection-id=UNKNOWN] img').src; return src.startsWith('data:image/svg+xml') || new URL(src).origin === location.origin; })()"),
+      'Unclassified collections use a bundled fallback, never a guessed remote image');
     await screenshot(`${label}-collections`);
+    await evaluate("document.querySelector('[data-collection-id=WHEAT] img').src = '/missing-collection-image.svg'");
+    await waitFor("document.querySelector('[data-collection-id=WHEAT] [data-collection-fallback]')");
+    assert.equal(await evaluate("document.querySelector('[data-collection-id=WHEAT] .collection-count strong').textContent"), '0');
+    await screenshot(`${label}-collections-fallback`);
+    const foragingOrder = "[...document.querySelectorAll('[data-collection-category=FORAGING] [data-collection-id]')].map(row => row.dataset.collectionId)";
+    await sortCollections('count-desc'); assert.deepEqual(await evaluate(foragingOrder), ['LOG:1', 'LOG:2']);
+    await sortCollections('count-asc'); assert.deepEqual(await evaluate(foragingOrder), ['LOG:2', 'LOG:1']);
+    await sortCollections('name-desc'); assert.deepEqual(await evaluate(foragingOrder), ['LOG:1', 'LOG:2']);
+    await screenshot(`${label}-collections-sorted`);
+    await sortCollections('name-asc');
+    await searchCollections('no matching collection');
+    await waitFor("document.querySelector('.collections-state h3')?.textContent === 'No matching collections'");
+    assert.equal(await evaluate("document.querySelectorAll('.collection-row').length"), 0);
+    await screenshot(`${label}-collections-no-results`);
+    await click('Clear search'); await waitFor("document.querySelectorAll('.collection-row').length === 5");
+    await searchCollections(' bIrCh '); await waitFor("document.querySelectorAll('.collection-row').length === 1");
+    assert.equal(await evaluate("document.querySelector('.collection-row').dataset.collectionId"), 'LOG:2');
+    await screenshot(`${label}-collections-search`);
+    assert.equal(requests.length, collectionRequestsBefore, 'Collections search/sort/fallback never call an API');
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     const beforeCollection = collectionStarts.length;
     await openCollection('LOG:2', 'Birch Log');
     assert.equal(collectionStarts.length, beforeCollection, 'Opening a collection does not generate advice');
@@ -283,7 +330,9 @@ async function run() {
     const collectionExport = fs.readFileSync(path.join(downloadDirectory, 'SkyAdvisor-foraging-collection-guide.txt'), 'utf8');
     assert.ok(collectionExport.includes('Birch Wood (LOG:2)') && collectionExport.includes('PART 2'));
     const afterCollection = collectionStarts.length;
-    await click('Back to Collections'); await click('Overview'); await openCollection('LOG:2', 'Birch Log');
+    await click('Back to Collections');
+    assert.equal(await evaluate("document.querySelector('.collections-controls input').value"), ' bIrCh ');
+    await click('Overview'); await openCollection('LOG:2', 'Birch Log');
     assert.equal(await turns(), 2); assert.equal(collectionStarts.length, afterCollection);
     await screenshot(`${label}-collection-followup`);
     await openCollection('LOG:1', 'Spruce Log'); await click('Build step-by-step guide');
@@ -295,7 +344,7 @@ async function run() {
     assert.equal(await turns(), 0, 'A response for another collection is rejected'); wrongCollection = false;
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     assert.equal(JSON.stringify(memory.rows('skyblockSnapshots')), snapshotBefore);
-    console.log(`PASS: ${label} Overview, compact header, profile switching, saved/missing/private values and shortcuts; skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
+    console.log(`PASS: ${label} Overview, compact header, profile switching, saved/missing/private values and shortcuts; Collections search, name/count sorting, verified groups, local icons and failed-image fallback; skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
   }
   // Deliberately ignore network cancellation to prove late results cannot repopulate another selection.
   await evaluate(`window.requestAborts = 0; const originalFetch = window.fetch; window.fetch = (url, options = {}) => {

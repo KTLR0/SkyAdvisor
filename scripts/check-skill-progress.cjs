@@ -159,7 +159,7 @@ async function run() {
   await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
   const beforeTabSwitch = thresholdRequests;
   await click('Collections');
-  await waitFor("document.querySelector('.collection-table') !== null");
+  await waitFor("document.querySelector('.collections-controls') !== null");
   await click('Skills');
   await waitFor(`${card('farming')}?.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow') === '50'`);
   assert.equal(thresholdRequests, beforeTabSwitch, 'Category switching preserves loaded thresholds');

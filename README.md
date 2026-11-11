@@ -56,6 +56,9 @@ stop that process or change `PORT` for Express, then restart both apps.
    navigation to browse their data. On narrow screens, scroll the category strip
    horizontally. Skills show personal level progress, Collections show item counts,
    and Inventory shows item cards with count, location, lore, and optional NBT details.
+   Collections groups saved entries by known category, supports name search and
+   name/count sorting, and uses bundled category icons. Missing values stay
+   unavailable; counts are not presented as tiers. See `docs/collections.md`.
 5. Choose **Timeline** to browse this profile's saved snapshots. Scroll the dated
    buttons, select a date, or use **Previous** (older) / **Next** (newer).
    **Load older snapshots** reads the next saved page. Skills XP and Collections
@@ -118,7 +121,8 @@ The dashboard browser check uses synthetic saved profiles, mocked model/resource
 and in-memory planner sessions. It covers the initial Overview, first-screen layout,
 profile switching, missing/private values, category shortcuts, and skill and collection
 entry points and both skill paths, follow-ups, TXT export, profile/skill/snapshot resets,
-request cancellation, unavailable skills, and the absence of the old Recommendations
+Collections search/sort/grouping and icon fallbacks, request cancellation,
+unavailable skills, and the absence of the old Recommendations
 panel or automatic generation requests. It does not use credentials or live services.
 
 ## Important files
@@ -131,6 +135,7 @@ panel or automatic generation requests. It does not use credentials or live serv
 - `server/normalize.js`: predictable, availability-aware category objects.
 - `server/skill-resource.js`: validated, cached official skill thresholds.
 - `client/src/OverviewView.jsx`: saved Skills/Collections previews and a Timeline shortcut.
+- `client/src/CollectionsView.jsx` and `collection-groups.js`: searchable category groups and exact-ID planning actions.
 - `client/src/SkillsView.jsx` and `skill-progress.js`: accessible personal progress cards and calculations.
 - `client/src/useSkillResource.js`: one shared threshold loader for Overview and Skills.
 - `server/skyblock.js`: identity checks, fetching, atomic persistence, and readback.

@@ -4,6 +4,7 @@ import TimelineView from './TimelineView.jsx';
 import ProgressionChat from './ProgressionChat.jsx';
 import OverviewView from './OverviewView.jsx';
 import useSkillResource from './useSkillResource.js';
+import CollectionsView from './CollectionsView.jsx';
 
 const DATA_TABS = ['Overview', 'Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
@@ -24,26 +25,6 @@ function Availability({ data }) {
         : 'This information was not provided. Check the player’s in-game API sharing settings.')}
     </p>
   );
-}
-
-function CollectionsView({ data, onPlan }) {
-  return <>
-    <p className="hint">Personal item collection counts reported for this profile. These are counts, not collection tiers.</p>
-    <Availability data={data} />
-    {!!data?.entries?.length && <div className="table-scroll">
-      <table className="collection-table collections-table">
-        <caption>Items collected by this player</caption>
-        <thead><tr><th scope="col">Collection</th><th scope="col" className="collection-amount">Items collected</th><th scope="col">Next steps</th></tr></thead>
-        <tbody>{data.entries.map((entry) => <tr key={entry.id} data-collection-id={entry.id}>
-          <th scope="row">{entry.label}</th><td className="collection-amount">{formatNumber(entry.amount)}</td>
-          <td className="collection-plan">{['available', 'partial'].includes(data.status) && entry.status === 'available'
-            && typeof entry.amount === 'number' && Number.isFinite(entry.amount) && entry.amount >= 0
-            ? <button type="button" className="secondary" aria-label={`Plan next steps for ${entry.label}`}
-              onClick={() => onPlan(entry)}>Plan next steps</button> : <span className="hint">Unavailable</span>}</td>
-        </tr>)}</tbody>
-      </table>
-    </div>}
-  </>;
 }
 
 function ItemCard({ item, onClick }) {
@@ -165,7 +146,8 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
     <div hidden={activeTab !== 'Planner'}>{target && <ProgressionChat key={`${scope}:${target.kind}:${target.id}`}
       playerUuid={playerUuid} profileId={profile.profileId}
       skill={target.kind === 'skill' ? target.id : null} collectionId={target.kind === 'collection' ? target.id : null} />}</div>
-    {activeTab === 'Collections' && <CollectionsView data={profile.data.Collections} onPlan={entry => openPlanner('collection', entry)} />}
+    <div hidden={activeTab !== 'Collections'}><CollectionsView key={scope} data={profile.data.Collections}
+      onPlan={entry => openPlanner('collection', entry)} /></div>
     {ITEM_TABS.has(activeTab) && <InventoryView data={profile.data[activeTab]} onItemClick={onItemClick} />}
     {activeTab === 'Pets' && <PetsView data={profile.data.Pets} />}
   </section>;
