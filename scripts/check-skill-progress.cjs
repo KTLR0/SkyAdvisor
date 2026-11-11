@@ -92,7 +92,16 @@ async function run() {
     await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
   }
   async function click(text) {
-    assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
+    assert.equal(await evaluate(`(() => {
+      const nav = document.querySelector('#dashboard-section');
+      if (nav?.getClientRects().length) {
+        const option = [...nav.options].find(o => o.value === ${JSON.stringify(text)} || o.textContent === ${JSON.stringify(text)});
+        if (option) { nav.focus(); nav.value = option.value; nav.dispatchEvent(new Event('change', { bubbles: true })); return true; }
+      }
+      const b = [...document.querySelectorAll('button')].find(b => b.getClientRects().length &&
+        (b.textContent.trim() === ${JSON.stringify(text)} || b.dataset.timelineMove && b.querySelector('strong')?.textContent === ${JSON.stringify(text)}));
+      if (!b || b.disabled) return false; b.click(); return true;
+    })()`), true, 'Clickable control: ' + text);
   }
   const card = id => `document.querySelector('[data-skill-id="${id}"]')`;
   const progressValue = id => evaluate(`${card(id)}.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow')`);

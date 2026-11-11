@@ -28,6 +28,10 @@ async function run() {
   const rows = timelineRows();
   const latest = rows.find(row => row._id === 'fetch-b:profile-a');
   const empty = () => ({ status: 'empty', items: [] });
+  const savedItem = (id, name, slot, container, count = 1, minecraftId = null, explicit = true) => ({
+    id, name, slot, container, count, minecraftId, lore: ['Saved item lore for browser checks.'],
+    raw: explicit ? { Slot: slot, Count: count } : {},
+  });
   latest.data = {
     Skills: { status: 'partial', entries: [
       { id: 'mining', label: 'Mining', xp: 12345.5, status: 'available' },
@@ -41,15 +45,38 @@ async function run() {
       { id: 'LOG:1', label: 'Spruce Log', amount: 50, status: 'available' },
       { id: 'UNKNOWN', label: 'Unknown', amount: null, status: 'unavailable' },
     ] },
-    Inventory: { status: 'available', items: [{ id: 'OWNED_PICKAXE', name: 'Saved Pickaxe',
-      minecraftId: null, count: 1, slot: 0, container: 'Inventory', lore: [], raw: {} }] },
-    Armor: empty(), Equipment: empty(), Enderchest: empty(), Talismans: empty(), Backpacks: empty(),
-    Pets: { status: 'empty', entries: [] },
+    Inventory: { status: 'available', items: [
+      savedItem('OWNED_PICKAXE', 'A long saved Diamond Pickaxe name that stays readable', 0, 'Inventory', 64, 'diamond_pickaxe'),
+      savedItem('UNKNOWN_ITEM', 'Unmapped saved item', 5, 'Inventory', null, null, false),
+      savedItem('DIAMOND', 'Diamond', 8, 'Inventory', 0, 'diamond'),
+    ] },
+    Armor: { status: 'available', items: [
+      savedItem('HELMET', 'Saved Helmet', 3, 'Armor'), savedItem('BOOTS', 'Saved Boots', 0, 'Armor'),
+      savedItem('UNMAPPED_ARMOR', 'Armor with no explicit slot', 1, 'Armor', 1, null, false),
+    ] },
+    Equipment: { status: 'available', items: [
+      savedItem('EQUIPMENT_TWO', 'Saved equipment at slot 2', 2, 'Equipment'),
+      savedItem('EQUIPMENT_ZERO', 'Saved equipment at slot 0', 0, 'Equipment'),
+    ] },
+    Backpacks: { status: 'partial', reason: 'Some backpacks could not be read.', items: [
+      savedItem('BACKPACK_WHEAT', 'Wheat', 1, 'Backpack 0', 32),
+      savedItem('BACKPACK_TOOL', 'Saved backpack tool', 3, 'Backpack 2', 1, null, false),
+    ] },
+    Enderchest: { status: 'private', items: [] },
+    Talismans: { status: 'unavailable', reason: 'This saved container could not be decoded.', items: [] },
+    Pets: { status: 'partial', entries: [
+      { id: 'synthetic-sheep', name: 'Sheep', rarity: 'Epic', xp: 0, active: false },
+      { id: 'synthetic-golem', name: 'Mithril Golem', rarity: 'Rare', xp: 12500, active: true },
+      { id: 'synthetic-rabbit', name: 'Rabbit', rarity: 'Unknown', xp: null, active: false },
+    ] },
   };
   for (const row of rows) {
     row.profileName = row.profileId.replaceAll('-', '').toLowerCase() === PROFILE_A ? 'Apple' : 'Banana';
     row.selected = row.profileName === 'Apple';
   }
+  const alternate = rows.find(row => row._id === 'other-profile');
+  alternate.data.Inventory = { status: 'empty', items: [] };
+  alternate.data.Equipment = { status: 'missing', reason: 'Equipment was not provided in this snapshot.', items: [] };
   rows.push({ ...structuredClone(latest), _id: 'no-skills', profileId: PROFILE_C, profileName: 'Coconut',
     selected: false, data: { Skills: { status: 'private', entries: [] }, Collections: { status: 'empty', entries: [] } } });
   rows.push({ ...structuredClone(latest), _id: 'private-collections', profileId: 'd'.repeat(32),
@@ -150,7 +177,16 @@ async function run() {
     await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
   }
   async function click(text) {
-    assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => !b.closest('[hidden]') && b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
+    assert.equal(await evaluate(`(() => {
+      const nav = document.querySelector('#dashboard-section');
+      if (nav?.getClientRects().length) {
+        const option = [...nav.options].find(o => o.value === ${JSON.stringify(text)} || o.textContent === ${JSON.stringify(text)});
+        if (option) { nav.focus(); nav.value = option.value; nav.dispatchEvent(new Event('change', { bubbles: true })); return true; }
+      }
+      const b = [...document.querySelectorAll('button')].find(b => b.getClientRects().length &&
+        (b.textContent.trim() === ${JSON.stringify(text)} || b.dataset.timelineMove && b.querySelector('strong')?.textContent === ${JSON.stringify(text)}));
+      if (!b || b.disabled) return false; b.click(); return true;
+    })()`), true, 'Clickable control: ' + text);
   }
   async function enterPlayer(name) {
     await waitFor("document.querySelector('#username')");
@@ -207,6 +243,9 @@ async function run() {
     assert.equal(await evaluate("[...document.querySelectorAll('.data-tabs button')].some(b => b.textContent === 'Next Steps')"), false);
     assert.equal(await evaluate("document.querySelectorAll('.next-steps-skill').length"), 0);
     assert.equal(await plannerCount(), 0);
+    assert.equal(await evaluate("document.querySelector('#dashboard-section').getClientRects().length > 0"), label === 'mobile');
+    assert.equal(await evaluate("document.querySelector('.data-tabs').getClientRects().length > 0"), label === 'desktop');
+    assert.equal(await evaluate("document.querySelector('#dashboard-section').value"), 'Overview');
     assert.equal(await evaluate(`${pageHeading}.textContent`), 'Overview');
     assert.equal(await evaluate("document.querySelector('.data-details').open"), false);
     assert.equal(await evaluate("document.querySelectorAll('.overview-grid .skill-plan-button,.overview-grid .progression-chat').length"), 0);
@@ -249,6 +288,58 @@ async function run() {
     await waitFor(`${pageHeading}.textContent === 'Skills'`);
     assert.equal(starts.length + collectionStarts.length, browseStart, 'Overview and profile/category shortcuts do not generate advice');
     await screenshot(`${label}-skills`);
+    const itemRequestsBefore = requests.length;
+    await click('Inventory'); await waitFor("document.querySelectorAll('.mc-item').length === 3");
+    await waitFor("document.querySelectorAll('.mc-item .asset-visual img').length === 0");
+    assert.equal(await evaluate("document.querySelectorAll('.mc-item .asset-fallback').length"), 3);
+    assert.equal(await evaluate("document.querySelectorAll('.mc-item-count')[0].textContent"), '×64');
+    assert.equal(await evaluate("document.querySelectorAll('.mc-item-count')[1].textContent"), 'Count not recorded');
+    assert.equal(await evaluate("document.querySelectorAll('.mc-item-count')[2].textContent"), '×0');
+    assert.ok(await evaluate("document.querySelector('.mc-item-name').textContent.includes('stays readable')"));
+    assert.equal(await evaluate("getComputedStyle(document.querySelector('.mc-item-count')).position"), 'static');
+    assert.equal(await evaluate("document.querySelector('.asset-visual').getBoundingClientRect().width"), 56);
+    assert.ok(await evaluate("document.querySelectorAll('.asset-location')[1].textContent.includes('Saved position 6')"));
+    await screenshot(`${label}-inventory-fallback`);
+    await evaluate("document.querySelector('.mc-item').click()"); await waitFor("document.querySelector('.item-details')");
+    assert.ok(await evaluate("document.querySelector('.item-details').textContent.includes('Saved item lore')"));
+    await evaluate("document.querySelector('.item-detail-json summary').click()");
+    assert.equal(await evaluate("document.querySelector('.item-detail-json').open"), true);
+    await screenshot(`${label}-item-details`); await click('Close');
+    await evaluate("document.querySelector('.mc-item').click()"); await waitFor("document.querySelector('.item-details')");
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+    await waitFor("document.querySelector('.item-details') === null");
+    await click('Armor');
+    await waitFor("document.querySelectorAll('.mc-item').length === 3");
+    assert.deepEqual(await evaluate("[...document.querySelectorAll('.asset-name')].map(e => e.textContent)"), ['Saved Boots', 'Saved Helmet', 'Armor with no explicit slot']);
+    assert.ok(await evaluate("document.querySelector('.asset-location').textContent.includes('Slot 0')"));
+    await screenshot(`${label}-armor`);
+    await click('Equipment'); await waitFor("document.querySelectorAll('.mc-item').length === 2");
+    assert.ok(await evaluate("document.querySelector('.asset-name').textContent.includes('slot 0')"));
+    await screenshot(`${label}-equipment`);
+    await click('Backpacks');
+    await waitFor("document.querySelector('.asset-state.partial')");
+    assert.ok(await evaluate("document.querySelector('.asset-state').textContent.includes('not assumed to be empty')"));
+    assert.ok(await evaluate("[...document.querySelectorAll('.asset-location')].some(e => e.textContent.includes('Backpack 2'))"));
+    await screenshot(`${label}-backpacks-partial`);
+    await click('Ender chest'); await waitFor("document.querySelector('.asset-state.private')");
+    assert.equal(await evaluate("document.querySelectorAll('.mc-item').length"), 0);
+    assert.equal(await evaluate(`${pageHeading}.textContent`), 'Ender chest');
+    await screenshot(`${label}-ender-chest-private`);
+    await click('Talismans'); await waitFor("document.querySelector('.asset-state.unavailable')");
+    await screenshot(`${label}-talismans-unavailable`);
+    await click('Pets'); await waitFor("document.querySelectorAll('.pet-card').length === 3");
+    assert.equal(await evaluate("document.querySelectorAll('.active-pet-badge').length"), 1);
+    assert.ok(await evaluate("document.querySelector('.pet-card').classList.contains('is-active')"));
+    assert.ok(await evaluate("document.querySelectorAll('.pet-card')[1].textContent.includes('0 saved XP')"));
+    assert.ok(await evaluate("document.querySelectorAll('.pet-card')[2].textContent.includes('XP not recorded')"));
+    await screenshot(`${label}-pets`);
+    await chooseProfile('Banana'); await click('Inventory');
+    await waitFor("document.querySelector('.asset-state.empty')"); await screenshot(`${label}-inventory-empty`);
+    await click('Equipment'); await waitFor("document.querySelector('.asset-state.missing')");
+    await screenshot(`${label}-equipment-missing`);
+    await chooseProfile('Apple'); await click('Skills');
+    assert.equal(requests.length, itemRequestsBefore, 'Item pages, missing images, inspectors and profile changes make no API requests');
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     const before = starts.length;
     await openSkillCard('mining'); assert.equal(await plannerCount(), 1); assert.equal(starts.length, before);
     assert.equal(await evaluate("document.querySelectorAll('.data-section h2').length"), 1);
@@ -272,7 +363,7 @@ async function run() {
     await click('Back to Skills');
     for (const tab of ['Overview', 'Collections', 'Inventory', 'Armor', 'Equipment', 'Pets', 'Timeline']) {
       await click(tab); await noLegacyPanel();
-      if (tab === 'Timeline') await waitFor("document.querySelector('.timeline-detail')");
+      if (tab === 'Timeline') { await waitFor("document.querySelector('.timeline-detail')"); await screenshot(`${label}-timeline-dates`); }
     }
     await openSkillCard('mining'); assert.equal(await turns(), 2); assert.equal(await plannerCount(), 1);
     assert.equal(starts.length, afterGuide); assert.equal(continuations.length, afterContinue);
@@ -344,7 +435,7 @@ async function run() {
     assert.equal(await turns(), 0, 'A response for another collection is rejected'); wrongCollection = false;
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     assert.equal(JSON.stringify(memory.rows('skyblockSnapshots')), snapshotBefore);
-    console.log(`PASS: ${label} Overview, compact header, profile switching, saved/missing/private values and shortcuts; Collections search, name/count sorting, verified groups, local icons and failed-image fallback; skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
+    console.log(`PASS: ${label} Overview, compact header, profile switching, saved/missing/private values and shortcuts; item pages, slot labels, Pets badges, empty/private/partial states, image failures and mobile section selector; Collections search, name/count sorting, verified groups, local icons and failed-image fallback; skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
   }
   // Deliberately ignore network cancellation to prove late results cannot repopulate another selection.
   await evaluate(`window.requestAborts = 0; const originalFetch = window.fetch; window.fetch = (url, options = {}) => {

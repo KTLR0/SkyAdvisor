@@ -53,14 +53,15 @@ stop that process or change `PORT` for Express, then restart both apps.
    to open the full category; Overview has no generic planning action.
 3. Use **Fetch fresh data** to request and save this one player's profiles.
 4. Use the header’s **Profile** selector to switch saved profiles and the category
-   navigation to browse their data. On narrow screens, scroll the category strip
-   horizontally. Skills show personal level progress, Collections show item counts,
+   navigation to browse their data. On mobile, use the labeled **Section**
+   selector; desktop keeps the category buttons. Skills show personal level progress, Collections show item counts,
    and Inventory shows item cards with count, location, lore, and optional NBT details.
    Collections groups saved entries by known category, supports name search and
    name/count sorting, and uses bundled category icons. Missing values stay
    unavailable; counts are not presented as tiers. See `docs/collections.md`.
 5. Choose **Timeline** to browse this profile's saved snapshots. Scroll the dated
-   buttons, select a date, or use **Previous** (older) / **Next** (newer).
+   buttons, select a date, or use **Older snapshot** / **Newer snapshot**. Each
+   control shows its destination date, or explains that more dates must be loaded.
    **Load older snapshots** reads the next saved page. Skills XP and Collections
    counts show changes from the immediate predecessor, with explicit unavailable
    and unexpected decrease labels. The first snapshot has no comparison baseline.
@@ -73,6 +74,12 @@ stop that process or change `PORT` for Express, then restart both apps.
    button restores the current guide; selecting a different target resets it.
    Player/profile/snapshot changes also reset and cancel pending work. Browsing or
    opening a planner does not generate advice.
+
+Item pages share readable cards with saved locations, count badges, and a local
+fallback when the existing base-item image cannot load. Pets use generic pet
+symbols and an **Active pet** badge when recorded. Armor/Equipment show explicit
+saved slot numbers in order; derived positions are labeled separately rather than
+inventing body-part or equipment-slot types. See `docs/item-pages.md`.
 
 Timeline browsing only calls saved-snapshot GET routes. It does not fetch Hypixel
 data or skill thresholds, refresh the player, or write to MongoDB. Profile changes
@@ -121,7 +128,8 @@ The dashboard browser check uses synthetic saved profiles, mocked model/resource
 and in-memory planner sessions. It covers the initial Overview, first-screen layout,
 profile switching, missing/private values, category shortcuts, and skill and collection
 entry points and both skill paths, follow-ups, TXT export, profile/skill/snapshot resets,
-Collections search/sort/grouping and icon fallbacks, request cancellation,
+Collections search/sort/grouping and icon fallbacks, item-page/Pets states,
+mobile section selection, failed item images, request cancellation,
 unavailable skills, and the absence of the old Recommendations
 panel or automatic generation requests. It does not use credentials or live services.
 
@@ -130,6 +138,7 @@ panel or automatic generation requests. It does not use credentials or live serv
 - `client/src/App.jsx`: username lookup and dashboard navigation.
 - `client/src/SkyblockPage.jsx`: profile selection and category displays.
 - `client/src/ProgressionChat.jsx`: the contextual skill/collection planner.
+- `client/src/ItemPages.jsx` and `item-display.js`: consistent item/Pets cards and conservative saved slot/location labels.
 - `server/app.js`: health, identity, snapshots/history, and manual fetch routes.
 - `server/minecraft.js`: canonical Minecraft username/UUID resolution.
 - `server/normalize.js`: predictable, availability-aware category objects.

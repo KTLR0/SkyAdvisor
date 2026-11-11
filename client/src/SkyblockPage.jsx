@@ -5,42 +5,14 @@ import ProgressionChat from './ProgressionChat.jsx';
 import OverviewView from './OverviewView.jsx';
 import useSkillResource from './useSkillResource.js';
 import CollectionsView from './CollectionsView.jsx';
+import { InventoryView, PetsView } from './ItemPages.jsx';
+import { categoryLabel, itemLocation } from './item-display.js';
 
 const DATA_TABS = ['Overview', 'Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
 const ITEM_TABS = new Set(['Inventory', 'Armor', 'Equipment', 'Backpacks', 'Enderchest', 'Talismans']);
-const STATUS_LABELS = {
-  available: 'Available', partial: 'Partially available', empty: 'Empty',
-  missing: 'Not provided', private: 'API sharing disabled', unavailable: 'Unavailable',
-};
 const formatNumber = (value) => value === null || value === undefined ? 'Not provided'
   : new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(value);
-
-function Availability({ data }) {
-  if (!data || data.status === 'available') return null;
-  return (
-    <p className={`availability ${data.status}`} role="status">
-      <strong>{STATUS_LABELS[data.status] || 'Unavailable'}.</strong>{' '}
-      {data.reason || (data.status === 'empty' ? 'The API returned no entries for this category.'
-        : 'This information was not provided. Check the player’s in-game API sharing settings.')}
-    </p>
-  );
-}
-
-function ItemCard({ item, onClick }) {
-  const [imageFailed, setImageFailed] = useState(false);
-  const textureUrl = item.minecraftId && /^[a-z0-9_]+$/i.test(item.minecraftId)
-    ? `https://mcasset.cloud/1.21.4/assets/minecraft/textures/item/${item.minecraftId.toLowerCase()}.png` : null;
-  return <button type="button" className="mc-item" onClick={() => onClick(item)}
-    title={`${item.name} · ${item.container}, slot ${item.slot}`}>
-    <span className="mc-item-icon">
-      {textureUrl && !imageFailed ? <img src={textureUrl} alt="" onError={() => setImageFailed(true)} />
-        : <span aria-hidden="true">{item.name.slice(0, 2).toUpperCase()}</span>}
-    </span>
-    {item.count !== null && item.count > 1 && <span className="mc-item-count">{formatNumber(item.count)}</span>}
-    <span className="mc-item-name">{item.name}</span>
-  </button>;
-}
 
 // The optional item inspector preserves the existing advanced NBT inspection feature.
 function JsonValue({ value, name, depth = 0 }) {
@@ -72,31 +44,11 @@ function ItemDetails({ item, onClose }) {
     <dl className="item-facts">
       <dt>Item ID</dt><dd><code>{item.id}</code></dd>
       <dt>Count</dt><dd>{formatNumber(item.count)}</dd>
-      <dt>Location</dt><dd>{item.container}, slot {item.slot}</dd>
+      <dt>Location</dt><dd>{itemLocation(item)}</dd>
     </dl>
     {!!item.lore.length && <ul className="item-lore">{item.lore.map((line, index) => <li key={index}>{line}</li>)}</ul>}
     <details className="item-detail-json"><summary>Advanced NBT details</summary><JsonValue value={item.raw} /></details>
   </aside>;
-}
-
-function InventoryView({ data, onItemClick }) {
-  return <>
-    <Availability data={data} />
-    {!!data?.items?.length && <>
-      <p className="hint">{data.items.length} item stacks. Select an item to see its count, location, lore, and details.</p>
-      <div className="item-grid">{data.items.map((item, index) => (
-        <ItemCard key={`${item.container}:${item.slot}:${index}`} item={item} onClick={onItemClick} />
-      ))}</div>
-    </>}
-  </>;
-}
-
-function PetsView({ data }) {
-  return <><Availability data={data} /><div className="skill-grid">
-    {(data?.entries || []).map((pet) => <article key={pet.id} className="skill-card">
-      <h3>{pet.name}</h3><p>{pet.rarity}{pet.active ? ' · Active pet' : ''}</p><p>{formatNumber(pet.xp)} XP</p>
-    </article>)}
-  </div></>;
 }
 
 // Keep Skills mounted while the planner resets with its player/profile/snapshot.
@@ -107,6 +59,7 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
   const target = selection?.scope === scope ? selection : null;
   const activeTab = selectedTab === 'Planner' && !target ? 'Overview' : selectedTab;
   const returnTab = target?.kind === 'collection' ? 'Collections' : 'Skills';
+  const categoryTab = activeTab === 'Planner' ? returnTab : activeTab;
   function openPlanner(kind, entry) {
     setSelection(current => current?.scope === scope && current.kind === kind && current.id === entry.id
       ? current : { scope, kind, id: entry.id, label: entry.label });
@@ -118,8 +71,10 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
   useEffect(() => { setSelection(null); }, [scope]);
 
   useEffect(() => {
-    navigation.current?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  }, [activeTab]);
+    if (navigation.current?.getClientRects().length) {
+      navigation.current.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+  }, [categoryTab]);
 
   useEffect(() => {
     if (activeTab === 'Planner') {
@@ -130,11 +85,15 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
 
   return <section className="data-section" aria-label="Profile data">
     <nav ref={navigation} className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
-      className={activeTab === tab ? 'active' : ''} aria-pressed={activeTab === tab}
-      onClick={() => onSelectTab(tab)}>{tab}</button>)}</nav>
+      className={categoryTab === tab ? 'active' : ''} aria-pressed={categoryTab === tab}
+      onClick={() => onSelectTab(tab)}>{categoryLabel(tab)}</button>)}</nav>
+    <div className="mobile-category-nav"><label htmlFor="dashboard-section">Section</label>
+      <select id="dashboard-section" value={categoryTab} onChange={event => onSelectTab(event.target.value)}>
+        {DATA_TABS.map(tab => <option key={tab} value={tab}>{categoryLabel(tab)}</option>)}
+      </select></div>
     <div className="planner-page-header">
       <h2 ref={heading} tabIndex={-1}>{activeTab === 'Planner' ? `Next steps for ${target.label}`
-        : activeTab === 'Enderchest' ? 'Ender chest' : activeTab}</h2>
+        : categoryLabel(activeTab)}</h2>
       {activeTab === 'Planner' && <button type="button" className="secondary" onClick={() => onSelectTab(returnTab)}>Back to {returnTab}</button>}
     </div>
     {activeTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
@@ -148,7 +107,8 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
       skill={target.kind === 'skill' ? target.id : null} collectionId={target.kind === 'collection' ? target.id : null} />}</div>
     <div hidden={activeTab !== 'Collections'}><CollectionsView key={scope} data={profile.data.Collections}
       onPlan={entry => openPlanner('collection', entry)} /></div>
-    {ITEM_TABS.has(activeTab) && <InventoryView data={profile.data[activeTab]} onItemClick={onItemClick} />}
+    {ITEM_TABS.has(activeTab) && <InventoryView key={`${scope}:${activeTab}`} category={activeTab}
+      data={profile.data[activeTab]} onItemClick={onItemClick} />}
     {activeTab === 'Pets' && <PetsView data={profile.data.Pets} />}
   </section>;
 }

@@ -113,7 +113,16 @@ async function run() {
     await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
   }
   async function click(text) {
-    assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
+    assert.equal(await evaluate(`(() => {
+      const nav = document.querySelector('#dashboard-section');
+      if (nav?.getClientRects().length) {
+        const option = [...nav.options].find(o => o.value === ${JSON.stringify(text)} || o.textContent === ${JSON.stringify(text)});
+        if (option) { nav.focus(); nav.value = option.value; nav.dispatchEvent(new Event('change', { bubbles: true })); return true; }
+      }
+      const b = [...document.querySelectorAll('button')].find(b => b.getClientRects().length &&
+        (b.textContent.trim() === ${JSON.stringify(text)} || b.dataset.timelineMove && b.querySelector('strong')?.textContent === ${JSON.stringify(text)}));
+      if (!b || b.disabled) return false; b.click(); return true;
+    })()`), true, 'Clickable control: ' + text);
   }
   async function select(index) {
     await evaluate(`document.querySelectorAll('.timeline-date')[${index}].click()`);
@@ -141,21 +150,23 @@ async function run() {
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('+50 XP')`));
   assert.ok(await evaluate("document.querySelector('.timeline-decrease')?.textContent.includes('Unexpected decrease: −5 items')"));
   assert.ok(await evaluate("[...document.querySelectorAll('.timeline-date time')].every(t => t.textContent.includes(':'))"));
-  assert.equal(await evaluate("document.querySelector('[aria-label=\"Next snapshot (newer)\"]').disabled"), true);
-  await click('Previous'); await waitFor("document.querySelector('.timeline-detail') !== null");
+  assert.equal(await evaluate("document.querySelector('[data-timeline-move=\"newer\"]').disabled"), true);
+  assert.equal(await evaluate("document.querySelector('[data-timeline-move=older] time').dateTime"), await evaluate("document.querySelectorAll('.timeline-date time')[1].dateTime"));
+  await click('Older snapshot'); await waitFor("document.querySelector('.timeline-detail') !== null");
   assert.equal(await selectedIndex(), 1);
-  await click('Next'); await waitFor("document.querySelector('.timeline-detail') !== null");
+  assert.equal(await evaluate("document.querySelector('[data-timeline-move=newer] time').dateTime"), await evaluate("document.querySelectorAll('.timeline-date time')[0].dateTime"));
+  await click('Newer snapshot'); await waitFor("document.querySelector('.timeline-detail') !== null");
   assert.equal(await selectedIndex(), 0);
-  console.log('PASS: initial list retry, selected state, saved totals, changes, decrease labels, same-date times, Previous/Next');
-  await select(9); await click('Previous');
+  console.log('PASS: initial list retry, selected state, saved totals, changes, decrease labels, same-date times, Older/Newer destination dates');
+  await select(9); await click('Older snapshot');
   await waitFor("document.querySelectorAll('.timeline-date').length === 11 && document.querySelector('.timeline-first') !== null");
   assert.equal(await selectedIndex(), 10);
   assert.equal(await evaluate("document.querySelector('.timeline-first').textContent"), 'First recorded snapshot');
   assert.equal(await evaluate(`${savedRow('mining')}.querySelector('td').textContent`), '0');
-  assert.equal(await evaluate("document.querySelector('[aria-label=\"Previous snapshot (older)\"]').disabled"), true);
+  assert.equal(await evaluate("document.querySelector('[data-timeline-move=\"older\"]').disabled"), true);
   await select(4);
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('Unavailable') && ${savedRow('mining')}.textContent.includes('Comparison unavailable')`));
-  console.log('PASS: Previous loads another cursor page; first snapshot, reliable zero and legacy unavailable values render correctly');
+  console.log('PASS: Older snapshot loads another cursor page; first snapshot, reliable zero and legacy unavailable values render correctly');
   await chooseProfile('Banana'); await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('999')`));
   await chooseProfile('Coconut'); await waitFor("document.querySelector('.timeline-view .empty-state') !== null");

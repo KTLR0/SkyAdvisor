@@ -106,6 +106,8 @@ export default function TimelineView({ playerUuid, profileId }) {
 
   const selectedIndex = snapshots.findIndex(snapshot => snapshot.snapshotId === selectedId);
   const visibleDetail = detail?.snapshot.snapshotId === selectedId ? detail : null;
+  const olderSnapshot = snapshots[selectedIndex + 1];
+  const newerSnapshot = snapshots[selectedIndex - 1];
   function previous() {
     if (selectedIndex + 1 < snapshots.length) setSelectedId(snapshots[selectedIndex + 1].snapshotId);
     else if (nextCursor) loadPage(nextCursor, true);
@@ -114,11 +116,15 @@ export default function TimelineView({ playerUuid, profileId }) {
   return <div className="timeline-view">
     <p className="hint">Browse saved snapshots for this profile, newest first. Dates include local times. Changes use the immediately previous saved snapshot.</p>
     <div className="timeline-controls">
-      <button type="button" className="secondary" onClick={previous} aria-label="Previous snapshot (older)"
-        disabled={listLoading || selectedIndex < 0 || (selectedIndex === snapshots.length - 1 && !nextCursor)}>Previous</button>
+      <button type="button" className="secondary" data-timeline-move="older" onClick={previous}
+        aria-label={`Older snapshot${olderSnapshot ? `: ${date(olderSnapshot.fetchedAt)}` : ''}`}
+        disabled={listLoading || selectedIndex < 0 || (selectedIndex === snapshots.length - 1 && !nextCursor)}>
+        <strong>Older snapshot</strong><small>{olderSnapshot ? <time dateTime={olderSnapshot.fetchedAt}>{date(olderSnapshot.fetchedAt)}</time>
+          : nextCursor ? 'Load older saved dates' : 'No older snapshot'}</small></button>
       <button type="button" className="secondary" onClick={() => setSelectedId(snapshots[selectedIndex - 1].snapshotId)}
-        aria-label="Next snapshot (newer)" disabled={selectedIndex <= 0}>Next</button>
-      <span className="hint">Previous: older · Next: newer</span>
+        data-timeline-move="newer" aria-label={`Newer snapshot${newerSnapshot ? `: ${date(newerSnapshot.fetchedAt)}` : ''}`} disabled={selectedIndex <= 0}>
+        <strong>Newer snapshot</strong><small>{newerSnapshot ? <time dateTime={newerSnapshot.fetchedAt}>{date(newerSnapshot.fetchedAt)}</time>
+          : selectedIndex === 0 ? 'Latest saved snapshot' : 'No newer snapshot'}</small></button>
     </div>
     {snapshots.length > 0 && <div className="timeline-strip" ref={strip} role="group" aria-label="Saved snapshot dates">
       {snapshots.map(snapshot => <button type="button" key={snapshot.snapshotId}
