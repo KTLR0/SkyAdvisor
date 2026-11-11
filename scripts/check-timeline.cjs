@@ -108,6 +108,10 @@ async function run() {
     for (let i = 0; i < 150; i++) { if (await evaluate(expression)) return; await delay(100); }
     throw new Error('Timed out: ' + expression);
   }
+  async function chooseProfile(name) {
+    await evaluate(`(() => { const s = document.querySelector('#dashboard-profile'); const option = [...s.options].find(o => o.textContent === ${JSON.stringify(name)}); if (!option) throw new Error('Profile not found'); s.value = option.value; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
+  }
   async function click(text) {
     assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
   }
@@ -152,20 +156,20 @@ async function run() {
   await select(4);
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('Unavailable') && ${savedRow('mining')}.textContent.includes('Comparison unavailable')`));
   console.log('PASS: Previous loads another cursor page; first snapshot, reliable zero and legacy unavailable values render correctly');
-  await click('Banana'); await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
+  await chooseProfile('Banana'); await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('999')`));
-  await click('Coconut'); await waitFor("document.querySelector('.timeline-view .empty-state') !== null");
+  await chooseProfile('Coconut'); await waitFor("document.querySelector('.timeline-view .empty-state') !== null");
   assert.equal(await evaluate("document.querySelectorAll('.timeline-date, .timeline-detail').length"), 0);
-  await click('Apple'); await waitFor("document.querySelectorAll('.timeline-date').length === 10 && document.querySelector('.timeline-detail') !== null");
+  await chooseProfile('Apple'); await waitFor("document.querySelectorAll('.timeline-date').length === 10 && document.querySelector('.timeline-detail') !== null");
   assert.equal(await selectedIndex(), 0);
   slowDetail = true;
   await evaluate("document.querySelectorAll('.timeline-date')[1].click()");
   await waitFor("document.querySelector('.timeline-view').textContent.includes('Loading saved snapshot')");
-  await click('Banana'); slowDetail = false;
+  await chooseProfile('Banana'); slowDetail = false;
   await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
   await delay(600);
   assert.ok(await evaluate(`${savedRow('mining')}.textContent.includes('999')`));
-  await click('Apple'); await waitFor("document.querySelector('.timeline-detail') !== null && document.querySelectorAll('.timeline-date').length === 10");
+  await chooseProfile('Apple'); await waitFor("document.querySelector('.timeline-detail') !== null && document.querySelectorAll('.timeline-date').length === 10");
   console.log('PASS: profile switching resets history and selection; empty histories and aborted stale detail requests are safe');
   failDetail = true;
   await evaluate("document.querySelectorAll('.timeline-date')[1].click()");
@@ -196,8 +200,8 @@ async function run() {
   assert.equal(requests.length, beforeScroll, 'Scrolling performs no requests');
   await evaluate("document.querySelector('.timeline-strip').scrollLeft = 0");
   const mobile = await screenshot('mobile');
-  await click('Banana'); await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
-  await click('Apple'); await waitFor("document.querySelectorAll('.timeline-date').length === 10 && document.querySelector('.timeline-detail') !== null");
+  await chooseProfile('Banana'); await waitFor("document.querySelector('.timeline-first') !== null && document.querySelectorAll('.timeline-date').length === 1");
+  await chooseProfile('Apple'); await waitFor("document.querySelectorAll('.timeline-date').length === 10 && document.querySelector('.timeline-detail') !== null");
   assert.equal(await selectedIndex(), 0);
   await delay(300);
   const snapshotGet = request => request.method === 'GET' && /^\/api\/players\/[a-f0-9]{32}\/profiles\/[a-f0-9]{32}\/snapshots(?:\/s1_[A-Za-z0-9_-]+)?$/.test(new URL(request.url || request.path, 'http://localhost').pathname);

@@ -319,9 +319,52 @@ dd { margin-left: 0; overflow-wrap: anywhere; }
   }
 }
 /* Dashboard values are readable on both desktop and narrow screens. */
-.skyblock-page { max-width: 1180px; padding: clamp(16px, 4vw, 40px); }
-.skyblock-header { flex-wrap: wrap; gap: 20px; }
-.skyblock-actions { max-width: 330px; }
+.skyblock-page { max-width: 1180px; padding: clamp(16px, 3vw, 28px); }
+.skyblock-header { flex-wrap: wrap; gap: 12px; }
+.skyblock-actions { max-width: none; gap: 8px; }
+.skyblock-actions button { padding: 8px 10px; min-height: 40px; font-size: 0.875rem; }
+.skyblock-header .eyebrow { margin: 0 0 2px; }
+.skyblock-header h1 { font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.2; overflow-wrap: anywhere; }
+.player-context { min-width: 0; flex: 1; }
+.player-title, .profile-context { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.profile-context { margin-top: 8px; font-size: 0.875rem; }
+.profile-context select { min-width: 100px; max-width: 170px; padding: 6px 10px; border: 1px solid #8ba5b8; border-radius: 6px; color: inherit; background: white; font: inherit; }
+.profile-context select:focus-visible { outline: 3px solid #235b85; outline-offset: 2px; }
+.profile-context .snapshot-time { margin: 0; font-size: 0.8rem; }
+.header-utilities { max-width: 100%; }
+.data-details { margin-top: 6px; font-size: 0.8rem; }
+.data-details summary { cursor: pointer; color: #476175; }
+.data-details[open] { padding: 10px; background: white; border: 1px solid #cbdce8; border-radius: 8px; }
+.data-details p { max-width: 430px; }
+.data-section { margin-top: 16px; padding: 16px; }
+.data-tabs { flex-wrap: nowrap; overflow-x: auto; gap: 6px; }
+.data-tabs button { flex: 0 0 auto; min-height: 40px; padding: 8px 10px; font-size: 0.875rem; white-space: nowrap; }
+button.category-link { min-height: 32px; padding: 4px 0; background: transparent; color: #235b85; font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.overview-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; }
+.overview-card { min-width: 0; padding: 14px; border: 1px solid #d3e0ea; border-radius: 9px; background: #f9fbfd; }
+.overview-card h3 { margin: 0; font-size: 1rem; }
+.overview-card-heading, .overview-skill-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.overview-skill-list, .overview-collection-list { list-style: none; padding: 0; margin: 8px 0 0; }
+.overview-skill-list { display: grid; gap: 12px; }
+.overview-skill-heading { font-size: 0.875rem; }
+.overview-skill-heading span, .overview-card small { color: #52697b; font-size: 0.8rem; }
+.overview-skill-list .skill-progress-track { height: 6px; margin: 5px 0 2px; }
+.overview-card .hint { margin: 8px 0 0; font-size: 0.8rem; }
+.overview-summary { margin: 8px 0; font-size: 0.875rem; }
+.overview-summary strong { font-size: 1.4rem; }
+.overview-collection-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 0.875rem; }
+.overview-collection-list li + li { margin-top: 6px; }
+.overview-collection-list strong { font-variant-numeric: tabular-nums; }
+.overview-status { margin: 8px 0 0; color: #52697b; font-size: 0.875rem; }
+.overview-timeline { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.overview-timeline > div { flex: 1; min-width: 0; }
+.overview-timeline p { margin: 4px 0 0; font-size: 0.875rem; color: #52697b; }
+.overview-timeline button { min-height: 40px; padding: 8px 10px; font-size: 0.875rem; }
+@media (max-width: 700px) {
+  .player-context, .header-utilities { width: 100%; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .overview-card { padding: 12px; }
+}
 .player-uuid, .profile-id { overflow-wrap: anywhere; }
 .player-uuid { color: #476175; font-size: 0.875rem; }
 .selected-profile { margin-bottom: 4px; font-size: 1.5rem; }
@@ -421,7 +464,7 @@ button.secondary { color: #235b85; border: 1px solid #b3cadb; background: white;
 .empty-state { opacity: 1; border-color: #b3cadb; }
 @media (max-width: 480px) {
   .skyblock-actions { max-width: none; width: 100%; }
-  .skyblock-actions button { flex: 1 1 100%; }
+  .skyblock-actions button { flex: 1 1 auto; }
   .data-section, .profile-section { padding: 16px; }
   .recommendations-section, .recommendation-card { padding: 16px; }
   .recommendation-controls { align-items: stretch; flex-direction: column; }

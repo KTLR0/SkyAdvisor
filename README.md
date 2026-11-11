@@ -47,9 +47,14 @@ stop that process or change `PORT` for Express, then restart both apps.
 ## Use the dashboard
 
 1. Enter a Minecraft Java username and choose **Find player**.
-2. Choose **Continue to SkyBlock data**. Previously saved profiles load from MongoDB.
+2. Choose **Continue to SkyBlock data**. Previously saved profiles load from MongoDB
+   and **Overview** opens first. It previews two saved skills, reliable collection
+   counts, and a Timeline shortcut. Use **View Skills** or **View Collections**
+   to open the full category; Overview has no generic planning action.
 3. Use **Fetch fresh data** to request and save this one player's profiles.
-4. Select a profile and a category. Skills show personal level progress, Collections show item counts,
+4. Use the header’s **Profile** selector to switch saved profiles and the category
+   navigation to browse their data. On narrow screens, scroll the category strip
+   horizontally. Skills show personal level progress, Collections show item counts,
    and Inventory shows item cards with count, location, lore, and optional NBT details.
 5. Choose **Timeline** to browse this profile's saved snapshots. Scroll the dated
    buttons, select a date, or use **Previous** (older) / **Next** (newer).
@@ -71,7 +76,10 @@ data or skill thresholds, refresh the player, or write to MongoDB. Profile chang
 reset its dates and selection. Snapshot times are shown in your browser's local
 time zone. To see newly saved records, reopen Timeline after an explicit refresh.
 
-The header shows the selected player/profile and the snapshot's fetch time.
+The compact header shows the selected player/profile and the saved snapshot time.
+**Change player** returns to lookup. **Data details & fetch limits** contains the
+optional UUIDs and manual-fetch limits. **Fetch fresh data** saves new data;
+**Reload saved data** reads existing snapshots. Neither action is automatic.
 A real zero is shown as zero. Missing, private, empty, and undecodable data have
 separate states. Existing schema-1 snapshots remain readable but ambiguous older
 zeros are marked unavailable until a fresh fetch. Skill levels use the official
@@ -106,8 +114,9 @@ requires an installed Chrome/Chromium browser (set `CHROME_BIN` if not at the
 default macOS Chrome path). Preview screenshots are written to the OS temporary
 directory. It does not read `.env` or connect to Atlas/Hypixel.
 
-The Next Steps browser check uses synthetic saved profiles, mocked model/resources,
-and in-memory planner sessions. It covers desktop/mobile navigation, skill and collection
+The dashboard browser check uses synthetic saved profiles, mocked model/resources,
+and in-memory planner sessions. It covers the initial Overview, first-screen layout,
+profile switching, missing/private values, category shortcuts, and skill and collection
 entry points and both skill paths, follow-ups, TXT export, profile/skill/snapshot resets,
 request cancellation, unavailable skills, and the absence of the old Recommendations
 panel or automatic generation requests. It does not use credentials or live services.
@@ -121,7 +130,9 @@ panel or automatic generation requests. It does not use credentials or live serv
 - `server/minecraft.js`: canonical Minecraft username/UUID resolution.
 - `server/normalize.js`: predictable, availability-aware category objects.
 - `server/skill-resource.js`: validated, cached official skill thresholds.
+- `client/src/OverviewView.jsx`: saved Skills/Collections previews and a Timeline shortcut.
 - `client/src/SkillsView.jsx` and `skill-progress.js`: accessible personal progress cards and calculations.
+- `client/src/useSkillResource.js`: one shared threshold loader for Overview and Skills.
 - `server/skyblock.js`: identity checks, fetching, atomic persistence, and readback.
 - `server/database.js`: MongoDB setup and transaction lifecycle.
 - `docs/data-contract.md`: stored/API shapes and legacy compatibility.

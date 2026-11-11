@@ -87,6 +87,10 @@ async function run() {
     for (let i = 0; i < 150; i++) { if (await evaluate(expression)) return; await delay(100); }
     throw new Error('Timed out: ' + expression);
   }
+  async function chooseProfile(name) {
+    await evaluate(`(() => { const s = document.querySelector('#dashboard-profile'); const option = [...s.options].find(o => o.textContent === ${JSON.stringify(name)}); if (!option) throw new Error('Profile not found'); s.value = option.value; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
+  }
   async function click(text) {
     assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
   }
@@ -102,6 +106,8 @@ async function run() {
   await click('Find player');
   await waitFor("document.body.textContent.includes('Continue to SkyBlock data')");
   await click('Continue to SkyBlock data');
+  await waitFor("document.querySelector('.overview-grid') !== null");
+  await click('Skills');
   await waitFor("document.querySelector('.skill-resource-error') !== null");
   assert.equal(await evaluate("document.querySelectorAll('[role=progressbar]').length"), 0);
   offline = false;
@@ -122,15 +128,15 @@ async function run() {
   }
   console.log('PASS: rendered level, progress, XP remaining, accessible text, zero XP, max level, and unavailable states');
   const originalRequests = thresholdRequests;
-  await click('Banana');
+  await chooseProfile('Banana');
   await waitFor(`${card('farming')}?.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow') === '25'`);
   assert.equal(await progressValue('mining'), '0');
   assert.equal(await evaluate(`${card('farming')}.querySelector('.skill-level').textContent`), 'Level 2');
-  await click('Coconut');
-  await waitFor("document.querySelector('.selected-profile')?.textContent === 'Coconut profile'");
+  await chooseProfile('Coconut');
+  await waitFor("document.querySelector('#dashboard-profile').selectedOptions[0].textContent === 'Coconut'");
   assert.equal(await evaluate("document.querySelectorAll('.skill-progress-track').length"), 0);
   assert.ok(await evaluate("document.querySelector('.data-section').textContent.includes('Unavailable')"));
-  await click('Apple');
+  await chooseProfile('Apple');
   await waitFor(`${card('farming')}?.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow') === '50'`);
   assert.equal(thresholdRequests, originalRequests, 'Profile switching does not refetch public resource');
   assert.equal(playerFetches, 1, 'No extra player requests');

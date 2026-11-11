@@ -2,7 +2,9 @@
 
 The existing `/recommendations` API (contract v2) remains available but has no
 player-facing dashboard panel. A contextual planner opens from Skills or Collections;
-it has no separate main-navigation item or generic skill picker.
+it has no separate main-navigation item or generic skill picker. The dashboard
+opens on Overview, which links to categories without offering a generic planner
+action. Visiting Overview and reopening the same entry preserves the active guide.
 
 ## Player workflow
 

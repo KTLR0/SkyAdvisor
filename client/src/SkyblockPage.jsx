@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import SkillsView from './SkillsView.jsx';
 import TimelineView from './TimelineView.jsx';
 import ProgressionChat from './ProgressionChat.jsx';
+import OverviewView from './OverviewView.jsx';
+import useSkillResource from './useSkillResource.js';
 
-const DATA_TABS = ['Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
+const DATA_TABS = ['Overview', 'Skills', 'Collections', 'Inventory', 'Armor', 'Equipment',
   'Backpacks', 'Enderchest', 'Talismans', 'Pets', 'Timeline'];
 const ITEM_TABS = new Set(['Inventory', 'Armor', 'Equipment', 'Backpacks', 'Enderchest', 'Talismans']);
 const STATUS_LABELS = {
@@ -118,10 +120,11 @@ function PetsView({ data }) {
 
 // Keep Skills mounted while the planner resets with its player/profile/snapshot.
 function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClick }) {
+  const skillResource = useSkillResource();
   const scope = `${playerUuid}:${profile.profileId}:${profile.fetchedAt ?? ''}`;
   const [selection, setSelection] = useState(null);
   const target = selection?.scope === scope ? selection : null;
-  const activeTab = selectedTab === 'Planner' && !target ? 'Skills' : selectedTab;
+  const activeTab = selectedTab === 'Planner' && !target ? 'Overview' : selectedTab;
   const returnTab = target?.kind === 'collection' ? 'Collections' : 'Skills';
   function openPlanner(kind, entry) {
     setSelection(current => current?.scope === scope && current.kind === kind && current.id === entry.id
@@ -129,8 +132,13 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
     onSelectTab('Planner');
   }
   const heading = useRef(null);
+  const navigation = useRef(null);
 
   useEffect(() => { setSelection(null); }, [scope]);
+
+  useEffect(() => {
+    navigation.current?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [activeTab]);
 
   useEffect(() => {
     if (activeTab === 'Planner') {
@@ -140,7 +148,7 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
   }, [activeTab, target?.kind, target?.id]);
 
   return <section className="data-section" aria-label="Profile data">
-    <nav className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
+    <nav ref={navigation} className="data-tabs" aria-label="Data categories">{DATA_TABS.map((tab) => <button type="button" key={tab}
       className={activeTab === tab ? 'active' : ''} aria-pressed={activeTab === tab}
       onClick={() => onSelectTab(tab)}>{tab}</button>)}</nav>
     <div className="planner-page-header">
@@ -149,10 +157,11 @@ function ProfileData({ profile, playerUuid, selectedTab, onSelectTab, onItemClic
       {activeTab === 'Planner' && <button type="button" className="secondary" onClick={() => onSelectTab(returnTab)}>Back to {returnTab}</button>}
     </div>
     {activeTab !== 'Timeline' && profile.sourceSchemaVersion < 2 && <p className="hint">Older snapshot: some unavailable values cannot be recovered. Fetch fresh data for explicit availability.</p>}
+    {activeTab === 'Overview' && <OverviewView data={profile.data} skillResource={skillResource} onSelectTab={onSelectTab} />}
     {activeTab === 'Timeline' && <TimelineView key={`${playerUuid}:${profile.profileId}`}
       playerUuid={playerUuid} profileId={profile.profileId} />}
     <div hidden={activeTab !== 'Skills'}><SkillsView data={profile.data.Skills}
-      onPlan={skill => openPlanner('skill', profile.data.Skills.entries.find(entry => entry.id === skill))} /></div>
+      {...skillResource} onPlan={skill => openPlanner('skill', profile.data.Skills.entries.find(entry => entry.id === skill))} /></div>
     <div hidden={activeTab !== 'Planner'}>{target && <ProgressionChat key={`${scope}:${target.kind}:${target.id}`}
       playerUuid={playerUuid} profileId={profile.profileId}
       skill={target.kind === 'skill' ? target.id : null} collectionId={target.kind === 'collection' ? target.id : null} />}</div>
@@ -175,7 +184,7 @@ async function readResponse(response) {
 export default function SkyBlockPage({ player, onBack }) {
   const [storedData, setStoredData] = useState(null);
   const [selectedProfileId, setSelectedProfileId] = useState(null);
-  const [selectedTab, setSelectedTab] = useState('Skills');
+  const [selectedTab, setSelectedTab] = useState('Overview');
   const [selectedItem, setSelectedItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
@@ -237,24 +246,36 @@ export default function SkyBlockPage({ player, onBack }) {
 
   const profile = storedData?.profiles.find((entry) => entry.profileId === selectedProfileId);
   const fetchedAt = profile?.fetchedAt ? new Date(profile.fetchedAt) : null;
+  const hasSavedTime = fetchedAt && Number.isFinite(fetchedAt.getTime());
 
   return <main className="skyblock-page">
     <header className="skyblock-header">
-      <div><p className="eyebrow">SkyAdvisor · Player dashboard</p><h1>{player.name}</h1>
-        <p className="player-uuid">Player UUID: <code>{player.uuid}</code></p>
-        {profile && <><h2 className="selected-profile">{profile.profile} profile</h2>
-          <p className="snapshot-time">Last fetched: {fetchedAt
-            ? <time dateTime={profile.fetchedAt}>{fetchedAt.toLocaleString()}</time> : 'Unknown for this saved snapshot'}</p></>}
+      <div className="player-context"><p className="eyebrow">SkyAdvisor</p>
+        <div className="player-title"><h1>{player.name}</h1>
+          <button type="button" className="category-link" onClick={onBack} disabled={isFetching}>Change player</button></div>
+        {profile && <div className="profile-context"><label htmlFor="dashboard-profile">Profile</label>
+          <select id="dashboard-profile" value={selectedProfileId}
+            onChange={event => { setSelectedProfileId(event.target.value); setSelectedItem(null); }}>
+            {storedData.profiles.map(entry => <option key={entry.profileId} value={entry.profileId}>{entry.profile}</option>)}
+          </select>
+          <p className="snapshot-time">Saved: {hasSavedTime
+            ? <time dateTime={profile.fetchedAt}>{fetchedAt.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</time>
+            : 'Time unavailable'}</p></div>}
       </div>
-      <div className="skyblock-actions">
-        <button type="button" onClick={fetchFreshData} disabled={isFetching || isLoading}>
-          {isFetching ? 'Fetching fresh data…' : 'Fetch fresh data'}
-        </button>
-        <button type="button" className="secondary" onClick={() => loadStoredData()} disabled={isFetching || isLoading}>Reload saved data</button>
-        <button type="button" className="secondary" onClick={onBack} disabled={isFetching}>Back</button>
+      <div className="header-utilities">
+        <div className="skyblock-actions">
+          <button type="button" onClick={fetchFreshData} disabled={isFetching || isLoading}>
+            {isFetching ? 'Fetching fresh data…' : 'Fetch fresh data'}
+          </button>
+          <button type="button" className="secondary" onClick={() => loadStoredData()} disabled={isFetching || isLoading}>Reload saved data</button>
+        </div>
+        <details className="data-details"><summary>Data details &amp; fetch limits</summary>
+          <p className="player-uuid">Player UUID: <code>{player.uuid}</code></p>
+          {profile && <p className="profile-id">Profile ID: <code>{profile.profileId}</code></p>}
+          <p className="hint">Fresh data is fetched only when you request it. Limit: once per hour and four times per 24 hours per player. Reload saved data reads stored snapshots.</p>
+        </details>
       </div>
     </header>
-    <p className="hint">Fresh data is fetched only when you request it. Limit: once per hour and four times per 24 hours per player.</p>
     {error && <p className="availability error" role="alert">{error}</p>}
     {fetchMessage && <p className="status online" role="status">{fetchMessage}</p>}
     {(isLoading || isFetching) && <p role="status">{isFetching ? 'Fetching and saving this player’s profiles…' : 'Loading saved profiles…'}</p>}
@@ -262,16 +283,6 @@ export default function SkyBlockPage({ player, onBack }) {
       <h2>No saved profiles yet</h2><p>Choose “Fetch fresh data” to retrieve this player’s SkyBlock profiles and save a snapshot.</p>
     </section>}
     {profile && <>
-      <section className="profile-section" aria-labelledby="profiles-heading">
-        <h2 id="profiles-heading">Select a profile</h2>
-        <div className="profile-tabs">{storedData.profiles.map((entry) => <button type="button"
-          key={entry.profileId} className={selectedProfileId === entry.profileId ? 'active' : ''}
-          aria-pressed={selectedProfileId === entry.profileId}
-          onClick={() => { setSelectedProfileId(entry.profileId); setSelectedItem(null); }}>
-          {entry.profile}
-        </button>)}</div>
-        <p className="hint profile-id">Profile ID: <code>{profile.profileId}</code></p>
-      </section>
       <ProfileData profile={profile} playerUuid={player.uuid} selectedTab={selectedTab}
         onSelectTab={(tab) => { setSelectedTab(tab); setSelectedItem(null); }} onItemClick={setSelectedItem} />
       {selectedItem && <ItemDetails item={selectedItem} onClose={() => setSelectedItem(null)} />}

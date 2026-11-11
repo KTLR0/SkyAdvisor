@@ -52,6 +52,9 @@ async function run() {
   }
   rows.push({ ...structuredClone(latest), _id: 'no-skills', profileId: PROFILE_C, profileName: 'Coconut',
     selected: false, data: { Skills: { status: 'private', entries: [] } } });
+  rows.push({ ...structuredClone(latest), _id: 'private-collections', profileId: 'd'.repeat(32),
+    profileName: 'Date', selected: false, fetchedAt: 'unavailable',
+    data: { Skills: { status: 'missing', entries: [] }, Collections: { status: 'private', entries: [] } } });
   memory.rows('players').push({ uuid: PLAYER_ID, username: PLAYER.name }, { uuid: OTHER.uuid, username: OTHER.name });
   memory.rows('skyblockSnapshots').push(...rows);
   const snapshotBefore = JSON.stringify(memory.rows('skyblockSnapshots'));
@@ -142,6 +145,10 @@ async function run() {
     for (let i = 0; i < 150; i++) { if (await evaluate(`!!(${expression})`)) return; await delay(100); }
     throw new Error('Timed out: ' + expression);
   }
+  async function chooseProfile(name) {
+    await evaluate(`(() => { const s = document.querySelector('#dashboard-profile'); const option = [...s.options].find(o => o.textContent === ${JSON.stringify(name)}); if (!option) throw new Error('Profile not found'); s.value = option.value; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+    await waitFor(`document.querySelector('#dashboard-profile').selectedOptions[0].textContent === ${JSON.stringify(name)}`);
+  }
   async function click(text) {
     assert.equal(await evaluate(`(() => { const b = [...document.querySelectorAll('button')].find(b => !b.closest('[hidden]') && b.textContent.trim() === ${JSON.stringify(text)}); if (!b || b.disabled) return false; b.click(); return true; })()`), true, 'Clickable control: ' + text);
   }
@@ -149,7 +156,8 @@ async function run() {
     await waitFor("document.querySelector('#username')");
     await evaluate(`(() => { const input = document.querySelector('#username'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, ${JSON.stringify(name)}); input.dispatchEvent(new Event('input', { bubbles: true })); })()`);
     await click('Find player'); await waitFor("document.body.textContent.includes('Continue to SkyBlock data')");
-    await click('Continue to SkyBlock data'); await waitFor("document.querySelector('[role=progressbar]')");
+    await click('Continue to SkyBlock data'); await waitFor("document.querySelector('.overview-grid')");
+    await waitFor("document.querySelector('[role=progressbar]')");
   }
   const pageHeading = "document.querySelector('.planner-page-header h2')";
   async function openSkillCard(skill) {
@@ -165,10 +173,11 @@ async function run() {
     assert.equal(await evaluate(`document.activeElement === ${pageHeading}`), true);
   }
   const previews = [];
-  async function screenshot(name) {
+  async function screenshot(name, viewport = false) {
     await evaluate("document.querySelectorAll('.player-uuid,.profile-id').forEach(el => { el.textContent = 'Identifier hidden for review'; })");
     await evaluate('window.scrollTo(0, 0)');
-    const clip = await evaluate("(() => { const b = document.querySelector('.data-section').getBoundingClientRect(); return { x: b.x + scrollX, y: b.y + scrollY, width: b.width, height: b.height, scale: 1 }; })()");
+    const clip = viewport ? await evaluate('({ x: 0, y: 0, width: innerWidth, height: innerHeight, scale: 1 })')
+      : await evaluate("(() => { const b = document.querySelector('.data-section').getBoundingClientRect(); return { x: b.x + scrollX, y: b.y + scrollY, width: b.width, height: b.height, scale: 1 }; })()");
     const shot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip });
     const file = path.join(os.tmpdir(), `skyadvisor-dashboard-redesign-${name}.png`);
     fs.writeFileSync(file, Buffer.from(shot.data, 'base64')); previews.push(file);
@@ -187,8 +196,40 @@ async function run() {
     await send('Page.navigate', { url: `http://127.0.0.1:${vite.httpServer.address().port}/` });
     await enterPlayer(PLAYER.name); await noLegacyPanel();
     assert.equal(await evaluate("[...document.querySelectorAll('.data-tabs button')].some(b => b.textContent === 'Next Steps')"), false);
-    assert.equal(await evaluate("document.querySelectorAll('.next-steps-skill, select').length"), 0);
+    assert.equal(await evaluate("document.querySelectorAll('.next-steps-skill,.data-section select').length"), 0);
     assert.equal(await plannerCount(), 0);
+    assert.equal(await evaluate(`${pageHeading}.textContent`), 'Overview');
+    assert.equal(await evaluate("document.querySelector('.data-details').open"), false);
+    assert.equal(await evaluate("document.querySelectorAll('.overview-grid .skill-plan-button,.overview-grid .progression-chat').length"), 0);
+    assert.equal(await evaluate("document.querySelector('[data-preview-skill=mining] [role=progressbar]').getAttribute('aria-valuenow')"),
+      await evaluate("document.querySelector('[data-skill-id=mining] [role=progressbar]').getAttribute('aria-valuenow')"));
+    assert.ok(await evaluate("document.querySelector('.overview-collections').textContent.includes('4 collection counts available')"));
+    assert.ok(await evaluate("document.querySelector('.overview-collection-list').textContent.includes('Wheat0')"));
+    assert.ok(await evaluate("document.querySelector('.overview-collections').textContent.includes('Some collection counts are unavailable')"));
+    const browseStart = starts.length + collectionStarts.length;
+    await screenshot(`${label}-overview`, true);
+    assert.equal(await evaluate("document.querySelector('.overview-timeline').getBoundingClientRect().bottom <= innerHeight"), true,
+      'Overview summaries and Timeline shortcut fit the initial viewport');
+    await evaluate("document.querySelector('.data-details summary').click()");
+    assert.equal(await evaluate("document.querySelector('.data-details').open"), true);
+    await evaluate("document.querySelector('.data-details summary').click()");
+    await chooseProfile('Banana');
+    await waitFor("document.querySelector('.overview-collections').textContent.includes('999')");
+    assert.ok(await evaluate("!document.querySelector('.overview-grid').textContent.includes('Cobblestone')"));
+    await screenshot(`${label}-profile-switch`, true);
+    await chooseProfile('Date');
+    await waitFor("document.querySelector('.overview-collections').textContent.includes('API sharing is disabled')");
+    assert.ok(await evaluate("document.querySelector('.overview-skills').textContent.includes('unavailable')"));
+    assert.equal(await evaluate("document.querySelector('.overview-grid [role=progressbar]') === null"), true);
+    assert.ok(await evaluate("document.querySelector('.snapshot-time').textContent.includes('Time unavailable')"));
+    assert.equal(await evaluate("document.querySelectorAll('.overview-collection-list li').length"), 0);
+    await screenshot(`${label}-unavailable`, true);
+    await chooseProfile('Apple'); await click('Open Timeline'); await waitFor("document.querySelector('.timeline-detail')");
+    await click('Overview'); await click('View Collections');
+    await waitFor("document.querySelector('.collections-table')");
+    await click('Overview'); await click('View Skills');
+    await waitFor(`${pageHeading}.textContent === 'Skills'`);
+    assert.equal(starts.length + collectionStarts.length, browseStart, 'Overview and profile/category shortcuts do not generate advice');
     await screenshot(`${label}-skills`);
     const before = starts.length;
     await openSkillCard('mining'); assert.equal(await plannerCount(), 1); assert.equal(starts.length, before);
@@ -211,7 +252,7 @@ async function run() {
     assert.ok(exported.includes('PART 2') && exported.includes('Explore the prerequisites'));
     const afterGuide = starts.length, afterContinue = continuations.length;
     await click('Back to Skills');
-    for (const tab of ['Collections', 'Inventory', 'Armor', 'Equipment', 'Pets', 'Timeline']) {
+    for (const tab of ['Overview', 'Collections', 'Inventory', 'Armor', 'Equipment', 'Pets', 'Timeline']) {
       await click(tab); await noLegacyPanel();
       if (tab === 'Timeline') await waitFor("document.querySelector('.timeline-detail')");
     }
@@ -242,7 +283,7 @@ async function run() {
     const collectionExport = fs.readFileSync(path.join(downloadDirectory, 'SkyAdvisor-foraging-collection-guide.txt'), 'utf8');
     assert.ok(collectionExport.includes('Birch Wood (LOG:2)') && collectionExport.includes('PART 2'));
     const afterCollection = collectionStarts.length;
-    await click('Back to Collections'); await openCollection('LOG:2', 'Birch Log');
+    await click('Back to Collections'); await click('Overview'); await openCollection('LOG:2', 'Birch Log');
     assert.equal(await turns(), 2); assert.equal(collectionStarts.length, afterCollection);
     await screenshot(`${label}-collection-followup`);
     await openCollection('LOG:1', 'Spruce Log'); await click('Build step-by-step guide');
@@ -254,7 +295,7 @@ async function run() {
     assert.equal(await turns(), 0, 'A response for another collection is rejected'); wrongCollection = false;
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     assert.equal(JSON.stringify(memory.rows('skyblockSnapshots')), snapshotBefore);
-    console.log(`PASS: ${label} skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
+    console.log(`PASS: ${label} Overview, compact header, profile switching, saved/missing/private values and shortcuts; skill and exact-collection entry; single heading/planner; preserved guides on return, both skill paths, collection context, follow-ups, TXT exports, mobile fit and maxed/mismatched collection errors`);
   }
   // Deliberately ignore network cancellation to prove late results cannot repopulate another selection.
   await evaluate(`window.requestAborts = 0; const originalFetch = window.fetch; window.fetch = (url, options = {}) => {
@@ -272,17 +313,17 @@ async function run() {
   }
   await pendingGuide(); await openCollection('COBBLESTONE', 'Cobblestone');
   await delay(700); assert.equal(await turns(), 0); assert.equal(await plannerCount(), 1);
-  await pendingGuide('collection', 'COBBLESTONE', 'Cobblestone'); await click('Banana');
-  await waitFor(`${pageHeading}.textContent === 'Skills'`);
+  await pendingGuide('collection', 'COBBLESTONE', 'Cobblestone'); await chooseProfile('Banana');
+  await waitFor(`${pageHeading}.textContent === 'Overview'`);
   await delay(700); assert.equal(await plannerCount(), 0);
-  await click('Coconut'); await waitFor("document.querySelector('.selected-profile').textContent === 'Coconut profile'");
+  await chooseProfile('Coconut'); await waitFor("document.querySelector('#dashboard-profile').selectedOptions[0].textContent === 'Coconut'");
   assert.equal(await plannerCount(), 0);
   assert.equal(await evaluate("document.querySelectorAll('.skill-plan-button').length"), 0);
-  await click('Apple'); await pendingGuide('skill', 'mining');
+  await chooseProfile('Apple'); await pendingGuide('skill', 'mining');
   latest.fetchedAt = new Date('2026-10-24T12:00:00Z');
-  await click('Reload saved data'); await waitFor(`${pageHeading}.textContent === 'Skills'`);
+  await click('Reload saved data'); await waitFor(`${pageHeading}.textContent === 'Overview'`);
   await delay(700); assert.equal(await plannerCount(), 0);
-  await pendingGuide(); await click('Back'); await enterPlayer(OTHER.name);
+  await pendingGuide(); await click('Change player'); await enterPlayer(OTHER.name);
   await delay(700); assert.equal(await plannerCount(), 0);
   assert.equal(await evaluate('window.requestAborts'), 4);
   slow = false;
